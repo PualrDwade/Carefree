@@ -1,0 +1,157 @@
+@charset "UTF-8";
+
+.search-container {
+    position: relative;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -320px;
+    width: 632px;
+    z-index: 5
+}
+
+.search-group {
+    padding: 15px;
+    background-color: #000;
+    background-color: rgba(0, 0, 0, .6);
+    border-radius: 4px
+}
+
+.searchtab {
+    margin-bottom: 7px;
+    color: #fff;
+    line-height: 26px;
+    font-size: 14px
+}
+
+.searchtab li {
+    float: left;
+    display: inline;
+    margin-right: 30px;
+    cursor: pointer
+}
+
+.searchtab i {
+    float: left;
+    margin: 5px 5px 0 0;
+    width: 16px;
+    height: 16px;
+    background-position: -60px -110px !important
+}
+
+.searchtab .tab-selected i {
+    background-position: -60px -140px !important
+}
+
+.searchbar {
+    height: 46px;
+    overflow: hidden
+}
+
+.search-wrapper {
+    float: left;
+    width: 546px
+}
+
+.search-group .search-input {
+    height: 46px;
+    overflow: hidden
+}
+
+.search-group .search-input input {
+    width: 504px;
+    height: 46px;
+    border: 0 none;
+    padding: 0 21px;
+    margin: 0;
+    line-height: 46px;
+    font-size: 16px;
+    color: #666;
+    border-radius: 4px
+}
+
+.search-group .search-button {
+    float: left;
+    margin-left: -8px;
+    width: 50px;
+    height: 46px
+}
+
+.search-group .search-button a {
+    display: block;
+    height: 46px;
+    background-color: #1493e3;
+    border-radius: 4px;
+    text-align: center
+}
+
+.search-group .search-button a:hover {
+    background-color: #147fc8;
+}
+
+.search-group .icon-search {
+    display: inline-block;
+    margin-top: 11px;
+    width: 24px;
+    height: 24px;
+    background-position: 0 -110px !important;
+    overflow: hidden;
+    vertical-align: top
+}
+
+.searchbar-hotel .search-input {
+    float: left;
+    width: 260px
+}
+
+.searchbar-hotel .search-input input {
+    width: 214px;
+    border-radius: 4px 0 0 4px
+}
+
+.search-group .search-date {
+    float: left;
+    margin-left: 3px;
+    width: 140px;
+    height: 46px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #444;
+    line-height: 46px;
+    position: relative;
+    cursor: pointer
+}
+
+.search-group .search-date:last-child {
+    border-radius: 0 4px 4px 0;
+    overflow: hidden
+}
+
+.search-group .search-date span {
+    display: block;
+    padding: 0 10px
+}
+
+.search-group .search-date input {
+    width: 120px;
+    border: 0;
+    margin: 0;
+    padding: 0 10px;
+    background-color: #fff;
+    line-height: 46px;
+    font-size: 14px;
+    color: #444
+}
+
+.search-group .icon-cal {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    width: 16px;
+    height: 16px;
+    background-position: 0 -140px !important;
+    overflow: hidden
+}
+
+.search-group .search-suggest-panel {
+    width: 600px
+}

@@ -15,7 +15,10 @@
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Style CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="css/css+mfw-index.2015_css+jquery-ui-1.9.1.custom.min_css+hotel+datepicker-range%5EZFM%5E1525846268.css">
 
 </head>
 
@@ -48,9 +51,9 @@
                                 class="fa fa-wechat" aria-hidden="true"></i></a>
                         <a href="#" data-toggle="tooltip" data-placement="bottom" title="QQ"><i
                                 class="fa fa-qq" aria-hidden="true"></i></a>
-                        <a href="#" title="signin"><i class="fa-sign-in" aria-hidden="true">登陆</i></a>
-                        <a href="#" title="signout"><i class="fa-sign-out" aria-hidden="true">登出</i></a>
-                        <a href="#" title="register"><i class="fa-sign-in" aria-hidden="true">注册</i></a>
+                        <a href="#" title="signin"><i class="fa fa-sign-in" aria-hidden="true"> 登陆</i></a>
+                        <a href="#" title="signout"><i class="fa fa-sign-out" aria-hidden="true"> 登出</i></a>
+                        <a href="#" title="register"><i class="fa fa-sign-in" aria-hidden="true"> 注册</i></a>
                     </div>
                 </div>
             </div>
@@ -103,7 +106,7 @@
                                         <li><a href="#">Catagory 1</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="about-us.html">攻略</a></li>
+                                <li><a href="about-us.html">旅游攻略</a></li>
                                 <li><a href="#">产品选择</a>
                                     <div class="megamenu">
                                         <ul class="single-mega cn-col-4">
@@ -141,14 +144,6 @@
                                     </div>
                                 </li>
                             </ul>
-                            <!-- Search Form  -->
-                            <div id="search-wrapper">
-                                <form action="#">
-                                    <input type="text" id="search" placeholder="Search something...">
-                                    <div id="close-icon"></div>
-                                    <input class="d-none" type="submit" value="">
-                                </form>
-                            </div>
                         </div>
                         <!-- Nav End -->
                     </div>
@@ -159,6 +154,38 @@
 </header>
 <!-- ##### Header Area End ##### -->
 
+
+<!--中间部分搜索栏-->
+<div class="search-area">
+    <div class="container">
+        <div class="search-container" id="_j_index_search">
+            <div class="search-group">
+                <div class="searchtab" id="_j_index_search_tab">
+                    <ul class="clearfix">
+                        <li class="tab-selected" data-index="0"><i></i>全部</li>
+                        <li data-index="1"><i></i>酒店</li>
+                        <li data-index="2"><i></i>目的地</li>
+                        <li data-index="3"><i></i>旅行商城</li>
+                    </ul>
+                </div>
+                <!-- 全部 begin -->
+                <div class="searchbar" id="_j_index_search_bar_all">
+                    <div class="search-wrapper">
+                        <div class="search-input">
+                            <input name="q" type="text" placeholder="搜目的地/攻略/酒店/旅行特价" id="_j_index_search_input_all"
+                                   autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="search-button" id="_j_index_search_btn_all">
+                        <a role="button" href="javascript:"></a>
+                    </div>
+                </div>
+                <!-- 全部 end -->
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ##### Hero Area Start ##### -->
 <div class="hero-area">
     <!--展示轮播图-->
@@ -166,51 +193,12 @@
     <div class="hero-slides owl-carousel">
         <!-- Single Slide -->
         <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/b2.jpg);">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <div class="col-12">
-                        <div class="slide-content text-center">
-                            <div class="post-tag">
-                                <a href="#" data-animation="fadeInUp">lifestyle</a>
-                            </div>
-                            <h2 data-animation="fadeInUp" data-delay="250ms"><a href="single-post.html">Take a look at
-                                last night’s party!</a></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- Single Slide -->
         <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/b1.jpg);">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <div class="col-12">
-                        <div class="slide-content text-center">
-                            <div class="post-tag">
-                                <a href="#" data-animation="fadeInUp">lifestyle</a>
-                            </div>
-                            <h2 data-animation="fadeInUp" data-delay="250ms"><a href="single-post.html">Take a look at
-                                last night’s party!</a></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- Single Slide -->
         <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/b3.jpg);">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <div class="col-12">
-                        <div class="slide-content text-center">
-                            <div class="post-tag">
-                                <a href="#" data-animation="fadeInUp">lifestyle</a>
-                            </div>
-                            <h2 data-animation="fadeInUp" data-delay="250ms"><a href="single-post.html">Take a look at
-                                last night’s party!</a></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -470,6 +458,7 @@
 <script src="js/plugins.js"></script>
 <!-- Active js -->
 <script src="js/active.js"></script>
+<!--马蜂窝css样式-->
 
 </body>
 
