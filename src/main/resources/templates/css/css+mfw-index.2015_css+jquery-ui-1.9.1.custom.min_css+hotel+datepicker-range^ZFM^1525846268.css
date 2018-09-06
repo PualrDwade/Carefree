@@ -79,13 +79,13 @@
 .search-group .search-button a {
     display: block;
     height: 46px;
-    background-color: #1493e3;
+    background-color: #d6d6d6;
     border-radius: 4px;
     text-align: center
 }
 
 .search-group .search-button a:hover {
-    background-color: #147fc8;
+    background-color: #bababa;
 }
 
 .search-group .icon-search {

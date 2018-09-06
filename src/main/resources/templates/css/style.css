@@ -278,6 +278,10 @@ img {
     padding: 100px 0;
 }
 
+.section-padding-20 {
+    padding: 20px 0;
+}
+
 .section-padding-50 {
     padding: 50px 0;
 }
@@ -634,24 +638,24 @@ img {
 .hero-slides .single-hero-slide {
     position: relative;
     z-index: 1;
-    height: 670px;
+    height: 300px;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .hero-slides .single-hero-slide {
-        height: 500px;
+        height: 350px;
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .hero-slides .single-hero-slide {
-        height: 450px;
+        height: 300px;
     }
 }
 
 @media only screen and (max-width: 767px) {
     .hero-slides .single-hero-slide {
-        height: 250px;
+        height: 150px;
     }
 }
 
