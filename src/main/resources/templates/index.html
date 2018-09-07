@@ -1,16 +1,465 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>畅游网</title>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>畅游网——畅游天下</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="css/css+mfw-index.2015_css+jquery-ui-1.9.1.custom.min_css+hotel+datepicker-range%5EZFM%5E1525846268.css">
+
 </head>
+
 <body>
-<h1>欢迎使用畅游网</h1>
-<div id="header"></div>
-<div id="content"></div>
-<div id="footer"></div>
+
+<!-- ##### 顶部区域，响应式框架##### -->
+<header class="header-area">
+    <!-- Top Header Area -->
+    <div class="top-header">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <!-- Breaking News Area -->
+                <div class="col-12 col-sm-8">
+                    <div class="breaking-news-area">
+                        <div id="breakingNewsTicker" class="ticker">
+                            <ul>
+                                <li><a href="#">Hello World!</a></li>
+                                <li><a href="#">Hello Universe!</a></li>
+                                <li><a href="#">Hello Original!</a></li>
+                                <li><a href="#">Hello Earth!</a></li>
+                                <li><a href="#">Hello Colorlib!</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Top Social Area -->
+                <div class="col-12 col-sm-4">
+                    <div class="top-social-area">
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="微信"><i
+                                class="fa fa-wechat" aria-hidden="true"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="QQ"><i
+                                class="fa fa-qq" aria-hidden="true"></i></a>
+                        <a href="#" title="signin"><i class="fa fa-sign-in" aria-hidden="true"> 登陆</i></a>
+                        <a href="#" title="signout"><i class="fa fa-sign-out" aria-hidden="true"> 登出</i></a>
+                        <a href="#" title="register"><i class="fa fa-sign-in" aria-hidden="true"> 注册</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 导航区域 -->
+    <div class="original-nav-area" id="stickyNav">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between">
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu" id="originalNav">
+                        <!-- close btn -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="index.html">首页</a></li>
+                                <li><a href="#">去旅游</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#">Catagory 1</a></li>
+                                        <li><a href="#">Catagory 1</a></li>
+                                        <li><a href="#">Catagory 1</a>
+                                            <ul class="dropdown">
+                                                <li><a href="#">Catagory 2</a></li>
+                                                <li><a href="#">Catagory 2</a></li>
+                                                <li><a href="#">Catagory 2</a>
+                                                    <ul class="dropdown">
+                                                        <li><a href="#">Catagory 3</a></li>
+                                                        <li><a href="#">Catagory 3</a></li>
+                                                        <li><a href="#">Catagory 3</a></li>
+                                                        <li><a href="#">Catagory 3</a></li>
+                                                        <li><a href="#">Catagory 3</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">Catagory 2</a></li>
+                                                <li><a href="#">Catagory 2</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Catagory 1</a></li>
+                                        <li><a href="#">Catagory 1</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="about-us.html">旅游攻略</a></li>
+                                <li><a href="#">产品选择</a>
+                                    <div class="megamenu">
+                                        <ul class="single-mega cn-col-4">
+                                            <li class="title">Headline 1</li>
+                                            <li><a href="#">Mega Menu Item 1</a></li>
+                                            <li><a href="#">Mega Menu Item 2</a></li>
+                                            <li><a href="#">Mega Menu Item 3</a></li>
+                                            <li><a href="#">Mega Menu Item 4</a></li>
+                                            <li><a href="#">Mega Menu Item 5</a></li>
+                                        </ul>
+                                        <ul class="single-mega cn-col-4">
+                                            <li class="title">Headline 2</li>
+                                            <li><a href="#">Mega Menu Item 1</a></li>
+                                            <li><a href="#">Mega Menu Item 2</a></li>
+                                            <li><a href="#">Mega Menu Item 3</a></li>
+                                            <li><a href="#">Mega Menu Item 4</a></li>
+                                            <li><a href="#">Mega Menu Item 5</a></li>
+                                        </ul>
+                                        <ul class="single-mega cn-col-4">
+                                            <li class="title">Headline 3</li>
+                                            <li><a href="#">Mega Menu Item 1</a></li>
+                                            <li><a href="#">Mega Menu Item 2</a></li>
+                                            <li><a href="#">Mega Menu Item 3</a></li>
+                                            <li><a href="#">Mega Menu Item 4</a></li>
+                                            <li><a href="#">Mega Menu Item 5</a></li>
+                                        </ul>
+                                        <ul class="single-mega cn-col-4">
+                                            <li class="title">Headline 4</li>
+                                            <li><a href="#">Mega Menu Item 1</a></li>
+                                            <li><a href="#">Mega Menu Item 2</a></li>
+                                            <li><a href="#">Mega Menu Item 3</a></li>
+                                            <li><a href="#">Mega Menu Item 4</a></li>
+                                            <li><a href="#">Mega Menu Item 5</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+
+<!--中间部分搜索栏-->
+<div class="search-area">
+    <div class="container">
+        <div class="search-container" id="_j_index_search">
+            <div class="search-group">
+                <div class="searchtab" id="_j_index_search_tab">
+                    <ul class="clearfix">
+                        <li class="tab-selected" data-index="0"><i></i>全部</li>
+                        <li data-index="1"><i></i>酒店</li>
+                        <li data-index="2"><i></i>目的地</li>
+                        <li data-index="3"><i></i>旅行商城</li>
+                    </ul>
+                </div>
+                <!-- 全部 begin -->
+                <div class="searchbar" id="_j_index_search_bar_all">
+                    <div class="search-wrapper">
+                        <div class="search-input">
+                            <input name="q" type="text" placeholder="搜目的地/攻略/酒店/旅行特价" id="_j_index_search_input_all"
+                                   autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="search-button" id="_j_index_search_btn_all">
+                        <a role="button" href="javascript:"></a>
+                    </div>
+                </div>
+                <!-- 全部 end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ##### Hero Area Start ##### -->
+<div class="hero-area section-padding-20">
+    <!--展示轮播图-->
+    <!-- Hero Slides Area -->
+    <div class="hero-slides owl-carousel">
+        <!-- Single Slide -->
+        <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/b2.jpg);">
+        </div>
+        <!-- Single Slide -->
+        <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/b1.jpg);">
+        </div>
+        <!-- Single Slide -->
+        <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/b3.jpg);">
+        </div>
+    </div>
+</div>
+<!-- ##### Hero Area End ##### -->
+
+<!-- ##### Blog Wrapper Start ##### -->
+<div class="blog-wrapper section-padding-50 clearfix">
+    <div class="container">
+        <div class="row">
+            <!-- ##### Sidebar Area ##### -->
+            <!--左边区域展示-->
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="post-sidebar-area">
+                    <!--边缘的展示-->
+                    <!-- Widget Area -->
+                    <div class="sidebar-widget-area">
+                        <h5 class="title">您可能喜欢</h5>
+                        <a href="#"><img src="img/bg-img/add.gif" alt=""></a>
+                    </div>
+                    <!-- Widget Area -->
+                    <div class="sidebar-widget-area">
+                        <h5 class="title">旅游人气榜</h5>
+
+                        <div class="widget-content">
+
+                            <!-- Single Blog Post -->
+                            <div class="single-blog-post d-flex align-items-center widget-post">
+                                <!-- Post Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <img src="img/blog-img/lp1.jpg" alt="">
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="#" class="post-tag">Lifestyle</a>
+                                    <h4><a href="#" class="post-headline">Party people in the house</a></h4>
+                                    <div class="post-meta">
+                                        <p><a href="#">12 March</a></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Single Blog Post -->
+                            <div class="single-blog-post d-flex align-items-center widget-post">
+                                <!-- Post Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <img src="img/blog-img/lp2.jpg" alt="">
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="#" class="post-tag">Lifestyle</a>
+                                    <h4><a href="#" class="post-headline">A sunday in the park</a></h4>
+                                    <div class="post-meta">
+                                        <p><a href="#">12 March</a></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Single Blog Post -->
+                            <div class="single-blog-post d-flex align-items-center widget-post">
+                                <!-- Post Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <img src="img/blog-img/lp3.jpg" alt="">
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="#" class="post-tag">Lifestyle</a>
+                                    <h4><a href="#" class="post-headline">Party people in the house</a></h4>
+                                    <div class="post-meta">
+                                        <p><a href="#">12 March</a></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Single Blog Post -->
+                            <div class="single-blog-post d-flex align-items-center widget-post">
+                                <!-- Post Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <img src="img/blog-img/lp4.jpg" alt="">
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="#" class="post-tag">Lifestyle</a>
+                                    <h4><a href="#" class="post-headline">A sunday in the park</a></h4>
+                                    <div class="post-meta">
+                                        <p><a href="#">12 March</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--个性选择标签-->
+                    <!-- Widget Area -->
+                    <div class="sidebar-widget-area">
+                        <h5 class="title">您感兴趣的</h5>
+                        <div class="widget-content">
+                            <ul class="tags">
+                                <li><a href="#">design</a></li>
+                                <li><a href="#">fashion</a></li>
+                                <li><a href="#">travel</a></li>
+                                <li><a href="#">music</a></li>
+                                <li><a href="#">party</a></li>
+                                <li><a href="#">video</a></li>
+                                <li><a href="#">photography</a></li>
+                                <li><a href="#">adventure</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--右边区域-->
+            <div class="col-12 col-lg-9">
+                <h5 class="title">畅游优质项目</h5>
+                <!-- Single Blog Area  -->
+                <div class="single-blog-area blog-style-2 mb-50 wow fadeInUp"
+                     data-wow-duration="1000ms">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="single-blog-thumbnail">
+                                <img src="img/blog-img/3.jpg" alt="">
+                                <div class="post-date">
+                                    <a href="#">12 <span>march</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <!-- Blog Content -->
+                            <div class="single-blog-content">
+                                <div class="line"></div>
+                                <a href="#" class="post-tag">Lifestyle</a>
+                                <h4><a href="#" class="post-headline">Party people in the house</a></h4>
+                                <p>Curabitur venenatis efficitur lorem sed tempor. Integer aliquet tempor cursus. Nullam
+                                    vestibulum convallis risus vel condimentum. Nullam auctor lorem in libero luctus,
+                                    vel volutpat quam tincidunt.</p>
+                                <div class="post-meta">
+                                    <p>By <a href="#">james smith</a></p>
+                                    <p>3 comments</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Blog Area  -->
+                <div class="single-blog-area blog-style-2 mb-50 wow fadeInUp"
+                     data-wow-duration="1000ms">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="single-blog-thumbnail">
+                                <img src="img/blog-img/4.jpg" alt="">
+                                <div class="post-date">
+                                    <a href="#">12 <span>march</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <!-- Blog Content -->
+                            <div class="single-blog-content">
+                                <div class="line"></div>
+                                <a href="#" class="post-tag">Lifestyle</a>
+                                <h4><a href="#" class="post-headline">We love colors in 2018</a></h4>
+                                <p>Curabitur venenatis efficitur lorem sed tempor. Integer aliquet tempor cursus. Nullam
+                                    vestibulum convallis risus vel condimentum. Nullam auctor lorem in libero luctus,
+                                    vel volutpat quam tincidunt.</p>
+                                <div class="post-meta">
+                                    <p>By <a href="#">james smith</a></p>
+                                    <p>3 comments</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Blog Area  -->
+                <div class="single-blog-area blog-style-2 mb-50 wow fadeInUp"
+                     data-wow-duration="1000ms">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="single-blog-thumbnail">
+                                <img src="img/blog-img/5.jpg" alt="">
+                                <div class="post-date">
+                                    <a href="#">12 <span>march</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <!-- Blog Content -->
+                            <div class="single-blog-content">
+                                <div class="line"></div>
+                                <a href="#" class="post-tag">Lifestyle</a>
+                                <h4><a href="#" class="post-headline">Party people in the house</a></h4>
+                                <p>Curabitur venenatis efficitur lorem sed tempor. Integer aliquet tempor cursus. Nullam
+                                    vestibulum convallis risus vel condimentum. Nullam auctor lorem in libero luctus,
+                                    vel volutpat quam tincidunt.</p>
+                                <div class="post-meta">
+                                    <p>By <a href="#">james smith</a></p>
+                                    <p>3 comments</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Blog Area  -->
+                <div class="single-blog-area blog-style-2 mb-50 wow fadeInUp"
+                     data-wow-duration="1000ms">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="single-blog-thumbnail">
+                                <img src="img/blog-img/6.jpg" alt="">
+                                <div class="post-date">
+                                    <a href="#">12 <span>march</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <!-- Blog Content -->
+                            <div class="single-blog-content">
+                                <div class="line"></div>
+                                <a href="#" class="post-tag">生活方式</a>
+                                <h4><a href="#" class="post-headline">We love colors in 2018</a></h4>
+                                <p>Curabitur venenatis efficitur lorem sed tempor. Integer aliquet tempor cursus. Nullam
+                                    vestibulum convallis risus vel condimentum. Nullam auctor lorem in libero luctus,
+                                    vel volutpat quam tincidunt.</p>
+                                <div class="post-meta">
+                                    <p>By <a href="#">james smith</a></p>
+                                    <p>3 comments</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- ##### Blog Wrapper End ##### -->
+
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area text-center">
+    <div class="footer-font">
+        Copyright &copy;2018 All rights reserved | This webpage is made with
+        <i class="fa fa-heart-o" aria-hidden="true"></i> 陈志轩小组
+    </div>
+</footer>
+<!-- ##### Footer Area End ##### -->
+
+<!-- jQuery (Necessary for All JavaScript Plugins) -->
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<!-- Popper js -->
+<script src="js/popper.min.js"></script>
+<!-- Bootstrap js -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Plugins js -->
+<script src="js/plugins.js"></script>
+<!-- Active js -->
+<script src="js/active.js"></script>
+<!--马蜂窝css样式-->
+
 </body>
+
 </html>
