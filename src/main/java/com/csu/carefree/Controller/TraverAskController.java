@@ -7,6 +7,6 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class TraverAskController {
-    @Autowired
+//    @Autowired
     private TraverMsgService traverMsgService;
 }

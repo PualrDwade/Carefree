@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class ProductDTController {
-    @Autowired
+//    @Autowired
     private ProductDTService productDTService;
 
 }

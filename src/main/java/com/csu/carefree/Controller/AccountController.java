@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class AccountController {
-    @Autowired
+//    @Autowired
     private AccountService accountService;
 
     //进行业务代码的编写
