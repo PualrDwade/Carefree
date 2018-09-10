@@ -1,4 +1,4 @@
 package com.csu.carefree.Persistence;
 
-public interface ProductDao {
+public interface TraverMsgMapper {
 }
