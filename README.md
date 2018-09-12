@@ -27,3 +27,5 @@
 [畅游网项目计划文档](https://github.com/PualrDwade/Carefree/blob/master/%E6%96%87%E6%A1%A3%E6%B1%87%E6%80%BB/%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92%E8%AF%B4%E6%98%8E/Carefree_Software%20Project%20Planning_V1.0.pdf)
 5. 项目需求分析文档
 [畅游网需求分析文档](https://github.com/PualrDwade/Carefree/blob/master/%E6%96%87%E6%A1%A3%E6%B1%87%E6%80%BB/%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/Project%20ID_Software%20Requirement%20Specification_V1..pdf)
+6. 项目概要设计文档
+[畅游网概要设计文档](https://github.com/PualrDwade/Carefree/blob/master/%E6%96%87%E6%A1%A3%E6%B1%87%E6%80%BB/%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E7%AC%AC11%E7%BB%84%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf)
