@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>账号安全</title>
+    <script type="text/javascript">
+        window.Env = {"WWW_HOST":"www.mafengwo.cn","IMG_HOST":"images.mafengwo.net","P_HOST":"passport.mafengwo.cn","P_HTTP":"https:\/\/passport.mafengwo.cn","PAGELET_HTTP":"https:\/\/pagelet.mafengwo.cn","JS_HOST":"js.mafengwo.net","UID":85353052,"CSTK":"960cca8233fd89505083a6f4f13c63b8_ef6dfb713f7e954b53f30d7e235a1675","GOOGLE_MAP_KEY":"AIzaSyD-Su0x_rPy1xehlMBcMyTqWkU49Bk53nQ","TONGJI_HOST":"tongji.mafengwo.cn"};
+    </script>
+    <link href="https://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css" rel="stylesheet" type="text/css"/>
+    <link href="https://css.mafengwo.net/css/other/isettings.css?1535630301" rel="stylesheet" type="text/css"/>
+    <script language="javascript" src="https://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js" type="text/javascript" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<!--左侧边栏-->
+<div class="wrapper clearfix">
+    <div class="aside">
+        <a href="UserCenter.html"><i class="i8"></i>返回个人中心</a>
+        <a href="AccountSetting.html"><i class="i1"></i>我的信息</a>
+        <a href="SettingUserInfo.html"><i class="i2"></i>我的头像</a>
+        <a href="SettingSecurity.html" class="on" target="_self"><i class="i4"></i>账号安全</a>
+        <a href="SettingPrivacy.html"><i class="i5"></i>隐私设置</a>
+    </div>
+    <!--显示内容-->
+    <div class="content">
+        <div class="hd">
+            <strong>账号安全</strong>
+        </div>
+        <div class="userpass">
+            <dl class="clearfix">
+                <dt>密码：</dt>
+                <dd>
+                    <a href="javascript:;" id="set-pw-btn" >修改密码</a>
+                    <div id="set-pw">
+                        <div class="ways">
+                            <a href="SendEmailSuccees.html" class="bymail"><i></i><p>邮箱验证修改</p></a>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl class="clearfix">
+                <dt>绑定邮箱：</dt>
+                <dd>
+                    changyou@qq.com<span class="status"><i></i>已绑定(无法更改)</span>
+                </dd>
+            </dl>
+            <br><br>
+        </div>
+
+    </div>
+</div>
+
+<link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
+
+<div id="footer">
+    <div class="ft-content" style="width: 1105px">
+        <div class="footer-font">
+            Copyright &copy;2018 All rights reserved | This webpage is made with
+            <i class="fa fa-heart-o" aria-hidden="true"></i> 陈志轩小组
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        $('.aside a').not('.on').on('click', function(e) {
+            var left, top;
+            $('.aside .ripple').removeClass('animate');
+            0 === $(this).children('.ripple').size() && $(this).prepend('<span class="ripple"></span>');
+            var ripple = $(this).children('.ripple');
+            left = e.pageX - $(this).offset().left - ripple.width() / 2,
+                top = e.pageY - $(this).offset().top - ripple.height() / 2,
+                ripple.css({
+                    top: top,
+                    left: left
+                }).addClass('animate');
+        });
+        $('.content .alert .close').on('click', function() {
+            $(this).closest('.alert').fadeOut(500, function() {
+                $(this).remove();
+            });
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    M.closure(function(require) {
+        var Confirm = require('dialog/confirm');
+        $('#set-pw-btn').on('click', function(){
+            var target = $(this);
+                if ($('#set-pw').is(':visible')) {
+                    $('#set-pw').hide();
+                } else {
+                    $('#set-pw').show();
+                }
+        });
+
+        $('body').on('click', '._js_expand_destory', function(ev) {
+            $(ev.currentTarget).parent().toggleClass('on');
+        });
+    });
+
+</script>
+
+
+<script language="javascript" type="text/javascript">
+    if (typeof M !== "undefined" && typeof M.loadResource === "function") {
+        M.loadResource("https://js.mafengwo.net/js/cv/js+Dropdown:js+pageletcommon+pageHeadUserInfoWWWNormal:js+jquery.tmpl:js+M+module+InputListener:js+M+module+SuggestionXHR:js+M+module+DropList:js+M+module+Suggestion:js+M+module+MesSearchEvent:js+SiteSearch:js+AHeader:js+M+module+dialog+Layer:js+M+module+dialog+DialogBase:js+M+module+dialog+Dialog:js+M+module+FrequencyVerifyControl:js+M+module+FrequencySystemVerify:js+ALogin:js+ACnzzGaLog:js+ARecruit:js+M+module+dialog+confirm^Z1ZT^1532697023.js");
+    }
+</script>
+
+</body>
+</html>
