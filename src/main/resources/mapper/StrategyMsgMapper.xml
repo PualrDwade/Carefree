@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.StrategyMsgMapper">
+
+    <cache/>
+
+    <select id="getStrategyList" resultType="com.csu.carefree.Model.ProductDT.StrategyMsg">
+    SELECT
+      id,
+      title,
+      link_url,
+      simple_content,
+      img_url,
+      scenic_id,
+      supplier_id_id as supplier_id
+    FROM ProductDT_strategymsg
+    </select>
+
+    <select id="getStrategyByScenic_name" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.StrategyMsg">
+    SELECT
+      id,
+      title,
+      link_url,
+      simple_content,
+      img_url,
+      scenic_id,
+      supplier_id_id as supplier_id
+    FROM ProductDT_strategymsg
+    WHERE scenic_name = #{scenic_name}
+    </select>
+
+</mapper>

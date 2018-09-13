@@ -12,22 +12,10 @@ public class HotelMsg {
     private String img_url;
     private String supplier_id;
     private String hotel_link;
+    private String sell_num;
+    private String latest_time;
 
-    @Override
-    public String toString() {
-        return "HotelMsg{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", score='" + score + '\'' +
-                ", hotel_price='" + hotel_price + '\'' +
-                ", hotel_content='" + hotel_content + '\'' +
-                ", city_id='" + city_id + '\'' +
-                ", scenic_id='" + scenic_id + '\'' +
-                ", img_url='" + img_url + '\'' +
-                ", supplier_id='" + supplier_id + '\'' +
-                ", hotel_link='" + hotel_link + '\'' +
-                '}';
+    public HotelMsg() {
     }
 
     public String getId() {
@@ -118,14 +106,24 @@ public class HotelMsg {
         this.hotel_link = hotel_link;
     }
 
-    public HotelMsg() {
+    public String getSell_num() {
+        return sell_num;
     }
 
-    public HotelMsg(String id, String name, String type,
-                    String score, String hotel_price,
-                    String hotel_content, String city_id,
-                    String scenic_id, String img_url,
-                    String supplier_id, String hotel_link) {
+    public void setSell_num(String sell_num) {
+        this.sell_num = sell_num;
+    }
+
+    public String getLatest_time() {
+        return latest_time;
+    }
+
+    public void setLatest_time(String latest_time) {
+        this.latest_time = latest_time;
+    }
+
+    public HotelMsg(String id, String name, String type, String score, String hotel_price, String hotel_content, String city_id, String scenic_id, String img_url, String supplier_id, String hotel_link, String sell_num, String latest_time) {
+
         this.id = id;
         this.name = name;
         this.type = type;
@@ -137,5 +135,7 @@ public class HotelMsg {
         this.img_url = img_url;
         this.supplier_id = supplier_id;
         this.hotel_link = hotel_link;
+        this.sell_num = sell_num;
+        this.latest_time = latest_time;
     }
 }

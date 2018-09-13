@@ -9,7 +9,7 @@ public class ScenicMsg {
 
     @Override
     public String toString() {
-        return "ScenicMsg{" +
+        return "Product_ScenicMsg{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", city_id='" + city_id + '\'' +

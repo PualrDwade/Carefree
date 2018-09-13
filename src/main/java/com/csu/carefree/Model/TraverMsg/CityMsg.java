@@ -9,7 +9,7 @@ public class CityMsg {
 
     @Override
     public String toString() {
-        return "CityMsg{" +
+        return "Product_CityMsg{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", city_content='" + city_content + '\'' +

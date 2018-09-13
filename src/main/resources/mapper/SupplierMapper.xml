@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.SupplierMapper">
+
+    <cache/>
+
+    <select id="getSupplierList" resultType="com.csu.carefree.Model.ProductDT.Supplier">
+    SELECT
+      id,
+      name,
+      link_url,
+      cooperation_type
+    FROM ProductDT_supplier
+    </select>
+
+    <select id="getSupplierByName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.Supplier">
+    SELECT
+      id,
+      name,
+      link_url,
+      cooperation_type
+    FROM ProductDT_supplier
+    WHERE name = #{name}
+    </select>
+
+</mapper>
