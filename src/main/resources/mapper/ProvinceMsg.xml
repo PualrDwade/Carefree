@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.ProvinceMsgMapper">
+
+    <cache />
+
+    <!--
+        通过省份ID查询省份信息
+    -->
+    <select id="getProvinceMsgById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.ProvinceMsg">
+    SELECT
+          ID,
+          NAME,
+          PROVINCE_CONTENT,
+          IMG_URL,
+    FROM TraverMsg_provincemsg
+    WHERE ID = #{value}
+  </select>
+
+    <!--
+        通过省份名称查询省份信息
+    -->
+    <select id="searchProvinceMsgByName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.ProvinceMsg">
+    SELECT
+          ID,
+          NAME,
+          PROVINCE_CONTENT,
+          IMG_URL,
+    FROM TraverMsg_provincemsg
+    WHERE lower(name) LIKE #{name}
+  </select>
+
+    <!--
+        查询省份所有城市信息
+    -->
+    <select id="getCityListById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.CityMsg">
+    SELECT
+          ID,
+          NAME,
+          CITY_CONTENT,
+          IMG_URL,
+          PROVINCE_ID,
+    FROM TraverMsg_citymsg
+    WHERE PROVINCE_ID = #{provinceId}
+  </select>
+
+</mapper>

@@ -4,7 +4,9 @@ public class UserAnswer {
     private String id;
     private String title;
     private String answer_content;
+    private String add_time;
     private String ask_id;
+    private String user_id;
 
     @Override
     public String toString() {
@@ -79,6 +81,4 @@ public class UserAnswer {
         this.user_id = user_id;
     }
 
-    private String add_time;
-    private String user_id;
 }
