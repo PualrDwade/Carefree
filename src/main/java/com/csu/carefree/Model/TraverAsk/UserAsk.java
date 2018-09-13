@@ -5,9 +5,9 @@ public class UserAsk {
     private String title;
     private String ask_content;
     private String star_num;
-    private String user_id;
     private String add_time;
     private String scenic_id;
+    private String user_id;
 
     @Override
     public String toString() {

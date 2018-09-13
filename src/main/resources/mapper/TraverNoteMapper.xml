@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.TraverNoteMapper">
+
+    <cache />
+
+    <!--
+        实现查询所有游记，将结果以LIST形式输出
+    -->
+    <select id="getTraverNoteList" resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
+    SELECT
+          ID,
+          TITLE,
+          NOTE_CONTENT,
+          STAR_NUM,
+          NOTIFY_STATUS,
+          ADD_TIME,
+          IMG_URL,
+          SCENIC_ID_ID AS scenic_id
+          USER_ID_ID AS user_id
+    FROM TraverAsk_travernote
+    WHERE NOTIFY_STATUS = 'YES'
+  </select>
+
+    <!--
+        实现关键字查询游记
+    -->
+    <select id="searchTraverNoteList" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
+    SELECT
+          ID,
+          TITLE,
+          NOTE_CONTENT,
+          STAR_NUM,
+          NOTIFY_STATUS,
+          ADD_TIME,
+          IMG_URL,
+          SCENIC_ID_ID AS scenic_id
+          USER_ID_ID AS user_id
+    FROM TraverAsk_travernote
+    WHERE lower(title) like #{value}
+    AND NOTIFY_STATUS = 'YES'
+  </select>
+
+    <!--
+        实现游记具体内容查询
+    -->
+    <select id="getTraverNoteById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
+    SELECT
+          ID,
+          TITLE,
+          NOTE_CONTENT,
+          STAR_NUM,
+          NOTIFY_STATUS,
+          ADD_TIME,
+          IMG_URL,
+          SCENIC_ID_ID AS scenic_id
+          USER_ID_ID AS user_id
+    FROM TraverAsk_travernote
+    WHERE ID = #{traverNoteId}
+  </select>
+
+    <!--
+        实现用户创建游记
+    -->
+    <insert id="insertUserAsk" parameterType="com.csu.carefree.Model.TraverAsk.TraverNote">
+    INSERT INTO TraverAsk_travernote
+      (ID, TITLE, NOTE_CONTENT, STAR_NUM, NOTIFY_STATUS, ADD_TIME, IMG_URL, SCENIC_ID_ID, USER_ID_ID)
+    VALUES
+      (#{id}, #{title}, #{note_content}, #{star_num}, 'NO', #{add_time}, #{img_url}, #{scenic_id}, #{user_id})
+  </insert>
+
+</mapper>

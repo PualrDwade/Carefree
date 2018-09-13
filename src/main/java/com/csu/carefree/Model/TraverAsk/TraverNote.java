@@ -3,14 +3,13 @@ package com.csu.carefree.Model.TraverAsk;
 public class TraverNote {
     private String id;
     private String title;
-    private String user_id;
     private String note_content;
     private String star_num;
     private String notify_status;
     private String add_time;
     private String img_url;
     private String scenic_id;
-
+    private String user_id;
     @Override
     public String toString() {
         return "TraverNote{" +

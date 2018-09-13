@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.CityMsgMapper">
+
+    <cache />
+
+    <!--
+        通过省份ID查询省份信息
+    -->
+    <select id="getProvinceMsgById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.ProvinceMsg">
+    SELECT
+          ID,
+          NAME,
+          PROVINCE_CONTENT,
+          IMG_URL,
+    FROM TraverMsg_provincemsg
+    WHERE ID = #{value}
+  </select>
+
+    <!--
+        根据城市ID查询城市信息
+    -->
+    <select id="getCityMsgById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.CityMsg">
+    SELECT
+          ID,
+          NAME,
+          CITY_CONTENT,
+          IMG_URL,
+          PROVINCE_ID,
+    FROM TraverMsg_citymsg
+    WHERE ID = #{cityId}
+  </select>
+
+    <!--
+        通过城市名称查询城市信息
+    -->
+    <select id="searchCityMsgByName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.CityMsg">
+    SELECT
+          ID,
+          NAME,
+          CITY_CONTENT,
+          IMG_URL,
+          PROVINCE_ID
+    FROM TraverMsg_citymsg
+    WHERE lower(name) LIKE #{cityName}
+  </select>
+
+    <!--
+        根据城市ID查询城市景点信息
+    -->
+    <select id="getScenicMsgListById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.ScenicMsg">
+    SELECT
+          ID,
+          NAME,
+          SCENIC_CONTENT,
+          IMG_URL,
+          CITY_ID_ID AS city_id,
+    FROM TraverMsg_scenicmsg
+    WHERE ID = #{cityId}
+  </select>
+
+
+</mapper>

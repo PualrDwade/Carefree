@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.UserAskMapper">
+
+    <cache />
+
+    <!--
+        实现查询所有问题，将结果以LIST形式输出
+    -->
+    <select id="getUserAskList" resultType="com.csu.carefree.Model.TraverAsk.UserAsk">
+    SELECT
+          ID,
+          TITLE,
+          ASK_CONTENT,
+          STAR_NUM,
+          ADD_TIME,
+          SCENIC_ID_ID AS scenic_id
+          USER_ID_ID AS user_id
+    FROM TraverAsk_userask
+  </select>
+
+    <!--
+        实现关键字查询问题
+    -->
+    <select id="searchUserAskList" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAsk">
+    SELECT
+          ID,
+          TITLE,
+          ASK_CONTENT,
+          STAR_NUM,
+          ADD_TIME,
+          SCENIC_ID_ID AS scenic_id
+          USER_ID_ID AS user_id
+    FROM TraverAsk_userask
+    WHERE lower(title) like #{value}
+  </select>
+
+    <!--
+        实现问题具体内容查询
+    -->
+    <select id="getUserAskById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAsk">
+    SELECT
+          ID,
+          TITLE,
+          ASK_CONTENT,
+          STAR_NUM,
+          ADD_TIME,
+          SCENIC_ID_ID AS scenic_id
+          USER_ID_ID AS user_id
+    FROM TraverAsk_userask
+    WHERE ID = #{userAskId}
+  </select>
+
+    <!--
+        实现用户创建问题
+    -->
+    <insert id="insertUserAsk" parameterType="com.csu.carefree.Model.TraverAsk.UserAsk">
+    INSERT INTO TraverAsk_userask
+      (ID, TITLE, ASK_CONTENT, STAR_NUM, ADD_TIME, SCENIC_ID_ID, USER_ID_ID)
+    VALUES
+      (#{id}, #{title}, #{ask_content}, #{star_num}, #{add_time}, #{scenic_id}, #{user_id})
+  </insert>
+
+</mapper>
