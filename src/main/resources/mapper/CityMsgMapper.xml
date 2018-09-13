@@ -4,12 +4,13 @@
 
 <mapper namespace="com.csu.carefree.Persistence.CityMsgMapper">
 
-    <cache />
+    <cache/>
 
     <!--
         通过省份ID查询省份信息
     -->
-    <select id="getProvinceMsgById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.ProvinceMsg">
+    <select id="getProvinceMsgById" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverMsg.ProvinceMsg">
     SELECT
           ID,
           NAME,
@@ -36,7 +37,8 @@
     <!--
         通过城市名称查询城市信息
     -->
-    <select id="searchCityMsgByName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.CityMsg">
+    <select id="searchCityMsgByName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverMsg.CityMsg">
     SELECT
           ID,
           NAME,
@@ -50,7 +52,8 @@
     <!--
         根据城市ID查询城市景点信息
     -->
-    <select id="getScenicMsgListById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.ScenicMsg">
+    <select id="getScenicMsgListById" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverMsg.ScenicMsg">
     SELECT
           ID,
           NAME,
