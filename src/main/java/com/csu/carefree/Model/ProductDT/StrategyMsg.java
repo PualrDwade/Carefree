@@ -2,27 +2,12 @@ package com.csu.carefree.Model.ProductDT;
 
 public class StrategyMsg {
     private String id;
-    private String titile;
+    private String title;
     private String link_url;
     private String simple_content;
     private String supplier_id;
     private String img_url;
-    private String city_id;
     private String scenic_id;
-
-    @Override
-    public String toString() {
-        return "StrategyMsg{" +
-                "id='" + id + '\'' +
-                ", titile='" + titile + '\'' +
-                ", link_url='" + link_url + '\'' +
-                ", simple_content='" + simple_content + '\'' +
-                ", supplier_id='" + supplier_id + '\'' +
-                ", img_url='" + img_url + '\'' +
-                ", city_id='" + city_id + '\'' +
-                ", scenic_id='" + scenic_id + '\'' +
-                '}';
-    }
 
     public String getId() {
         return id;
@@ -32,12 +17,12 @@ public class StrategyMsg {
         this.id = id;
     }
 
-    public String getTitile() {
-        return titile;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitile(String titile) {
-        this.titile = titile;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getLink_url() {
@@ -72,14 +57,6 @@ public class StrategyMsg {
         this.img_url = img_url;
     }
 
-    public String getCity_id() {
-        return city_id;
-    }
-
-    public void setCity_id(String city_id) {
-        this.city_id = city_id;
-    }
-
     public String getScenic_id() {
         return scenic_id;
     }
@@ -91,16 +68,13 @@ public class StrategyMsg {
     public StrategyMsg() {
     }
 
-    public StrategyMsg(String id, String titile, String link_url,
-                       String simple_content, String supplier_id,
-                       String img_url, String city_id, String scenic_id) {
+    public StrategyMsg(String id, String title, String link_url, String simple_content, String supplier_id, String img_url, String scenic_id) {
         this.id = id;
-        this.titile = titile;
+        this.title = title;
         this.link_url = link_url;
         this.simple_content = simple_content;
         this.supplier_id = supplier_id;
         this.img_url = img_url;
-        this.city_id = city_id;
         this.scenic_id = scenic_id;
     }
 }

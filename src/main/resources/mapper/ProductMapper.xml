@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.ProductMapper">
+
+    <cache/>
+
+    <select id="getProductList" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    SELECT
+      id,
+      name,
+      traver_days,
+      product_type,
+      img_url,
+      product_link,
+      score,
+      sell_num,
+      comments_num,
+      product_grade,
+      supplier_id
+    FROM ProductDT_productmsg
+    </select>
+
+    <select id="getProductById" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    SELECT
+      id,
+      name,
+      traver_days,
+      product_type,
+      img_url,
+      product_link,
+      score,
+      sell_num,
+      comments_num,
+      product_grade,
+      supplier_id
+    FROM ProductDT_productmsg
+    WHERE id = #{id}
+    </select>
+
+    <select id="getProductListByTraver_days" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    SELECT
+      id,
+      name,
+      traver_days,
+      product_type,
+      img_url,
+      product_link,
+      score,
+      sell_num,
+      comments_num,
+      product_grade,
+      supplier_id
+    FROM ProductDT_productmsg
+    WHERE traver_days = #{traver_days}
+    </select>
+
+    <select id="getProductListByProduct_type" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    SELECT
+      id,
+      name,
+      traver_days,
+      product_type,
+      img_url,
+      product_link,
+      score,
+      sell_num,
+      comments_num,
+      product_grade,
+      supplier_id
+    FROM ProductDT_productmsg
+    WHERE product_type = #{product_type}
+    </select>
+
+    <select id="getProductListBySupplier_id" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    SELECT
+      id,
+      name,
+      traver_days,
+      product_type,
+      img_url,
+      product_link,
+      score,
+      sell_num,
+      comments_num,
+      product_grade,
+      supplier_id
+    FROM ProductDT_productmsg
+    WHERE supplier_id = #{supplier_id}
+    </select>
+
+    <select id="getProductListByThree" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    SELECT
+      id,
+      name,
+      traver_days,
+      product_type,
+      img_url,
+      product_link,
+      score,
+      sell_num,
+      comments_num,
+      product_grade,
+      supplier_id
+    FROM ProductDT_productmsg
+    WHERE traver_days = #{0} AND product_type = #{1} AND supplier_id = #{2}
+    </select>
+
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.HotelMsgMapper">
+
+    <cache/>
+
+    <select id="getHotelMsgList" resultType="com.csu.carefree.Model.ProductDT.HotelMsg">
+    SELECT
+      id,
+      name,
+      score,
+      hotel_price,
+      hotel_content,
+      scenic_id,
+      img_url,
+      hotel_link,
+      sell_num,
+      latest_time,
+      supplier_id_id as supplier_id
+    FROM ProductDT_hotelmsg
+    </select>
+
+    <select id="getHotelMsg" parameterType="java.lang.String" resultType="com.csu.carefree.Model.ProductDT.HotelMsg">
+    SELECT
+      id,
+      name,
+      score,
+      hotel_price,
+      hotel_content,
+      scenic_id,
+      img_url,
+      hotel_link,
+      sell_num,
+      latest_time,
+      supplier_id_id as supplier_id
+    FROM ProductDT_hotelmsg
+    WHERE ID = #{id}
+    </select>
+
+    <!--
+        具体的字符串信息提取过程！！！
+    -->
+    <select id="searchHotelMsgList" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.HotelMsg">
+    SELECT
+      id,
+      name,
+      score,
+      hotel_price,
+      hotel_content,
+      scenic_id,
+      img_url,
+      hotel_link,
+      sell_num,
+      latest_time,
+      supplier_id_id as supplier_id
+    FROM ProductDT_hotelmsg
+    WHERE lower(name) = #{keyword}
+    </select>
+</mapper>
