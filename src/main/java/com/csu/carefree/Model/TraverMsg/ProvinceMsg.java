@@ -6,6 +6,7 @@ public class ProvinceMsg {
     private String province_content;
     private String img_url;
 
+
     @Override
     public String toString() {
         return "ProvinceMsg{" +

@@ -3,9 +3,9 @@ package com.csu.carefree.Model.TraverMsg;
 public class ScenicMsg {
     private String id;
     private String name;
-    private String city_id;
     private String scenic_content;
     private String img_url;
+    private String city_id;
 
     @Override
     public String toString() {

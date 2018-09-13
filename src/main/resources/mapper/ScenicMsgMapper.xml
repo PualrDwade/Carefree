@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.ScenicMsgMapper">
+
+    <cache />
+
+    <!--
+        通过城市ID查询城市信息
+    -->
+    <select id="getScenicMsgById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.ScenicMsg">
+    SELECT
+          ID,
+          NAME,
+          SCENIC_CONTENT,
+          IMG_URL,
+          CITY_ID_ID AS CITY_ID
+    FROM TraverMsg_scenicmsg
+    WHERE ID = #{value}
+  </select>
+
+    <!--
+        根据城市ID查询城市信息
+    -->
+    <select id="getCityMsgById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.CityMsg">
+    SELECT
+          ID,
+          NAME,
+          CITY_CONTENT,
+          IMG_URL,
+          PROVINCE_ID,
+    FROM TraverMsg_citymsg
+    WHERE ID = #{cityId}
+  </select>
+
+    <!--
+        通过景点名称查询景点信息
+    -->
+    <select id="searchCityMsgByName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverMsg.ScenicMsg">
+    SELECT
+         ID,
+          NAME,
+          SCENIC_CONTENT,
+          IMG_URL,
+          CITY_ID_ID AS CITY_ID
+    FROM TraverMsg_scenicmsg
+    WHERE lower(name) LIKE #{scenicName}
+  </select>
+
+
+
+
+</mapper>

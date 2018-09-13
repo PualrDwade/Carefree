@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.UserAnswerMapper">
+
+    <cache />
+
+    <!--
+        实现查询所有问题答案，将结果以LIST形式输出
+    -->
+    <select id="getUserAnswerByAsk" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
+    SELECT
+          ID,
+          TITLE,
+          ANSWER_CONTENT,
+          ADD_TIME,
+          ASK_ID_ID as ask_id,
+          USER_ID_ID as user_id
+    FROM TraverAsk_useranswer
+  </select>
+
+    <!--
+        实现回答用户问题
+    -->
+    <insert id="insertUserAnswer" parameterType="com.csu.carefree.Model.TraverAsk.UserAnswer">
+    INSERT INTO TraverAsk_useranswer
+      (ID, TITLE, ANSWER_CONTENT, ADD_TIME, ASK_ID_ID, USER_ID_ID)
+    VALUES
+      (#{id}, #{title}, #{answer_content}, #{add_time}, #{user_id})=
+  </insert>
+
+</mapper>
