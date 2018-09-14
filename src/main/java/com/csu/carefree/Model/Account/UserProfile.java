@@ -1,7 +1,7 @@
 package com.csu.carefree.Model.Account;
 
 public class UserProfile {
-    private String nick_name;
+    private String nick_name;//用户昵称
     private String birthday;
     private String gender;
     private String address;

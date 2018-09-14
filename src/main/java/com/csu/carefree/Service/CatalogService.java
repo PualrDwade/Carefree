@@ -115,7 +115,7 @@ public interface CatalogService {
 
     List<TicketMsg> getTicketListByCity_id(String city_id);
 
-    /**************游记信息****/
+    /**************游记信息*******/
     //获取所有游记信息
     List<TraverNote> getTraverNoteList();
 

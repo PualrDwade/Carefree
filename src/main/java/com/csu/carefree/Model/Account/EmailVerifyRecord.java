@@ -51,6 +51,11 @@ public class EmailVerifyRecord {
     public EmailVerifyRecord() {
     }
 
+    public String getRandomCode() {
+        //得到随机验证码
+        return null;
+    }
+
     public EmailVerifyRecord(String code, String email, String send_type, String send_time) {
         this.code = code;
         this.email = email;

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TraverNoteMapper {
 
-   //获取所有游记信息
+    //获取所有游记信息
     List<TraverNote> getTraverNoteList();
 
     //通过关键词搜索游记信息
@@ -17,4 +17,7 @@ public interface TraverNoteMapper {
 
     //存储用户游记信息
     void insertTraverNote(TraverNote traverNote);
+
+    //通过username得到用户游记列表
+    List<TraverNote> getTraverNodeListbyName(String username);
 }

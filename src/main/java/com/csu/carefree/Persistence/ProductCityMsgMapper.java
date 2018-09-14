@@ -4,7 +4,7 @@ import com.csu.carefree.Model.ProductDT.Product_CityMsg;
 
 import java.util.List;
 
-public interface Product_CityMsgMapper {
+public interface ProductCityMsgMapper {
     List<Product_CityMsg> getProduct_CityList();
 
     //根据产品ID找出产品的所有出发城市以及相应的起价

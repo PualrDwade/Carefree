@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>我的头像</title>
+
+    <script type="text/javascript">
+        window.Env = {"WWW_HOST":"www.mafengwo.cn","IMG_HOST":"images.mafengwo.net","P_HOST":"passport.mafengwo.cn","P_HTTP":"https:\/\/passport.mafengwo.cn","PAGELET_HTTP":"https:\/\/pagelet.mafengwo.cn","JS_HOST":"js.mafengwo.net","UID":85353052,"CSTK":"d2241968f90f83809244de292fd5fa1e_2286c5ab904f9190d9e0909bed1799cd","GOOGLE_MAP_KEY":"AIzaSyD-Su0x_rPy1xehlMBcMyTqWkU49Bk53nQ","TONGJI_HOST":"tongji.mafengwo.cn"};
+    </script>
+
+    <link href="https://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css" rel="stylesheet" type="text/css"/>
+
+    <link href="https://css.mafengwo.net/css/other/isettings.css?1535630301" rel="stylesheet" type="text/css"/>
+
+    <link href="https://css.mafengwo.net/css/plugins/jquery.Jcrop.css?1493174418" rel="stylesheet" type="text/css"/>
+
+    <script language="javascript" src="https://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js" type="text/javascript" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+
+<!--左侧边栏-->
+<div class="wrapper clearfix">
+    <div class="aside">
+        <a href="UserCenter.html"><i class="i8"></i>返回个人中心</a>
+        <a href="AccountSetting.html"><i class="i1"></i>我的信息</a>
+        <a href="SettingUserInfo.html" class="on" target="_self"><i class="i2"></i>我的头像</a>
+        <a href="SettingSecurity.html" ><i class="i4"></i>账号安全</a>
+        <a href="SettingPrivacy.html" ><i class="i5"></i>隐私设置</a>
+    </div>
+
+    <div class="content">
+        <div class="hd">
+            <strong>我的头像</strong>
+        </div>
+
+        <div class="userlogo">
+            <div class="avatar" id="_j_avatar_box">
+                <img src="../static/img/blog-img/lp4.jpg" width="120" height="120" border="0">
+                <div class="progress" id="percentContent" style="display:none;">
+                </div>
+            </div>
+            <div class="btn-sub">
+                <div class="btn" id="_j_upload">选择图片</div>支持jpg、png、jpeg、bmp，图片大小5M以内
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
+
+<div id="footer">
+    <div class="ft-content" style="width: 1105px">
+        <div class="footer-font">
+            Copyright &copy;2018 All rights reserved | This webpage is made with
+            <i class="fa fa-heart-o" aria-hidden="true"></i> 陈志轩小组
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    $(function() {
+        $('.aside a').not('.on').on('click', function(e) {
+            var left, top;
+            $('.aside .ripple').removeClass('animate');
+            0 === $(this).children('.ripple').size() && $(this).prepend('<span class="ripple"></span>');
+            var ripple = $(this).children('.ripple');
+            left = e.pageX - $(this).offset().left - ripple.width() / 2,
+                top = e.pageY - $(this).offset().top - ripple.height() / 2,
+                ripple.css({
+                    top: top,
+                    left: left
+                }).addClass('animate');
+        });
+        $('.content .alert .close').on('click', function() {
+            $(this).closest('.alert').fadeOut(500, function() {
+                $(this).remove();
+            });
+        });
+    });
+</script>
+
+<script language="javascript" src="https://js.mafengwo.net/js/cv/js+plugins+plupload.full.min:js+plugins+jquery.Jcrop^Zlc^1493174420.js" type="text/javascript" crossorigin="anonymous"></script>
+
+<!--<script type="text/javascript">-->
+    <!--$(function() {-->
+        <!--var boundX = 0, boundY = 0;-->
+        <!--var avatar;-->
+        <!--var avatarBox = $('#_j_avatar_box');-->
+        <!--var cropApi, cropX = 0, cropY = 0, cropWidth = 0, cropHeight = 0;-->
+        <!--var cropBox = $('#_j_crop_box');-->
+        <!--var updatePreview = function(crop) {-->
+            <!--if(parseInt(crop.w) > 0) {-->
+                <!--var largeX = 120 / crop.w;-->
+                <!--var largeY = 120 / crop.h;-->
+                <!--var normalX = 48 / crop.w;-->
+                <!--var normalY = 48 / crop.h;-->
+                <!--var smallX = 16 / crop.w;-->
+                <!--var smallY = 16 / crop.h;-->
+
+                <!--cropX = crop.x;-->
+                <!--cropY = crop.y;-->
+                <!--cropWidth = crop.w;-->
+                <!--cropHeight = crop.h;-->
+
+                <!--cropBox.find('.preview .large img').css({-->
+                    <!--width: Math.round(largeX * boundX),-->
+                    <!--height: Math.round(largeY * boundY),-->
+                    <!--marginLeft: -Math.round(largeX * crop.x),-->
+                    <!--marginTop: -Math.round(largeY * crop.y)-->
+                <!--});-->
+                <!--cropBox.find('.preview .normal img').css({-->
+                    <!--width: Math.round(normalX * boundX),-->
+                    <!--height: Math.round(normalY * boundY),-->
+                    <!--marginLeft: -Math.round(normalX * crop.x),-->
+                    <!--marginTop: -Math.round(normalY * crop.y)-->
+                <!--});-->
+                <!--cropBox.find('.preview .small img').css({-->
+                    <!--width: Math.round(smallX * boundX),-->
+                    <!--height: Math.round(smallY * boundY),-->
+                    <!--marginLeft: -Math.round(smallX * crop.x),-->
+                    <!--marginTop: -Math.round(smallY * crop.y)-->
+                <!--});-->
+            <!--}-->
+        <!--};-->
+        <!--var avatarUploader = new plupload.Uploader({-->
+            <!--runtimes: 'html5,flash',-->
+            <!--browse_button: '_j_upload',-->
+            <!--flash_swf_url: '/swf/Moxie.swf',-->
+            <!--multi_selection: false,-->
+            <!--filters: [{-->
+                <!--title: 'Image files',-->
+                <!--extensions: 'jpg,jpeg,png,gif'-->
+            <!--}],-->
+            <!--url: '/home/setting.php/uploadAvatar',-->
+            <!--resize: {-->
+                <!--width: 2048,-->
+                <!--quality: 100-->
+            <!--},-->
+            <!--multipart: 'form-data'-->
+        <!--});-->
+        <!--avatarUploader.init();-->
+        <!--avatarUploader.bind('FilesAdded', function() {-->
+            <!--// tmp prohibit avatar change-->
+            <!--/*-->
+            <!--M.closure(function(require) {-->
+                <!--var Alert = require('dialog/alert');-->
+                <!--Alert.pop('系统维护中，暂无法修改个人头像，请谅解！');-->
+            <!--}, true);-->
+            <!--return false;-->
+            <!--*/-->
+
+            <!--if(typeof cropApi !== 'undefined') {-->
+                <!--cropApi.destroy();-->
+                <!--cropBox.find('.btns a').addClass('disable');-->
+            <!--}-->
+            <!--cropBox.find('.plan img,.preview dl img')-->
+                <!--.removeAttr('style')-->
+                <!--.attr('src', 'http://images.mafengwo.net/images/pp600.gif');-->
+            <!--cropX = cropY = cropWidth = cropHeight = 0;-->
+            <!--avatarUploader.start();-->
+        <!--});-->
+        <!--avatarUploader.bind('UploadProgress', function(up, file) {-->
+            <!--var data = {-->
+                <!--'width': file.percent + '%'-->
+            <!--};-->
+            <!--$('#uploadPercent').css(data);-->
+            <!--$('#percentNum').text(file.percent + '%');-->
+        <!--});-->
+        <!--avatarUploader.bind('BeforeUpload', function() {-->
+            <!--avatarUploader.disableBrowse(true);-->
+            <!--$('#_j_upload').text('正在上传..').addClass('disable');-->
+            <!--$('#percentContent').show();-->
+            <!--$('#percentNum').text('0%');-->
+            <!--var data = {-->
+                <!--'width': '0%'-->
+            <!--};-->
+            <!--$('#uploadPercent').css(data);-->
+        <!--});-->
+        <!--avatarUploader.bind('FileUploaded', function(up, file, response) {-->
+            <!--$('#percentContent').hide();-->
+            <!--var data = $.parseJSON(response.response);-->
+            <!--if(!$.isEmptyObject(data)) {-->
+                <!--avatar = data.id;-->
+                <!--$('<img />')-->
+                    <!--.on('load', function() {-->
+                        <!--cropBox.slideDown(700);-->
+                        <!--cropBox.find('.preview dl img').attr('src', data.url);-->
+                        <!--cropBox.find('.plan img')-->
+                            <!--.attr('src', data.url)-->
+                            <!--.Jcrop({-->
+                                <!--boxWidth: 330,-->
+                                <!--onChange: updatePreview,-->
+                                <!--onSelect: updatePreview,-->
+                                <!--aspectRatio: 1-->
+                            <!--}, function() {-->
+                                <!--cropApi = this;-->
+                                <!--var bounds = cropApi.getBounds();-->
+                                <!--boundX = bounds[0];-->
+                                <!--boundY = bounds[1];-->
+
+                                <!--var X1 = (boundX / 2) - 115;-->
+                                <!--var Y1 = (boundY / 2) - 115;-->
+                                <!--if(X1 < 0) X1 = 0;-->
+                                <!--if(Y1 < 0) Y1 = 0;-->
+                                <!--var X2 = (boundX / 2) + 115;-->
+                                <!--var Y2 = (boundY / 2) + 115;-->
+                                <!--if(X2 > boundX) X2 = boundX;-->
+                                <!--if(Y2 > boundY) Y2 = boundY;-->
+
+                                <!--if(X2 - X1 > Y2 - Y1) {-->
+                                    <!--X1 = (boundX / 2) - (Y2 - Y1) / 2;-->
+                                    <!--X2 = (boundX / 2) + (Y2 - Y1) / 2;-->
+                                <!--} else if(X2 - X1 < Y2 - Y1) {-->
+                                    <!--Y1 = (boundY / 2) - (X2 - X1) / 2;-->
+                                    <!--Y2 = (boundY / 2) + (X2 - X1) / 2;-->
+                                <!--}-->
+                                <!--cropApi.animateTo([X1, Y1, X2, Y2]);-->
+
+                                <!--cropBox.find('.btns a').removeClass('disable');-->
+                            <!--});-->
+                    <!--})-->
+                    <!--.attr('src', data.url);-->
+            <!--} else {-->
+                <!--M.closure(function(require) {-->
+                    <!--var Alert = require('dialog/alert');-->
+                    <!--Alert.pop('图片上传失败，请稍候再试');-->
+                <!--}, true);-->
+            <!--}-->
+            <!--avatarUploader.disableBrowse(false);-->
+            <!--$('#_j_upload').text('选择图片').removeClass('disable');-->
+        <!--});-->
+
+        <!--cropBox.delegate('.btns .btn1', 'click', function(e) {-->
+            <!--e.preventDefault();-->
+            <!--var self = $(this);-->
+            <!--if(self.hasClass('disable') || cropWidth == 0 || cropHeight == 0) {-->
+                <!--return false;-->
+            <!--}-->
+            <!--cropApi.disable();-->
+            <!--cropBox.find('.btns a').addClass('disable');-->
+            <!--$.post('/home/setting.php/cropAvatar', {-->
+                <!--x: cropX,-->
+                <!--y: cropY,-->
+                <!--width: cropWidth,-->
+                <!--height: cropHeight,-->
+                <!--avatarwidth: boundX,-->
+                <!--avatarheight: boundY,-->
+                <!--avatar: avatar-->
+            <!--}, function(data) {-->
+                <!--if(data) {-->
+                    <!--avatarBox.find('img').attr('src', data);-->
+                    <!--cropApi.destroy();-->
+                    <!--cropBox.slideUp(700);-->
+                <!--} else {-->
+                    <!--cropApi.enable();-->
+                    <!--cropBox.find('.btns a').removeClass('disable');-->
+                    <!--M.closure(function(require) {-->
+                        <!--var Alert = require('dialog/alert');-->
+                        <!--Alert.pop('头像裁剪失败，请稍候再试');-->
+                    <!--}, true);-->
+                <!--}-->
+            <!--});-->
+        <!--}).delegate('.btns .btn2', 'click', function(e) {-->
+            <!--e.preventDefault();-->
+            <!--cropApi.destroy();-->
+            <!--cropBox.slideUp(700);-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
+
+<script language="javascript" type="text/javascript">
+    if (typeof M !== "undefined" && typeof M.loadResource === "function") {
+        M.loadResource("https://js.mafengwo.net/js/cv/js+Dropdown:js+pageletcommon+pageHeadUserInfoWWWNormal:js+jquery.tmpl:js+M+module+InputListener:js+M+module+SuggestionXHR:js+M+module+DropList:js+M+module+Suggestion:js+M+module+MesSearchEvent:js+SiteSearch:js+AHeader:js+M+module+dialog+Layer:js+M+module+dialog+DialogBase:js+M+module+dialog+Dialog:js+M+module+FrequencyVerifyControl:js+M+module+FrequencySystemVerify:js+ALogin:js+ACnzzGaLog:js+ARecruit^Z1VQ^1532697023.js");
+    }
+</script>
+
+</body>
+</html>

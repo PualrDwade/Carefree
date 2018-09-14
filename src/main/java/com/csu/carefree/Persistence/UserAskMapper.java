@@ -19,8 +19,11 @@ public interface UserAskMapper {
     //通过用户问题ID获取问题信息
     UserAsk getUserAskById(String userAskId);
 
-    //用户提出提出问题
+    //插入用户提出的问题
     void insertUserAsk(UserAsk userAsk);
+
+    //通过username得到用户问题列表
+    List<UserAsk> getUserAskListbyName(String username);
 
 
 }

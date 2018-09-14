@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.ProductScenicMsgMapper">
+
+    <cache/>
+
+    <select id="getProductIdsByScenicName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.Product_ScenicMsg">
+    SELECT
+      id,
+      senic_name as scenic_name,
+      product_id_id as product_id
+    FROM ProductDT_product_senic
+    WHERE senic_name = #{scenicName}
+    </select>
+
+    <select id="getScenicNamesByProductId" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.Product_ScenicMsg">
+    SELECT
+      id,
+      senic_name as scenic_name,
+      product_id_id as product_id
+    FROM ProductDT_product_senic
+    WHERE product_id_id = #{ProductId}
+    </select>
+
+</mapper>
