@@ -36,6 +36,14 @@ public class CatalogController {
     //请求主界面
     @GetMapping("/")
     public String viewIndex(HttpSession session, Model model) {
+        //首先判断是否登陆
+        String username = (String) session.getAttribute("username");
+        //返回数据给前端页面
+        if (username == null) {
+            model.addAttribute("login", false);
+        } else {
+            model.addAttribute("login", true);
+        }
         //行程信息存在session当中
         TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
         if (traverMsg == null)
