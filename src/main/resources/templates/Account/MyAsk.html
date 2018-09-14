@@ -27,10 +27,10 @@
         <div class="tags_bar">
             <div class="center clearfix">
                 <ul class="flt2">
-                    <li><a class="tags_link" href="../../index.html" title="返回主页">返回主页</a></li>
-                    <li ><a class="tags_link" href="UserCenter.html" title="我的主页">我的主页</a></li>
+                    <li><a class="tags_link" href="../index.html" title="返回主页">返回主页</a></li>
+                    <li class="on"><a class="tags_link" href="UserCenter.html" title="我的主页">我的主页</a></li>
                     <li><a class="tags_link" href="MyTravelNote.html" title="我的游记">我的游记</a></li>
-                    <li class="on"><a class="tags_link" href="MyAnswer.html" title="我的问答">我的问答</a></li>
+                    <li><a class="tags_link" href="MyAnswer.html" title="我的问答">我的问答</a></li>
                     <li><a class="tags_link" href="#" title="我的收藏">我的收藏</a></li>
                     <li class="more ">
                         <span class="tags_link" role="button" title="更多" style="cursor:default">更多<i class="MDownMore"></i></span>
@@ -92,11 +92,11 @@
             <div class="wd-main">
                 <div class="wd-navbar clearfix">
                     <ul class="wd-nav _j_qa_nav">
-                        <li class="on"><a href="MyAnswer.html">我的回答</a></li>
-                        <li ><a href="MyAsk.html">我的提问</a></li>
+                        <li><a href="MyAnswer.html">我的回答</a></li>
+                        <li class="on"><a href="MyAsk.html">我的提问</a></li>
                     </ul>
                 </div>
-                <div class="wd-total">共有<span class="_j_total_item">0条</span>回答</div>
+                <div class="wd-total">共有<span class="_j_total_item">0条</span>提问</div>
                 <div class="wd-list _j_qa_list">
                     <div class="no_data">
                         <img src="http://css.mafengwo.net/images/home_new2015/no_num.png" height="139" width="156" alt="">
@@ -117,7 +117,7 @@
                             谢邀啦可以试试我上个月找的拼车团队，非常nice~随时想停车都可以，主要是带队的人好，特别体贴我们。什么旅拍，航拍，氧气瓶都有的。还可以去看看我的游记哟~
                         </div>
                         <div class="wd-meta">
-                        <span class="meta-item meta-like"><i></i>1</span>
+                            <span class="meta-item meta-like"><i></i>1</span>
                             <div class="meta-pull">
                                 <span class="meta-item meta-commit">1回答</span>
                                 <span class="meta-item meta-time">2018-08-10 15:25</span>
@@ -125,13 +125,13 @@
                         </div>
                     </div>
 
-                <div class="pagin" id="smallpager"></div>
+                    <div class="pagin" id="smallpager"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script type="text/x-jquery-tmpl" id="_j_pagitmpl">
+    <script type="text/x-jquery-tmpl" id="_j_pagitmpl">
     {{if pageTotal > 1 && $("#_j_param").data('type') != 5}}
 	    <div align="right" class="m-pagination">
             <span class="count">共<span>${pageTotal}</span>页 / <span>${total}</span>条</span>
@@ -158,7 +158,7 @@
     {{/if}}
 </script>
 
-<link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
+    <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
 
     <div id="footer">
         <div class="ft-content" style="width: 1105px">
@@ -171,29 +171,29 @@
     </div>
 
 
-<link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
+    <link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
 
-<div class="mfw-toolbar" id="_j_mfwtoolbar">
-    <div class="toolbar-item-top">
-        <a role="button" class="btn _j_gotop">
-            <i class="icon_top"></i>
-            <em>返回顶部</em>
-        </a>
+    <div class="mfw-toolbar" id="_j_mfwtoolbar">
+        <div class="toolbar-item-top">
+            <a role="button" class="btn _j_gotop">
+                <i class="icon_top"></i>
+                <em>返回顶部</em>
+            </a>
+        </div>
+        <div class="toolbar-item-down">
+            <a role="button" class="btn _j_gobottom">
+                <i class="icon_down"></i>
+                <em>页面底部</em>
+            </a>
+        </div>
     </div>
-    <div class="toolbar-item-down">
-        <a role="button" class="btn _j_gobottom">
-            <i class="icon_down"></i>
-            <em>页面底部</em>
-        </a>
-    </div>
-</div>
 
 
-<script language="javascript" type="text/javascript">
-    if (typeof M !== "undefined" && typeof M.loadResource === "function") {
-        M.loadResource("http://js.mafengwo.net/js/cv/js+pageletcommon+pageHeadUserInfoWWWDark:js+jquery.tmpl:js+M+module+Pagination:js+M+module+dialog+Layer:js+M+module+dialog+DialogBase:js+M+module+dialog+Dialog:js+M+module+dialog+alert:js+qa+QaHome:js+M+module+dialog+confirm:js+M+module+FrequencyVerifyControl:js+M+module+FrequencyAppVerify:js+home+AMsgBoard:js+M+module+PageAdmin:js+M+module+Storage:js+M+module+Cookie:js+M+module+ResourceKeeper:js+jquery.jgrowl.min:js+AMessage:js+M+module+FrequencySystemVerify:js+ALogin:js+M+module+ScrollObserver:js+M+module+QRCode:js+AToolbar:js+ACnzzGaLog:js+ARecruit:js+ALazyLoad^ZlJT^1531130229.js");
-    }
-</script>
+    <script language="javascript" type="text/javascript">
+        if (typeof M !== "undefined" && typeof M.loadResource === "function") {
+            M.loadResource("http://js.mafengwo.net/js/cv/js+pageletcommon+pageHeadUserInfoWWWDark:js+jquery.tmpl:js+M+module+Pagination:js+M+module+dialog+Layer:js+M+module+dialog+DialogBase:js+M+module+dialog+Dialog:js+M+module+dialog+alert:js+qa+QaHome:js+M+module+dialog+confirm:js+M+module+FrequencyVerifyControl:js+M+module+FrequencyAppVerify:js+home+AMsgBoard:js+M+module+PageAdmin:js+M+module+Storage:js+M+module+Cookie:js+M+module+ResourceKeeper:js+jquery.jgrowl.min:js+AMessage:js+M+module+FrequencySystemVerify:js+ALogin:js+M+module+ScrollObserver:js+M+module+QRCode:js+AToolbar:js+ACnzzGaLog:js+ARecruit:js+ALazyLoad^ZlJT^1531130229.js");
+        }
+    </script>
 
 </body>
 </html>
