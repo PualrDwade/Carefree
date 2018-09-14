@@ -14,6 +14,12 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class AccountController {
+    /**
+     * 实现用户登陆注册模块的业务
+     * 实现用户中心模块的业务
+     */
+
+
     //springmvc自动装配,创建一个用户的服务接口
     @Autowired
     private AccountService accountService;

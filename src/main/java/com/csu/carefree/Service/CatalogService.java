@@ -80,4 +80,6 @@ public interface CatalogService {
 
     //通过景点名称获取景点信息
     List<ScenicMsg> getScenicMsgListByName(String name);
+
+
 }
