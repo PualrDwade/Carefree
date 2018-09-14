@@ -6,6 +6,9 @@
 
     <cache/>
 
+    <!--
+        获取所有产品信息
+    -->
     <select id="getProductList" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
       id,
@@ -20,8 +23,12 @@
       product_grade,
       supplier_id
     FROM ProductDT_productmsg
+    ORDER BY ${'sell_num'} DESC
     </select>
 
+    <!--
+        通过产品ID获得产品信息
+    -->
     <select id="getProductById" parameterType="java.lang.String"
             resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
@@ -40,6 +47,9 @@
     WHERE id = #{id}
     </select>
 
+    <!--
+        通过旅行天数推荐产品信息
+    -->
     <select id="getProductListByTraver_days" parameterType="java.lang.String"
             resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
@@ -56,8 +66,35 @@
       supplier_id
     FROM ProductDT_productmsg
     WHERE traver_days = #{traver_days}
+    ORDER BY ${'sell_num'} DESC
     </select>
 
+    <!--
+        通过产品名字找出产品信息
+    -->
+    <select id="getProductListByName" parameterType="java.lang.String"
+        resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    SELECT
+      id,
+      name,
+      traver_days,
+      product_type,
+      img_url,
+      product_link,
+      score,
+      sell_num,
+      comments_num,
+      product_grade,
+      supplier_id
+    FROM ProductDT_productmsg
+    WHERE lower(name) LIKE #{value}
+    ORDER BY ${'sell_num'} DESC
+    </select>
+
+
+    <!--
+        通过旅行类型获取产品信息
+    -->
     <select id="getProductListByProduct_type" parameterType="java.lang.String"
             resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
@@ -74,8 +111,13 @@
       supplier_id
     FROM ProductDT_productmsg
     WHERE product_type = #{product_type}
+    ORDER BY ${'sell_num'} DESC
     </select>
 
+
+    <!--
+        通过供应商获取产品信息
+    -->
     <select id="getProductListBySupplier_id" parameterType="java.lang.String"
             resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
@@ -92,8 +134,12 @@
       supplier_id
     FROM ProductDT_productmsg
     WHERE supplier_id = #{supplier_id}
+    ORDER BY ${'sell_num'} DESC
     </select>
 
+    <!--
+        通过旅行天数，产品类型，供应商ID获取产品信息
+    -->
     <select id="getProductListByThree" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
       id,
@@ -109,6 +155,7 @@
       supplier_id
     FROM ProductDT_productmsg
     WHERE traver_days = #{0} AND product_type = #{1} AND supplier_id = #{2}
+    ORDER BY ${'sell_num'} DESC
     </select>
 
 </mapper>

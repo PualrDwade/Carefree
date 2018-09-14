@@ -15,4 +15,7 @@ public interface ScenicMsgMapper {
 
     //通过景点名称获取景点信息
     List<ScenicMsg> getScenicMsgListByName(String name);
+
+    //通过城市名称获取景点列表
+    List<ScenicMsg> getScenicMsgListByCityName(String cityName);
 }

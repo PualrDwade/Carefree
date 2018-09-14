@@ -18,6 +18,7 @@
           ASK_ID_ID as ask_id,
           USER_ID_ID as user_id
     FROM TraverAsk_useranswer
+        ORDER BY ${'add_time'} DESC
   </select>
 
     <!--

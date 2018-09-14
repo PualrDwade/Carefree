@@ -14,9 +14,12 @@ public interface CityMsgMapper {
     //通过城市ID获取城市信息
     CityMsg getCityMsgById(String cityId);
 
-    //通过城市名称获取城市信息
+    //通过城市名称获取城市信息(模糊搜索)
     List<CityMsg> searchCityMsgByName(String cityName);
 
     //通过城市ID获取城市所有景点信息
     List<ScenicMsg> getScenicMsgListById(String cityId);
+
+    //通过城市名字获取城市所有景点信息
+    List<ScenicMsg> getScenicMsgListByCityName(String cityName);
 }
