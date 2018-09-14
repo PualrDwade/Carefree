@@ -8,7 +8,7 @@ public interface SigonMapper {
     Sigon getSigon(String username);
 
     //用过注册账号,
-    boolean setSigon(Sigon username, String password);
+    boolean setSigon(String username, String password);
 
     //通过邮箱找回密码
     boolean updateSigon(String username, String password);
