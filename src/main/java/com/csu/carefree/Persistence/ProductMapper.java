@@ -21,6 +21,9 @@ public interface ProductMapper {
     //供应商
     List<ProductMsg> getProductListBySupplier_id(String supplier_id);
 
+    //产品名称
+    List<ProductMsg> getProductListByName(String product_name);
+
     //三个筛选条件都有
     List<ProductMsg> getProductListByThree(String traver_days, String product_type, String supplier_id);
 

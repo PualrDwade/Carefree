@@ -64,5 +64,19 @@
     WHERE ID = #{cityId}
   </select>
 
+    <!--
+        通过城市名称获取城市景点信息
+    -->
+    <select id="getScenicMsgListByCityName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverMsg.ScenicMsg">
+    SELECT
+          ID,
+          NAME,
+          SCENIC_CONTENT,
+          IMG_URL,
+          CITY_ID_ID AS city_id
+    FROM TraverMsg_scenicmsg
+    WHERE Name = #{name}
+    </select>
 
 </mapper>

@@ -9,4 +9,5 @@ public interface SupplierMapper {
 
     //例如当点击产品当中的供应商信息时候，要返回相应的信息
     Supplier getSupplierByName(String name);
+
 }

@@ -8,33 +8,36 @@
 
     <select id="getHotelMsgList" resultType="com.csu.carefree.Model.ProductDT.HotelMsg">
     SELECT
-      id,
-      name,
-      score,
-      hotel_price,
-      hotel_content,
-      scenic_id,
-      img_url,
-      hotel_link,
-      sell_num,
-      latest_time,
-      supplier_id_id as supplier_id
+          ID,
+          NAME,
+          SCORE,
+          HOTEL_PRICE,
+          HOTEL_CONTENT,
+          IMG_URL,
+          HOTEL_LINK,
+          SELL_NUM,
+          LATEST_TIME,
+          SUPPLIER_ID_ID AS supplier_id,
+          CITY_NAME,
+          SCENIC_NAME
     FROM ProductDT_hotelmsg
+    ORDER BY ${'sell_num'} DESC
     </select>
 
     <select id="getHotelMsg" parameterType="java.lang.String" resultType="com.csu.carefree.Model.ProductDT.HotelMsg">
     SELECT
-      id,
-      name,
-      score,
-      hotel_price,
-      hotel_content,
-      scenic_id,
-      img_url,
-      hotel_link,
-      sell_num,
-      latest_time,
-      supplier_id_id as supplier_id
+          ID,
+          NAME,
+          SCORE,
+          HOTEL_PRICE,
+          HOTEL_CONTENT,
+          IMG_URL,
+          HOTEL_LINK,
+          SELL_NUM,
+          LATEST_TIME,
+          SUPPLIER_ID_ID AS supplier_id,
+          CITY_NAME,
+          SCENIC_NAME
     FROM ProductDT_hotelmsg
     WHERE ID = #{id}
     </select>
@@ -45,18 +48,45 @@
     <select id="searchHotelMsgList" parameterType="java.lang.String"
             resultType="com.csu.carefree.Model.ProductDT.HotelMsg">
     SELECT
-      id,
-      name,
-      score,
-      hotel_price,
-      hotel_content,
-      scenic_id,
-      img_url,
-      hotel_link,
-      sell_num,
-      latest_time,
-      supplier_id_id as supplier_id
+          ID,
+          NAME,
+          SCORE,
+          HOTEL_PRICE,
+          HOTEL_CONTENT,
+          IMG_URL,
+          HOTEL_LINK,
+          SELL_NUM,
+          LATEST_TIME,
+          SUPPLIER_ID_ID AS supplier_id,
+          CITY_NAME,
+          SCENIC_NAME
     FROM ProductDT_hotelmsg
     WHERE lower(name) = #{keyword}
     </select>
+
+
+    <!--
+        根据目的地信息获取酒店信息
+        通过sell_num进行排列-降序
+    -->
+    <select id="getHotelListByDestination" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.HotelMsg">
+      SELECT
+            ID,
+            NAME,
+            SCORE,
+            HOTEL_PRICE,
+            HOTEL_CONTENT,
+            IMG_URL,
+            HOTEL_LINK,
+            SELL_NUM,
+            LATEST_TIME,
+            SUPPLIER_ID_ID AS supplier_id,
+            CITY_NAME,
+            SCENIC_NAME
+      FROM ProductDT_hotelmsg
+      WHERE city_name = #{value}
+      ORDER BY ${'sell_num'} DESC
+    </select>
+
 </mapper>

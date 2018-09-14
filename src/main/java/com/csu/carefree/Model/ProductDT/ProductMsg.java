@@ -5,13 +5,14 @@ public class ProductMsg {
     private String name;
     private String traver_days;
     private String product_type;
-    private String supplier_id;
+    private String img_url;
     private String product_link;
     private String score;
     private String sell_num;
-    private String img_url;
     private String comments_num;
     private String product_grade;
+    private String supplier_id;
+
 
     public String getId() {
         return id;
