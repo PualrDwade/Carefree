@@ -98,7 +98,7 @@ public class AccountController {
         }
     }
 
-    //充值密码的控制器url
+    //重置密码的控制器url
     @GetMapping("/account/ResetPassword")
     public String ResetPassword(@RequestParam String password, HttpSession session) {
         //修改密码
@@ -110,4 +110,6 @@ public class AccountController {
             return "Account/ResetError";
         }
     }
+
+
 }
