@@ -14,7 +14,7 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/TraverAsk/ViewTraverNote}">游记</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/TraverAsk/QuestionAnswer}">问答专区</a></li>
                     <li class="nav-item" style="margin-left: 200px">
-                        <a th:if="${session.username}" class="nav-link"
+                        <a th:if="!${session.username}" class="nav-link"
                            th:href="@{/account/ViewUserCenter}">用户中心</a>
                     </li>
                     <li th:if="!${session.username}" class="nav-item">
