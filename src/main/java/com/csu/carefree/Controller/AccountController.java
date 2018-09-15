@@ -36,6 +36,7 @@ public class AccountController {
     private SystemService systemService;
     //进行业务代码的编写
 
+
     @GetMapping("/account/ViewSignonForm")
     public String ViewSigonForm() {
         return "Account/AccountLogin";
@@ -132,25 +133,24 @@ public class AccountController {
         }
     }
 
-
     //跳转到用户中心的控制器url
     @GetMapping("/account/ViewUserCenter")
     public String ViewUserCenter(Model model, HttpSession session) {
-        //错误处理,没有登陆就发起请求
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            //返回登陆页面
-            return "Account/AccountLogin";
-        }
-        //用户名不为空,则通过username获取需要的信息进行渲染
-        List<TraverNote> traverNoteList = accountService.getTraverNodeListbyName(username);
-        List<UserAsk> userAskList = accountService.getUserAskListbyName(username);
-        List<UserAnswer> userAnswerList = accountService.getUserAnswerListByName(username);
-        UserProfile userProfile = accountService.getUserProfile(username);
-        model.addAttribute("traverNoteList", traverNoteList);
-        model.addAttribute("userAskList", userAskList);
-        model.addAttribute("userAnswerList", userAnswerList);
-        model.addAttribute("userProfile", userProfile);
+//        //错误处理,没有登陆就发起请求
+//        String username = (String) session.getAttribute("username");
+//        if (username == null) {
+//            //返回登陆页面
+//            return "Account/AccountLogin";
+//        }
+//        //用户名不为空,则通过username获取需要的信息进行渲染
+//        List<TraverNote> traverNoteList = accountService.getTraverNodeListbyName(username);
+//        List<UserAsk> userAskList = accountService.getUserAskListbyName(username);
+//        List<UserAnswer> userAnswerList = accountService.getUserAnswerListByName(username);
+//        UserProfile userProfile = accountService.getUserProfile(username);
+//        model.addAttribute("traverNoteList", traverNoteList);
+//        model.addAttribute("userAskList", userAskList);
+//        model.addAttribute("userAnswerList", userAnswerList);
+//        model.addAttribute("userProfile", userProfile);
         return "Account/UserCenter";
     }
 
@@ -228,4 +228,41 @@ public class AccountController {
         model.addAttribute("answeredNum", answeredNum);//他人回答数
         return "Account/MyAsk";
     }
+
+    //跳转到用户信息设置
+    @GetMapping("/account/AccountSetting")
+    public String AccountSetting( HttpSession session){
+        return "account/AccountSetting";
+    }
+
+    //跳转到用户头像设置
+    @GetMapping("/account/GotoSettingInfo")
+    public String GotoSettingInfo( HttpSession session){
+        return "account/SettingUserInfo";
+    }
+
+    //跳转到隐私设置
+    @GetMapping("/account/GotoSettingPrivacy")
+    public String GotoSettingPrivacy ( HttpSession session){
+        return "account/SettingPrivacy";
+    }
+
+    //跳转到安全设置
+    @GetMapping("/account/GotoSettingSecurity")
+    public String GotoSettingSecurity( HttpSession session){
+        return "account/SettingSecurity";
+    }
+
+    // 跳转到写游记
+    @GetMapping("/account/GotoCreateNote")
+    public String GotoCreateNote( HttpSession session){
+        return "TraverAsk/CreateNote";
+    }
+    //跳转到写问题
+    @GetMapping("/account/GotoCreateAsk")
+    public String GotoCreateAsk( HttpSession session){
+        return "TraverAsk/CreateAsk";
+    }
+
+
 }

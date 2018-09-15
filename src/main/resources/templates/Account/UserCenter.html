@@ -1,106 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>个人中心</title>
-    <meta name="renderer" content="webkit"/>
-
-    <script type="text/javascript">
-        window.Env = {
-            "profileSetting": {
-                "banner_cover": "",
-                "banner_cover_url": "",
-                "banner_map_type": 0,
-                "bg_type": 0,
-                "cover_pic": 0
-            },
-            "profileConfig": {
-                "page_bg_type_config": [{"bodyClass": "bg0"}, {"bodyClass": "bg2"}, {"bodyClass": "bg3"}, {"bodyClass": "bg4"}, {"bodyClass": "bg1"}],
-                "banner_map_type_config": [{
-                    "name": "\u7ecf\u5178",
-                    "thumbnail": "\/images\/home_new2015\/m1.gif",
-                    "className": "maps-theme-default",
-                    "regionFill": [{"fill": "#cccccc", "fill-opacity": "0.1"}, {
-                        "fill": "#ffe5a6",
-                        "fill-opacity": "0.9"
-                    }, {"fill": "#ffd267", "fill-opacity": "0.9"}, {
-                        "fill": "#ffba14",
-                        "fill-opacity": "0.9"
-                    }, {"fill": "#ff9000", "fill-opacity": "0.9"}]
-                }, {
-                    "name": "\u8dc3\u5165\u84dd\u8272\u661f\u7403",
-                    "thumbnail": "\/images\/home_new2015\/m2.gif",
-                    "className": "maps-theme-blue",
-                    "regionFill": [{"fill": "#ffffff", "fill-opacity": "0.8"}, {
-                        "fill": "#4ea3d2",
-                        "fill-opacity": "0.8"
-                    }, {"fill": "#509ed3", "fill-opacity": "0.8"}, {
-                        "fill": "#3589cf",
-                        "fill-opacity": "0.8"
-                    }, {"fill": "#0066cc", "fill-opacity": "0.8"}]
-                }, {
-                    "name": "\u65c5\u884c\u8ba9\u4e16\u754c\u6709\u5149",
-                    "thumbnail": "\/images\/home_new2015\/m3.gif",
-                    "className": "maps-theme-black",
-                    "regionFill": [{"fill": "#2d2e32", "fill-opacity": "1"}, {
-                        "fill": "#ffcf59",
-                        "fill-opacity": "1"
-                    }, {"fill": "#ffbd21", "fill-opacity": "1"}, {
-                        "fill": "#ff9c00",
-                        "fill-opacity": "1"
-                    }, {"fill": "#fd703a", "fill-opacity": "1"}]
-                }, {
-                    "name": "\u5927\u822a\u6d77\u65f6\u4ee3",
-                    "thumbnail": "\/images\/home_new2015\/m4.gif",
-                    "className": "maps-theme-green",
-                    "regionFill": [{"fill": "#a3dde0", "fill-opacity": "0.8"}, {
-                        "fill": "#77d9dc",
-                        "fill-opacity": "0.8"
-                    }, {"fill": "#35c9cb", "fill-opacity": "0.8"}, {
-                        "fill": "#0eb0b2",
-                        "fill-opacity": "0.8"
-                    }, {"fill": "#039ba4", "fill-opacity": "0.8"}]
-                }, {
-                    "name": "PINK PUNK",
-                    "thumbnail": "\/images\/home_new2015\/m5.gif",
-                    "className": "maps-theme-red",
-                    "regionFill": [{"fill": "#ffffff", "fill-opacity": "0.8"}, {
-                        "fill": "#f7ae9c",
-                        "fill-opacity": "0.8"
-                    }, {"fill": "#f7ae9c", "fill-opacity": "0.8"}, {
-                        "fill": "#e46547",
-                        "fill-opacity": "0.8"
-                    }, {"fill": "#db4c2b", "fill-opacity": "0.8"}]
-                }]
-            },
-            "china_mdd_lng_lat": [],
-            "world_mdd_lng_lat": [],
-            "target_uid": 85353052,
-            "WWW_HOST": "www.mafengwo.cn",
-            "IMG_HOST": "images.mafengwo.net",
-            "P_HOST": "passport.mafengwo.cn",
-            "P_HTTP": "https:\/\/passport.mafengwo.cn",
-            "PAGELET_HTTP": "http:\/\/pagelet.mafengwo.cn",
-            "JS_HOST": "js.mafengwo.net",
-            "UID": 85353052,
-            "CSTK": "eed7c0563f8cc16a91a73f4545a06466_3d16d12e983a96c66d6e0aa5afa5f9b5",
-            "GOOGLE_MAP_KEY": "AIzaSyD-Su0x_rPy1xehlMBcMyTqWkU49Bk53nQ",
-            "TONGJI_HOST": "tongji.mafengwo.cn"
-        };
-    </script>
-
-    <!--<link href="../static/css/userCentertext.css" rel="stylesheet" type="text/css"/>-->
-
-    <link href="http://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+app+topbar_v2^alw^1527308432.css"
-          rel="stylesheet" type="text/css"/>
-    <link href="http://css.mafengwo.net/css/cv/css+home_new2015+home_new2015:css+path+wo-path_v2:css+clip:css+path+map:css+path+jvectormap-2.0.1^alI^1509971336.css"
-          rel="stylesheet" type="text/css"/>
-    <script language="javascript"
-            src="http://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js"
-            type="text/javascript" crossorigin="anonymous"></script>
-
-</head>
+<head th:replace="common/userCenter::userHead"></head>
 <style type="text/css">
     .tags_link {
         font-size: 15px !important;
@@ -111,39 +12,7 @@
 <div class="main">
 
     <!--导航栏-->
-    <div class="banner">
-
-        <div class="tags_bar">
-            <div class="center clearfix">
-                <ul class="flt2">
-
-                    <li><a class="tags_link" href="../index.html" title="返回主页">返回主页</a></li>
-                    <li class="on"><a class="tags_link" href="UserCenter.html" title="我的主页">我的主页</a></li>
-                    <li><a class="tags_link" href="MyTravelNote.html" title="我的游记">我的游记</a></li>
-                    <li><a class="tags_link" href="MyAnswer.html" title="我的问答">我的问答</a></li>
-                    <li><a class="tags_link" href="#" title="我的收藏">我的收藏</a></li>
-                    <li class="more ">
-                        <span class="tags_link" role="button" title="更多" style="cursor:default">更多<i
-                                class="MDownMore"></i></span>
-                        <div class="tags_more_list">
-                            <ul>
-                                <li data-cs-t="go_to_activity"><a href="#" title="我的攻略" data-cs-p="activity"><i
-                                        class="ico_activity"></i><span>我的攻略</span></a></li>
-                                <li data-cs-t="go_to_activity"><a href="#" title="我的定制"><i class="ico_group"></i><span>我的定制</span></a>
-                                </li>
-                                <li data-cs-t="go_to_activity"><a href="#" title="我的点赞"><i
-                                        class="ico_collect"></i><span>我的点赞</span></a></li>
-                                <li data-cs-t="go_to_activity"><a href="#" title="我的门票"><i class="ico_order"></i><span>我的门票</span></a>
-                                </li>
-                                <li data-cs-t="go_to_activity"><a href="#" title="我的产品"><i class="ico_ticket"></i><span>我的产品</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <div th:replace="common/userCenter::userNav"></div>
 
     <!--页面内容-->
     <div class="center clearfix">
@@ -172,7 +41,7 @@
                 <div class="MAvaInfo clearfix MAvaMyInfo">
                     <span class="MAvaLevel flt1" title="11.15">生日：11.15</a></span>
                     <span class="MAvaPlace flt1" title="长沙">现居：长沙</span>
-                    <span class="MAvaSet"><a title="设置" href="AccountSetting.html" target="_self"></a></span>
+                    <span class="MAvaSet"><a title="设置" href="/account/AccountSetting" target="_self"></a></span>
                 </div>
 
                 <!--个人介绍-->
@@ -256,10 +125,10 @@
             <!--快捷功能-->
             <div class="common_block main_links">
                 <ul class="clearfix">
-                    <li><a href="../TraverAsk/CreateNote.html" target="_blank">
+                    <li><a href="/TraverAsk/ViewTraverNote" target="_blank">
                         <i class="write_note"></i><span class="tags_link">看游记</span></a>
                     </li>
-                    <li><a href="../TraverAsk/QuestionAnswer.html" target="_blank"><i
+                    <li><a href="/TraverAsk/QuestionAnswer" target="_blank"><i
                             class="ask_expert"></i><span class="tags_link">问达人</span></a></li>
                     <li><a href="" >
                         <i class="add_footprint"></i><span class="tags_link">查攻略</span></a></li>
@@ -267,7 +136,7 @@
                         <i class="invite_friends"></i><span class="tags_link">收消息</span></a>
                     </li>
                 </ul>
-            </div>
+            </div>TraverAsk/ViewTraverNote
 
 
             <!--<script>-->
@@ -311,7 +180,7 @@
                     <h2>我的游记</h2>
                 </div>
                 <div class="notes_default_v2">
-                    <a href="../TraverAsk/CreateNote.html" target="_blank" title="写游记" class="btn_write"><i></i>写游记</a>
+                    <a href="/account/GotoCreateNote" target="_blank" title="写游记" class="btn_write"><i></i>写游记</a>
                 </div>
 
                 <!--游记列表-->
@@ -324,7 +193,7 @@
                                     <div class="note_title clearfix">
                                         <div class="note_info">
                                             <h3>
-                                                <a href="/i/7234091.html" target="_blank"
+                                                <a href="" target="_blank"
                                                    title="激情龙门峡穿楠溪江“鬼村”探秘（胆小者勿入）">激情龙门峡穿楠溪江“鬼村”探秘（胆小者勿入）</a></h3>
                                             <div class="note_more">
 

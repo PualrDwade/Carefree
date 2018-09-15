@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
-<html>
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/userSetting::head">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>我的头像</title>
 
@@ -19,19 +19,9 @@
 
 </head>
 <body>
-
-
-
-<!--左侧边栏-->
 <div class="wrapper clearfix">
-    <div class="aside">
-        <a href="UserCenter.html"><i class="i8"></i>返回个人中心</a>
-        <a href="AccountSetting.html"><i class="i1"></i>我的信息</a>
-        <a href="SettingUserInfo.html" class="on" target="_self"><i class="i2"></i>我的头像</a>
-        <a href="SettingSecurity.html" ><i class="i4"></i>账号安全</a>
-        <a href="SettingPrivacy.html" ><i class="i5"></i>隐私设置</a>
-    </div>
-
+    <!--左侧边栏-->
+    <div th:replace="common/userSetting::leftColum"></div>
     <div class="content">
         <div class="hd">
             <strong>我的头像</strong>
@@ -53,15 +43,7 @@
 
 <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
 
-<div id="footer">
-    <div class="ft-content" style="width: 1105px">
-        <div class="footer-font">
-            Copyright &copy;2018 All rights reserved | This webpage is made with
-            <i class="fa fa-heart-o" aria-hidden="true"></i> 陈志轩小组
-        </div>
-
-    </div>
-</div>
+<div th:replace="common/userSetting::footer"></div>
 
 
 
