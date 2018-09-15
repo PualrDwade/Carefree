@@ -22,8 +22,6 @@
             "TONGJI_HOST": "tongji.mafengwo.cn"
         };
     </script>
-
-
     <link href="http://css.mafengwo.net/css/cv/css+mfw-ask+detail_v3:css+mfw-ask+img_pop:css+mfw-ask+detail_answer_foldup:css+mfw-ask+upload_pics^al0^1533612615.css"
           rel="stylesheet" type="text/css"/>
 
@@ -42,755 +40,234 @@
 
 </head>
 <body>
+<!--================Header Area =================-->
+<header th:replace="common/menu::header"></header>
+<!--================Header Area =================-->
+<div id="content">
+    <div class="wrapper">
+        <div class="ap-head">
+            <h1>撰写新游记</h1>
+            <div class="clearfix"></div>
+        </div>
+        <div class="ap-wrap">
+            <div class="ap-main">
+                <form class="forms" id="infoform" action="/ginfo/create.php/save" method="post"
+                      enctype="multipart/form-data" target="postinfo">
+                    <dl class="title cf">
+                        <dd>
+                            <!--<span class="char-limit hide _j_char_limit">可输入<strong>48</strong>字</span>-->
+                            <input id="title" name="title" type="text" maxlength="48" placeholder="请输入游记标题" value="">
+                            <!--<input id="type" name="type" type="hidden">-->
+                            <!--<input id="cid" name="cid" type="hidden">-->
+                            <!--<input id="rid" name="rid" type="hidden" value="">-->
+                            <!--<input id="sfrom" name="sfrom" type="hidden" value="">-->
+                            <!--<input type="hidden" name="target" value="iframe">-->
+                        </dd>
+                    </dl>
+
+                    <div class="answer-wrap">
 
 
-<div class="wrapper">
-    <div class="ap-head">
-        <h1>撰写新游记</h1>
-        <div class="clearfix"></div>
-    </div>
-    <div class="ap-wrap">
-        <div class="ap-main">
-            <form class="forms" id="infoform" action="/ginfo/create.php/save" method="post"
-                  enctype="multipart/form-data" target="postinfo">
-                <dl class="title cf">
-                    <dd>
-                        <!--<span class="char-limit hide _j_char_limit">可输入<strong>48</strong>字</span>-->
-                        <input id="title" name="title" type="text" maxlength="48" placeholder="请输入游记标题" value="">
-                        <!--<input id="type" name="type" type="hidden">-->
-                        <!--<input id="cid" name="cid" type="hidden">-->
-                        <!--<input id="rid" name="rid" type="hidden" value="">-->
-                        <!--<input id="sfrom" name="sfrom" type="hidden" value="">-->
-                        <!--<input type="hidden" name="target" value="iframe">-->
-                    </dd>
-                </dl>
+                        <div class="answer-add clearfix">
+                            <a name="answer"></a>
 
-                <div class="answer-wrap">
+                            <div class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  ">
+                                <div class="editor-scroll">
+                                    <div class="question-title">新游记</div>
+                                    <div class="answer-editor">
+                                        <div class="toolbar-out">
+                                            <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar">
+                                                <div class="item _js_bold"><a class="btn-bold" role="button"></a>
+                                                    <div class="tooltip"><span>加粗</span></div>
+                                                </div>
+
+                                                <div class="item _js_title"><a class="btn-title" role="button"></a>
+                                                    <div class="tooltip"><span>标题</span></div>
+                                                </div>
+
+                                                <div class="item _js_unordered_list"><a class="btn-ul"
+                                                                                        role="button"></a>
+                                                    <div class="tooltip"><span>无序列表</span></div>
+                                                </div>
+
+                                                <div class="item _js_ordered_list"><a class="btn-ol" role="button"></a>
+                                                    <div class="tooltip"><span>有序列表</span></div>
+                                                </div>
 
 
-                    <div class="answer-add clearfix">
-                        <a name="answer"></a>
+                                                <div class="separator"></div>
 
-                        <div class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  ">
-                            <div class="editor-scroll">
-                                <div class="question-title">新游记</div>
-                                <div class="answer-editor">
-                                    <div class="toolbar-out">
-                                        <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar">
-                                            <div class="item _js_bold"><a class="btn-bold" role="button"></a>
-                                                <div class="tooltip"><span>加粗</span></div>
+
+                                                <div class="item"><a class="btn-insertimg _js_upload_pic"
+                                                                     role="button"></a>
+                                                    <div class="tooltip"><span>插入图片</span></div>
+                                                </div>
+                                                <div class="item _js_video"><a class="btn-video _js_upload_video"
+                                                                               role="button"></a>
+                                                    <div class="tooltip"><span>插入视频</span></div>
+                                                </div>
+
+                                                <a class="btn-fullscreen _j_fullscreen" role="button"><i></i>全屏模式</a>
+                                                <a class="btn-exitfullscreen _j_exitfullscreen" role="button"><i></i>退出全屏模式</a>
                                             </div>
-
-                                            <div class="item _js_title"><a class="btn-title" role="button"></a>
-                                                <div class="tooltip"><span>标题</span></div>
-                                            </div>
-
-                                            <div class="item _js_unordered_list"><a class="btn-ul" role="button"></a>
-                                                <div class="tooltip"><span>无序列表</span></div>
-                                            </div>
-
-                                            <div class="item _js_ordered_list"><a class="btn-ol" role="button"></a>
-                                                <div class="tooltip"><span>有序列表</span></div>
-                                            </div>
-
-
-                                            <div class="separator"></div>
-
-
-                                            <div class="item"><a class="btn-insertimg _js_upload_pic" role="button"></a>
-                                                <div class="tooltip"><span>插入图片</span></div>
-                                            </div>
-                                            <div class="item _js_video"><a class="btn-video _js_upload_video"
-                                                                           role="button"></a>
-                                                <div class="tooltip"><span>插入视频</span></div>
-                                            </div>
-
-                                            <a class="btn-fullscreen _j_fullscreen" role="button"><i></i>全屏模式</a>
-                                            <a class="btn-exitfullscreen _j_exitfullscreen" role="button"><i></i>退出全屏模式</a>
+                                        </div>
+                                        <div class="editor-container" id="_j_answer_editor">
                                         </div>
                                     </div>
-                                    <div class="editor-container" id="_j_answer_editor">
+                                    <div class="aa-ft">
+                                        <div class="count">
+                                            <span class="word"><b id="_j_word_count">0</b>字</span>
+                                            <span class="pic"><b id="_j_pic_count">0</b>图</span>
+                                            <span class="pic"><b id="_j_video_count">0</b>视频</span>
+                                        </div>
+                                        <input class="btn-comment _j_submit_answer_btn" type="button" value="发表游记">
                                     </div>
-                                </div>
-                                <div class="aa-ft">
-                                    <div class="count">
-                                        <span class="word"><b id="_j_word_count">0</b>字</span>
-                                        <span class="pic"><b id="_j_pic_count">0</b>图</span>
-                                        <span class="pic"><b id="_j_video_count">0</b>视频</span>
-                                    </div>
-                                    <input class="btn-comment _j_submit_answer_btn" type="button" value="发表游记">
                                 </div>
                             </div>
                         </div>
+
+                        <style type="text/css">
+                            .video_upload {
+                                position: absolute;
+                                left: 100px;
+                                top: 58px;
+                                width: 500px;
+                                background-color: #fff;
+                                border: 1px solid #d3d3d3;
+                                box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
+                                z-index: 100;
+                            }
+
+                            .video-hd {
+                                height: 76px;
+                                border-bottom: 2px solid #e5e5e5;
+                                text-align: center;
+                                text-align: center;
+                                font-size: 18px;
+                                color: #333;
+                                line-height: 76px;
+                            }
+
+                            .video-hd .item {
+                                float: left;
+                                width: 50%;
+                                cursor: pointer;
+                                position: relative;
+                            }
+
+                            .video-hd .item i {
+                                display: inline-block;
+                                margin-right: 10px;
+                                width: 28px;
+                                height: 28px;
+                                background: url(https://images.mafengwo.net/images/post/new_notes/sprite_v34.png) no-repeat -189px -470px;
+                                vertical-align: -8px;
+                                *vertical-align: middle;
+                            }
+
+                            .video-hd .item.on .icon-vonline {
+                                background-position: -218px -470px;
+                            }
+
+                            .video-hd .item .icon-vlocal {
+                                background-position: -345px -470px;
+                            }
+
+                            .video-hd .item.on .icon-vlocal {
+                                background-position: -271px -470px;
+                            }
+
+                            .video-hd .item.on {
+                                color: #ff9d00;
+                            }
+
+                            .video-hd .item.on:after {
+                                content: '';
+                                position: absolute;
+                                width: 150px;
+                                height: 5px;
+                                background-color: #ff9d00;
+                                border-radius: 5px;
+                                bottom: -3px;
+                                left: 50%;
+                                margin-left: -75px;
+                            }
+
+                            .video-bd {
+                                padding: 35px 35px 60px;
+                                height: 95px;
+                                position: relative;
+                            }
+
+                            .video-bd .art-tips {
+                                font-size: 14px;
+                            }
+
+                            .vbd-local {
+                                text-align: center;
+                            }
+
+                            .vbd-local .art-tips {
+                                margin-top: 15px;
+                            }
+
+                            .vbd-online, .vbd-online .art-tips {
+                                text-align: left;
+                            }
+
+                            .vbd-online .a-inptxt {
+                                font-size: 14px;
+                            }
+
+                            .video_bar {
+                                margin-top: 25px;
+                                padding-left: 55px;
+                            }
+
+                            .video_bar p {
+                                width: 300px;
+                                margin-right: 15px;
+                                height: 18px;
+                                background-color: #e2e2e2;
+                                border-radius: 15px;
+                            }
+
+                            .video_bar p span {
+                                background-color: #add75c;
+                                display: block;
+                                width: 0;
+                                height: 100%;
+                                border-radius: 15px;
+                            }
+
+                            .video_bar strong {
+                                font-weight: normal;
+                                font-size: 14px;
+                                color: #999;
+                                line-height: 18px;
+                                cursor: pointer;
+                            }
+
+                            ._j_uploading_mode ._j_process {
+                                display: block;
+                            }
+
+                            .editor-toolbar .item-active:hover .tooltip {
+                                visibility: hidden;
+                                opacity: 0;
+                            }
+                        </style>
                     </div>
-
-                    <style type="text/css">
-                        .video_upload {
-                            position: absolute;
-                            left: 100px;
-                            top: 58px;
-                            width: 500px;
-                            background-color: #fff;
-                            border: 1px solid #d3d3d3;
-                            box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
-                            z-index: 100;
-                        }
-
-                        .video-hd {
-                            height: 76px;
-                            border-bottom: 2px solid #e5e5e5;
-                            text-align: center;
-                            text-align: center;
-                            font-size: 18px;
-                            color: #333;
-                            line-height: 76px;
-                        }
-
-                        .video-hd .item {
-                            float: left;
-                            width: 50%;
-                            cursor: pointer;
-                            position: relative;
-                        }
-
-                        .video-hd .item i {
-                            display: inline-block;
-                            margin-right: 10px;
-                            width: 28px;
-                            height: 28px;
-                            background: url(https://images.mafengwo.net/images/post/new_notes/sprite_v34.png) no-repeat -189px -470px;
-                            vertical-align: -8px;
-                            *vertical-align: middle;
-                        }
-
-                        .video-hd .item.on .icon-vonline {
-                            background-position: -218px -470px;
-                        }
-
-                        .video-hd .item .icon-vlocal {
-                            background-position: -345px -470px;
-                        }
-
-                        .video-hd .item.on .icon-vlocal {
-                            background-position: -271px -470px;
-                        }
-
-                        .video-hd .item.on {
-                            color: #ff9d00;
-                        }
-
-                        .video-hd .item.on:after {
-                            content: '';
-                            position: absolute;
-                            width: 150px;
-                            height: 5px;
-                            background-color: #ff9d00;
-                            border-radius: 5px;
-                            bottom: -3px;
-                            left: 50%;
-                            margin-left: -75px;
-                        }
-
-                        .video-bd {
-                            padding: 35px 35px 60px;
-                            height: 95px;
-                            position: relative;
-                        }
-
-                        .video-bd .art-tips {
-                            font-size: 14px;
-                        }
-
-                        .vbd-local {
-                            text-align: center;
-                        }
-
-                        .vbd-local .art-tips {
-                            margin-top: 15px;
-                        }
-
-                        .vbd-online, .vbd-online .art-tips {
-                            text-align: left;
-                        }
-
-                        .vbd-online .a-inptxt {
-                            font-size: 14px;
-                        }
-
-                        .video_bar {
-                            margin-top: 25px;
-                            padding-left: 55px;
-                        }
-
-                        .video_bar p {
-                            width: 300px;
-                            margin-right: 15px;
-                            height: 18px;
-                            background-color: #e2e2e2;
-                            border-radius: 15px;
-                        }
-
-                        .video_bar p span {
-                            background-color: #add75c;
-                            display: block;
-                            width: 0;
-                            height: 100%;
-                            border-radius: 15px;
-                        }
-
-                        .video_bar strong {
-                            font-weight: normal;
-                            font-size: 14px;
-                            color: #999;
-                            line-height: 18px;
-                            cursor: pointer;
-                        }
-
-                        .uping_per {
-                            margin-top: 12px;
-                            font-size: 12px;
-                            color: #999;
-                        }
-
-                        .uping_per span {
-                            color: #ff8a00;
-                        }
-
-                        .flt1 {
-                            float: left;
-                        }
-
-                        ._j_process, ._j_uploading_mode ._j_upload {
-                            display: none;
-                        }
-
-                        ._j_uploading_mode ._j_process {
-                            display: block;
-                        }
-
-                        .art-btn-upload {
-                            display: inline-block;
-                            margin-top: 15px;
-                            width: 240px;
-                            height: 60px;
-                            line-height: 60px;
-                            text-align: center;
-                            font-size: 20px;
-                            color: #fff;
-                            border-radius: 30px;
-                            background: -webkit-linear-gradient(-30deg, transparent 0%, rgba(173, 217, 101, .3) 40%, rgba(173, 217, 101, 1) 90%);
-                            background: linear-gradient(-30deg right, transparent 0%, rgba(173, 217, 101, .3) 40%, rgba(173, 217, 101, 1) 90%);
-                            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#FFADD965', GradientType=0);
-                            background-color: #47afbd;
-                            position: relative;
-                        }
-
-                        .art-btn-upload:hover {
-                            background-color: #add965;
-                            text-decoration: none;
-                            color: #fff;
-                        }
-
-                        ._j_upload_video_trigger {
-                            display: inline-block;
-                            opacity: 0;
-                            filter: Alpha(Opacity=0);
-                            width: 100%;
-                            height: 100%;
-                            position: absolute;
-                            z-index: 1;
-                            top: 0;
-                            left: 0
-                        }
-
-                        .editor-toolbar .item-active:hover .tooltip {
-                            visibility: hidden;
-                            opacity: 0;
-                        }
-                    </style>
-                    <script type="text/x-jquery-tmpl" id="_js_videoUpTmpl">
-        <div class="video_upload hide" id="_js_videoUpPop">
-            <div class="video-hd">
-                <span class="item" data-target="local" style="float: none;"><i class="icon-vlocal"></i>本地上传</span>
+                </form>
             </div>
-            <div class="video-bd vbd-local _j_local">
-                <div class="_j_upload">
-                    <a class="art-btn-upload" role="button"><div class="_j_upload_video_trigger">&nbsp;</div>上传视频</a>
-                    <div class="art-tips">请上传1G以内的视频</div>
-                </div>
-                <div class="_j_process">
-                    <div class="video_bar clearfix">
-                        <p class="flt1"><span class="_j_progress"></span></p>
-                        <strong class="flt1 _j_cancel_up">取消上传</strong>
-                    </div>
-                    <div class="_j_process_word"></div>
-                </div>
-            </div>
+
         </div>
-
-
-                    </script>
-
-
-                </div>
-            </form>
-        </div>
-
     </div>
+
 </div>
-
-
-<script id="_j_qa_picUp_tmpl" type="text/x-jquery-tmpl">
-    <div class="popup-inst">
-        <div class="popup-title">
-            <h2>添加图片</h2>
-        </div>
-        <div class="img-box up_list">
-            <div class="up_pics_wrap">
-                <ul id="_js_upPics">
-                </ul>
-            </div>
-        </div>
-        <div class="upload-pro clearfix">
-            <div class="up-rates">
-                <div style="width:0;" class="run-rates _j_progress"></div>
-            </div>
-            <p><span class="pics_nums"><em class="_j_finishedindex">0</em>/<span class="_j_totalcount"></span></span>张</p>
-            <div class="u-inst" id="_js_inserPics">完成添加</div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
-<script id="_j_qa_upPics_tmpl" type="text/x-jquery-tmpl">
-    {{each(i, file) files}}
-    <li class="li_wait _j_waiting _j_img_li_item" id="_j_photo_${file.id}" data-file_id="${file.id}">
-        <a class="close_ico _j_remove_up mos-into"></a>
-        <div class="cover wait">
-            <p class="cover_pop"></p>
-            <p class="wait_up">等待<br>上传</p>
-            <a class="close_ico _j_remove_up"></a>
-        </div>
-        <div class="cover bar">
-            <p class="cover_pop"></p>
-            <div class="pro_bar"><i></i><span class="per">0%</span></div>
-            <a role="button" class="close_ico _j_remove_up"></a>
-        </div>
-        <div class="cover failure">
-            <p class="cover_pop"></p>
-            <div class="up_failure"><i></i>上传失败</div>
-        </div>
-    </li>
-    {{/each}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
-
-
-<link href="http://css.mafengwo.net/mobile/css/omc/coupon-pop/coupon-pop.css?1526627473" rel="stylesheet"
-      type="text/css"/>
-
-<script language="javascript" src="http://js.mafengwo.net/mobile/js/activity/app_newer_180.js?1526627474"
-        type="text/javascript" crossorigin="anonymous"></script>
-<link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
-
-<div id="footer">
-    <div class="ft-content" style="width: 1105px">
-        <div class="footer-font">
-            Copyright &copy;2018 All rights reserved | This webpage is made with
-            <i class="fa fa-heart-o" aria-hidden="true"></i> 陈志轩小组
-        </div>
-
-    </div>
-</div>
-
-
-<link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
-
+<!--================ start footer Area  =================-->
+<footer th:replace="common/menu::footer"></footer>
+<!--================ End footer Area  =================-->
 <div class="mfw-toolbar" id="_j_mfwtoolbar">
     <div class="toolbar-item-top">
         <a role="button" class="btn _j_gotop">
@@ -805,13 +282,17 @@
         </a>
     </div>
 </div>
-
-
+<!--加载静态资源-->
+<link href="http://css.mafengwo.net/mobile/css/omc/coupon-pop/coupon-pop.css?1526627473" rel="stylesheet"
+      type="text/css"/>
+<script language="javascript" src="http://js.mafengwo.net/mobile/js/activity/app_newer_180.js?1526627474"
+        type="text/javascript" crossorigin="anonymous"></script>
+<link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
+<link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
 <script language="javascript" type="text/javascript">
     if (typeof M !== "undefined" && typeof M.loadResource === "function") {
         M.loadResource("http://js.mafengwo.net/js/cv/js+pageletcommon+pageHeadUserInfoWWWDark:js+M+module+dialog+Layer:js+M+module+dialog+DialogBase:js+M+module+dialog+Dialog:js+M+module+dialog+alert:js+M+module+dialog+confirm:js+M+module+FrequencyVerifyControl:js+M+module+FrequencyAppVerify:js+jquery.scrollTo:js+qa+videoPlay:js+M+module+Storage:js+qa+wysiwyg:js+qa+wysiwyg-editor:js+qa+qa_module+selection:js+plupload:js+module+uploader+Pluploader:js+jquery.tmpl:js+plugins+jquery.rotate:js+qa+QaPicDialog:js+qa+QaPicUploader:js+qa+qa_module+PasteInEditor:js+qa+qa_module+FilterHtml:js+qiniu+qiniuFileUpload:js+M+module+TopTip:js+qa+VideoUploadPop:js+M+module+InputListener:js+M+module+SuggestionXHR:js+M+module+DropList:js+M+module+Suggestion:js+qa+initPlaceSuggestion:js+qa+QaRichTextEditor:js+mfwCountdown:js+qa+QaDetailV1:js+mSnsShare:js+qa+DoShare:js+qa+QaShare:js+M+module+Pagination:js+qa+QaCaret:js+qa+QaComments:js+qa+QaSeach:js+M+module+Toggle:js+qa+InviteUserAnswer:js+jquery.lazyload:js+jquery.upnum:js+M+module+ScrollObserver:js+qa+ControllerDetailAnswerList:js+qa+ARecommentQu:js+M+module+PageAdmin:js+M+module+Cookie:js+M+module+ResourceKeeper:js+jquery.jgrowl.min:js+AMessage:js+M+module+FrequencySystemVerify:js+ALogin:js+M+module+QRCode:js+AToolbar:js+ACnzzGaLog:js+ARecruit:js+ALazyLoad^YldWRw^1534732433.js");
     }
 </script>
-
 </body>
 </html>
