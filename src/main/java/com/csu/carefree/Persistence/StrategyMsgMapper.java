@@ -11,5 +11,5 @@ public interface StrategyMsgMapper {
 
 
     // 根据景点得到
-    StrategyMsg getStrategyByScenic_name(String scenic_name);
+    StrategyMsg getStrategyByScenicName(String scenicName);
 }

@@ -10,7 +10,7 @@ public interface TraverNoteMapper {
     List<TraverNote> getTraverNoteList();
 
     //通过关键词搜索游记信息
-    List<TraverNote> searchTraverNoteList(String keyword);
+    List<TraverNote> searchTraverNoteList(String keyord);
 
     //通过游记ID获取游记信息
     TraverNote getTraverNoteById(String traverNoteId);

@@ -16,4 +16,5 @@ public interface ProvinceMsgMapper {
     //根据省份ID获取省份所有城市信息
     List<CityMsg> getCityListById(String provinceId);
 
+
 }
