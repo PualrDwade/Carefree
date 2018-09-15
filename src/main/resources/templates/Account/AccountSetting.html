@@ -1,32 +1,13 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>我的信息</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-
-    <script type="text/javascript">
-        window.Env = {"WWW_HOST":"www.mafengwo.cn","IMG_HOST":"images.mafengwo.net","P_HOST":"passport.mafengwo.cn","P_HTTP":"https:\/\/passport.mafengwo.cn","PAGELET_HTTP":"https:\/\/pagelet.mafengwo.cn","JS_HOST":"js.mafengwo.net","UID":85353052,"CSTK":"bed8c79231ac1cc909bf132f8506938a_6c8b07dbf132e5e90bed3807a3cdb7a2","GOOGLE_MAP_KEY":"AIzaSyD-Su0x_rPy1xehlMBcMyTqWkU49Bk53nQ","TONGJI_HOST":"tongji.mafengwo.cn"};
-    </script>
-
-    <link href="https://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css" rel="stylesheet" type="text/css"/>
-    <link href="https://css.mafengwo.net/css/other/isettings.css?1535630301" rel="stylesheet" type="text/css"/>
-    <script language="javascript" src="https://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js" type="text/javascript" crossorigin="anonymous"></script>
-
-</head>
+<head th:replace="common/userSetting::head"></head>
 <body>
 
 
-<!--左侧边栏-->
 <div class="wrapper clearfix">
-    <div class="aside">
-        <a href="UserCenter.html"><i class="i8"></i>返回个人中心</a>
-        <a href="AccountSetting.html" class="on" target="_self"><i class="i1"></i>我的信息</a>
-        <a href="SettingUserInfo.html" ><i class="i2"></i>我的头像</a>
-        <a href="SettingSecurity.html" ><i class="i4"></i>账号安全</a>
-        <a href="SettingPrivacy.html" ><i class="i5"></i>隐私设置</a>
-    </div>
-
+    <!--左侧导航栏-->
+    <div th:replace="common/userSetting::leftColum"></div>
     <div class="content">
         <div class="hd">
             <strong>我的信息</strong>
@@ -81,11 +62,7 @@
                     <dt>个人简介：</dt>
                     <dd><textarea name="intro" data-verification-name="个人简介" placeholder="例" class="verification[maxSize[100]]" maxlength="100"></textarea></dd>
                 </dl>
-
-
                 <div class="btn-sub"><button type="submit">保存</button></div>
-
-
             </form>
 
         </div>
@@ -95,21 +72,9 @@
 
 <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
 
-<div id="footer">
-    <div class="ft-content" style="width: 1105px">
-        <div class="footer-font">
-            Copyright &copy;2018 All rights reserved | This webpage is made with
-            <i class="fa fa-heart-o" aria-hidden="true"></i> 陈志轩小组
-        </div>
-
-    </div>
-</div>
-
+<div th:replace="common/userSetting::footer"></div>
 
 <link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
-
-
-
 
 <script language="javascript" type="text/javascript">
     if (typeof M !== "undefined" && typeof M.loadResource === "function") {
@@ -117,12 +82,9 @@
     }
 </script>
 
-
-
-
 <script type="text/javascript">
-    $(function() {
-        $('.aside a').not('.on').on('click', function(e) {
+    $(function () {
+        $('.aside a').not('.on').on('click', function (e) {
             var left, top;
             $('.aside .ripple').removeClass('animate');
             0 === $(this).children('.ripple').size() && $(this).prepend('<span class="ripple"></span>');
@@ -134,28 +96,30 @@
                     left: left
                 }).addClass('animate');
         });
-        $('.content .alert .close').on('click', function() {
-            $(this).closest('.alert').fadeOut(500, function() {
+        $('.content .alert .close').on('click', function () {
+            $(this).closest('.alert').fadeOut(500, function () {
                 $(this).remove();
             });
         });
     });
 </script>
 
-<script language="javascript" src="https://js.mafengwo.net/js/cv/js+plugins+jquery.datepicker:js+mfw.verification^Z10^1493174420.js" type="text/javascript" crossorigin="anonymous"></script>
+<script language="javascript"
+        src="https://js.mafengwo.net/js/cv/js+plugins+jquery.datepicker:js+mfw.verification^Z10^1493174420.js"
+        type="text/javascript" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         var timer = 0, citySuggestXHR = null;
         var eventName = ($.browser.msie && parseInt($.browser.version, 10) < 9) ? 'keyup' : 'input';
-        var success = function(field) {
+        var success = function (field) {
             field.closest('dl').removeClass('error');
             $(".alert-danger").html("");
             $(".alert-danger").hide();
             console.log('show succ');
             console.log(field);
         };
-        var failed = function(field, message) {
+        var failed = function (field, message) {
             field.closest('dl').addClass('error');
             $(".alert-danger").html(message);
             $(".alert-danger").show();
@@ -163,27 +127,27 @@
             console.log(field);
         };
         $('#_j_form')
-            .delegate('[name="city"]', eventName, function() {
+            .delegate('[name="city"]', eventName, function () {
                 var self = $(this),
                     parentGroup = self.closest('.input-group'),
                     oldWord = self.data('city'),
                     word = $.trim(self.val()),
                     suggest = parentGroup.find('.input-suggest');
 
-                if(oldWord != word) {
+                if (oldWord != word) {
                     clearTimeout(timer);
                     citySuggestXHR && citySuggestXHR.abort();
                     parentGroup.find('input[name="citymddid"]').val('');
-                    if(!word) {
+                    if (!word) {
                         suggest.empty().hide();
                     } else {
-                        timer = setTimeout(function() {
-                            citySuggestXHR = $.getJSON('/home/setting.php/citySuggest?word=' + encodeURIComponent(word), function(data) {
+                        timer = setTimeout(function () {
+                            citySuggestXHR = $.getJSON('/home/setting.php/citySuggest?word=' + encodeURIComponent(word), function (data) {
                                 self.data('city', word);
                                 suggest.empty();
-                                if(data.length > 0) {
-                                    for(var i in data) {
-                                        $('<li><a href="#" data-mddid="'+data[i].mddid+'"><i class="place"></i><span class="mddname">' + data[i].name +  '</span>' + (data[i].parent ? '('+data[i].parent.name+')':'') +'</a></li>').appendTo(suggest);
+                                if (data.length > 0) {
+                                    for (var i in data) {
+                                        $('<li><a href="#" data-mddid="' + data[i].mddid + '"><i class="place"></i><span class="mddname">' + data[i].name + '</span>' + (data[i].parent ? '(' + data[i].parent.name + ')' : '') + '</a></li>').appendTo(suggest);
                                     }
                                     suggest.show();
                                 }
@@ -192,7 +156,7 @@
                     }
                 }
             })
-            .delegate('.input-group .input-suggest a', 'click', function(e) {
+            .delegate('.input-group .input-suggest a', 'click', function (e) {
                 e.preventDefault();
                 var self = $(this);
                 var group = self.closest('.input-group');
@@ -203,17 +167,17 @@
             })
             .verification({
                 customFuncs: {
-                    checkNickname: function(field) {
+                    checkNickname: function (field) {
                         var value = $.trim(field.val());
                         var len = 0;
                         for (var i = 0; i < value.length; i++) {
                             if (value.charAt(i).match(/[^\x4e00-\x9fa5]/ig)) {
                                 len += 2;
                             } else {
-                                len ++;
+                                len++;
                             }
                         }
-                        if(len > 16) {
+                        if (len > 16) {
                             failed(field, '名号不能长于8个汉字长度（或16个英文字符）');
                             $.verification.verifyFailed(field);
                         } else {
@@ -221,11 +185,11 @@
                             $.verification.verifySuccess(field);
                         }
                     },
-                    checkCity: function(field) {
+                    checkCity: function (field) {
                         $.get('/home/setting.php/checkCity', {
                             city: $.trim(field.val())
-                        }, function(data) {
-                            if(data) {
+                        }, function (data) {
+                            if (data) {
                                 failed(field, '居住城市填写不正确');
                                 $.verification.verifyFailed(field);
                             } else {
@@ -235,17 +199,17 @@
                         });
                     }
                 },
-                success: function(field) {
+                success: function (field) {
                     success(field);
                 },
-                failed: function(field, message) {
+                failed: function (field, message) {
                     failed(field, message);
                 }
             });
 
         $('[name="birthday"]', '#_j_form').datepicker({
             endDate: new Date()
-        }).on('changeDate', function() {
+        }).on('changeDate', function () {
             $('#_j_form').verification('verifyField', $(this));
             $(this).datepicker('hide');
         });

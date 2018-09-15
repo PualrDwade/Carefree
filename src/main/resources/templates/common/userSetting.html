@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>隐私设置</title>
+
+
+    <script type="text/javascript">
+        window.Env = {"WWW_HOST":"www.mafengwo.cn","IMG_HOST":"images.mafengwo.net","P_HOST":"passport.mafengwo.cn","P_HTTP":"https:\/\/passport.mafengwo.cn","PAGELET_HTTP":"https:\/\/pagelet.mafengwo.cn","JS_HOST":"js.mafengwo.net","UID":85353052,"CSTK":"ef43d8619337753832c6f5d0d068fd8d_6f37258befa3b363980634aab00adf09","GOOGLE_MAP_KEY":"AIzaSyD-Su0x_rPy1xehlMBcMyTqWkU49Bk53nQ","TONGJI_HOST":"tongji.mafengwo.cn"};
+    </script>
+
+    <link href="https://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css" rel="stylesheet" type="text/css"/>
+    <link href="https://css.mafengwo.net/css/other/isettings.css?1535630301" rel="stylesheet" type="text/css"/>
+    <script language="javascript" src="https://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js" type="text/javascript" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<!--左侧边栏-->
+<div th:fragment="leftColum" class="aside">
+    <a href="/account/ViewUserCenter"><i class="i8"></i>返回个人中心</a>
+    <a href="/account/AccountSetting"><i class="i1"></i>我的信息</a>
+    <a href="/account/GotoSettingInfo" class="on" target="_self"><i class="i2"></i>我的头像</a>
+    <a href="/account/GotoSettingSecurity" ><i class="i4"></i>账号安全</a>
+    <a href="/account/GotoSettingPrivacy" ><i class="i5"></i>隐私设置</a>
+</div>
+<div class="wrapper clearfix">
+
+</div>
+
+<div th:fragment="footer" id="footer">
+    <div class="ft-content" style="width: 1105px">
+        <div class="footer-font">
+            Copyright &copy;2018 All rights reserved | This webpage is made with
+            <i class="fa fa-heart-o" aria-hidden="true"></i> 陈志轩小组
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

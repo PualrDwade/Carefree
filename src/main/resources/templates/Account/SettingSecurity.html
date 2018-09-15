@@ -1,28 +1,12 @@
 
 <!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>账号安全</title>
-    <script type="text/javascript">
-        window.Env = {"WWW_HOST":"www.mafengwo.cn","IMG_HOST":"images.mafengwo.net","P_HOST":"passport.mafengwo.cn","P_HTTP":"https:\/\/passport.mafengwo.cn","PAGELET_HTTP":"https:\/\/pagelet.mafengwo.cn","JS_HOST":"js.mafengwo.net","UID":85353052,"CSTK":"960cca8233fd89505083a6f4f13c63b8_ef6dfb713f7e954b53f30d7e235a1675","GOOGLE_MAP_KEY":"AIzaSyD-Su0x_rPy1xehlMBcMyTqWkU49Bk53nQ","TONGJI_HOST":"tongji.mafengwo.cn"};
-    </script>
-    <link href="https://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css" rel="stylesheet" type="text/css"/>
-    <link href="https://css.mafengwo.net/css/other/isettings.css?1535630301" rel="stylesheet" type="text/css"/>
-    <script language="javascript" src="https://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js" type="text/javascript" crossorigin="anonymous"></script>
-
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/userSetting::head"></head>
 <body>
 
-<!--左侧边栏-->
 <div class="wrapper clearfix">
-    <div class="aside">
-        <a href="UserCenter.html"><i class="i8"></i>返回个人中心</a>
-        <a href="AccountSetting.html"><i class="i1"></i>我的信息</a>
-        <a href="SettingUserInfo.html"><i class="i2"></i>我的头像</a>
-        <a href="SettingSecurity.html" class="on" target="_self"><i class="i4"></i>账号安全</a>
-        <a href="SettingPrivacy.html"><i class="i5"></i>隐私设置</a>
-    </div>
+    <!--左侧边栏-->
+    <div th:replace="common/userSetting::leftColum"></div>
     <!--显示内容-->
     <div class="content">
         <div class="hd">
@@ -49,21 +33,12 @@
             </dl>
             <br><br>
         </div>
-
     </div>
 </div>
 
 <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
 
-<div id="footer">
-    <div class="ft-content" style="width: 1105px">
-        <div class="footer-font">
-            Copyright &copy;2018 All rights reserved | This webpage is made with
-            <i class="fa fa-heart-o" aria-hidden="true"></i> 陈志轩小组
-        </div>
-
-    </div>
-</div>
+<div th:replace="common/userSetting::footer"></div>
 
 <script type="text/javascript">
     $(function() {
@@ -87,7 +62,6 @@
     });
 </script>
 
-
 <script type="text/javascript">
     M.closure(function(require) {
         var Confirm = require('dialog/confirm');
@@ -106,7 +80,6 @@
     });
 
 </script>
-
 
 <script language="javascript" type="text/javascript">
     if (typeof M !== "undefined" && typeof M.loadResource === "function") {
