@@ -1,424 +1,437 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common/head::head">
-    <style>
-        .priceTag {
-            font-size: 25px;
-            margin-top: 5px;
-            color: #F3C300;
-            font-weight: 800;
-        }
-        small {
-            font-size: 15px;
-        }
+<style>
+    .priceTag {
+        font-size: 25px;
+        margin-top: 5px;
+        color: #F3C300;
+        font-weight: 800;
+    }
 
-        .productImg {
-            width: 270px;
-            height: 170px;
-        }
+    small {
+        font-size: 15px;
+    }
 
-        h3 {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            overflow: hidden;
-        }
-    </style>
-</head>
+    .productImg {
+        width: 270px;
+        height: 170px;
+    }
+
+    h3 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+</style>
+
 <body>
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
 <!--================Header Area =================-->
-
-<!--================Banner Area =================-->
-<section class="banner_area">
-    <!--海报-->
-    <div class="booking_table d_flex align-items-center">
-        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
-             data-background=""></div>
-        <div class="container">
-            <div class="banner_content text-center">
-                <h5 style="letter-spacing: 45px;font-size: 30px">行你所行</h5>
-                <h2 style="letter-spacing: 50px">畅游</h2>
-                <br>
-                <h6 style="letter-spacing: 15px;font-size: 25px">走 ， 去 发 现 更 大 世 界 ！<br></h6>
-            </div>
-        </div>
-    </div>
-    <!--海报-->
-
-    <!--定制模块-->
-    <div class="hotel_booking_area position">
-        <div class="container">
-            <div class="hotel_booking_table" style="margin-bottom: 100px">
-                <div class="col-md-3">
-                    <h2 style="letter-spacing: 5px">定制您的旅行<br></h2>
-                </div>
-                <div class="col-md-9">
-                    <div class="boking_table">
-                        <form action="ProductDT/CityMsg.html" method="post">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker11'>
-                                                <input id="startTime" type='text' class="form-control"
-                                                       placeholder="出发时间"/>
-                                                <span class="input-group-addon">
-                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                    </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker1'>
-                                                <input id="backTime" type='text' class="form-control"
-                                                       placeholder="返程时间"/>
-                                                <span class="input-group-addon">
-                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                    </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <input id="adultNum" type='text' class="form-control"
-                                                       placeholder="成人数"/>
-                                            </div>
-                                            <div class="input-group">
-                                                <input id="childrenNum" type='text' class="form-control"
-                                                       placeholder="儿童数"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <input id="destination" type='text' class="form-control"
-                                                       placeholder="目的地"/>
-                                            </div>
-                                        </div>
-                                        <input type="submit" value="选好了" class="book_now_btn button_hover"
-                                               href="ProductDT/CityMsg.html">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--定制模块-->
-</section>
-<!--================Banner Area =================-->
-
-
-<!--================ 游记  =================-->
-<section class="latest_blog_area section_gap">
-    <div class="container" style="padding-bottom: 1px">
-        <div class="section_title text-center">
-            <a href="TraverAsk/TraverNoteList.html"><h2 class="title_color">精 品 游 记</h2></a>
-            <p style="text-align: center">这 里 有 最 精 彩 的 旅 行 游 记，能 给 你 更 多 的 旅 行 知 识</p>
-        </div>
-        <div class="row mb_30">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-recent-blog-post">
-                    <div class="thumb">
-                        <img class="img-fluid" src="/image/blog/blog-1.jpg" alt="post">
-                    </div>
-                    <div class="details">
-                        <div class="tags">
-                            <a href="#" class="button_hover tag_btn">Travel</a>
-                            <a href="#" class="button_hover tag_btn">Life Style</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">Low Cost Advertising</h4></a>
-                        <p>Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
-                            farmer.</p>
-                        <h6 class="date title_color">31st January,2018</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-recent-blog-post">
-                    <div class="thumb">
-                        <img class="img-fluid" src="/image/blog/blog-2.jpg" alt="post">
-                    </div>
-                    <div class="details">
-                        <div class="tags">
-                            <a href="#" class="button_hover tag_btn">Travel</a>
-                            <a href="#" class="button_hover tag_btn">Life Style</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">Creative Outdoor Ads</h4></a>
-                        <p>Self-doubt and fear interfere with our ability to achieve or set goals. Self-doubt and fear
-                            are</p>
-                        <h6 class="date title_color">31st January,2018</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-recent-blog-post">
-                    <div class="thumb">
-                        <img class="img-fluid" src="/image/blog/blog-3.jpg" alt="post">
-                    </div>
-                    <div class="details">
-                        <div class="tags">
-                            <a href="#" class="button_hover tag_btn">Travel</a>
-                            <a href="#" class="button_hover tag_btn">Life Style</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">It S Classified How To Utilize Free</h4></a>
-                        <p>Why do you want to motivate yourself? Actually, just answering that question fully can </p>
-                        <h6 class="date title_color">31st January,2018</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--================ 游记  =================-->
-
-<!--================ 产品  =================-->
-<div class="whole-wrap">
-    <br>
-    <div class="section_title text-center">
-        <a href="ProductDT/ProductList.html">
-            <h2 class="title_color">热门旅游</h2>
-        </a>
-    </div>
-    <div class="container">
-        <div class="section-top-border">
-            <div class="row">
-                <div class="col-md-3 ">
-                    <div>
-                        <img src="http://dimg03.c-ctrip.com/images/100v0700000020xmvE599_C_350_170_Q90.jpg "
-                             class="productImg">
-                    </div>
-
-                </div>
-                <div class="col-md-7 mt-sm-20 left-align-p">
-                    <a href="http://vacations.ctrip.com/grouptravel/p9313636s2.html?kwd=%e4%b8%89%e4%ba%9a"
-                       target="_blank">
-                        <h3 class="mb-30 title_color ">海南三亚4日3晚跟团游(5钻)·【自营优选】网红游亚特兰蒂斯神秘世界 0购物 海景套房+希尔顿品牌选择 热门景区全覆盖</h3>
-                    </a>
-                </div>
-                <div class="col-md-2">
-                    <div class="priceTag">
-                        <p>￥1754
-                            <small>/人起</small>
-                        </p>
-                    </div>
-                    <div class="logo-size">
-                        <img src="/image/logo/携程.svg">
-                    </div>
-                    <div class="container">
-                        <a>评分：</a><span class="badge badge-primary"
-                                        style="background-color: #f3c300;">4.8</span><br><br>
-                        <a>销量：</a><span class="badge badge-primary" style="background-color: #f3aecc;">1200</span>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-md-3 ">
-                    <div>
-                        <img src="//dimg04.c-ctrip.com/images/300o0t000000i9rrm0739_C_350_170_Q90.jpg" alt=""
-                             class="productImg">
-                    </div>
-
-                </div>
-                <div class="col-md-7 mt-sm-20 left-align-p">
-                    <a href="http://vacations.ctrip.com/grouptravel/p9218158s2.html?kwd=%e4%b8%89%e4%ba%9a"
-                       target="_blank"><h3 class="mb-30 title_color">海南三亚5日4晚跟团游(4钻)·【携程自营】[一价全包放心游 无购物无自费] 南山108米海上观音
-                        西岛凤凰岭 中秋度假国庆出游 9月错峰特惠无上限立减500元/人！ 〈+1元升级两晚5钻海景酒店〉</h3></a>
-                </div>
-                <div class="col-md-2">
-                    <div class="priceTag">
-                        <p>￥2790
-                            <small>起</small>
-                        </p>
-                    </div>
-                    <div class="logo-size">
-                        <img src="/image/logo/携程.svg">
-                    </div>
-                    <div class="container">
-                        <a>评分：</a><span class="badge badge-primary"
-                                        style="background-color: #f3c300;">4.8</span><br><br>
-                        <a>销量：</a><span class="badge badge-primary" style="background-color: #f3aecc;">1200</span>
-                    </div>
-                </div>
-            </div>
-            <hr>
-        </div>
-
-    </div>
-</div>
-<!--================ 产品  =================-->
-
-<!--================ 酒店  =================-->
-<section class="accomodation_area section_gap">
-    <div class="container">
-        <div class="section_title text-center">
-            <a href="ProductDT/Hotelist.html"><h2 class="title_color">优 质 酒 店</h2></a>
-            <p class="text-center">我 们 竭 力 为 您 推 荐 最 舒 适 最 优 质 性 价 比 最 高 的 酒 店，让 您 在 旅 途 的 奔 波 当 中 能 够 安 心 舒 睡 ，消 除 一 天
-                的 疲 惫</p>
-        </div>
-        <div class="row mb_30">
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <style>
-                        p {
-                            letter-spacing: 1px;
-                            text-align: left;
-                        }
-                    </style>
-                    <div class="hotel_img">
-                        <img src="https://p1.meituan.net/320.0/tdchotel/5fa0abab06f1fed9049e6ad6a0f93702648344.jpg"
-                             alt="">
-                        <a href="http://hotel.meituan.com/123211356/" target="view_window"
-                           class="btn theme_btn button_hover">立即预定</a>
-                    </div>
-                    <a href="http://hotel.meituan.com/123211356/" target="view_window"><h4 class="sec_h4">浮乐德酒店</h4></a>
-                    <h5>￥222
-                        <small>/晚</small>
-                    </h5>
-                    <p>韶山市清溪镇新颜路新天地步行街御园8栋</p>
-                    <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.8</span>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="https://p1.meituan.net/320.0/tdchotel/f5a94413f7d5ba94a0dde9d53c2fb252349948.png"
-                             alt="">
-                        <a href="http://hotel.meituan.com/2208101/" target="view_window"
-                           class="btn theme_btn button_hover">立即预定</a>
-                    </div>
-                    <a href="http://hotel.meituan.com/2208101/" target="view_window"><h4 class="sec_h4">华龙山庄大酒店</h4></a>
-                    <h5>￥288
-                        <small>/晚</small>
-                    </h5>
-                    <p>韶山市南环路韶山冲青狮塘（近毛泽东故居、毛泽东铜像广场）</p>
-                    <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.1</span>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="https://p1.meituan.net/320.0/hotelbiz/43e3b8e6bb02b95cf5422b5bf64f1e5a283122.jpg"
-                             alt="">
-                        <a href="http://hotel.meituan.com/162138190/	" target="view_window"
-                           class="btn theme_btn button_hover">立即预定</a>
-                    </div>
-                    <a href="http://hotel.meituan.com/162138190/" target="view_window"><h4 class="sec_h4">千古情客栈</h4></a>
-                    <h5>￥138
-                        <small>/晚</small>
-                    </h5>
-                    <p> 珠晖区合福村师范学院南门西行100米路南（125路公交车终点站对面）</p>
-                    <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.8</span>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="accomodation_item text-center">
-                    <div class="hotel_img">
-                        <img src="https://p0.meituan.net/320.0/tdchotel/d3101a6a4e5f9d68b5570fb5c8a83b4756933.jpg"
-                             alt="">
-                        <a href="http://hotel.meituan.com/117915144/" target="view_window"
-                           class="btn theme_btn button_hover">立即预定</a>
-                    </div>
-                    <a href="http://hotel.meituan.com/117915144/	" target="view_window"><h4 class="sec_h4">
-                        水岸假日酒店</h4></a>
-                    <h5>￥100
-                        <small>/晚</small>
-                    </h5>
-                    <p>雁峰区天马山南路51号</p>
+<div id="content">
+    <!--================Banner Area =================-->
+    <section class="banner_area">
+        <!--海报-->
+        <div class="booking_table d_flex align-items-center">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
+                 data-background=""></div>
+            <div class="container">
+                <div class="banner_content text-center">
+                    <h5 style="letter-spacing: 45px;font-size: 30px">行你所行</h5>
+                    <h2 style="letter-spacing: 50px">畅游</h2>
                     <br>
-                    <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.5</span>
+                    <h6 style="letter-spacing: 15px;font-size: 25px">走 ， 去 发 现 更 大 世 界 ！<br></h6>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!--================ 酒店  =================-->
+        <!--海报-->
 
-<!--================ 问答展示  =================-->
-<section class="testimonial_area section_gap">
-    <div class="container">
+        <!--定制模块-->
+        <div class="hotel_booking_area position">
+            <div class="container">
+                <div class="hotel_booking_table" style="margin-bottom: 100px">
+                    <div class="col-md-3">
+                        <h2 style="letter-spacing: 5px">定制您的旅行<br></h2>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="boking_table">
+                            <form action="ProductDT/CityMsg.html" method="post">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="book_tabel_item">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker11'>
+                                                    <input id="startTime" type='text' class="form-control"
+                                                           placeholder="出发时间"/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input id="backTime" type='text' class="form-control"
+                                                           placeholder="返程时间"/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="book_tabel_item">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input id="adultNum" type='text' class="form-control"
+                                                           placeholder="成人数"/>
+                                                </div>
+                                                <div class="input-group">
+                                                    <input id="childrenNum" type='text' class="form-control"
+                                                           placeholder="儿童数"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="book_tabel_item">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input id="destination" type='text' class="form-control"
+                                                           placeholder="目的地"/>
+                                                </div>
+                                            </div>
+                                            <input type="submit" value="选好了" class="book_now_btn button_hover"
+                                                   href="ProductDT/CityMsg.html">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--定制模块-->
+    </section>
+    <!--================Banner Area =================-->
+
+
+    <!--================ 游记  =================-->
+    <section class="latest_blog_area section_gap">
+        <div class="container" style="padding-bottom: 1px">
+            <div class="section_title text-center">
+                <a href="TraverAsk/TraverNoteList.html"><h2 class="title_color">精 品 游 记</h2></a>
+                <p style="text-align: center">这 里 有 最 精 彩 的 旅 行 游 记，能 给 你 更 多 的 旅 行 知 识</p>
+            </div>
+            <div class="row mb_30">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-recent-blog-post">
+                        <div class="thumb">
+                            <img class="img-fluid" src="/image/blog/blog-1.jpg" alt="post">
+                        </div>
+                        <div class="details">
+                            <div class="tags">
+                                <a href="#" class="button_hover tag_btn">Travel</a>
+                                <a href="#" class="button_hover tag_btn">Life Style</a>
+                            </div>
+                            <a href="#"><h4 class="sec_h4">Low Cost Advertising</h4></a>
+                            <p>Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
+                                farmer.</p>
+                            <h6 class="date title_color">31st January,2018</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-recent-blog-post">
+                        <div class="thumb">
+                            <img class="img-fluid" src="/image/blog/blog-2.jpg" alt="post">
+                        </div>
+                        <div class="details">
+                            <div class="tags">
+                                <a href="#" class="button_hover tag_btn">Travel</a>
+                                <a href="#" class="button_hover tag_btn">Life Style</a>
+                            </div>
+                            <a href="#"><h4 class="sec_h4">Creative Outdoor Ads</h4></a>
+                            <p>Self-doubt and fear interfere with our ability to achieve or set goals. Self-doubt and
+                                fear
+                                are</p>
+                            <h6 class="date title_color">31st January,2018</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-recent-blog-post">
+                        <div class="thumb">
+                            <img class="img-fluid" src="/image/blog/blog-3.jpg" alt="post">
+                        </div>
+                        <div class="details">
+                            <div class="tags">
+                                <a href="#" class="button_hover tag_btn">Travel</a>
+                                <a href="#" class="button_hover tag_btn">Life Style</a>
+                            </div>
+                            <a href="#"><h4 class="sec_h4">It S Classified How To Utilize Free</h4></a>
+                            <p>Why do you want to motivate yourself? Actually, just answering that question fully
+                                can </p>
+                            <h6 class="date title_color">31st January,2018</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================ 游记  =================-->
+
+    <!--================ 产品  =================-->
+    <div class="whole-wrap">
+        <!--<br>-->
         <div class="section_title text-center">
-            <a href="TraverAsk/QuestionAnswer.html"><h2 class="title_color">问 答 专 区</h2></a>
-            <p style="text-align: center">为 你 答 疑 解 惑， 更 加 了 解 这 个 城 市</p>
+            <a href="ProductDT/ProductList.html">
+                <h2 class="title_color">热门旅游</h2>
+            </a>
         </div>
-        <div class="testimonial_slider owl-carousel">
-            <div class="media testimonial_item">
-                <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                <div class="media-body">
-                    <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you
-                        think about it, you travel across her face, and She is the </p>
-                    <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                    <div class="star">
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star-half-o"></i></a>
+        <div class="container">
+            <div class="section-top-border">
+                <div class="row">
+                    <div class="col-md-3 ">
+                        <div>
+                            <img src="http://dimg03.c-ctrip.com/images/100v0700000020xmvE599_C_350_170_Q90.jpg "
+                                 class="productImg">
+                        </div>
+
+                    </div>
+                    <div class="col-md-7 mt-sm-20 left-align-p">
+                        <a href="http://vacations.ctrip.com/grouptravel/p9313636s2.html?kwd=%e4%b8%89%e4%ba%9a"
+                           target="_blank">
+                            <h4 class="mb-30 title_color ">海南三亚4日3晚跟团游(5钻)·【自营优选】网红游亚特兰蒂斯神秘世界 0购物 海景套房+希尔顿品牌选择
+                                热门景区全覆盖</h4>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="priceTag">
+                            <p>￥1754
+                                <small>/人起</small>
+                            </p>
+                        </div>
+                        <div class="logo-size">
+                            <img src="/image/logo/携程.svg">
+                        </div>
+                        <div class="container">
+                            <a>评分：</a><span class="badge badge-primary"
+                                            style="background-color: #f3c300;">4.8</span><br><br>
+                            <a>销量：</a><span class="badge badge-primary" style="background-color: #f3aecc;">1200</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="media testimonial_item">
-                <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                <div class="media-body">
-                    <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you
-                        think about it, you travel across her face, and She is the </p>
-                    <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                    <div class="star">
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star-half-o"></i></a>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3 ">
+                        <div>
+                            <img src="//dimg04.c-ctrip.com/images/300o0t000000i9rrm0739_C_350_170_Q90.jpg" alt=""
+                                 class="productImg">
+                        </div>
+
+                    </div>
+                    <div class="col-md-7 mt-sm-20 left-align-p">
+                        <a href="http://vacations.ctrip.com/grouptravel/p9218158s2.html?kwd=%e4%b8%89%e4%ba%9a"
+                           target="_blank">
+                            <h4 class="mb-30 title_color">海南三亚5日4晚跟团游(4钻)·【携程自营】[一价全包放心游 无购物无自费]
+                            南山108米海上观音
+                            西岛凤凰岭 中秋度假国庆出游 9月错峰特惠无上限立减500元/人！ 〈+1元升级两晚5钻海景酒店〉</h4></a>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="priceTag">
+                            <p>￥2790
+                                <small>起</small>
+                            </p>
+                        </div>
+                        <div class="logo-size">
+                            <img src="/image/logo/携程.svg">
+                        </div>
+                        <div class="container">
+                            <a>评分：</a><span class="badge badge-primary"
+                                            style="background-color: #f3c300;">4.8</span><br><br>
+                            <a>销量：</a><span class="badge badge-primary" style="background-color: #f3aecc;">1200</span>
+                        </div>
                     </div>
                 </div>
+                <hr>
             </div>
-            <div class="media testimonial_item">
-                <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                <div class="media-body">
-                    <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you
-                        think about it, you travel across her face, and She is the </p>
-                    <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                    <div class="star">
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star-half-o"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="media testimonial_item">
-                <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                <div class="media-body">
-                    <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you
-                        think about it, you travel across her face, and She is the </p>
-                    <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                    <div class="star">
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star-half-o"></i></a>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
-</section>
-<!--================ 问答展示  =================-->
+    <!--================ 产品  =================-->
 
+    <!--================ 酒店  =================-->
+    <section class="accomodation_area section_gap">
+        <div class="container">
+            <div class="section_title text-center">
+                <a href="ProductDT/Hotelist.html"><h2 class="title_color">优 质 酒 店</h2></a>
+                <p class="text-center">我 们 竭 力 为 您 推 荐 最 舒 适 最 优 质 性 价 比 最 高 的 酒 店，让 您 在 旅 途 的 奔 波 当 中 能 够 安 心 舒 睡 ，消 除
+                    一 天
+                    的 疲 惫</p>
+            </div>
+            <div class="row mb_30">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <style>
+                            p {
+                                letter-spacing: 1px;
+                                text-align: left;
+                            }
+                        </style>
+                        <div class="hotel_img">
+                            <img src="https://p1.meituan.net/320.0/tdchotel/5fa0abab06f1fed9049e6ad6a0f93702648344.jpg"
+                                 alt="">
+                            <a href="http://hotel.meituan.com/123211356/" target="view_window"
+                               class="btn theme_btn button_hover">立即预定</a>
+                        </div>
+                        <a href="http://hotel.meituan.com/123211356/" target="view_window"><h4 class="sec_h4">浮乐德酒店</h4>
+                        </a>
+                        <h5>￥222
+                            <small>/晚</small>
+                        </h5>
+                        <p>韶山市清溪镇新颜路新天地步行街御园8栋</p>
+                        <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.8</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="https://p1.meituan.net/320.0/tdchotel/f5a94413f7d5ba94a0dde9d53c2fb252349948.png"
+                                 alt="">
+                            <a href="http://hotel.meituan.com/2208101/" target="view_window"
+                               class="btn theme_btn button_hover">立即预定</a>
+                        </div>
+                        <a href="http://hotel.meituan.com/2208101/" target="view_window"><h4 class="sec_h4">华龙山庄大酒店</h4>
+                        </a>
+                        <h5>￥288
+                            <small>/晚</small>
+                        </h5>
+                        <p>韶山市南环路韶山冲青狮塘（近毛泽东故居、毛泽东铜像广场）</p>
+                        <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.1</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="https://p1.meituan.net/320.0/hotelbiz/43e3b8e6bb02b95cf5422b5bf64f1e5a283122.jpg"
+                                 alt="">
+                            <a href="http://hotel.meituan.com/162138190/	" target="view_window"
+                               class="btn theme_btn button_hover">立即预定</a>
+                        </div>
+                        <a href="http://hotel.meituan.com/162138190/" target="view_window"><h4 class="sec_h4">千古情客栈</h4>
+                        </a>
+                        <h5>￥138
+                            <small>/晚</small>
+                        </h5>
+                        <p> 珠晖区合福村师范学院南门西行100米路南（125路公交车终点站对面）</p>
+                        <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.8</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="https://p0.meituan.net/320.0/tdchotel/d3101a6a4e5f9d68b5570fb5c8a83b4756933.jpg"
+                                 alt="">
+                            <a href="http://hotel.meituan.com/117915144/" target="view_window"
+                               class="btn theme_btn button_hover">立即预定</a>
+                        </div>
+                        <a href="http://hotel.meituan.com/117915144/	" target="view_window"><h4 class="sec_h4">
+                            水岸假日酒店</h4></a>
+                        <h5>￥100
+                            <small>/晚</small>
+                        </h5>
+                        <p>雁峰区天马山南路51号</p>
+                        <br>
+                        <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================ 酒店  =================-->
+
+    <!--================ 问答展示  =================-->
+    <section class="testimonial_area section_gap">
+        <div class="container">
+            <div class="section_title text-center">
+                <a href="TraverAsk/QuestionAnswer.html"><h2 class="title_color">问 答 专 区</h2></a>
+                <p style="text-align: center">为 你 答 疑 解 惑， 更 加 了 解 这 个 城 市</p>
+            </div>
+            <div class="testimonial_slider owl-carousel">
+                <div class="media testimonial_item">
+                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
+                    <div class="media-body">
+                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
+                            you
+                            think about it, you travel across her face, and She is the </p>
+                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
+                        <div class="star">
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star-half-o"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="media testimonial_item">
+                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
+                    <div class="media-body">
+                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
+                            you
+                            think about it, you travel across her face, and She is the </p>
+                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
+                        <div class="star">
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star-half-o"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="media testimonial_item">
+                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
+                    <div class="media-body">
+                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
+                            you
+                            think about it, you travel across her face, and She is the </p>
+                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
+                        <div class="star">
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star-half-o"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="media testimonial_item">
+                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
+                    <div class="media-body">
+                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
+                            you
+                            think about it, you travel across her face, and She is the </p>
+                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
+                        <div class="star">
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star-half-o"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================ 问答展示  =================-->
+</div>
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>
 <!--================ End footer Area  =================-->

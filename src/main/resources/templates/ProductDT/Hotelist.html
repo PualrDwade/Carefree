@@ -1,75 +1,75 @@
 <!doctype html >
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <head th:replace="common/head::head"></head>
-    <body>
-        <!--================Header Area =================-->
-        <header th:replace="common/menu::header"></header>
-        <!--================Header Area =================-->
-        
-        <!--================Breadcrumb Area =================-->
-        <section class="breadcrumb_area">
-            <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
-            <div class="container">
-                <div class="page-cover text-center">
-                    <h2 class="page-cover-tittle">精 品 酒 店</h2>
-                </div>
-            </div>
-        </section>
-        <!--================Breadcrumb Area =================-->
 
-        <!--================定制模块================-->
-        <div class="container" style="padding-top: 50px">
-            <div class="hotel_booking_area position">
-                <div class="container">
-                    <div class="hotel_booking_table">
-                        <div class="col-md-3">
-                            <h2>预定您的酒店<br></h2>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="boking_table">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="book_tabel_item">
-                                            <div class="form-group">
-                                                <div class='input-group date' id='datetimepicker11'>
-                                                    <input type='text' class="form-control" placeholder="出发时间"/>
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                    </span>
-                                                </div>
+<body>
+<!--================Header Area =================-->
+<header th:replace="common/menu::header"></header>
+<!--================Header Area =================-->
+<div id="content">
+    <!--================Breadcrumb Area =================-->
+    <section class="breadcrumb_area">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0"
+             data-background=""></div>
+        <div class="container">
+            <div class="page-cover text-center">
+                <h2 class="page-cover-tittle">精 品 酒 店</h2>
+            </div>
+        </div>
+    </section>
+    <!--================Breadcrumb Area =================-->
+
+    <!--================定制模块================-->
+    <div class="container" style="padding-top: 50px">
+        <div class="hotel_booking_area position">
+            <div class="container">
+                <div class="hotel_booking_table">
+                    <div class="col-md-3">
+                        <h2>预定您的酒店<br></h2>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="boking_table">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="book_tabel_item">
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker11'>
+                                                <input type='text' class="form-control" placeholder="出发时间"/>
+                                                <span class="input-group-addon">
+                                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                        </span>
                                             </div>
-                                            <div class="form-group">
-                                                <div class='input-group date' id='datetimepicker1'>
-                                                    <input type='text' class="form-control" placeholder="返程时间"/>
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                    </span>
-                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker1'>
+                                                <input type='text' class="form-control" placeholder="返程时间"/>
+                                                <span class="input-group-addon">
+                                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                        </span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="book_tabel_item">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type='text' class="form-control" placeholder="成人数"/>
-                                                </div>
-                                                <div class="input-group">
-                                                    <input type='text' class="form-control" placeholder="儿童数"/>
-                                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="book_tabel_item">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type='text' class="form-control" placeholder="成人数"/>
+                                            </div>
+                                            <div class="input-group">
+                                                <input type='text' class="form-control" placeholder="儿童数"/>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="book_tabel_item">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type='text' class="form-control" placeholder="目的地"/>
-                                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="book_tabel_item">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type='text' class="form-control" placeholder="目的地"/>
                                             </div>
-                                            <a class="book_now_btn button_hover" href="CityMsg.html">填好了</a>
                                         </div>
+                                        <a class="book_now_btn button_hover" href="CityMsg.html">填好了</a>
                                     </div>
                                 </div>
                             </div>
@@ -78,103 +78,120 @@
                 </div>
             </div>
         </div>
-        <!--================定制模块================-->
-        <div th:include="common/header::testimage"></div>
-        <!--================ 精选酒店模块 =================-->
-        <section class="accomodation_area section_gap">
-            <div class="container">
-                <div class="section_title text-center">
-                    <h2 class="title_color">精 选 酒 店</h2>
-                    <p>为 您 提 供 最 优 质 的 酒 店 选 择</p>
+    </div>
+    <!--================定制模块================-->
+
+    <!--================ 精选酒店模块 =================-->
+    <section class="accomodation_area section_gap">
+        <div class="container">
+            <div class="section_title text-center">
+                <h2 class="title_color">精 选 酒 店</h2>
+                <p>为 您 提 供 最 优 质 的 酒 店 选 择</p>
+            </div>
+            <div class="row accomodation_two">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="../../static/image/room1.jpg" alt="">
+                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
+                        </div>
+                        <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
+                        <h5>$250
+                            <small>/night</small>
+                        </h5>
+                    </div>
                 </div>
-                <div class="row accomodation_two">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="../../static/image/room1.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-                            <h5>$250<small>/night</small></h5>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="../../static/image/room2.jpg" alt="">
+                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
                         </div>
+                        <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
+                        <h5>$200
+                            <small>/night</small>
+                        </h5>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="../../static/image/room2.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
-                            <h5>$200<small>/night</small></h5>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="../../static/image/room3.jpg" alt="">
+                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
                         </div>
+                        <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
+                        <h5>$750
+                            <small>/night</small>
+                        </h5>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="../../static/image/room3.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
-                            <h5>$750<small>/night</small></h5>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="../../static/image/room4.jpg" alt="">
+                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
                         </div>
+                        <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
+                        <h5>$200
+                            <small>/night</small>
+                        </h5>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="../../static/image/room4.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
-                            <h5>$200<small>/night</small></h5>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="../../static/image/room1.jpg" alt="">
+                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
                         </div>
+                        <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
+                        <h5>$250
+                            <small>/night</small>
+                        </h5>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="../../static/image/room1.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-                            <h5>$250<small>/night</small></h5>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="../../static/image/room2.jpg" alt="">
+                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
                         </div>
+                        <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
+                        <h5>$200
+                            <small>/night</small>
+                        </h5>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="../../static/image/room2.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
-                            <h5>$200<small>/night</small></h5>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="../../static/image/room3.jpg" alt="">
+                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
                         </div>
+                        <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
+                        <h5>$750
+                            <small>/night</small>
+                        </h5>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="../../static/image/room3.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
-                            <h5>$750<small>/night</small></h5>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="../../static/image/room4.jpg" alt="">
+                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
-                            <div class="hotel_img">
-                                <img src="../../static/image/room4.jpg" alt="">
-                                <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
-                            <h5>$200<small>/night</small></h5>
-                        </div>
+                        <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
+                        <h5>$200
+                            <small>/night</small>
+                        </h5>
                     </div>
                 </div>
             </div>
-        </section>
-        <!--================ 精选酒店模块  =================-->
-
-        <!--================ start footer Area  =================-->
-        <footer th:replace="common/menu::footer"></footer>
-        <!--================ End footer Area  =================-->
-    </body>
+        </div>
+    </section>
+    <!--================ 精选酒店模块  =================-->
+</div>
+<!--================ start footer Area  =================-->
+<footer th:replace="common/menu::footer"></footer>
+<!--================ End footer Area  =================-->
+</body>
 </html>

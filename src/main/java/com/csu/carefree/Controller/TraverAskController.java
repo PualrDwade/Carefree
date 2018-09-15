@@ -18,7 +18,7 @@ public class TraverAskController {
     @GetMapping("/TraverAsk/QuestionAnswer")
     public String ViewQuesttionAnswer() {
         //获取所有的问题列表
-        List<UserAsk> userAskList = traverAskService.getUserAskList();
+//        List<UserAsk> userAskList = traverAskService.getUserAskList();
         //进行分页操作
         //按时间进行排序
         //返回页面
