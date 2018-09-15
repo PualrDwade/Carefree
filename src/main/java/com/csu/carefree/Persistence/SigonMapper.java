@@ -10,6 +10,6 @@ public interface SigonMapper {
     //用过注册账号,
     boolean setSigon(String username, String password);
 
-    //通过邮箱找回密码
+    //通过找回密码
     boolean updateSigon(String username, String password);
 }

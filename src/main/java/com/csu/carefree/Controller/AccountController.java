@@ -89,6 +89,13 @@ public class AccountController {
         }
     }
 
+    //用户注销登陆的控制器请求url
+    @GetMapping("/account/Signup")
+    public String Signup(HttpSession session) {
+//        session.removeAttribute("username");
+        return "index";
+    }
+
     //邮箱激活的控制器请求url
     @GetMapping("/account/EmailVerify")
     public String Register(@RequestParam("username") String username,

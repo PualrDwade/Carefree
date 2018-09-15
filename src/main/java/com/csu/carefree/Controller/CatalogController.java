@@ -1,11 +1,9 @@
 package com.csu.carefree.Controller;
 
 
-import com.csu.carefree.Model.TraverAsk.UserAsk;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
 import com.csu.carefree.Service.CatalogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +28,7 @@ public class CatalogController {
     public String viewHotelMsgList(Model model) {
         model.addAttribute("HotelList");
 
-        return "ProductDT/Hotelist";
+        return "Hotel";
     }
 
 
@@ -59,7 +57,7 @@ public class CatalogController {
     //不填写表单直接跳转到目的地界面
     @GetMapping("/Catalog/Mdd")
     public String ViewMdd() {
-        return "ProductDT/CityMsg";
+        return "ProductDT/Mdd";
     }
 
     //填写表单请求跳转目的地界面
@@ -67,32 +65,32 @@ public class CatalogController {
     public String ViewMdd(@RequestParam("startTime") String startTime, @RequestParam("backTime") String backTime,
                           @RequestParam("adultNum") String adultNum, @RequestParam("childrenNum") String childrenNum,
                           @RequestParam("destination") String destination, HttpSession session, Model model) {
-        //行程数据
-        TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
-        //保证字段不为空
-        traverMsg.setAdult_num(adultNum == null ? "" : adultNum);
-        traverMsg.setChild_num(childrenNum == null ? "" : childrenNum);
-        traverMsg.setEnd_city(destination == null ? "" : destination);
-
-        //**********************景点数据
-        //控制逻辑：若已经获得目的地的信息，则显示目的地城市景点、地图、酒店信息；若没有获得即为定位城市
-        //1、判断城市名是否存在
-        String map_city_name;
-        if (catalogService.searchCityMsgByName(traverMsg.getEnd_city()) == null) {
-            //定位城市
-            map_city_name = (String) session.getAttribute("map_city_name");
-        } else {
-            map_city_name = traverMsg.getEnd_city();
-        }
-        List<ScenicMsg> scenicMsgList = catalogService.getScenicMsgListByCityName(map_city_name);
-
-        //景点排序功能（前端展示）
-
-        //插入model
-        model.addAttribute("scenicMsgList", scenicMsgList);
+//        //行程数据
+//        TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
+//        //保证字段不为空
+//        traverMsg.setAdult_num(adultNum == null ? "" : adultNum);
+//        traverMsg.setChild_num(childrenNum == null ? "" : childrenNum);
+//        traverMsg.setEnd_city(destination == null ? "" : destination);
+//
+//        //**********************景点数据
+//        //控制逻辑：若已经获得目的地的信息，则显示目的地城市景点、地图、酒店信息；若没有获得即为定位城市
+//        //1、判断城市名是否存在
+//        String map_city_name;
+//        if (catalogService.searchCityMsgByName(traverMsg.getEnd_city()) == null) {
+//            //定位城市
+//            map_city_name = (String) session.getAttribute("map_city_name");
+//        } else {
+//            map_city_name = traverMsg.getEnd_city();
+//        }
+//        List<ScenicMsg> scenicMsgList = catalogService.getScenicMsgListByCityName(map_city_name);
+//
+//        //景点排序功能（前端展示）
+//
+//        //插入model
+//        model.addAttribute("scenicMsgList", scenicMsgList);
 
         //**********************酒店数据
-        return "ProductDT/CityMsg";
+        return "ProductDT/Mdd";
     }
 
 
@@ -100,15 +98,14 @@ public class CatalogController {
     @GetMapping("/Catalog/HotProductList")
     public String HotProductList() {
         //业务操作增删查改
-        return "ProductDT/ProductList";
+        return "ProductDT/Product";
     }
 
     //进入酒店页面的界面控制器
     @GetMapping("/Catalog/HotHotelList")
     public String HotHotelList() {
         //获取当前用户位置,推荐酒店
-        return "ProductDT/Hotelist";
+        return "ProductDT/Hotel";
     }
-
 
 }

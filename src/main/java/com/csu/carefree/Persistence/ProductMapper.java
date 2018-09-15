@@ -12,6 +12,7 @@ public interface ProductMapper {
     List<ProductMsg> getProductList();
 
     ProductMsg getProductById(String id);
+
     //筛选条件：traver_days, product_type, supplier_id
 
     //行程天数
