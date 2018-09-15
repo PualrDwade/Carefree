@@ -8,7 +8,7 @@ public class TraverNote {
     private String notify_status;
     private String add_time;
     private String img_url;
-    private String scenic_id;
+    private String city_id;
     private String user_id;
     @Override
     public String toString() {
@@ -21,7 +21,7 @@ public class TraverNote {
                 ", notify_status='" + notify_status + '\'' +
                 ", add_time='" + add_time + '\'' +
                 ", img_url='" + img_url + '\'' +
-                ", scenic_id='" + scenic_id + '\'' +
+                ", scenic_id='" + city_id + '\'' +
                 '}';
     }
 
@@ -89,12 +89,12 @@ public class TraverNote {
         this.img_url = img_url;
     }
 
-    public String getScenic_id() {
-        return scenic_id;
+    public String getCity_id() {
+        return city_id;
     }
 
-    public void setScenic_id(String scenic_id) {
-        this.scenic_id = scenic_id;
+    public void setCity_id(String scenic_id) {
+        this.city_id = scenic_id;
     }
 
     public TraverNote() {
@@ -103,7 +103,7 @@ public class TraverNote {
     public TraverNote(String id, String title, String user_id,
                       String note_content, String star_num,
                       String notify_status, String add_time,
-                      String img_url, String scenic_id) {
+                      String img_url, String city_id) {
         this.id = id;
         this.title = title;
         this.user_id = user_id;
@@ -112,6 +112,6 @@ public class TraverNote {
         this.notify_status = notify_status;
         this.add_time = add_time;
         this.img_url = img_url;
-        this.scenic_id = scenic_id;
+        this.city_id = city_id;
     }
 }

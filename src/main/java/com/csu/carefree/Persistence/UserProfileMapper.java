@@ -7,11 +7,12 @@ import com.csu.carefree.Model.Account.UserProfile;
 public interface UserProfileMapper {
 
     //通过userprofile创建用户详细信息
-    boolean setUserProfile(UserProfile userProfile);
+    void setUserProfile(UserProfile userProfile);
 
     //通过username得到用户详细信息
-    UserProfile getUserProfile(String username);
+    UserProfile getUserProfileByUserName(String username);
 
     //用过userprofile更新用户详细信息
-    boolean updateUserProfile(UserProfile userProfile);
+    void updateUserProfile(UserProfile userProfile);
+
 }

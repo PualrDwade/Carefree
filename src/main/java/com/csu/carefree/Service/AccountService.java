@@ -16,31 +16,31 @@ public interface AccountService {
 
     /****************用户登陆注册模块Service****************************************/
     //通过用户名得到登陆账号信息
-    Sigon getSigon(String username);
+    Sigon getSigonByUserName(String username);
 
     //用过注册账号,
-    boolean setSigon(String username, String password);
+    void setSigon(String username, String password);
 
     //通过邮箱找回密码
-    boolean updateSigon(String username, String password);
+    void updateSigon(String username, String password);
 
     //通过邮箱得到验证码
-    String getVerifyCode(String username, String type);
+    EmailVerifyRecord getEmailVerifyRecordByCodeAndType(String code, String send_type);
 
     //插入邮箱验证码信息
-    boolean setVerifyCode(String username, String code, String type);
+    void setVerifyCodeRecord(EmailVerifyRecord emailVerifyRecord);
     /*****************************************************************************/
 
 
     /**********************用户中心模块Service*************************************/
     //通过userprofile创建用户详细信息
-    boolean setUserProfile(UserProfile userProfile);
+    void setUserProfile(UserProfile userProfile);
 
     //通过userprofile更新用户详细信息
-    boolean updateUserProfile(UserProfile userProfile);
+    void updateUserProfile(UserProfile userProfile);
 
     //通过username得到用户详细信息
-    UserProfile getUserProfile(String username);
+    UserProfile getUserProfileByUserName(String username);
 
     //通过username得到用户游记列表
     List<TraverNote> getTraverNodeListbyName(String username);

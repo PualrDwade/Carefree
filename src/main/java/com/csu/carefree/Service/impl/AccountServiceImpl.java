@@ -35,18 +35,18 @@ public class AccountServiceImpl implements AccountService {
      * 登陆注册
      **/
     @Override
-    public Sigon getSigon(String username) {
-        return sigonMapper.getSigon(username);
+    public Sigon getSigonByUserName(String username) {
+        return sigonMapper.getSigonByUserName(username);
     }
 
     @Override
-    public boolean setSigon(String username, String password) {
-        return sigonMapper.setSigon(username, password);
+    public void setSigon(String username, String password) {
+        sigonMapper.setSigon(username, password);
     }
 
     @Override
-    public boolean updateSigon(String username, String password) {
-        return sigonMapper.updateSigon(username, password);
+    public void updateSigon(String username, String password) {
+        sigonMapper.updateSigon(username, password);
     }
 
 
@@ -55,18 +55,18 @@ public class AccountServiceImpl implements AccountService {
      **/
 
     @Override
-    public boolean setUserProfile(UserProfile userProfile) {
-        return userProfileMapper.setUserProfile(userProfile);
+    public void setUserProfile(UserProfile userProfile) {
+         userProfileMapper.setUserProfile(userProfile);
     }
 
     @Override
-    public boolean updateUserProfile(UserProfile userProfile) {
-        return userProfileMapper.updateUserProfile(userProfile);
+    public void updateUserProfile(UserProfile userProfile) {
+         userProfileMapper.updateUserProfile(userProfile);
     }
 
     @Override
-    public UserProfile getUserProfile(String username) {
-        return userProfileMapper.getUserProfile(username);
+    public UserProfile getUserProfileByUserName(String username) {
+        return userProfileMapper.getUserProfileByUserName(username);
     }
 
 
@@ -94,12 +94,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public String getVerifyCode(String username, String type) {
-        return emailVerifyRecordMapper.getVerifyCode(username, type);
+    public EmailVerifyRecord getEmailVerifyRecordByCodeAndType(String code, String send_type) {
+        return emailVerifyRecordMapper.getEmailVerifyRecordByCodeAndType(code, send_type);
     }
 
     @Override
-    public boolean setVerifyCode(String username, String code, String type) {
-        return emailVerifyRecordMapper.setVerifyCode(username, code, type);
+    public void setVerifyCodeRecord(EmailVerifyRecord emailVerifyRecord) {
+        emailVerifyRecordMapper.setVerifyCodeRecord(emailVerifyRecord);
     }
 }

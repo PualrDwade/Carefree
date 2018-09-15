@@ -13,7 +13,7 @@
       link_url,
       simple_content,
       img_url,
-      scenic_id,
+      scenic_name,
       supplier_id_id as supplier_id
     FROM ProductDT_strategymsg
     </select>
@@ -26,7 +26,7 @@
       link_url,
       simple_content,
       img_url,
-      scenic_id,
+      scenic_name,
       supplier_id_id as supplier_id
     FROM ProductDT_strategymsg
     WHERE scenic_name = #{scenic_name}

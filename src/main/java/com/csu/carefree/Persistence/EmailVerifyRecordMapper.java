@@ -6,9 +6,10 @@ import java.util.List;
 
 //邮箱的持久化接口
 public interface EmailVerifyRecordMapper {
-    //通过邮箱号码和类型得到验证码
-    String getVerifyCode(String username, String type);
+
+    //通过邮箱Code和type得到验证码
+    EmailVerifyRecord getEmailVerifyRecordByCodeAndType(String code, String send_type);
 
     //插入邮箱验证码信息
-    boolean setVerifyCode(String username, String code, String type);
+    void setVerifyCodeRecord(EmailVerifyRecord emailVerifyRecord);
 }

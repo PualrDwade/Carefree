@@ -7,9 +7,6 @@ import java.util.List;
 
 public interface ScenicMsgMapper {
 
-    //通过城市ID获取景点信息
-    List<ScenicMsg> getScenicMsgListByCityId(String cityId);
-
     //通过景点ID获取景点信息
     ScenicMsg getScenicMsgById(String scenicId);
 

@@ -196,8 +196,8 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public List<TicketMsg> getTicketListByCityId(String cityId) {
-        return ticketMsgMapper.getTicketListByCityId(cityId);
+    public List<TicketMsg> getTicketListByCityName(String cityId) {
+        return ticketMsgMapper.getTicketListByCityName(cityId);
     }
 
 

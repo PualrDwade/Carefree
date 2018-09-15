@@ -11,13 +11,12 @@
     -->
     <select id="getUserAskList" resultType="com.csu.carefree.Model.TraverAsk.UserAsk">
     SELECT
-          ID,
-          TITLE,
-          ASK_CONTENT,
-          STAR_NUM,
-          ADD_TIME,
-          SCENIC_ID_ID AS scenic_id
-          USER_ID_ID AS user_id
+         ID,
+         TITLE,
+         ASK_CONTENT,
+         STAR_NUM,ADD_TIME,
+         USER_ID_ID AS user_id,
+         CITY_ID_ID AS city_id
     FROM TraverAsk_userask
         ORDER BY ${'add_time'} DESC
   </select>
@@ -27,13 +26,12 @@
     -->
     <select id="searchUserAskList" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAsk">
     SELECT
-          ID,
-          TITLE,
-          ASK_CONTENT,
-          STAR_NUM,
-          ADD_TIME,
-          SCENIC_ID_ID AS scenic_id
-          USER_ID_ID AS user_id
+         ID,
+         TITLE,
+         ASK_CONTENT,
+         STAR_NUM,ADD_TIME,
+         USER_ID_ID AS user_id,
+         CITY_ID_ID AS city_id
     FROM TraverAsk_userask
     WHERE lower(title) like #{value}
        ORDER BY ${'add_time'} DESC
@@ -44,13 +42,12 @@
     -->
     <select id="getUserAskById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAsk">
     SELECT
-          ID,
-          TITLE,
-          ASK_CONTENT,
-          STAR_NUM,
-          ADD_TIME,
-          SCENIC_ID_ID AS scenic_id
-          USER_ID_ID AS user_id
+         ID,
+         TITLE,
+         ASK_CONTENT,
+         STAR_NUM,ADD_TIME,
+         USER_ID_ID AS user_id,
+         CITY_ID_ID AS city_id
     FROM TraverAsk_userask
     WHERE ID = #{userAskId}
   </select>
@@ -60,9 +57,21 @@
     -->
     <insert id="insertUserAsk" parameterType="com.csu.carefree.Model.TraverAsk.UserAsk">
     INSERT INTO TraverAsk_userask
-      (ID, TITLE, ASK_CONTENT, STAR_NUM, ADD_TIME, SCENIC_ID_ID, USER_ID_ID)
+      (ID, TITLE, ASK_CONTENT, STAR_NUM, ADD_TIME,  USER_ID_ID, CITY_ID_ID)
     VALUES
-      (#{id}, #{title}, #{ask_content}, #{star_num}, #{add_time}, #{scenic_id}, #{user_id})
+      (#{id}, #{title}, #{ask_content}, #{star_num}, #{add_time},}, #{user_id}, #{city_id})
   </insert>
 
+    <!--通过username得到用户问题列表-->
+    <select id="getUserAskListbyName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAsk">
+    SELECT
+         ID,
+         TITLE,
+         ASK_CONTENT,
+         STAR_NUM,ADD_TIME,
+         USER_ID_ID AS user_id,
+         CITY_ID_ID AS city_id
+    FROM TraverAsk_userask
+    WHERE user_id_id = #{username}
+    </select>
 </mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.EmailVerifyRecordMapper">
+
+    <cache/>
+    <select id="getEmailVerifyRecordByCodeAnd" resultType="com.csu.carefree.Model.Account.EmailVerifyRecord">
+    SELECT
+        CODE,
+        EMAIL,
+        SEND_TYPE,
+        SEND_TIME
+    FROM Account_emailverifyrecord
+    WHERE code = #{0} AND send_type = #{1}
+    </select>
+
+    <insert id="setVerifyCodeRecord" parameterType="com.csu.carefree.Model.Account.EmailVerifyRecord">
+    INSERT INTO Account_emailverifyrecord
+      (CODE, EMAIL, SEND_TYPE, SEND_TIME)
+    VALUES
+      (#{code}, #{email}, #{send_type}, #{send_time})
+    </insert>
+
+</mapper>

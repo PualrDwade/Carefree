@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csu.carefree.Persistence.UserProfileMapper">
+    <cache/>
+    <!--
+        插入用户详细信息
+    -->
+    <insert id="setUserProfile" parameterType="com.csu.carefree.Model.Account.UserProfile">
+    INSERT INTO Account_userprofile
+    (NICK_NAME, BIRTHDAY, GENDER, ADDRESS, MOBILE, IMAGE, EMAIL)
+    VALUES
+    (#{nick_name}, #{birthday}, #{gender}, #{address}, #{mobile}, #{image}, #{email})
+    </insert>
+
+    <!--
+        查询用户信息
+    -->
+    <select id="getUserProfileByUserName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.Account.UserProfile">
+    SELECT
+          NICK_NAME,
+          BIRTHDAY,
+          GENDER,
+          ADDRESS,
+          MOBILE,
+          IMAGE,
+          EMAIL
+    FROM Account_userprofile
+    WHERE email = #{username}
+    </select>
+
+    <!--
+        更新用户信息,通过用户 Email 找查
+    -->
+    <update id="updateUserProfile" parameterType="com.csu.carefree.Model.Account.UserProfile">
+    UPDATE Account_userprofile SET
+          NICK_NAME = #{nice_name},
+          BIRTHDAY = #{birthday},
+          GENDER = #{gender},
+          ADDRESS = #{address},
+          MOBILE = #{mobile},
+          IMAGE = #{image}
+    WHERE EMAIL = #{email}
+    </update>
+
+
+</mapper>
