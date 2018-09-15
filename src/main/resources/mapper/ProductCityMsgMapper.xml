@@ -6,7 +6,7 @@
 
     <cache/>
 
-    <select id="getProduct_CityList" resultType="com.csu.carefree.Model.ProductDT.Product_CityMsg">
+    <select id="getProduct_CityList" resultType="com.csu.carefree.Model.ProductDT.ProductCityMsg">
     SELECT
       id,
       city_id,
@@ -16,7 +16,7 @@
     </select>
 
     <select id="getAllDepartCityListByProductId" parameterType="java.lang.String"
-            resultType="com.csu.carefree.Model.ProductDT.Product_CityMsg">
+            resultType="com.csu.carefree.Model.ProductDT.ProductCityMsg">
     SELECT
       id,
       city_id,
@@ -26,7 +26,7 @@
     WHERE product_id_id = #{product_id}
     </select>
 
-    <select id="getADepartCity_Price" resultType="com.csu.carefree.Model.ProductDT.Product_CityMsg">
+    <select id="getADepartCity_Price" resultType="com.csu.carefree.Model.ProductDT.ProductCityMsg">
     SELECT
       id,
       city_id,

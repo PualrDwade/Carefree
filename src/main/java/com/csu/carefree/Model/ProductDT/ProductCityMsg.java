@@ -1,6 +1,6 @@
 package com.csu.carefree.Model.ProductDT;
 
-public class Product_CityMsg {
+public class ProductCityMsg {
     private String id;
     private String city_id;
     private String product_price;
@@ -38,13 +38,13 @@ public class Product_CityMsg {
         this.product_id = product_id;
     }
 
-    public Product_CityMsg(String id, String city_id, String product_price, String product_id) {
+    public ProductCityMsg(String id, String city_id, String product_price, String product_id) {
         this.id = id;
         this.city_id = city_id;
         this.product_price = product_price;
         this.product_id = product_id;
     }
 
-    public Product_CityMsg() {
+    public ProductCityMsg() {
     }
 }

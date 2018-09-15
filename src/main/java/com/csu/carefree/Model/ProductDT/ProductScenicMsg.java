@@ -1,11 +1,11 @@
 package com.csu.carefree.Model.ProductDT;
 
-public class Product_ScenicMsg {
+public class ProductScenicMsg {
     private String id;
     private String scenic_name;
     private String product_id;
 
-    public Product_ScenicMsg(String id, String scenic_name, String product_id) {
+    public ProductScenicMsg(String id, String scenic_name, String product_id) {
         this.id = id;
         this.scenic_name = scenic_name;
         this.product_id = product_id;
@@ -35,6 +35,6 @@ public class Product_ScenicMsg {
         this.product_id = product_id;
     }
 
-    public Product_ScenicMsg() {
+    public ProductScenicMsg() {
     }
 }
