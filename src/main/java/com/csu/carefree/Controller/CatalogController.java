@@ -1,6 +1,7 @@
 package com.csu.carefree.Controller;
 
 
+import com.csu.carefree.Model.TraverAsk.UserAsk;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
 import com.csu.carefree.Service.CatalogService;
@@ -55,9 +56,15 @@ public class CatalogController {
         return "index";
     }
 
-    //请求跳转地图界面
-    @PostMapping("/Travel_Info/Map_Info")
-    public String viewMap(@RequestParam("startTime") String startTime, @RequestParam("backTime") String backTime,
+    //不填写表单直接跳转到目的地界面
+    @GetMapping("/Catalog/Mdd")
+    public String ViewMdd() {
+        return "ProductDT/CityMsg";
+    }
+
+    //填写表单请求跳转目的地界面
+    @PostMapping("/Catalog/Mdd")
+    public String ViewMdd(@RequestParam("startTime") String startTime, @RequestParam("backTime") String backTime,
                           @RequestParam("adultNum") String adultNum, @RequestParam("childrenNum") String childrenNum,
                           @RequestParam("destination") String destination, HttpSession session, Model model) {
         //行程数据
@@ -85,8 +92,23 @@ public class CatalogController {
         model.addAttribute("scenicMsgList", scenicMsgList);
 
         //**********************酒店数据
-
-        return "Travel_Info/Map_Info";
+        return "ProductDT/CityMsg";
     }
+
+
+    //进入热门产品的界面控制器url
+    @GetMapping("/Catalog/HotProductList")
+    public String HotProductList() {
+        //业务操作增删查改
+        return "ProductDT/ProductList";
+    }
+
+    //进入酒店页面的界面控制器
+    @GetMapping("/Catalog/HotHotelList")
+    public String HotHotelList() {
+        //获取当前用户位置,推荐酒店
+        return "ProductDT/Hotelist";
+    }
+
 
 }

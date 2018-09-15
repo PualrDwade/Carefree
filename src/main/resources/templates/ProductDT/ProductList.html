@@ -1,55 +1,6 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="../../static/image/favicon.png" type="image/png">
-        <title>Royal Hotel</title>
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="../../static/css/bootstrap.css">
-        <link rel="stylesheet" href="../../static/vendors/linericon/style.css">
-        <link rel="stylesheet" href="../../static/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../../static/vendors/owl-carousel/owl.carousel.min.css">
-        <link rel="stylesheet" href="../../static/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
-        <link rel="stylesheet" href="../../static/vendors/nice-select/css/nice-select.css">
-        <link rel="stylesheet" href="../../static/vendors/owl-carousel/owl.carousel.min.css">
-        <!-- main css -->
-        <link rel="stylesheet" href="../../static/css/style.css">
-        <link rel="stylesheet" href="../../static/css/responsive.css">
-        <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- 可选的Bootstrap主题文件（一般不使用） -->
-        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
-
-        <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-        <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-
-        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        <style>
-            .myYellow{
-                color: #F3C300;
-            }
-            .margin-div{
-                margin-top: 100px;
-                float: right;
-            }
-            .select-margin{
-                margin-left: 40px;
-            }
-            .parent row-div{
-                display: inline;
-                padding-left: 20px;
-            }
-
-            hr{
-                height: 5px;
-                color: #4cd3e3;
-            }
-        </style>
-    </head>
+<!doctype html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="common/menu::head"></head>
     <body>
         <!--================Header Area =================-->
         <header class="header_area">
@@ -292,35 +243,6 @@
         <!--================ 产品  =================-->
 
         <!--================ start footer Area  =================-->	
-        <footer class="footer-area section_gap" >
-            <!--<div class="container" style="height: 50px;">-->
-                <!--&lt;!&ndash;<div class="border_line"></div>&ndash;&gt;-->
-                <!---->
-            <!--</div>-->
-            <div class="row footer-bottom d-flex justify-content-between align-items-center" >
-                <p class="col-lg-8 col-sm-12 footer-text m-0" style="text-align: center">
-                    Copyright &copy;
-                    <script>document.write(new Date().getFullYear());</script>
-                    All rights reserved | made with 陈志轩-group
-                </p>
-            </div>
-        </footer>
-		<!--================ End footer Area  =================-->
-        
-        
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="../../static/js/jquery-3.2.1.min.js"></script>
-        <script src="../../static/js/popper.js"></script>
-        <script src="../../static/js/bootstrap.min.js"></script>
-        <script src="../../static/vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="../../static/js/jquery.ajaxchimp.min.js"></script>
-        <script src="../../static/js/mail-script.js"></script>
-        <script src="../../static/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
-        <script src="../../static/vendors/nice-select/js/jquery.nice-select.js"></script>
-        <script src="../../static/js/mail-script.js"></script>
-        <script src="../../static/js/stellar.js"></script>
-        <script src="../../static/vendors/lightbox/simpleLightbox.min.js"></script>
-        <script src="../../static/js/custom.js"></script>
+        <footer th:replace="common/menu::footer"></footer>
     </body>
 </html>
