@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class AccountServiceIml implements AccountService {
+public class AccountServiceImpl implements AccountService {
     @Autowired
     SigonMapper sigonMapper;
 

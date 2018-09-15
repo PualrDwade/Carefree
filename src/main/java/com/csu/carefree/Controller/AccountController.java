@@ -29,10 +29,10 @@ public class AccountController {
 
 
     //springmvc自动装配,创建一个用户的服务接口
-    @Autowired
+//    @Autowired
     private AccountService accountService;
     //自动装备一个类
-    @Autowired
+//    @Autowired
     private SystemService systemService;
     //进行业务代码的编写
 

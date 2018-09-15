@@ -1,22 +1,22 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="../static/image/favicon.png" type="image/png">
+    <link rel="icon" href="/image/favicon.png" type="image/png">
     <title>Royal Hotel</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../static/css/bootstrap.css">
-    <link rel="stylesheet" href="../static/vendors/linericon/style.css">
-    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../static/vendors/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="../static/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="../static/vendors/nice-select/css/nice-select.css">
-    <link rel="stylesheet" href="../static/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/vendors/linericon/style.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="/vendors/owl-carousel/owl.carousel.min.css">
     <!-- main css -->
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/responsive.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
 
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,8 +28,6 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
     <style>
         .priceTag {
             font-size: 25px;
@@ -41,6 +39,20 @@
         small {
             font-size: 15px;
         }
+
+        .productImg {
+            width: 270px;
+            height: 170px;
+        }
+
+        h3 {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -48,24 +60,16 @@
 <header class="header_area">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <a class="navbar-brand logo_h" href="index.html"><img src="../static/image/Logo.png" alt=""></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                 <ul class="nav navbar-nav menu_nav ml-auto">
                     <li class="nav-item active"><a class="nav-link" href="index.html">主页</a></li>
-                    <li class="nav-item"><a class="nav-link" href="TraverAsk/QuestionAnswer .html">问答专区</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ProductDT/CityMsg.html">目的地</a></li>
+                    <li class="nav-item"><a class="nav-link" href="TraverAsk/QuestionAnswer.html">问答专区</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ProductDT/ProductList.html">热门旅游</a></li>
                     <li class="nav-item"><a class="nav-link" href="ProductDT/Hotelist.html">酒店</a></li>
-                    <li class="nav-item"><a class="nav-link" href="ProductDT/CityMsg.html">地图</a></li>
                     <li class="nav-item"><a class="nav-link" href="TraverAsk/TraverNoteList.html">游记</a></li>
-                    <li class="nav-item" style="margin-left: 200px"><a class="nav-link"
-                                                                       href="Account/UserCenter.html">用户中心</a></li>
+                    <li class="nav-item" style="margin-left: 200px"><a class="nav-link" href="Account/UserCenter.html">用户中心</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="Account/AccountLogin.html">登陆</a></li>
                     <li class="nav-item"><a class="nav-link" href="Account/AccountRegister.html">注册</a></li>
                 </ul>
@@ -101,50 +105,58 @@
                 </div>
                 <div class="col-md-9">
                     <div class="boking_table">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="book_tabel_item">
-                                    <div class="form-group">
-                                        <div class='input-group date' id='datetimepicker11'>
-                                            <input type='text' class="form-control" placeholder="出发时间"/>
-                                            <span class="input-group-addon">
+                        <form action="ProductDT/CityMsg.html" method="post">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="book_tabel_item">
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker11'>
+                                                <input id="startTime" type='text' class="form-control"
+                                                       placeholder="出发时间"/>
+                                                <span class="input-group-addon">
                                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                                     </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class='input-group date' id='datetimepicker1'>
-                                            <input type='text' class="form-control" placeholder="返程时间"/>
-                                            <span class="input-group-addon">
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker1'>
+                                                <input id="backTime" type='text' class="form-control"
+                                                       placeholder="返程时间"/>
+                                                <span class="input-group-addon">
                                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                                     </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="book_tabel_item">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input type='text' class="form-control" placeholder="成人数"/>
-                                        </div>
-                                        <div class="input-group">
-                                            <input type='text' class="form-control" placeholder="儿童数"/>
+                                <div class="col-md-4">
+                                    <div class="book_tabel_item">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input id="adultNum" type='text' class="form-control"
+                                                       placeholder="成人数"/>
+                                            </div>
+                                            <div class="input-group">
+                                                <input id="childrenNum" type='text' class="form-control"
+                                                       placeholder="儿童数"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="book_tabel_item">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input type='text' class="form-control" placeholder="目的地"/>
+                                <div class="col-md-4">
+                                    <div class="book_tabel_item">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input id="destination" type='text' class="form-control"
+                                                       placeholder="目的地"/>
+                                            </div>
                                         </div>
+                                        <input type="submit" value="选好了" class="book_now_btn button_hover"
+                                               href="ProductDT/CityMsg.html">
                                     </div>
-                                    <a class="book_now_btn button_hover" href="ProductDT/CityMsg.html">选好了</a>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -166,7 +178,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single-recent-blog-post">
                     <div class="thumb">
-                        <img class="img-fluid" src="../static/image/blog/blog-1.jpg" alt="post">
+                        <img class="img-fluid" src="/image/blog/blog-1.jpg" alt="post">
                     </div>
                     <div class="details">
                         <div class="tags">
@@ -183,7 +195,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single-recent-blog-post">
                     <div class="thumb">
-                        <img class="img-fluid" src="../static/image/blog/blog-2.jpg" alt="post">
+                        <img class="img-fluid" src="/image/blog/blog-2.jpg" alt="post">
                     </div>
                     <div class="details">
                         <div class="tags">
@@ -200,7 +212,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single-recent-blog-post">
                     <div class="thumb">
-                        <img class="img-fluid" src="../static/image/blog/blog-3.jpg" alt="post">
+                        <img class="img-fluid" src="/image/blog/blog-3.jpg" alt="post">
                     </div>
                     <div class="details">
                         <div class="tags">
@@ -229,24 +241,27 @@
     <div class="container">
         <div class="section-top-border">
             <div class="row">
-                <div class="col-md-3">
-                    <img src="../static/image/elements/d.jpg" alt="" class="img-fluid">
+                <div class="col-md-3 ">
+                    <div>
+                        <img src="http://dimg03.c-ctrip.com/images/100v0700000020xmvE599_C_350_170_Q90.jpg "
+                             class="productImg">
+                    </div>
+
                 </div>
                 <div class="col-md-7 mt-sm-20 left-align-p">
-                    <a href="#"><h3 class="mb-30 title_color">这里是标题，展示简略的产品信息</h3></a>
-                    <p> 这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
-                        这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
-                        这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
-                    </p>
+                    <a href="http://vacations.ctrip.com/grouptravel/p9313636s2.html?kwd=%e4%b8%89%e4%ba%9a"
+                       target="_blank">
+                        <h3 class="mb-30 title_color ">海南三亚4日3晚跟团游(5钻)·【自营优选】网红游亚特兰蒂斯神秘世界 0购物 海景套房+希尔顿品牌选择 热门景区全覆盖</h3>
+                    </a>
                 </div>
                 <div class="col-md-2">
                     <div class="priceTag">
-                        <p>￥2790
-                            <small>起</small>
+                        <p>￥1754
+                            <small>/人起</small>
                         </p>
                     </div>
                     <div class="logo-size">
-                        <img src="../static/image/logo/携程.svg">
+                        <img src="/image/logo/携程.svg">
                     </div>
                     <div class="container">
                         <a>评分：</a><span class="badge badge-primary"
@@ -257,15 +272,17 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-md-3">
-                    <img src="../static/image/elements/d.jpg" alt="" class="img-fluid">
+                <div class="col-md-3 ">
+                    <div>
+                        <img src="//dimg04.c-ctrip.com/images/300o0t000000i9rrm0739_C_350_170_Q90.jpg" alt=""
+                             class="productImg">
+                    </div>
+
                 </div>
                 <div class="col-md-7 mt-sm-20 left-align-p">
-                    <a href="#"><h3 class="mb-30 title_color">这里是标题，展示简略的产品信息</h3></a>
-                    <p> 这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
-                        这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
-                        这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
-                    </p>
+                    <a href="http://vacations.ctrip.com/grouptravel/p9218158s2.html?kwd=%e4%b8%89%e4%ba%9a"
+                       target="_blank"><h3 class="mb-30 title_color">海南三亚5日4晚跟团游(4钻)·【携程自营】[一价全包放心游 无购物无自费] 南山108米海上观音
+                        西岛凤凰岭 中秋度假国庆出游 9月错峰特惠无上限立减500元/人！ 〈+1元升级两晚5钻海景酒店〉</h3></a>
                 </div>
                 <div class="col-md-2">
                     <div class="priceTag">
@@ -274,7 +291,7 @@
                         </p>
                     </div>
                     <div class="logo-size">
-                        <img src="../static/image/logo/携程.svg">
+                        <img src="/image/logo/携程.svg">
                     </div>
                     <div class="container">
                         <a>评分：</a><span class="badge badge-primary"
@@ -295,9 +312,9 @@
     <div class="container">
         <div class="section_title text-center">
             <a href="ProductDT/Hotelist.html"><h2 class="title_color">优 质 酒 店</h2></a>
-            <p>我 们 竭 力 为 您 推 荐 最 舒 适 最 优 质 性 价 比 最 高 的 酒 店，让 您 在 旅 途 的 奔 波 当 中 能 够 安 心 舒 睡 ，消 除 一 天 的 疲 惫</p>
+            <p class="text-center">我 们 竭 力 为 您 推 荐 最 舒 适 最 优 质 性 价 比 最 高 的 酒 店，让 您 在 旅 途 的 奔 波 当 中 能 够 安 心 舒 睡 ，消 除 一 天
+                的 疲 惫</p>
         </div>
-
         <div class="row mb_30">
             <div class="col-lg-3 col-sm-6">
                 <div class="accomodation_item text-center">
@@ -376,17 +393,16 @@
 </section>
 <!--================ 酒店  =================-->
 
-
 <!--================ 问答展示  =================-->
 <section class="testimonial_area section_gap">
     <div class="container">
         <div class="section_title text-center">
-            <a href="TraverAsk/QuestionAnswer .html"><h2 class="title_color">问 答 专 区</h2></a>
+            <a href="TraverAsk/QuestionAnswer.html"><h2 class="title_color">问 答 专 区</h2></a>
             <p style="text-align: center">为 你 答 疑 解 惑， 更 加 了 解 这 个 城 市</p>
         </div>
         <div class="testimonial_slider owl-carousel">
             <div class="media testimonial_item">
-                <img class="rounded-circle" src="../static/image/testtimonial-1.jpg" alt="">
+                <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
                 <div class="media-body">
                     <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you
                         think about it, you travel across her face, and She is the </p>
@@ -401,7 +417,7 @@
                 </div>
             </div>
             <div class="media testimonial_item">
-                <img class="rounded-circle" src="../static/image/testtimonial-1.jpg" alt="">
+                <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
                 <div class="media-body">
                     <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you
                         think about it, you travel across her face, and She is the </p>
@@ -416,7 +432,7 @@
                 </div>
             </div>
             <div class="media testimonial_item">
-                <img class="rounded-circle" src="../static/image/testtimonial-1.jpg" alt="">
+                <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
                 <div class="media-body">
                     <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you
                         think about it, you travel across her face, and She is the </p>
@@ -431,7 +447,7 @@
                 </div>
             </div>
             <div class="media testimonial_item">
-                <img class="rounded-circle" src="../static/image/testtimonial-1.jpg" alt="">
+                <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
                 <div class="media-body">
                     <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you
                         think about it, you travel across her face, and She is the </p>
@@ -449,7 +465,6 @@
     </div>
 </section>
 <!--================ 问答展示  =================-->
-
 
 <!--================ start footer Area  =================-->
 <footer class="footer-area section_gap">
@@ -470,17 +485,17 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="../static/js/jquery-3.2.1.min.js"></script>
-<script src="../static/js/popper.js"></script>
-<script src="../static/js/bootstrap.min.js"></script>
-<script src="../static/vendors/owl-carousel/owl.carousel.min.js"></script>
-<script src="../static/js/jquery.ajaxchimp.min.js"></script>
-<script src="../static/js/mail-script.js"></script>
-<script src="../static/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
-<script src="../static/vendors/nice-select/js/jquery.nice-select.js"></script>
-<script src="../static/js/mail-script.js"></script>
-<script src="../static/js/stellar.js"></script>
-<script src="../static/vendors/lightbox/simpleLightbox.min.js"></script>
-<script src="../static/js/custom.js"></script>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/popper.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="/js/jquery.ajaxchimp.min.js"></script>
+<script src="/js/mail-script.js"></script>
+<script src="/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="/vendors/nice-select/js/jquery.nice-select.js"></script>
+<script src="/js/mail-script.js"></script>
+<script src="/js/stellar.js"></script>
+<script src="/vendors/lightbox/simpleLightbox.min.js"></script>
+<script src="/js/custom.js"></script>
 </body>
 </html>

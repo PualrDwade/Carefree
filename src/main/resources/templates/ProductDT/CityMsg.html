@@ -44,24 +44,17 @@
 <header class="header_area">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <a class="navbar-brand logo_h" href="../index.html"><img src="../../static/image/Logo.png" alt=""></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                 <ul class="nav navbar-nav menu_nav ml-auto">
                     <li class="nav-item "><a class="nav-link" href="../index.html">主页</a></li>
-                    <li class="nav-item"><a class="nav-link" href="wenda.html">问答专区</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="CityMsg.html">目的地</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../TraverAsk/QuestionAnswer.html">问答专区</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ProductList.html">热门旅游</a></li>
                     <li class="nav-item"><a class="nav-link" href="Hotelist.html">酒店</a></li>
-                    <li class="nav-item active"><a class="nav-link" href="CityMsg.html">地图</a></li>
                     <li class="nav-item"><a class="nav-link" href="../TraverAsk/TraverNoteList.html">游记</a></li>
-                    <li class="nav-item" style="margin-left: 100px"><a class="nav-link"
-                                                                       href="../Account/UserCenter.html">用户中心</a></li>
+                    <li class="nav-item" style="margin-left: 100px"><a class="nav-link" href="../Account/UserCenter.html">用户中心</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Account/AccountLogin.html">登陆</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Account/AccountRegister.html">注册</a></li>
                 </ul>
             </div>
         </nav>
@@ -75,54 +68,57 @@
     <div class="container">
         <div class="hotel_booking_table">
             <div class="col-md-3">
-                <h2>定制您的旅行<br></h2>
+                <h2 style="letter-spacing: 5px">定制您的旅行<br></h2>
             </div>
             <div class="col-md-9">
                 <div class="boking_table">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="book_tabel_item">
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepicker11'>
-                                        <input type='text' class="form-control" placeholder="出发时间"/>
-                                        <span class="input-group-addon">
+                    <form action="CityMsg.html" method="post">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="book_tabel_item">
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker11'>
+                                            <input id="startTime" type='text' class="form-control" placeholder="出发时间"/>
+                                            <span class="input-group-addon">
                                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                                     </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepicker1'>
-                                        <input type='text' class="form-control" placeholder="返程时间"/>
-                                        <span class="input-group-addon">
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker1'>
+                                            <input id="backTime" type='text' class="form-control" placeholder="返程时间"/>
+                                            <span class="input-group-addon">
                                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                                     </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="book_tabel_item">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type='text' class="form-control" placeholder="成人数"/>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type='text' class="form-control" placeholder="儿童数"/>
+                            <div class="col-md-4">
+                                <div class="book_tabel_item">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input id="adultNum" type='text' class="form-control" placeholder="成人数"/>
+                                        </div>
+                                        <div class="input-group">
+                                            <input id="childrenNum" type='text' class="form-control" placeholder="儿童数"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="book_tabel_item">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type='text' class="form-control" placeholder="目的地"/>
+                            <div class="col-md-4">
+                                <div class="book_tabel_item">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input id="destination" type='text' class="form-control" placeholder="目的地"/>
+                                        </div>
                                     </div>
+                                    <input type="submit" value="选好了" class="book_now_btn button_hover"
+                                           href="ProductDT/CityMsg.html">
                                 </div>
-                                <a class="book_now_btn button_hover" href="#">选好了</a>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -133,6 +129,45 @@
 <div class="container" style="margin-top: 0px">
     <div class="section-top-border">
         <div class="row">
+            <!--酒店侧边栏开始-->
+            <div class="col-lg-2 col-md-4 mt-sm-30 element-wrap"
+                 style="background-color: rgba(235,252,255,0.98) ; height: 700px ;overflow:auto">
+                <div class="single-element-widget">
+                    <h3 style="margin-left: 10px;font-size: 25px" class="mb-30 title_color">想要怎样的酒店？</h3>
+                    <!--酒店1-->
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <a href="#"><h4 style="margin-left: 20px">1. 酒 店 1</h4></a>
+                    </div>
+                    <hr>
+                    <!--酒店1-->
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <a href="#"><h4 style="margin-left: 20px">2. 酒 店 2</h4></a>
+                    </div>
+                    <hr>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <a href="#"><h4 style="margin-left: 20px">3. 酒 店 3</h4></a>
+                    </div>
+                    <hr>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <a href="#"><h4 style="margin-left: 20px">4. 酒 店 4</h4></a>
+                    </div>
+                    <hr>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <a href="#"><h4 style="margin-left: 20px">5. 酒 店 5</h4></a>
+                    </div>
+                    <hr>
+                    <div class="switch-wrap d-flex justify-content-between">
+                        <a href="#"><h4 style="margin-left: 20px">6. 酒 店 6</h4></a>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <!--酒店侧边栏结束-->
+
+            <!--地图-->
+            <div class="col-lg-8 col-md-8" id="allmap"></div>
+            <!--地图-->
+
             <!--景点侧边栏开始-->
             <div class="col-lg-2 col-md-4 mt-sm-30 element-wrap"
                  style="background-color: rgba(235,252,255,0.98) ; height: 700px ;overflow:auto">
@@ -195,45 +230,6 @@
                 </div>
             </div>
             <!--景点侧边栏结束-->
-
-            <!--地图-->
-            <div class="col-lg-8 col-md-8" id="allmap"></div>
-            <!--地图-->
-
-            <!--酒店侧边栏开始-->
-            <div class="col-lg-2 col-md-4 mt-sm-30 element-wrap"
-                 style="background-color: rgba(235,252,255,0.98) ; height: 700px ;overflow:auto">
-                <div class="single-element-widget">
-                    <h3 style="margin-left: 10px;font-size: 25px" class="mb-30 title_color">想要怎样的酒店？</h3>
-                    <!--酒店1-->
-                    <div class="switch-wrap d-flex justify-content-between">
-                        <a href="#"><h4 style="margin-left: 20px">1. 酒 店 1</h4></a>
-                    </div>
-                    <hr>
-                    <!--酒店1-->
-                    <div class="switch-wrap d-flex justify-content-between">
-                        <a href="#"><h4 style="margin-left: 20px">2. 酒 店 2</h4></a>
-                    </div>
-                    <hr>
-                    <div class="switch-wrap d-flex justify-content-between">
-                        <a href="#"><h4 style="margin-left: 20px">3. 酒 店 3</h4></a>
-                    </div>
-                    <hr>
-                    <div class="switch-wrap d-flex justify-content-between">
-                        <a href="#"><h4 style="margin-left: 20px">4. 酒 店 4</h4></a>
-                    </div>
-                    <hr>
-                    <div class="switch-wrap d-flex justify-content-between">
-                        <a href="#"><h4 style="margin-left: 20px">5. 酒 店 5</h4></a>
-                    </div>
-                    <hr>
-                    <div class="switch-wrap d-flex justify-content-between">
-                        <a href="#"><h4 style="margin-left: 20px">6. 酒 店 6</h4></a>
-                    </div>
-                    <hr>
-                </div>
-            </div>
-            <!--酒店侧边栏结束-->
         </div>
     </div>
 </div>
@@ -303,10 +299,9 @@
         </div>
         <!--游记-->
         <!--攻略-->
-
         <div class="col-lg-6" style="padding-left: 50px">
             <div class="section_title text-center">
-                <a href="../TraverAsk/TraverNoteList.html"><h2 class="title_color">推 荐 攻 略</h2></a>
+                <a href="#"><h2 class="title_color">推 荐 攻 略</h2></a>
                 <p>这 里 有 最 全 面 的 旅 行 攻 略，为 您 的 旅 行 出 谋 划 策</p>
             </div>
             <div class="row">
@@ -349,7 +344,6 @@
         <!--攻略-->
     </div>
 </section>
-
 <!--游记区域结束-->
 
 <!--================ start footer Area  =================-->
@@ -368,20 +362,6 @@
 </footer>
 <!--================ End footer Area  =================-->
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="../../static/js/jquery-3.2.1.min.js"></script>
-<script src="../../static/js/popper.js"></script>
-<script src="../../static/js/bootstrap.min.js"></script>
-<script src="../../static/vendors/owl-carousel/owl.carousel.min.js"></script>
-<script src="../../static/js/jquery.ajaxchimp.min.js"></script>
-<script src="../../static/js/mail-script.js"></script>
-<script src="../../static/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
-<script src="../../static/vendors/nice-select/js/jquery.nice-select.js"></script>
-<script src="../../static/js/mail-script.js"></script>
-<script src="../../static/js/stellar.js"></script>
-<script src="../../static/vendors/lightbox/simpleLightbox.min.js"></script>
-<script src="../../static/js/custom.js"></script>
 <script type="text/javascript">
     // 百度地图API功能
     var map = new BMap.Map("allmap");    // 创建Map实例

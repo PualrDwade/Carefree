@@ -22,7 +22,7 @@ public class CatalogController {
      * 酒店信息展示，热门酒店推荐
      */
 
-    @Autowired
+//    @Autowired
     private CatalogService catalogService;
 
     @GetMapping("ProductDT/viewHotel")
