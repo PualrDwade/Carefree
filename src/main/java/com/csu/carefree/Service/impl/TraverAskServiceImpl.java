@@ -13,6 +13,7 @@ import java.util.List;
 /*
  *   Great by WLX
  */
+@Service
 public class TraverAskServiceImpl implements TraverAskService {
 
     @Autowired

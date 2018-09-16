@@ -8,12 +8,14 @@ import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Persistence.*;
 import com.csu.carefree.Service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /*
  *   Great by WLX
  */
+@Service
 public class CatalogServiceImpl implements CatalogService {
     @Autowired
     private HotelMsgMapper hotelMsgMapper;

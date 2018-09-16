@@ -4,6 +4,7 @@ package com.csu.carefree.Controller;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
 import com.csu.carefree.Service.CatalogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +21,9 @@ public class CatalogController {
      * 实现与酒店有关的业务逻辑
      * 酒店信息展示，热门酒店推荐
      */
-
-//    @Autowired
+    @Autowired
     private CatalogService catalogService;
+
 
     @GetMapping("ProductDT/viewHotel")
     public String viewHotelMsgList(Model model) {

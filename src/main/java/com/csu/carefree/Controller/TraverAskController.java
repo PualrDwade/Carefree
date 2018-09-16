@@ -11,8 +11,9 @@ import java.util.List;
 
 @Controller
 public class TraverAskController {
-    //@Autowired
+    @Autowired
     private TraverAskService traverAskService;
+
 
     //进入问答专区的控制层url
     @GetMapping("/TraverAsk/QuestionAnswer")

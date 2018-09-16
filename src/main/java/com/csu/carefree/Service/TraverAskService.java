@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
-@Service
 public interface TraverAskService {
 
     //获取数据库所有问题

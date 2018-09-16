@@ -9,9 +9,11 @@ import com.csu.carefree.Model.TraverAsk.UserAsk;
 import com.csu.carefree.Persistence.*;
 import com.csu.carefree.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AccountServiceImpl implements AccountService {
     @Autowired
     SigonMapper sigonMapper;
