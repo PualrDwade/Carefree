@@ -64,20 +64,16 @@
                                         <div class="book_tabel_item">
                                             <div class="form-group">
                                                 <div class='input-group date' id='datetimepicker11'>
-                                                    <input id="startTime" type='text' class="form-control"
-                                                           placeholder="出发时间"/>
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                    </span>
+                                                    <input th:text="${session.traverMsg.start_city}" id="startCity"
+                                                           type='text' class="form-control"
+                                                           placeholder="出发城市"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class='input-group date' id='datetimepicker1'>
-                                                    <input id="backTime" type='text' class="form-control"
-                                                           placeholder="返程时间"/>
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                    </span>
+                                                    <input th:text="${session.traverMsg.end_city}" id="destination"
+                                                           type='text' class="form-control"
+                                                           placeholder="目的地城市"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -86,11 +82,13 @@
                                         <div class="book_tabel_item">
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <input id="adultNum" type='text' class="form-control"
+                                                    <input th:text="${session.traverMsg.adult_num}" id="adultNum"
+                                                           type='text' class="form-control"
                                                            placeholder="成人数"/>
                                                 </div>
                                                 <div class="input-group">
-                                                    <input id="childrenNum" type='text' class="form-control"
+                                                    <input th:text="${session.traverMsg.child_num}" id="childrenNum"
+                                                           type='text' class="form-control"
                                                            placeholder="儿童数"/>
                                                 </div>
                                             </div>
@@ -100,12 +98,13 @@
                                         <div class="book_tabel_item">
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <input id="destination" type='text' class="form-control"
-                                                           placeholder="目的地"/>
+                                                    <input th:text="${session.traverMsg.traverdays}" id="travelDays"
+                                                           type='text' class="form-control"
+                                                           placeholder="行程天数"/>
                                                 </div>
                                             </div>
                                             <input type="submit" value="选好了" class="book_now_btn button_hover"
-                                                   href="ProductDT/CityMsg.html">
+                                                   href="/Catalog/Mdd">
                                         </div>
                                     </div>
                                 </div>
@@ -118,6 +117,89 @@
         <!--定制模块-->
     </section>
     <!--================Banner Area =================-->
+
+
+    <!--================ 产品  =================-->
+    <div class="whole-wrap">
+        <!--<br>-->
+        <div class="section_title text-center">
+            <a href="TraverAsk/ViewTraverNote">
+                <h2 class="title_color">热门旅游</h2>
+            </a>
+        </div>
+        <div class="container">
+            <div class="section-top-border">
+                <div class="row">
+                    <div class="col-md-3 ">
+                        <div>
+                            <img th:src="${session.product1.img_url}"
+                                 class="productImg">
+                        </div>
+
+                    </div>
+                    <div class="col-md-7 mt-sm-20 left-align-p">
+                        <a th:href="${session.product1.product_link}"
+                           target="_blank">
+                            <h4 th:text="${session.product1.name}" class="mb-30 title_color "></h4>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="priceTag">
+                            <p>￥ <span th:text="${session.product1.price}"></span>
+                                <small>/人起</small>
+                            </p>
+                        </div>
+                        <div class="logo-size">
+                            <a th:href="${session.product1.supplierUrl}"><img
+                                    th:src="${session.product1.supplierImgUrl}"></a>
+                        </div>
+                        <div class="container">
+                            <a>评分：</a><span th:text="${session.product1.product_grade}" class="badge badge-primary"
+                                            style="background-color: #f3c300;"></span><br><br>
+                            <a>销量：</a><span th:text="${session.product1.sell_num}" class="badge badge-primary"
+                                            style="background-color: #f3aecc;"></span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3 ">
+                        <div>
+                            <img th:src="${session.product2.img_url}"
+                                 class="productImg">
+                        </div>
+
+                    </div>
+                    <div class="col-md-7 mt-sm-20 left-align-p">
+                        <a th:href="${session.product2.product_link}"
+                           target="_blank">
+                            <h4 th:text="${session.product2.name}" class="mb-30 title_color "></h4>
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="priceTag">
+                            <p>￥ <span th:text="${session.product2.price}"></span>
+                                <small>/人起</small>
+                            </p>
+                        </div>
+                        <div class="logo-size">
+                            <a th:href="${session.product2.supplierUrl}"><img
+                                    th:src="${session.product2.supplierImgUrl}"></a>
+                        </div>
+                        <div class="container">
+                            <a>评分：</a><span th:text="${session.product2.product_grade}" class="badge badge-primary"
+                                            style="background-color: #f3c300;"></span><br><br>
+                            <a>销量：</a><span th:text="${session.product2.sell_num}" class="badge badge-primary"
+                                            style="background-color: #f3aecc;"></span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+        </div>
+    </div>
+    <!--================ 产品  =================-->
 
 
     <!--================ 游记  =================-->
@@ -185,85 +267,6 @@
     </section>
     <!--================ 游记  =================-->
 
-    <!--================ 产品  =================-->
-    <div class="whole-wrap">
-        <!--<br>-->
-        <div class="section_title text-center">
-            <a href="ProductDT/Product.html">
-                <h2 class="title_color">热门旅游</h2>
-            </a>
-        </div>
-        <div class="container">
-            <div class="section-top-border">
-                <div class="row">
-                    <div class="col-md-3 ">
-                        <div>
-                            <img src="http://dimg03.c-ctrip.com/images/100v0700000020xmvE599_C_350_170_Q90.jpg "
-                                 class="productImg">
-                        </div>
-
-                    </div>
-                    <div class="col-md-7 mt-sm-20 left-align-p">
-                        <a href="http://vacations.ctrip.com/grouptravel/p9313636s2.html?kwd=%e4%b8%89%e4%ba%9a"
-                           target="_blank">
-                            <h4 class="mb-30 title_color ">海南三亚4日3晚跟团游(5钻)·【自营优选】网红游亚特兰蒂斯神秘世界 0购物 海景套房+希尔顿品牌选择
-                                热门景区全覆盖</h4>
-                        </a>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="priceTag">
-                            <p>￥1754
-                                <small>/人起</small>
-                            </p>
-                        </div>
-                        <div class="logo-size">
-                            <img src="/image/logo/携程.svg">
-                        </div>
-                        <div class="container">
-                            <a>评分：</a><span class="badge badge-primary"
-                                            style="background-color: #f3c300;">4.8</span><br><br>
-                            <a>销量：</a><span class="badge badge-primary" style="background-color: #f3aecc;">1200</span>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-3 ">
-                        <div>
-                            <img src="//dimg04.c-ctrip.com/images/300o0t000000i9rrm0739_C_350_170_Q90.jpg" alt=""
-                                 class="productImg">
-                        </div>
-
-                    </div>
-                    <div class="col-md-7 mt-sm-20 left-align-p">
-                        <a href="http://vacations.ctrip.com/grouptravel/p9218158s2.html?kwd=%e4%b8%89%e4%ba%9a"
-                           target="_blank">
-                            <h4 class="mb-30 title_color">海南三亚5日4晚跟团游(4钻)·【携程自营】[一价全包放心游 无购物无自费]
-                            南山108米海上观音
-                            西岛凤凰岭 中秋度假国庆出游 9月错峰特惠无上限立减500元/人！ 〈+1元升级两晚5钻海景酒店〉</h4></a>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="priceTag">
-                            <p>￥2790
-                                <small>起</small>
-                            </p>
-                        </div>
-                        <div class="logo-size">
-                            <img src="/image/logo/携程.svg">
-                        </div>
-                        <div class="container">
-                            <a>评分：</a><span class="badge badge-primary"
-                                            style="background-color: #f3c300;">4.8</span><br><br>
-                            <a>销量：</a><span class="badge badge-primary" style="background-color: #f3aecc;">1200</span>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            </div>
-
-        </div>
-    </div>
-    <!--================ 产品  =================-->
 
     <!--================ 酒店  =================-->
     <section class="accomodation_area section_gap">
