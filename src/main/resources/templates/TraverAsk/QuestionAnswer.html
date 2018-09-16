@@ -81,7 +81,7 @@
                             <li class="item clearfix " data-qid="12980256">
                                 <!--问题标题-->
                                 <div class="title">
-                                    <a href="./askanwDetail.html" target="_blank" th:text="${userAsk.title}">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
+                                    <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}" target="_blank" th:text="${userAsk.title}">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
                                 </div>
                                 <!--问题内容-->
                                 <div class="container">
@@ -92,23 +92,23 @@
                                     </div>
                                     <!--用户昵称-->
                                     <div class="user-info">
-                                        <a class="name _j_filter_click" href="#" target="_blank">张恺庭</a>
+                                        <a class="name _j_filter_click" target="_blank" th:text="${userAsk.user_id}">张恺庭</a>
                                     </div>
-                                    <!--问题描述-->
+                                    <!-- 问题描述 -->
                                     <div class="desc clearfix">
-                                        <a href="./askanwDetail.html" target="_blank" style="color: #666;">
-                                            <p th:text="${hotel.sell_num}">
+                                        <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}" target="_blank" style="color: #666;">
+                                            <p th:text="${userAsk.ask_content}">
                                                 明天开车去长沙世界之窗，请问世界之窗有免费停车的地方吗？能大包小包提进去吗？因为要带吃的和泳衣。然后想问下水上乐园玩完能有地方洗澡吗？玩每个项目前，包包有地方寄存吗？寄存要钱吗？问题有点多，麻烦各位了🌸🌸</p>
                                         </a>
                                     </div>
                                     <!--相关操作-->
                                     <div class="operate">
                                         <!--回答-->
-                                        <a href="./askanwDetail.html" target="_blank" style="text-decoration: none;">
+                                        <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}" target="_blank" style="text-decoration: none;">
                                             <span class="reply">回答 (2)</span>
                                         </a>
                                         <!--发布时间-->
-                                        <span class="date">发布于17分钟前</span>
+                                        <span class="date" th:text="发布于+${userAsk.add_time}">发布于17分钟前</span>
                                     </div>
                                 </div>
                             </li>

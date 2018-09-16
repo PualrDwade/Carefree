@@ -25,7 +25,7 @@ public class TraverAskServiceImpl implements TraverAskService {
 
     @Override
     public List<UserAsk> getUserAskList() {
-        return null;
+        return userAskMapper.getUserAskList();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class TraverAskServiceImpl implements TraverAskService {
 
     @Override
     public UserAsk getUserAskById(String userAskId) {
-        return null;
+        return userAskMapper.getUserAskById(userAskId);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class TraverAskServiceImpl implements TraverAskService {
 
     @Override
     public List<UserAnswer> getUserAnswerByAsk(String userAskId) {
-        return null;
+        return userAnswerMapper.getUserAnswerByAsk(userAskId);
     }
 
     @Override

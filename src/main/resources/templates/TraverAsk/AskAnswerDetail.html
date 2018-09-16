@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <body>
 <!--================Header Area =================-->
@@ -12,8 +13,9 @@
             <div class="col-main">
                 <!-- 面包屑导航 -->
                 <div class="crumb">
-                    <a href="/wenda/" target="_blank">问答首页</a> &gt; <span>长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</span>
+                    <a th:href="@{/TraverAsk/QuestionAnswer}" target="_blank">问答首页</a> &gt; <span>问答详情</span>
                 </div>
+
                 <!-- 搜索区域 -->
                 <div class="search-box">
 
@@ -30,24 +32,25 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- 问题区域 -->
                 <div class="q-detail" id="_js_askDetail">
                     <!-- 问题详情 -->
                     <div class="q-content">
                         <div class="q-title">
-                            <h1>
+                            <h1 th:text="${userAsk.title}">
                                 长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？
                             </h1>
                         </div>
-                        <div class="q-desc">
+                        <div class="q-desc" th:text="${userAsk.ask_content}">
                             明天开车去长沙世界之窗，请问世界之窗有免费停车的地方吗？能大包小包提进去吗？因为要带吃的和泳衣。然后想问下水上乐园玩完能有地方洗澡吗？玩每个项目前，包包有地方寄存吗？寄存要钱吗？问题有点多，麻烦各位了🌸🌸
                         </div>
                         <div class="q-info1 clearfix">
                             <div class="pub-bar fr">
                             <span class="photo"> <img src="https://images.mafengwo.net/images/pp48.gif" width="16"
                                                       height="16"></span>
-                                <span class="name">匿名用户</span>
-                                <span class="time"><i class="ico_phone"></i><span>2018-09-12 10:10:59</span></span>
+                                <span class="name" th:text="${userAsk.user_id}">匿名用户</span>
+                                <span class="time"><i class="ico_phone"></i><span th:text="${userAsk.add_time}">2018-09-12 10:10:59</span></span>
                             </div>
                         </div>
                     </div>
@@ -60,7 +63,9 @@
                             </div>
                         </div>
                         <div class="fr">
-                            <span class="atten-num">195浏览</span>
+                            <!--
+                                <span class="atten-num">195浏览</span>
+                            -->
                             <a class="btn-answer _j_btn_goanswer" rel="nofollow">回答</a>
                         </div>
                     </div>
@@ -76,45 +81,48 @@
                 <!-- 回答区域 -->
                 <div class="answer-wrap">
                     <div class="hd">
-                        <span id="_j_anum">2</span>个回答
+                        <span id="_j_anum" th:text="${userAnswerList.size()}">2</span>个回答
                     </div>
 
                     <div class="bd _j_pager_box">
                         <ul class="answer-list ">
                             <!-- 回答列表 -->
                             <div data-pagelet id="normal_answer_wrap" class=""
-                                 data-controller="/js/qa/ControllerDetailAnswerList">
+                                 data-controller="/js/qa/ControllerDetailAnswerList"
+                                 th:each="userAnswer : ${userAnswerList}">
 
                                 <!--这是一个回答-->
                                 <li class="answer-item clearfix _j_answer_item _js_answer13051806 " data-aid="13051806">
                                     <div class="answer-side _js_answerAva">
-                                        <a class="btn-ding _js_zan "><i></i><span data-real_num="1">1</span></a>
+                                        <a class="btn-ding _js_zan "><i></i><span data-real_num="1" th:text="${userAsk.star_num}">1</span></a>
                                     </div>
 
                                     <div class="answer-content _js_answer_content">
                                         <div class="answer-info clearfix">
                                             <div class="user-bar fl">
-                                                <a class="_j_filter_click avatar" href="/wenda/u/57711123/answer.html"
+                                                <a class="_j_filter_click avatar"
                                                    target="_blank"><img
                                                         src="http://n1-q.mafengwo.net/s12/M00/AF/F2/wKgED1uXKemAA3paAAO2TFHH3ks75.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
                                                         width="48" height="48" class="photo"></a>
-                                                <a class="name" href="/wenda/u/57711123/answer.html"
-                                                   target="_blank">王鹭星</a>
+                                                <a class="name"
+                                                   target="_blank" th:text="${userAnswer.user_id}">王鹭星</a>
                                             </div>
                                         </div>
                                         <!-- 回答内容 -->
-                                        <div class="_j_short_answer_item hide">
-                                            <div class="_j_answer_html" style="display: none;">你好</br></br>1.门票是免费的</br>
-                                                2.9.16号，是它的周年纪念日，当然有两场影像展，有时间的话推荐那天去看看</br></br></br></div>
-                                            <div class="_j_foldup_answer answer-foldup clearfix"
-                                                 style="display: block;">
-                                                <p class="_j_foldup_content">
-                                                    你好1.门票是免费的2.9.16号，是它的周年纪念日，当然有两场影像展，有时间的话推荐那天去看看&nbsp;<a
-                                                        class="_j_expand">显示全部</a></p>
-                                            </div>
-                                        </div>
+                                            <!--
+                                               <div class="_j_short_answer_item hide">
+                                                    <div class="_j_answer_html" style="display: none;" th:text="${userAnswer.answer_content}">你好</br></br>1.门票是免费的</br>
+                                                        2.9.16号，是它的周年纪念日，当然有两场影像展，有时间的话推荐那天去看看</br></br></br></div>
+                                                    <div class="_j_foldup_answer answer-foldup clearfix"
+                                                         style="display: block;">
+                                                        <p class="_j_foldup_content">
+                                                            你好1.门票是免费的2.9.16号，是它的周年纪念日，当然有两场影像展，有时间的话推荐那天去看看&nbsp;<a
+                                                                class="_j_expand">显示全部</a></p>
+                                                    </div>
+                                                </div>
+                                            -->
                                         <div class="_j_long_answer_item">
-                                            <div class="_j_answer_html">你好</br></br>1.门票是免费的</br>
+                                            <div class="_j_answer_html" th:text="${userAnswer.answer_content}">你好</br></br>1.门票是免费的</br>
                                                 2.9.16号，是它的周年纪念日，当然有两场影像展，有时间的话推荐那天去看看</br></br></br></div>
                                         </div>
                                     </div>
@@ -126,59 +134,7 @@
                                                 <a class="_j_collect_answer"><i></i>收藏</a>
                                             </div>
                                             <div class="pub-time">
-                                                <span>发布于 1天前</span>
-                                            </div>
-                                            <div class="tip-off">
-                                                <a data-japp="report"
-                                                   data-refer="http://www.mafengwo.cn/wenda/detail-13051644.html#answer13051806"
-                                                   data-refer-uid="57711123" data-app="qa.answer">举报</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <!--这是一个回答-->
-                                <li class="answer-item clearfix _j_answer_item _js_answer13051806 " data-aid="13051806">
-                                    <div class="answer-side _js_answerAva">
-                                        <a class="btn-ding _js_zan "><i></i><span data-real_num="1">1</span></a>
-                                    </div>
-
-                                    <div class="answer-content _js_answer_content">
-                                        <div class="answer-info clearfix">
-                                            <div class="user-bar fl">
-                                                <a class="_j_filter_click avatar" href="/wenda/u/57711123/answer.html"
-                                                   target="_blank"><img
-                                                        src="http://n1-q.mafengwo.net/s12/M00/AF/F2/wKgED1uXKemAA3paAAO2TFHH3ks75.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
-                                                        width="48" height="48" class="photo"></a>
-                                                <a class="name" href="/wenda/u/57711123/answer.html"
-                                                   target="_blank">袁保</a>
-                                            </div>
-                                        </div>
-                                        <!-- 回答内容 -->
-                                        <div class="_j_short_answer_item hide">
-                                            <div class="_j_answer_html" style="display: none;">你好</br></br>1.门票是免费的</br>
-                                                2.9.16号，是它的周年纪念日，当然有两场影像展，有时间的话推荐那天去看看</br></br></br></div>
-                                            <div class="_j_foldup_answer answer-foldup clearfix"
-                                                 style="display: block;">
-                                                <p class="_j_foldup_content">
-                                                    你好1.门票是免费的2.9.16号，是它的周年纪念日，当然有两场影像展，有时间的话推荐那天去看看&nbsp;<a
-                                                        class="_j_expand">显示全部</a></p>
-                                            </div>
-                                        </div>
-                                        <div class="_j_long_answer_item">
-                                            <div class="_j_answer_html">你好</br></br>1.门票是免费的</br>
-                                                2.9.16号，是它的周年纪念日，当然有两场影像展，有时间的话推荐那天去看看</br></br></br></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="a-operate _js_operate clearfix">
-                                        <div class="fl">
-
-                                            <div class="collect">
-                                                <a class="_j_collect_answer"><i></i>收藏</a>
-                                            </div>
-                                            <div class="pub-time">
-                                                <span>发布于 1天前</span>
+                                                <span th:text="发布与+${userAnswer.add_time}">发布于 1天前</span>
                                             </div>
                                             <div class="tip-off">
                                                 <a data-japp="report"
@@ -205,6 +161,7 @@
                     </div>
 
 
+                    <!-- 用户回复信息 -->
                     <div class="answer-add clearfix">
                         <a name="answer"></a>
                         <div class="aa-hd">
@@ -276,7 +233,7 @@
             <div class="col-side" id="_js_right_side">
                 <!-- 我要提问 -->
                 <div class="btn-question">
-                    <a href="/wenda/publish.html" class="btn-ask btn-ask2" target="_blank">我要提问</a>
+                    <a th:href="@{/TraverAsk/ViewCreateAsk}" class="btn-ask btn-ask2" target="_blank">我要提问</a>
                 </div>
             </div>
         </div>
