@@ -13,8 +13,7 @@
     SELECT
           ID,
           NAME,
-          PROVINCE_CONTENT,
-          IMG_URL,
+          IMG_URL
     FROM TraverMsg_provincemsg
     WHERE ID = #{value}
   </select>
@@ -26,7 +25,7 @@
     SELECT
           ID,
           NAME,
-          IMG_URL,
+          IMG_URL
     FROM TraverMsg_provincemsg
     WHERE lower(name) LIKE #{name}
   </select>
@@ -39,7 +38,7 @@
           ID,
           NAME,
           IMG_URL,
-          PROVINCE_NAME,
+          PROVINCE_NAME
     FROM TraverMsg_citymsg
     WHERE PROVINCE_ID = #{provinceId}
   </select>

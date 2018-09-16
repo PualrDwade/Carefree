@@ -18,7 +18,7 @@
           NOTIFY_STATUS,
           ADD_TIME,
           IMG_URL,
-          USER_ID_ID AS user_id
+          USER_ID_ID AS user_id,
           CITY_ID_ID AS city_id
     FROM TraverAsk_travernote
     WHERE NOTIFY_STATUS = 'YES'
@@ -36,7 +36,7 @@
           NOTIFY_STATUS,
           ADD_TIME,
           IMG_URL,
-          USER_ID_ID AS user_id
+          USER_ID_ID AS user_id,
           CITY_ID_ID AS city_id
     FROM TraverAsk_travernote
     WHERE lower(title) like #{value}
@@ -55,7 +55,7 @@
           NOTIFY_STATUS,
           ADD_TIME,
           IMG_URL,
-          USER_ID_ID AS user_id
+          USER_ID_ID AS user_id,
           CITY_ID_ID AS city_id
     FROM TraverAsk_travernote
     WHERE ID = #{traverNoteId}
@@ -81,7 +81,7 @@
           NOTIFY_STATUS,
           ADD_TIME,
           IMG_URL,
-          USER_ID_ID AS user_id
+          USER_ID_ID AS user_id,
           CITY_ID_ID AS city_id
     FROM TraverAsk_travernote
     WHERE user_id_id = #{username}
