@@ -3,13 +3,7 @@ package com.csu.carefree.Controller;
 
 import com.csu.carefree.Model.Account.EmailVerifyRecord;
 import com.csu.carefree.Model.Account.Sigon;
-import com.csu.carefree.Model.Account.UserProfile;
-import com.csu.carefree.Model.TraverAsk.TraverNote;
-import com.csu.carefree.Model.TraverAsk.UserAnswer;
-import com.csu.carefree.Model.TraverAsk.UserAsk;
 import com.csu.carefree.Service.AccountService;
-import com.csu.carefree.Service.SystemService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +16,6 @@ import com.csu.carefree.Util.EmailSendUtils;//邮箱发送类
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 
 @Controller
@@ -78,26 +70,35 @@ public class AccountController {
             @RequestParam("username") String username,
             @RequestParam("password") String password,
             HttpSession session) {
-        //发送到指定邮件地址
-        //把用户名和密码存入session中
-        session.setAttribute("register_username", username);
-        session.setAttribute("register_password", password);
-        //使用工具类的静态方法随机获得一个8位验证码
-        String code = RandomNumberUtils.getRandonString(8);
-        //存入数据库
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        EmailVerifyRecord emailVerifyRecord = new EmailVerifyRecord(code, username, "register", df.format(new Date()));
-        //存入数据库
-        accountService.setVerifyCodeRecord(emailVerifyRecord);
-        //发送邮件,同时捕获异常进行处理
-        try {
-            EmailSendUtils.sendHtmlEmail(username, code, "register");
-        } catch (Exception e) {
-            System.out.println(e);
-            //发送失败,跳转到失败页面
-            return "Account/SendEmailFail";
+        //首先判断用户是否存在
+        Sigon sigon = accountService.getSigonByUserName(username);
+        //如果不存在
+        if (sigon == null) {
+            //发送到指定邮件地址
+            //把用户名和密码存入session中
+            session.setAttribute("register_username", username);
+            session.setAttribute("register_password", password);
+            //使用工具类的静态方法随机获得一个8位验证码
+            String code = RandomNumberUtils.getRandonString(8);
+            //存入数据库
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            EmailVerifyRecord emailVerifyRecord = new EmailVerifyRecord(code, username, "register", df.format(new Date()));
+            //存入数据库
+            accountService.setVerifyCodeRecord(emailVerifyRecord);
+            //发送邮件,同时捕获异常进行处理
+            try {
+                EmailSendUtils.sendHtmlEmail(username, code, "register");
+            } catch (Exception e) {
+                System.out.println(e);
+                //发送失败,跳转到失败页面
+                return "Account/SendEmailFail";
+            }
+            return "Account/SendEmailSuccees";
         }
-        return "Account/SendEmailSuccees";
+        //用户已经存在了,传递一个值到下一个页面
+        else {
+            return "common/ErrorPage";
+        }
     }
 
 
@@ -157,6 +158,7 @@ public class AccountController {
                 //如果是注册
                 if (type.equalsIgnoreCase("register")) {
                     //完成注册激活
+                    System.out.println("succ");
                     accountService.setSigon(username, (String) session.getAttribute("register_password"));
                     //同时进行登陆
                     session.setAttribute("username", username);

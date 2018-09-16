@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <body>
 <!--================Header Area =================-->
@@ -16,22 +17,12 @@
                       enctype="multipart/form-data" target="postinfo">
                     <dl class="title cf">
                         <dd>
-                            <!--<span class="char-limit hide _j_char_limit">可输入<strong>48</strong>字</span>-->
                             <input id="title" name="title" type="text" maxlength="48" placeholder="请输入问题标题" value="">
-                            <!--<input id="type" name="type" type="hidden">-->
-                            <!--<input id="cid" name="cid" type="hidden">-->
-                            <!--<input id="rid" name="rid" type="hidden" value="">-->
-                            <!--<input id="sfrom" name="sfrom" type="hidden" value="">-->
-                            <!--<input type="hidden" name="target" value="iframe">-->
                         </dd>
                     </dl>
-
                     <div class="answer-wrap">
-
-
                         <div class="answer-add clearfix">
                             <a name="answer"></a>
-
                             <div class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  ">
                                 <div class="editor-scroll">
 
@@ -54,11 +45,7 @@
                                                 <div class="item _js_ordered_list"><a class="btn-ol" role="button"></a>
                                                     <div class="tooltip"><span>有序列表</span></div>
                                                 </div>
-
-
                                                 <div class="separator"></div>
-
-
                                             </div>
                                         </div>
                                         <div class="editor-container" id="_j_answer_editor">
@@ -67,7 +54,6 @@
                                     <div class="aa-ft">
                                         <div class="count">
                                             <span class="word"><b id="_j_word_count">0</b>字</span>
-
                                         </div>
                                         <input class="btn-comment _j_submit_answer_btn" type="button" value="提交问题">
                                     </div>

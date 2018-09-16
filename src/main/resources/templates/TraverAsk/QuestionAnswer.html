@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="http://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+app+topbar_v2^alw^1527308432.css"
           rel="stylesheet" type="text/css"/>
@@ -19,278 +19,80 @@
             <div class="col-main">
                 <div class="i-main">
                     <div class="mt-nav clearfix i_link">
-                        <a href="/wenda/">问答首页</a>
+                        <a th:href="@{/TraverAsk/QuestionAnswer}">问答首页</a>
                         <em></em>
                         <div class="drop-mine _j_crumb_my">
-                            <a class="drop-hd" href="/wenda/u/85353052/answer.html" target="_blank"><i></i>我的问答</a>
-                            <ul class="drop-bd" style="display: none;">
-                                <li><a href="/wenda/u/85353052/question.html" target="_blank">我的提问</a></li>
-                                <li><a href="/wenda/u/85353052/answer.html" target="_blank">我的回答</a></li>
-                            </ul>
+                            <a class="drop-hd" th:href="@{/account/ViewMyTraverAnswers}" target="_blank"><i></i>我的问答</a>
                         </div>
                     </div>
-
-
                     <div class="search-box ">
                         <div class="search-panel" data-cs-t="wenda">
                             <div class="clearfix _j_suggest_hd">
                                 <div class="sp-input" style="height: auto!important;">
                                     <input type="text" id="_j_wenda_seach_input" value="" placeholder="提问前请先搜索">
                                 </div>
-                                <input type="button" id="_j_wenda_seach_button" class="sp-button" data-mddid="0">
+                                <input th:href="@{/TraverAsk/searchAskList}" type="button" id="_j_wenda_seach_button" class="sp-button" data-mddid="0">
                             </div>
                             <div class="bd _j_suggest_box hide">
                             </div>
                         </div>
                     </div>
                 </div>
-
-
                 <div class="newcate-wrap _j_qa_list">
                     <div class="hd">
                         <ul class="cate-tab">
                             <li class="on _j_change_type" data-type="1" data-sort="10">
-                                <a>
+                                <a th:href="@{/TraverAsk/ViewHotQuestion}">
                                     热门问题
                                 </a>
                             </li>
                             <li class="_j_change_type" data-type="0" data-sort="1">
-                                <a>
+                                <a th:href="@{/TraverAsk/ViewNewQuestion}">
                                     最新问题
                                 </a>
                             </li>
-                            <!--<li class="_j_change_type" data-type="2" data-sort="1">-->
-                            <!--<a>-->
-                            <!--待回答问题-->
-                            <!--</a>-->
-                            <!--</li>-->
                         </ul>
                     </div>
 
                     <!--问题显示区-->
                     <div class="bd newcate-bd">
-
                         <!--问题列表-->
-                        <ul class="_j_pager_box">
-
-                            <!--这是一个问题块-->
+                        <ul class="_j_pager_box" th:each="userAsk : ${askList}">
+                            <!--这是一个循环问题块-->
                             <li class="item clearfix " data-qid="12980256">
                                 <!--问题标题-->
                                 <div class="title">
-                                    <a href="./askanwDetail.html" target="_blank">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
+                                    <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}" target="_blank" th:text="${userAsk.title}">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
                                 </div>
                                 <!--问题内容-->
                                 <div class="container">
                                     <!--用户头像-->
-                                    <div class="avatar"><a href="#" target="_blank" class="_j_filter_click"><img
+                                    <div class="avatar"><a target="_blank" class="_j_filter_click"><img
                                             class="_j_filter_click"
                                             src="http://n2-q.mafengwo.net/s10/M00/48/68/wKgBZ1kAeXeAUnIGAABhXP2UUcY94.jpeg?imageMogr2%2Fthumbnail%2F%2190x90r%2Fgravity%2FCenter%2Fcrop%2F%2190x90%2Fquality%2F90"></a>
                                     </div>
                                     <!--用户昵称-->
                                     <div class="user-info">
-                                        <a class="name _j_filter_click" href="#" target="_blank">王鹭星</a>
+                                        <a class="name _j_filter_click" target="_blank" th:text="${userAsk.user_id}">张恺庭</a>
                                     </div>
-                                    <!--问题描述-->
+                                    <!-- 问题描述 -->
                                     <div class="desc clearfix">
-                                        <a href="./askanwDetail.html" target="_blank" style="color: #666;">
-                                            <p>
+                                        <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}" target="_blank" style="color: #666;">
+                                            <p th:text="${userAsk.ask_content}">
                                                 明天开车去长沙世界之窗，请问世界之窗有免费停车的地方吗？能大包小包提进去吗？因为要带吃的和泳衣。然后想问下水上乐园玩完能有地方洗澡吗？玩每个项目前，包包有地方寄存吗？寄存要钱吗？问题有点多，麻烦各位了🌸🌸</p>
                                         </a>
                                     </div>
                                     <!--相关操作-->
                                     <div class="operate">
                                         <!--回答-->
-                                        <a href="./askanwDetail.html" target="_blank" style="text-decoration: none;">
+                                        <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}" target="_blank" style="text-decoration: none;">
                                             <span class="reply">回答 (2)</span>
                                         </a>
                                         <!--发布时间-->
-                                        <span class="date">发布于17分钟前</span>
+                                        <span class="date" th:text="发布于+${userAsk.add_time}">发布于17分钟前</span>
                                     </div>
                                 </div>
                             </li>
-
-
-                            <!--这是一个问题块-->
-                            <li class="item clearfix " data-qid="12980256">
-                                <!--问题标题-->
-                                <div class="title">
-                                    <a href="./askanwDetail.html" target="_blank">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
-                                </div>
-                                <!--问题内容-->
-                                <div class="container">
-                                    <!--用户头像-->
-                                    <div class="avatar"><a href="#" target="_blank" class="_j_filter_click"><img
-                                            class="_j_filter_click"
-                                            src="http://n2-q.mafengwo.net/s10/M00/48/68/wKgBZ1kAeXeAUnIGAABhXP2UUcY94.jpeg?imageMogr2%2Fthumbnail%2F%2190x90r%2Fgravity%2FCenter%2Fcrop%2F%2190x90%2Fquality%2F90"></a>
-                                    </div>
-                                    <!--用户昵称-->
-                                    <div class="user-info">
-                                        <a class="name _j_filter_click" href="#" target="_blank">王鹭星</a>
-                                    </div>
-                                    <!--问题描述-->
-                                    <div class="desc clearfix">
-                                        <a href="./askanwDetail.html" target="_blank" style="color: #666;">
-                                            <p>
-                                                明天开车去长沙世界之窗，请问世界之窗有免费停车的地方吗？能大包小包提进去吗？因为要带吃的和泳衣。然后想问下水上乐园玩完能有地方洗澡吗？玩每个项目前，包包有地方寄存吗？寄存要钱吗？问题有点多，麻烦各位了🌸🌸</p>
-                                        </a>
-                                    </div>
-                                    <!--相关操作-->
-                                    <div class="operate">
-                                        <!--回答-->
-                                        <a href="./askanwDetail.html" target="_blank" style="text-decoration: none;">
-                                            <span class="reply">回答 (2)</span>
-                                        </a>
-                                        <!--发布时间-->
-                                        <span class="date">发布于17分钟前</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <!--这是一个问题块-->
-                            <li class="item clearfix " data-qid="12980256">
-                                <!--问题标题-->
-                                <div class="title">
-                                    <a href="./askanwDetail.html" target="_blank">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
-                                </div>
-                                <!--问题内容-->
-                                <div class="container">
-                                    <!--用户头像-->
-                                    <div class="avatar"><a href="#" target="_blank" class="_j_filter_click"><img
-                                            class="_j_filter_click"
-                                            src="http://n2-q.mafengwo.net/s10/M00/48/68/wKgBZ1kAeXeAUnIGAABhXP2UUcY94.jpeg?imageMogr2%2Fthumbnail%2F%2190x90r%2Fgravity%2FCenter%2Fcrop%2F%2190x90%2Fquality%2F90"></a>
-                                    </div>
-                                    <!--用户昵称-->
-                                    <div class="user-info">
-                                        <a class="name _j_filter_click" href="#" target="_blank">王鹭星</a>
-                                    </div>
-                                    <!--问题描述-->
-                                    <div class="desc clearfix">
-                                        <a href="./askanwDetail.html" target="_blank" style="color: #666;">
-                                            <p>
-                                                明天开车去长沙世界之窗，请问世界之窗有免费停车的地方吗？能大包小包提进去吗？因为要带吃的和泳衣。然后想问下水上乐园玩完能有地方洗澡吗？玩每个项目前，包包有地方寄存吗？寄存要钱吗？问题有点多，麻烦各位了🌸🌸</p>
-                                        </a>
-                                    </div>
-                                    <!--相关操作-->
-                                    <div class="operate">
-                                        <!--回答-->
-                                        <a href="./askanwDetail.html" target="_blank" style="text-decoration: none;">
-                                            <span class="reply">回答 (2)</span>
-                                        </a>
-                                        <!--发布时间-->
-                                        <span class="date">发布于17分钟前</span>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <!--这是一个问题块-->
-                            <li class="item clearfix " data-qid="12980256">
-                                <!--问题标题-->
-                                <div class="title">
-                                    <a href="./askanwDetail.html" target="_blank">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
-                                </div>
-                                <!--问题内容-->
-                                <div class="container">
-                                    <!--用户头像-->
-                                    <div class="avatar"><a href="#" target="_blank" class="_j_filter_click"><img
-                                            class="_j_filter_click"
-                                            src="http://n2-q.mafengwo.net/s10/M00/48/68/wKgBZ1kAeXeAUnIGAABhXP2UUcY94.jpeg?imageMogr2%2Fthumbnail%2F%2190x90r%2Fgravity%2FCenter%2Fcrop%2F%2190x90%2Fquality%2F90"></a>
-                                    </div>
-                                    <!--用户昵称-->
-                                    <div class="user-info">
-                                        <a class="name _j_filter_click" href="#" target="_blank">王鹭星</a>
-                                    </div>
-                                    <!--问题描述-->
-                                    <div class="desc clearfix">
-                                        <a href="./askanwDetail.html" target="_blank" style="color: #666;">
-                                            <p>
-                                                明天开车去长沙世界之窗，请问世界之窗有免费停车的地方吗？能大包小包提进去吗？因为要带吃的和泳衣。然后想问下水上乐园玩完能有地方洗澡吗？玩每个项目前，包包有地方寄存吗？寄存要钱吗？问题有点多，麻烦各位了🌸🌸</p>
-                                        </a>
-                                    </div>
-                                    <!--相关操作-->
-                                    <div class="operate">
-                                        <!--回答-->
-                                        <a href="./askanwDetail.html" target="_blank" style="text-decoration: none;">
-                                            <span class="reply">回答 (2)</span>
-                                        </a>
-                                        <!--发布时间-->
-                                        <span class="date">发布于17分钟前</span>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <!--这是一个问题块-->
-                            <li class="item clearfix " data-qid="12980256">
-                                <!--问题标题-->
-                                <div class="title">
-                                    <a href="./askanwDetail.html" target="_blank">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
-                                </div>
-                                <!--问题内容-->
-                                <div class="container">
-                                    <!--用户头像-->
-                                    <div class="avatar"><a href="#" target="_blank" class="_j_filter_click"><img
-                                            class="_j_filter_click"
-                                            src="http://n2-q.mafengwo.net/s10/M00/48/68/wKgBZ1kAeXeAUnIGAABhXP2UUcY94.jpeg?imageMogr2%2Fthumbnail%2F%2190x90r%2Fgravity%2FCenter%2Fcrop%2F%2190x90%2Fquality%2F90"></a>
-                                    </div>
-                                    <!--用户昵称-->
-                                    <div class="user-info">
-                                        <a class="name _j_filter_click" href="#" target="_blank">王鹭星</a>
-                                    </div>
-                                    <!--问题描述-->
-                                    <div class="desc clearfix">
-                                        <a href="./askanwDetail.html" target="_blank" style="color: #666;">
-                                            <p>
-                                                明天开车去长沙世界之窗，请问世界之窗有免费停车的地方吗？能大包小包提进去吗？因为要带吃的和泳衣。然后想问下水上乐园玩完能有地方洗澡吗？玩每个项目前，包包有地方寄存吗？寄存要钱吗？问题有点多，麻烦各位了🌸🌸</p>
-                                        </a>
-                                    </div>
-                                    <!--相关操作-->
-                                    <div class="operate">
-                                        <!--回答-->
-                                        <a href="./askanwDetail.html" target="_blank" style="text-decoration: none;">
-                                            <span class="reply">回答 (2)</span>
-                                        </a>
-                                        <!--发布时间-->
-                                        <span class="date">发布于17分钟前</span>
-                                    </div>
-                                </div>
-                            </li>
-
-
-                            <!--这是一个问题块-->
-                            <li class="item clearfix " data-qid="12980256">
-                                <!--问题标题-->
-                                <div class="title">
-                                    <a href="./askanwDetail.html" target="_blank">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
-                                </div>
-                                <!--问题内容-->
-                                <div class="container">
-                                    <!--用户头像-->
-                                    <div class="avatar"><a href="#" target="_blank" class="_j_filter_click"><img
-                                            class="_j_filter_click"
-                                            src="http://n2-q.mafengwo.net/s10/M00/48/68/wKgBZ1kAeXeAUnIGAABhXP2UUcY94.jpeg?imageMogr2%2Fthumbnail%2F%2190x90r%2Fgravity%2FCenter%2Fcrop%2F%2190x90%2Fquality%2F90"></a>
-                                    </div>
-                                    <!--用户昵称-->
-                                    <div class="user-info">
-                                        <a class="name _j_filter_click" href="#" target="_blank">王鹭星</a>
-                                    </div>
-                                    <!--问题描述-->
-                                    <div class="desc clearfix">
-                                        <a href="./askanwDetail.html" target="_blank" style="color: #666;">
-                                            <p>
-                                                明天开车去长沙世界之窗，请问世界之窗有免费停车的地方吗？能大包小包提进去吗？因为要带吃的和泳衣。然后想问下水上乐园玩完能有地方洗澡吗？玩每个项目前，包包有地方寄存吗？寄存要钱吗？问题有点多，麻烦各位了🌸🌸</p>
-                                        </a>
-                                    </div>
-                                    <!--相关操作-->
-                                    <div class="operate">
-                                        <!--回答-->
-                                        <a href="./askanwDetail.html" target="_blank" style="text-decoration: none;">
-                                            <span class="reply">回答 (2)</span>
-                                        </a>
-                                        <!--发布时间-->
-                                        <span class="date">发布于17分钟前</span>
-                                    </div>
-                                </div>
-                            </li>
-
-
                         </ul>
                     </div>
                     <div class="_j_pager">
@@ -305,17 +107,17 @@
                     </div>
                 </div>
             </div>
+            <!-------提问模块以及显示当前参加问题的人数------->
             <div class="col-side">
 
                 <div class="i-ask">
-                    <a href="createAsk.html" class="btn-ask btn-ask2" target="_blank"><i></i>我要提问</a>
+                    <a th:href="@{/TraverAsk/ViewCreateAsk}" class="btn-ask btn-ask2" target="_blank"><i></i>我要提问</a>
                 </div>
 
                 <div class="i_num">
                     共<span id="q_total">3425001</span>问题<span id="u_total">8029366</span>人参与
                 </div>
             </div>
-
         </div>
         <link href="http://css.mafengwo.net/mobile/css/omc/coupon-pop/coupon-pop.css?1526627473" rel="stylesheet"
               type="text/css"/>

@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.ProductDT;
 
-public class ProductMsg {
+import java.io.Serializable;
+
+public class ProductMsg implements Serializable {
     private String id;
     private String name;
     private String traver_days;

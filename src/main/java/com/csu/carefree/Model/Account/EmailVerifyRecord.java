@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.Account;
 
-public class EmailVerifyRecord {
+import java.io.Serializable;
+
+public class EmailVerifyRecord implements Serializable {
     private String code;
     private String email;
     private String send_type;

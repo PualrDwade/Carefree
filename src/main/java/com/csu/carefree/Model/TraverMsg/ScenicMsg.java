@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.TraverMsg;
 
-public class ScenicMsg {
+import java.io.Serializable;
+
+public class ScenicMsg implements Serializable {
     private String id;
     private String name;
     private String city_name;

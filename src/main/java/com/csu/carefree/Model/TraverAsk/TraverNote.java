@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.TraverAsk;
 
-public class TraverNote {
+import java.io.Serializable;
+
+public class TraverNote implements Serializable {
     private String id;
     private String title;
     private String note_content;

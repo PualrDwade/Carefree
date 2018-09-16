@@ -1,6 +1,7 @@
 package com.csu.carefree.Persistence;
 
 import com.csu.carefree.Model.Account.Sigon;
+import org.apache.ibatis.annotations.Param;
 
 // 登陆注册模块的持久化类
 public interface SigonMapper {
@@ -8,7 +9,7 @@ public interface SigonMapper {
     Sigon getSigonByUserName(String username);
 
     //用来注册账号,
-    void setSigon(String username, String password);
+    void setSigon(@Param("username") String username, @Param("password") String password);
 
     //通过找回密码
     void updateSigon(String username, String password);

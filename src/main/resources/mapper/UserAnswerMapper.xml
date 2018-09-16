@@ -15,9 +15,8 @@
         ANSWER_CONTENT,
         ADD_TIME,
         ASK_ID_ID AS ask_id,
-        USER_ID_ID AS user_id,
+        USER_ID_ID AS user_id
     FROM TraverAsk_useranswer
-        ORDER BY ${'add_time'} DESC
   </select>
 
     <!--
@@ -27,7 +26,7 @@
     INSERT INTO TraverAsk_useranswer
       (ID, ANSWER_CONTENT, ADD_TIME, ASK_ID_ID, USER_ID_ID)
     VALUES
-      (#{id}, #{answer_content}, #{add_time}, #{user_id})=
+      (#{id}, #{answer_content}, #{add_time}, #{user_id})
   </insert>
 
 
@@ -38,7 +37,7 @@
         ANSWER_CONTENT,
         ADD_TIME,
         ASK_ID_ID AS ask_id,
-        USER_ID_ID AS user_id,
+        USER_ID_ID AS user_id
     FROM TraverAsk_useranswer
     WHERE user_id_id = #{username}
     </select>

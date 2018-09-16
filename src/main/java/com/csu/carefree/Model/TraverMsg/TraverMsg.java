@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.TraverMsg;
 
-public class TraverMsg {
+import java.io.Serializable;
+
+public class TraverMsg implements Serializable {
     private String id;
     private String name;
     private String user_id;

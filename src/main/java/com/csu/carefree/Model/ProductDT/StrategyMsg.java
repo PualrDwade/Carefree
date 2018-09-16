@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.ProductDT;
 
-public class StrategyMsg {
+import java.io.Serializable;
+
+public class StrategyMsg implements Serializable {
     private String id;
     private String title;
     private String link_url;

@@ -16,7 +16,7 @@
         ADDRESS,
         BASIC_DESC,
         LINk_URL,
-        POPULAR_LEVEL,
+        POPULAR_LEVEL
     FROM TraverMsg_scenicmsg
     WHERE CITY_NAME = #{cityName}
     </select>
@@ -31,7 +31,7 @@
         ADDRESS,
         BASIC_DESC,
         LINk_URL,
-        POPULAR_LEVEL,
+        POPULAR_LEVEL
     FROM TraverMsg_scenicmsg
     WHERE ID = #{scenicId}
     </select>
@@ -46,7 +46,7 @@
         ADDRESS,
         BASIC_DESC,
         LINk_URL,
-        POPULAR_LEVEL,
+        POPULAR_LEVEL
     FROM TraverMsg_scenicmsg
     WHERE lower(NAME) LIKE #{name}
     </select>

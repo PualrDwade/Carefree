@@ -52,7 +52,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<HotelMsg> getHotelMsgList() {
-        return null;
+        return hotelMsgMapper.getHotelMsgList();
     }
 
     @Override

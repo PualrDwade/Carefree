@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.TraverAsk;
 
-public class UserAsk {
+import java.io.Serializable;
+
+public class UserAsk implements Serializable {
     private String id;
     private String title;
     private String ask_content;
@@ -81,9 +83,13 @@ public class UserAsk {
     public UserAsk() {
     }
 
-    public UserAsk(String id, String title, String ask_content,
-                   String star_num, String user_id,
-                   String add_time, String city_id) {
+    public UserAsk(String id,
+                   String title,
+                   String ask_content,
+                   String star_num,
+                   String add_time,
+                   String user_id,
+                   String city_id) {
         this.id = id;
         this.title = title;
         this.ask_content = ask_content;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/userCenter::userHead"></head>
 <body>
 <div class="main">
@@ -39,7 +39,7 @@
                             <div>采纳率</div>
                         </li>
                     </ul>
-                    <a class="btn" href="../TraverAsk/CreateAsk.html" target="_blank">我要提问</a>
+                    <a class="btn" th:href="@{/TraverAsk/ViewCreateAsk}" target="_blank">我要提问</a>
                 </div>
                 <div class="wd-main">
                     <div class="wd-navbar clearfix">

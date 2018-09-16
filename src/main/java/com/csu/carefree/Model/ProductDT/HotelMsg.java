@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.ProductDT;
 
-public class HotelMsg {
+import java.io.Serializable;
+
+public class HotelMsg implements Serializable {
     private String id;
     private String name;
     private String score;
@@ -106,18 +108,17 @@ public class HotelMsg {
 
 
 
-    public HotelMsg(String id, String name, String score, String hotel_price, String hotel_content, String city_name, String img_url, String supplier_id, String hotel_link, String sell_num, String latest_time) {
-
+    public HotelMsg(String id, String name, String score, String hotel_price, String hotel_content, String img_url,  String hotel_link, String sell_num, String latest_time, String supplier_id, String city_name) {
         this.id = id;
         this.name = name;
         this.score = score;
         this.hotel_price = hotel_price;
         this.hotel_content = hotel_content;
-        this.city_name = city_name;
         this.img_url = img_url;
-        this.supplier_id = supplier_id;
         this.hotel_link = hotel_link;
         this.sell_num = sell_num;
         this.latest_time = latest_time;
+        this.supplier_id = supplier_id;
+        this.city_name = city_name;
     }
 }

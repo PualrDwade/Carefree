@@ -8,19 +8,18 @@
 
     <select id="getHotelMsgList" resultType="com.csu.carefree.Model.ProductDT.HotelMsg">
     SELECT
-          ID,
-          NAME,
-          SCORE,
-          HOTEL_PRICE,
-          HOTEL_CONTENT,
-          IMG_URL,
-          HOTEL_LINK,
-          SELL_NUM,
-          LATEST_TIME,
-          SUPPLIER_ID_ID AS supplier_id,
-          CITY_NAME,
+      ID,
+      NAME,
+      SCORE,
+      HOTEL_PRICE,
+      HOTEL_CONTENT,
+      IMG_URL,
+      HOTEL_LINK,
+      SELL_NUM,
+      LATEST_TIME,
+      SUPPLIER_ID_ID AS supplier_id,
+      CITY_NAME
     FROM ProductDT_hotelmsg
-    ORDER BY ${'sell_num'} DESC
     </select>
 
     <select id="getHotelMsg" parameterType="java.lang.String" resultType="com.csu.carefree.Model.ProductDT.HotelMsg">
@@ -35,7 +34,7 @@
           SELL_NUM,
           LATEST_TIME,
           SUPPLIER_ID_ID AS supplier_id,
-          CITY_NAME,
+          CITY_NAME
     FROM ProductDT_hotelmsg
     WHERE ID = #{id}
     </select>
@@ -56,7 +55,7 @@
           SELL_NUM,
           LATEST_TIME,
           SUPPLIER_ID_ID AS supplier_id,
-          CITY_NAME,
+          CITY_NAME
     FROM ProductDT_hotelmsg
     WHERE lower(name) = #{keyword}
     </select>
@@ -79,10 +78,9 @@
             SELL_NUM,
             LATEST_TIME,
             SUPPLIER_ID_ID AS supplier_id,
-            CITY_NAME,
+            CITY_NAME
       FROM ProductDT_hotelmsg
       WHERE city_name = #{value}
-      ORDER BY ${'sell_num'} DESC
     </select>
 
 </mapper>
