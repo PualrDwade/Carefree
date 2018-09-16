@@ -6,52 +6,26 @@
 <div class="main">
     <!--导航栏-->
     <div th:replace="common/userCenter::userNav">
-<<<<<<< HEAD
         <!--页面内容-->
         <div class="center clearfix">
-=======
-
-    <!--页面内容-->
-    <div class="center clearfix">
->>>>>>> f6a83f8f38421fca9b1477b046bdcb1eda9ae51e
-
             <!--左侧边栏-->
             <div class="side_bar flt1">
-
                 <!--用户信息-->
                 <div class="MAvatar">
-
-<<<<<<< HEAD
                     <!--昵称和性别标签-->
                     <div class="MAvaName">畅游用户625
                         <i class="MGenderMale"></i>
                         <!--<i class="MGenderFemale"></i>-->
                         <!--<i class="MGender"></i>-->
                     </div>
-
                     <!--生日和居住地，设置图标-->
                     <div class="MAvaInfo clearfix MAvaMyInfo">
                         <span class="MAvaLevel flt1" title="11.15">生日：11.15</a></span>
                         <span class="MAvaPlace flt1" title="鹿儿岛">现居：鹿儿岛</span>
                         <span class="MAvaSet"><a title="设置" href="AccountSetting.html" target="_self"></a></span>
                     </div>
-=======
-                <!--昵称和性别标签-->
-                <div class="MAvaName">畅游用户625
-                    <i class="MGenderMale"></i>
-                    <!--<i class="MGenderFemale"></i>-->
-                    <!--<i class="MGender"></i>-->
-                </div>
-
-                <!--生日和居住地，设置图标-->
-                <div class="MAvaInfo clearfix MAvaMyInfo">
-                    <span class="MAvaLevel flt1" title="11.15">生日：11.15</a></span>
-                    <span class="MAvaPlace flt1" title="鹿儿岛">现居：鹿儿岛</span>
-                    <span class="MAvaSet"><a title="设置" href="AccountSetting.html" target="_self"></a></span>
->>>>>>> f6a83f8f38421fca9b1477b046bdcb1eda9ae51e
                 </div>
             </div>
-<<<<<<< HEAD
             <div class="content flt2">
                 <div class="achievement clearfix">
                     <ul>
@@ -65,26 +39,6 @@
                         <li><strong>0%</strong>
                             <div>采纳率</div>
                         </li>
-=======
-
-        </div>
-        <div class="content flt2">
-            <div class="achievement clearfix">
-                <ul>
-                    <li><a href=""><strong>0</strong><div>回答数</div></a></li>
-                    <li>
-                        <strong><i></i>0</strong><div>提问数</div>
-                    </li>
-                    <li><strong>0%</strong><div>采纳率</div></li>
-                </ul>
-                <a class="btn" href="../TraverAsk/CreateAsk.html" target="_blank">我要提问</a>
-            </div>
-            <div class="wd-main">
-                <div class="wd-navbar clearfix">
-                    <ul class="wd-nav _j_qa_nav">
-                        <li><a href="MyAnswer.html">我的回答</a></li>
-                        <li class="on"><a href="MyAsk.html">我的提问</a></li>
->>>>>>> f6a83f8f38421fca9b1477b046bdcb1eda9ae51e
                     </ul>
                     <a class="btn" href="../TraverAsk/CreateAsk.html" target="_blank">我要提问</a>
                 </div>
@@ -124,12 +78,12 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="pagin" id="smallpager"></div>
                     </div>
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
         <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
         <div th:replace="common/userCenter::footer"></div>
         <link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
@@ -146,56 +100,6 @@
                     <em>页面底部</em>
                 </a>
             </div>
-=======
-    </div>
-
-    <script type="text/x-jquery-tmpl" id="_j_pagitmpl">
-    {{if pageTotal > 1 && $("#_j_param").data('type') != 5}}
-	    <div align="right" class="m-pagination">
-            <span class="count">共<span>${pageTotal}</span>页 / <span>${total}</span>条</span>
-             {{if currPage > 1}}
-				<a class="pg-prev _j_pageitem" data-page="${currPage - 1}">&lt;&lt; 上一页</a>
-                {{/if}}
-				{{if indexers[indexers.length-1] > 10}}
-                <a class="ti _j_pageitem" data-page="1">1...</a>
-                {{/if}}
-                {{each(i, index) indexers}}
-                {{if index == currPage}}
-                <span class="pi pg-current">${index}</span>
-                {{else}}
-                <a class="pi _j_pageitem" data-page="${index}">${index}</a>
-                {{/if}}
-                {{/each}}
-                {{if indexers[indexers.length-1] < pageTotal}}
-                <a class="pi _j_pageitem" data-page="${pageTotal}">...${pageTotal}</a>
-                {{/if}}
-                {{if currPage < pageTotal}}
-				<a class="pg-next _j_pageitem" data-page="${currPage + 1}">下一页 &gt;&gt;</a>
-            {{/if}}
-        </div>
-    {{/if}}
-</script>
-
-    <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
-
-    <div th:replace="common/userCenter::footer"></div>
-
-
-    <link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
-
-    <div class="mfw-toolbar" id="_j_mfwtoolbar">
-        <div class="toolbar-item-top">
-            <a role="button" class="btn _j_gotop">
-                <i class="icon_top"></i>
-                <em>返回顶部</em>
-            </a>
-        </div>
-        <div class="toolbar-item-down">
-            <a role="button" class="btn _j_gobottom">
-                <i class="icon_down"></i>
-                <em>页面底部</em>
-            </a>
->>>>>>> f6a83f8f38421fca9b1477b046bdcb1eda9ae51e
         </div>
         <script language="javascript" type="text/javascript">
             if (typeof M !== "undefined" && typeof M.loadResource === "function") {

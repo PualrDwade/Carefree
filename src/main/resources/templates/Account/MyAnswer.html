@@ -5,13 +5,10 @@
 <div class="main">
     <!--导航栏-->
     <div th:replace="common/userCenter::userNav"></div>
-
     <!--页面内容-->
     <div class="center clearfix">
-
         <!--左侧边栏-->
         <div th:replace="common/userCenter::userLeft">
-<<<<<<< HEAD
             <div class="content flt2">
                 <div class="achievement clearfix">
                     <ul>
@@ -25,47 +22,15 @@
                         <li><strong>0%</strong>
                             <div>采纳率</div>
                         </li>
-=======
-        <div class="content flt2">
-            <div class="achievement clearfix">
-                <ul>
-                    <li><a href="#"><strong>0</strong>
-                        <div>回答数</div>
-                    </a></li>
-                    <li>
-                        <strong><i></i>0</strong>
-                        <div>提问数</div>
-                    </li>
-                    <li><strong>0%</strong>
-                        <div>采纳率</div>
-                    </li>
-                </ul>
-                <a class="btn" href="../TraverAsk/CreateAsk.html" target="_blank">我要提问</a>
-            </div>
-            <div class="wd-main">
-                <div class="wd-navbar clearfix">
-                    <ul class="wd-nav _j_qa_nav">
-                        <li class="on"><a href="MyAnswer.html">我的回答</a></li>
-                        <li><a href="MyAsk.html">我的提问</a></li>
->>>>>>> f6a83f8f38421fca9b1477b046bdcb1eda9ae51e
                     </ul>
                     <a class="btn" href="../TraverAsk/CreateAsk.html" target="_blank">我要提问</a>
                 </div>
-<<<<<<< HEAD
                 <div class="wd-main">
                     <div class="wd-navbar clearfix">
                         <ul class="wd-nav _j_qa_nav">
                             <li class="on"><a href="MyAnswer.html">我的回答</a></li>
                             <li><a href="MyAsk.html">我的提问</a></li>
                         </ul>
-=======
-                <div class="wd-total">共有<span class="_j_total_item">0条</span>回答</div>
-                <div class="wd-list _j_qa_list">
-                    <div class="no_data">
-                        <img src="http://css.mafengwo.net/images/home_new2015/no_num.png" height="139" width="156"
-                             alt="">
-                        <p>这里的还没有东西</p>
->>>>>>> f6a83f8f38421fca9b1477b046bdcb1eda9ae51e
                     </div>
                     <div class="wd-total">共有<span class="_j_total_item">0条</span>回答</div>
                     <div class="wd-list _j_qa_list">
@@ -77,7 +42,6 @@
 
                     </div>
 
-<<<<<<< HEAD
                     <div class="wd-list _j_qa_list">
                         <!--这是一个条目-->
                         <div class="wd-item">
@@ -95,37 +59,17 @@
                                     <span class="meta-item meta-commit">1回答</span>
                                     <span class="meta-item meta-time">2018-08-10 15:25</span>
                                 </div>
-=======
-                <div class="wd-list _j_qa_list">
-                    <!--这是一个条目-->
-                    <div class="wd-item">
-                        <div class="wd-medal">
-                        </div>
-                        <div class="wd-title">
-                            <a href="#" target="_blank">中秋期间想去稻城亚丁和色达，有推荐靠谱的拼车司机吗？</a>
-                        </div>
-                        <div class="wd-detail">
-                            谢邀啦可以试试我上个月找的拼车团队，非常nice~随时想停车都可以，主要是带队的人好，特别体贴我们。什么旅拍，航拍，氧气瓶都有的。还可以去看看我的游记哟~
-                        </div>
-                        <div class="wd-meta">
-                            <span class="meta-item meta-like"><i></i>1</span>
-                            <div class="meta-pull">
-                                <span class="meta-item meta-commit">1回答</span>
-                                <span class="meta-item meta-time">2018-08-10 15:25</span>
->>>>>>> f6a83f8f38421fca9b1477b046bdcb1eda9ae51e
                             </div>
                         </div>
 
-<<<<<<< HEAD
                         <div class="pagin" id="smallpager"></div>
                     </div>
                 </div>
             </div>
         </div>
-
         <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
 
-        <div th:replace="common/userCenter::userHead"></div>
+        <div th:replace="common/userCenter::footer"></div>
 
         <link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
 
@@ -136,53 +80,5 @@
         </script>
     </div>
 </div>
-=======
-                    <div class="pagin" id="smallpager"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script type="text/x-jquery-tmpl" id="_j_pagitmpl">
-    {{if pageTotal > 1 && $("#_j_param").data('type') != 5}}
-	    <div align="right" class="m-pagination">
-            <span class="count">共<span>${pageTotal}</span>页 / <span>${total}</span>条</span>
-             {{if currPage > 1}}
-				<a class="pg-prev _j_pageitem" data-page="${currPage - 1}">&lt;&lt; 上一页</a>
-                {{/if}}
-				{{if indexers[indexers.length-1] > 10}}
-                <a class="ti _j_pageitem" data-page="1">1...</a>
-                {{/if}}
-                {{each(i, index) indexers}}
-                {{if index == currPage}}
-                <span class="pi pg-current">${index}</span>
-                {{else}}
-                <a class="pi _j_pageitem" data-page="${index}">${index}</a>
-                {{/if}}
-                {{/each}}
-                {{if indexers[indexers.length-1] < pageTotal}}
-                <a class="pi _j_pageitem" data-page="${pageTotal}">...${pageTotal}</a>
-                {{/if}}
-                {{if currPage < pageTotal}}
-				<a class="pg-next _j_pageitem" data-page="${currPage + 1}">下一页 &gt;&gt;</a>
-            {{/if}}
-        </div>
-    {{/if}}
-
-    </script>
-
-    <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
-
-    <div th:replace="common/userCenter::userHead"></div>
-
-    <link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
-
-    <script language="javascript" type="text/javascript">
-        if (typeof M !== "undefined" && typeof M.loadResource === "function") {
-            M.loadResource("http://js.mafengwo.net/js/cv/js+pageletcommon+pageHeadUserInfoWWWDark:js+jquery.tmpl:js+M+module+Pagination:js+M+module+dialog+Layer:js+M+module+dialog+DialogBase:js+M+module+dialog+Dialog:js+M+module+dialog+alert:js+qa+QaHome:js+M+module+dialog+confirm:js+M+module+FrequencyVerifyControl:js+M+module+FrequencyAppVerify:js+home+AMsgBoard:js+M+module+PageAdmin:js+M+module+Storage:js+M+module+Cookie:js+M+module+ResourceKeeper:js+jquery.jgrowl.min:js+AMessage:js+M+module+FrequencySystemVerify:js+ALogin:js+M+module+ScrollObserver:js+M+module+QRCode:js+AToolbar:js+ACnzzGaLog:js+ARecruit:js+ALazyLoad^ZlJT^1531130229.js");
-        }
-    </script>
-
->>>>>>> f6a83f8f38421fca9b1477b046bdcb1eda9ae51e
 </body>
 </html>
