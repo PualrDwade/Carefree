@@ -163,19 +163,19 @@
             <h2 class="title_color">为您推荐</h2>
         </div>
         <div class="container">
-            <div class="section-top-border">
+            <div class="section-top-border" th:each="productMsg:${productMsgList}">
                 <div class="row">
                     <div class="col-md-3 hotel_img">
                         <div class=" hotel_img">
-                            <img src="http://dimg03.c-ctrip.com/images/100v0700000020xmvE599_C_350_170_Q90.jpg "
+                            <img th:src="${productMsg.img_url}"
                                  class="img-fluid">
                         </div>
 
                     </div>
                     <div class="col-md-7 mt-sm-20 left-align-p">
-                        <a href="http://vacations.ctrip.com/grouptravel/p9313636s2.html?kwd=%e4%b8%89%e4%ba%9a"
+                        <a th:href="${productMsg.product_link}"
                            target="_blank">
-                            <h3 class="mb-30 title_color">海南三亚4日3晚跟团游(5钻)·【自营优选】网红游亚特兰蒂斯神秘世界 0购物 海景套房+希尔顿品牌选择
+                            <h3 class="mb-30 title_color" th:text="${productMsg.name}">海南三亚4日3晚跟团游(5钻)·【自营优选】网红游亚特兰蒂斯神秘世界 0购物 海景套房+希尔顿品牌选择
                                 热门景区全覆盖</h3>
                         </a>
                     </div>
@@ -186,45 +186,18 @@
                             </p>
                         </div>
                         <div class="logo-size">
-                            <img src="../static/image/logo/携程.svg">
+                            <img th:if="${productMsg.supplier_id}=='00001'" src="../static/image/logo/美团.svg">
+                            <img th:if="${productMsg.supplier_id}=='00002'" src="../static/image/logo/携程.svg">
+                            <img th:if="${productMsg.supplier_id}=='00003'" src="/image/logo/携程.svg">
+                            <img th:if="${productMsg.supplier_id}=='00004'" src="../static/image/logo/携程.svg">
                         </div>
                         <div class="container">
                             <a>评分：</a><span class="badge badge-primary"
-                                            style="background-color: #f3c300;">4.8</span><br><br>
-                            <a>销量：</a><span class="badge badge-primary" style="background-color: #f3aecc;">1200</span>
+                                            style="background-color: #f3c300;" th:text="${productMsg.product_grade}">4.8</span><br><br>
+                            <a>销量：</a><span class="badge badge-primary" style="background-color: #f3aecc;" th:text="${productMsg.sell_num}">1200</span>
                         </div>
                     </div>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-3 ">
-                        <div class="hotel_img">
-                            <img src="../static/image/elements/d.jpg" alt="" class="img-fluid">
-                        </div>
-
-                    </div>
-                    <div class="col-md-7 mt-sm-20 left-align-p">
-                        <a href="#"><h3 class="mb-30 title_color">海南三亚5日4晚跟团游(4钻)·【携程自营】[一价全包放心游 无购物无自费] 南山108米海上观音
-                            西岛凤凰岭
-                            中秋度假国庆出游 9月错峰特惠无上限立减500元/人！ 〈+1元升级两晚5钻海景酒店〉</h3></a>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="priceTag">
-                            <p>￥2790
-                                <small>起</small>
-                            </p>
-                        </div>
-                        <div class="logo-size">
-                            <img src="../static/image/logo/携程.svg">
-                        </div>
-                        <div class="container">
-                            <a>评分：</a><span class="badge badge-primary"
-                                            style="background-color: #f3c300;">4.8</span><br><br>
-                            <a>销量：</a><span class="badge badge-primary" style="background-color: #f3aecc;">1200</span>
-                        </div>
-                    </div>
-                </div>
-                <hr>
             </div>
 
         </div>

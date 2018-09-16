@@ -2,6 +2,8 @@ package com.csu.carefree.Controller;
 
 
 import com.csu.carefree.Model.ProductDT.FullProductInfo;
+import com.csu.carefree.Model.ProductDT.HotelMsg;
+import com.csu.carefree.Model.ProductDT.ProductCityMsg;
 import com.csu.carefree.Model.ProductDT.ProductMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
@@ -27,6 +29,7 @@ public class CatalogController {
     @Autowired
     private CatalogService catalogService;
 
+
     @GetMapping("ProductDT/viewHotel")
     public String viewHotelMsgList(Model model) {
         model.addAttribute("HotelList");
@@ -38,6 +41,9 @@ public class CatalogController {
     //请求主界面
     @GetMapping("/")
     public String viewIndex(HttpSession session, Model model) {
+
+        //写死长沙
+        session.setAttribute("location","长沙");
         //首先判断是否登陆
         String username = (String) session.getAttribute("username");
         //返回数据给前端页面
@@ -130,15 +136,27 @@ public class CatalogController {
 
     //进入热门产品的界面控制器url
     @GetMapping("/Catalog/HotProductList")
-    public String HotProductList() {
+    public String HotProductList(Model model) {
         //业务操作增删查改
+        List<ProductMsg> productMsgList = catalogService.getProductList();
+        System.out.println(productMsgList.size());
+       // List<ProductCityMsg> productCityMsgList = catalogService.getProductCityList();
+        model.addAttribute("productMsgList",productMsgList);
+      //  model.addAttribute("productCityMsgList",productCityMsgList);
         return "ProductDT/Product";
     }
 
     //进入酒店页面的界面控制器
     @GetMapping("/Catalog/HotHotelList")
-    public String HotHotelList() {
+    public String HotHotelList(@RequestParam("destination") String destination, Model model) {
         //获取当前用户位置,推荐酒店
+        if(destination != null) {
+         //  List<HotelMsg> hotelMsgList = catalogService.getHotelListByDestination(destination);
+            List<HotelMsg> hotelMsgList = catalogService.getHotelMsgList();
+            System.out.println(hotelMsgList.size());
+            model.addAttribute("hotelMsgList",hotelMsgList);
+            model.addAttribute("destination",destination);
+        }
         return "ProductDT/Hotel";
     }
 

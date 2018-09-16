@@ -4,9 +4,6 @@
 
 <mapper namespace="com.csu.carefree.Persistence.SigonMapper">
     <cache/>
-
-
-
     <!--通过用户名得到账户信息-->
     <select id="getSigonByUserName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.Account.Sigon">
     SELECT

@@ -1,5 +1,5 @@
 <!doctype html >
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
@@ -87,99 +87,15 @@
                 <p>为 您 提 供 最 优 质 的 酒 店 选 择</p>
             </div>
             <div class="row accomodation_two">
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-3 col-sm-6" th:each="hotelMsg:${hotelMsgList}">
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
-                            <img src="/image/room1.jpg" alt="">
-                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
+                            <img th:src="${hotelMsg.img_url}" alt="">
+                            <a class="btn theme_btn button_hover" th:href="${hotelMsg.hotel_link}">立即预定</a>
                         </div>
-                        <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-                        <h5>$250
-                            <small>/night</small>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="accomodation_item text-center">
-                        <div class="hotel_img">
-                            <img src="/image/room2.jpg" alt="">
-                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
-                        <h5>$200
-                            <small>/night</small>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="accomodation_item text-center">
-                        <div class="hotel_img">
-                            <img src="/image/room3.jpg" alt="">
-                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
-                        <h5>$750
-                            <small>/night</small>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="accomodation_item text-center">
-                        <div class="hotel_img">
-                            <img src="/image/room4.jpg" alt="">
-                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
-                        <h5>$200
-                            <small>/night</small>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="accomodation_item text-center">
-                        <div class="hotel_img">
-                            <img src="/image/room1.jpg" alt="">
-                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-                        <h5>$250
-                            <small>/night</small>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="accomodation_item text-center">
-                        <div class="hotel_img">
-                            <img src="/image/room2.jpg" alt="">
-                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">Single Deluxe Room</h4></a>
-                        <h5>$200
-                            <small>/night</small>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="accomodation_item text-center">
-                        <div class="hotel_img">
-                            <img src="/image/room3.jpg" alt="">
-                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">Honeymoon Suit</h4></a>
-                        <h5>$750
-                            <small>/night</small>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="accomodation_item text-center">
-                        <div class="hotel_img">
-                            <img src="/image/room4.jpg" alt="">
-                            <a href="#" class="btn theme_btn button_hover">立即预定</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">Economy Double</h4></a>
-                        <h5>$200
-                            <small>/night</small>
+                        <a th:href="${hotelMsg.hotel_link}"><h4 class="sec_h4" th:text="${hotelMsg.name}">Double Deluxe Room</h4></a>
+                        <h5 th:utext="${hotelMsg.hotel_price}+'<small>/日</small>'">$250
+
                         </h5>
                     </div>
                 </div>
