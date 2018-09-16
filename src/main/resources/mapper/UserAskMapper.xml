@@ -18,7 +18,6 @@
          USER_ID_ID AS user_id,
          CITY_ID_ID AS city_id
     FROM TraverAsk_userask
-        ORDER BY ${'add_time'} DESC
   </select>
 
     <!--
@@ -34,7 +33,6 @@
          CITY_ID_ID AS city_id
     FROM TraverAsk_userask
     WHERE lower(title) like #{value}
-       ORDER BY ${'add_time'} DESC
   </select>
 
     <!--
