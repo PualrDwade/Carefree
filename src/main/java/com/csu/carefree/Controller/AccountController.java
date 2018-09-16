@@ -157,20 +157,20 @@ public class AccountController {
     //跳转到我的游记界面
     @GetMapping("/account/ViewMyTraverNotes")
     public String ViewMyTraverNotes(Model model, HttpSession session) {
-        //错误处理,没有登陆就发起请求
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            //返回登陆页面
-            return "Account/AccountLogin";
-        }
-        //用户名不为空,则通过username获取需要的信息进行渲染
-        UserProfile userProfile = accountService.getUserProfile(username);
-        List<TraverNote> traverNoteList = accountService.getTraverNodeListbyName(username);
-        int notesNum = traverNoteList.size();
-        model.addAttribute("userProfile", userProfile);
-        model.addAttribute("traverNoteList", traverNoteList);
-        model.addAttribute("NotesNum", notesNum);
-        //后期加阅读量
+//        //错误处理,没有登陆就发起请求
+//        String username = (String) session.getAttribute("username");
+//        if (username == null) {
+//            //返回登陆页面
+//            return "Account/AccountLogin";
+//        }
+//        //用户名不为空,则通过username获取需要的信息进行渲染
+//        UserProfile userProfile = accountService.getUserProfile(username);
+//        List<TraverNote> traverNoteList = accountService.getTraverNodeListbyName(username);
+//        int notesNum = traverNoteList.size();
+//        model.addAttribute("userProfile", userProfile);
+//        model.addAttribute("traverNoteList", traverNoteList);
+//        model.addAttribute("NotesNum", notesNum);
+//        //后期加阅读量
         return "Account/MyTravelNote";
     }
 
@@ -178,27 +178,27 @@ public class AccountController {
     //跳转到我的回答界面
     @GetMapping("/account/ViewMyTraverAnswers")
     public String ViewMyTraverAnswers(Model model, HttpSession session) {
-        //错误处理,没有登陆就发起请求
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            //返回登陆页面
-            return "Account/AccountLogin";
-        }
-        //用户名不为空,则通过username获取需要的信息进行渲染
-        UserProfile userProfile = accountService.getUserProfile(username);
-        List<UserAsk> userAskList = accountService.getUserAskListbyName(username);
-        List<UserAnswer> userAnswerList = accountService.getUserAnswerByAsk(username);
-        int askNum = userAskList.size();
-        int answeredNum = 0;
-        for (UserAsk userAsk : userAskList) {
-            //遍历用户问题,得出回答总数
-            answeredNum += accountService.getUserAnswerByAsk(userAsk.getId()).size();
-        }
-        System.out.println("回答总数:" + answeredNum);
-        model.addAttribute("userProfile", userProfile);
-        model.addAttribute("userAnswerList", userAnswerList);
-        model.addAttribute("askNum", askNum);
-        model.addAttribute("answeredNum", answeredNum);//他人回答数
+//        //错误处理,没有登陆就发起请求
+//        String username = (String) session.getAttribute("username");
+//        if (username == null) {
+//            //返回登陆页面
+//            return "Account/AccountLogin";
+//        }
+//        //用户名不为空,则通过username获取需要的信息进行渲染
+//        UserProfile userProfile = accountService.getUserProfile(username);
+//        List<UserAsk> userAskList = accountService.getUserAskListbyName(username);
+//        List<UserAnswer> userAnswerList = accountService.getUserAnswerByAsk(username);
+//        int askNum = userAskList.size();
+//        int answeredNum = 0;
+//        for (UserAsk userAsk : userAskList) {
+//            //遍历用户问题,得出回答总数
+//            answeredNum += accountService.getUserAnswerByAsk(userAsk.getId()).size();
+//        }
+//        System.out.println("回答总数:" + answeredNum);
+//        model.addAttribute("userProfile", userProfile);
+//        model.addAttribute("userAnswerList", userAnswerList);
+//        model.addAttribute("askNum", askNum);
+//        model.addAttribute("answeredNum", answeredNum);//他人回答数
         return "Account/MyAnswer";
     }
 

@@ -18,106 +18,7 @@
     <div class="center clearfix">
 
         <!--左侧边栏-->
-        <div class="side_bar flt1">
-
-            <!--用户信息-->
-            <div class="MAvatar">
-
-                <!--头像-->
-                <div class="MAvaImg hasAva">
-                    <img src="../../static/image/favicon.png" height="120" width="120"><a href="SettingUserInfo.html"
-                                                                                          class="MAvaUp"><i
-                        class="Mphoto"></i></a></i>
-                </div>
-
-                <!--昵称和性别标签-->
-                <div class="MAvaName">畅游用户625
-                    <i class="MGenderMale"></i>
-                    <!--<i class="MGenderFemale"></i>-->
-                    <!--<i class="MGender"></i>-->
-                </div>
-
-                <!--生日和居住地，设置图标-->
-                <div class="MAvaInfo clearfix MAvaMyInfo">
-                    <span class="MAvaLevel flt1" title="11.15">生日：11.15</a></span>
-                    <span class="MAvaPlace flt1" title="长沙">现居：长沙</span>
-                    <span class="MAvaSet"><a title="设置" href="/account/AccountSetting" target="_self"></a></span>
-                </div>
-
-                <!--个人介绍-->
-                <div id="_j_profilearea" class="MAvaProfile">
-                    <a role="button" class="addBtn _j_showintrobox">添加个人介绍</a>
-                    <div class="MAvaInput hide _j_inputarea">
-                        <textarea id="_j_introarea" placeholder="例如：中南大学学生" maxlength="100"></textarea>
-                        <a role="button" id="_j_introsaver" class="MAvaBtn" title="保存">保存</a>
-                    </div>
-                </div>
-
-                <!--数据展示-->
-                <div class="MAvaMore clearfix">
-                    <div class="MAvaNums">
-                        <strong><a href="#">5</a></strong>
-                        <p>关注</p>
-                    </div>
-                    <div class="MAvaNums">
-                        <strong><a href="#">20</a></strong>
-                        <p>粉丝</p>
-                    </div>
-                    <div class="MAvaNums last">
-                        <strong><a href="#">3</a></strong>
-                        <p>游记</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!--我的关注-->
-            <div class="MUsers">
-                <div class="MUsersTitle">我的关注</div>
-                <div class="MUsersDetail" id="_j_followcnt">
-                    <div class="MUsersAtom">
-                        <ul class="clearfix _j_followlist">
-                            <li>
-                                <a href="/u/10024.html" target="_blank">
-                                    <img src="http://p4-q.mafengwo.net/s11/M00/44/FF/wKgBEFqx9GeAMw4mAADuZSQe9AY372.png?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
-                                         height="48" width="48" alt="小蜂" title="小蜂">
-                                </a>
-                                <p><a href="/u/10024.html" target="_blank" title="张恺庭">张恺庭</a></p>
-                            </li>
-                            <li>
-                                <a href="/u/114259.html" target="_blank">
-                                    <img src="http://n1-q.mafengwo.net/s9/M00/0D/F5/wKgBs1hPb8WAEruUAAGXKCGfy4U06.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
-                                         height="48" width="48" alt="蜂窝机器人" title="蜂窝机器人">
-                                </a>
-                                <p><a href="/u/114259.html" target="_blank" title="陈志轩">陈志轩</a></p>
-                            </li>
-                            <li>
-                                <a href="/u/388631.html" target="_blank">
-                                    <img src="http://p1-q.mafengwo.net/s11/M00/E6/B5/wKgBEFsWUTmAexhvAANf5Uux-cw10.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
-                                         height="48" width="48" alt="马蜂窝大管家" title="马蜂窝大管家">
-                                </a>
-                                <p><a href="/u/388631.html" target="_blank" title="廖智勇">廖智勇</a></p>
-                            </li>
-                            <li>
-                                <a href="/u/461006.html" target="_blank">
-                                    <img src="http://b3-q.mafengwo.net/s11/M00/63/A5/wKgBEFqyBhiABvUmAAEyFTouc2U797.png?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
-                                         height="48" width="48" alt="小蚂" title="小蚂">
-                                </a>
-                                <p><a href="/u/461006.html" target="_blank" title="黄凯">黄凯</a></p>
-                            </li>
-                            <li>
-                                <a href="/u/90102427.html" target="_blank">
-                                    <img src="http://b4-q.mafengwo.net/s10/M00/E8/CD/wKgBZ1iZk2SAGbKsAAME0TWzCHE45.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
-                                         height="48" width="48" alt="马小蜂" title="马小蜂">
-                                </a>
-                                <p><a href="/u/90102427.html" target="_blank" title="王鹭星">王鹭星</a></p>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div th:replace="common/userCenter::userLeft"></div>
 
         <!--右侧边栏-->
         <div class="content flt2">
@@ -136,7 +37,7 @@
                         <i class="invite_friends"></i><span class="tags_link">收消息</span></a>
                     </li>
                 </ul>
-            </div>TraverAsk/ViewTraverNote
+            </div>
 
 
             <!--<script>-->
@@ -336,15 +237,7 @@
 <!--底部黑色栏-->
 <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
 
-<div id="footer">
-    <div class="ft-content" style="width: 1105px">
-        <div class="footer-font">
-            Copyright &copy;2018 All rights reserved | This webpage is made with
-            <i class="fa fa-heart-o" aria-hidden="true"></i> 陈志轩小组
-        </div>
-
-    </div>
-</div>
+<div th:replace="common/userCenter::footer"></div>
 
 
 <!--<link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>-->
