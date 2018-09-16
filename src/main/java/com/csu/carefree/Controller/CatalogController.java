@@ -24,9 +24,10 @@ public class CatalogController {
      * 实现与酒店有关的业务逻辑
      * 酒店信息展示，热门酒店推荐
      */
-
+ 
     @Autowired
     private CatalogService catalogService;
+
 
     @GetMapping("ProductDT/viewHotel")
     public String viewHotelMsgList(Model model) {

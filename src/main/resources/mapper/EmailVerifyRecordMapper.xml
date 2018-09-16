@@ -5,14 +5,15 @@
 <mapper namespace="com.csu.carefree.Persistence.EmailVerifyRecordMapper">
 
     <cache/>
-    <select id="getEmailVerifyRecordByCodeAnd" resultType="com.csu.carefree.Model.Account.EmailVerifyRecord">
+    <select id="getEmailVerifyRecordByCodeAndType" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.Account.EmailVerifyRecord">
     SELECT
         CODE,
         EMAIL,
         SEND_TYPE,
         SEND_TIME
     FROM Account_emailverifyrecord
-    WHERE code = #{0} AND send_type = #{1}
+    WHERE code = #{code} AND send_type = #{send_type}
     </select>
 
     <insert id="setVerifyCodeRecord" parameterType="com.csu.carefree.Model.Account.EmailVerifyRecord">

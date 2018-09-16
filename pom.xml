@@ -63,6 +63,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+<<<<<<< HEAD
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+=======
 
         <!-- 引入Spring Session -->
         <dependency>
@@ -83,6 +90,7 @@
             <version>1.5.4</version>
         </dependency>
 
+>>>>>>> 828c007a362e0be16c17d0415eb4453852783c05
     </dependencies>
 
     <build>
