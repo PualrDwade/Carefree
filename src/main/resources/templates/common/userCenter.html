@@ -5,6 +5,7 @@
     <title>个人中心</title>
     <meta name="renderer" content="webkit"/>
 
+<<<<<<< HEAD
     <link href="http://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+app+topbar_v2^alw^1527308432.css"
           rel="stylesheet" type="text/css"/>
     <link href="http://css.mafengwo.net/css/cv/css+home_new2015+home_new2015:css+path+wo-path_v2:css+clip:css+path+map:css+path+jvectormap-2.0.1^alI^1509971336.css"
@@ -12,6 +13,11 @@
     <script language="javascript"
             src="http://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js"
             type="text/javascript" crossorigin="anonymous"></script>
+=======
+    <link href="http://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+app+topbar_v2^alw^1527308432.css" rel="stylesheet" type="text/css"/>
+    <link href="http://css.mafengwo.net/css/cv/css+home_new2015+home_new2015:css+path+wo-path_v2:css+clip:css+path+map:css+path+jvectormap-2.0.1^alI^1509971336.css" rel="stylesheet" type="text/css"/>
+    <script language="javascript" src="http://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js" type="text/javascript" crossorigin="anonymous"></script>
+>>>>>>> f6a83f8f38421fca9b1477b046bdcb1eda9ae51e
 
 </head>
 <body>
@@ -143,6 +149,115 @@
         </div>
     </div>
 </div>
+<div th:fragment="footer" id="footer">
+    <div class="ft-content" style="width: 1105px">
+        <div class="footer-font">
+            Copyright &copy;2018 All rights reserved | This webpage is made with
+            <i class="fa fa-heart-o" aria-hidden="true"></i> 陈志轩小组
+        </div>
+    </div>
+</div>
+
+<div th:fragment="userLeft" class="side_bar flt1">
+    <!--用户信息-->
+    <div class="MAvatar">
+
+        <!--头像-->
+        <div class="MAvaImg hasAva">
+            <img src="../../static/image/favicon.png" height="120" width="120"><a href="SettingUserInfo.html"
+                                                                                  class="MAvaUp"><i
+                class="Mphoto"></i></a></i>
+        </div>
+
+        <!--昵称和性别标签-->
+        <div class="MAvaName">畅游用户625
+            <i class="MGenderMale"></i>
+            <!--<i class="MGenderFemale"></i>-->
+            <!--<i class="MGender"></i>-->
+        </div>
+
+        <!--生日和居住地，设置图标-->
+        <div class="MAvaInfo clearfix MAvaMyInfo">
+            <span class="MAvaLevel flt1" title="11.15">生日：11.15</a></span>
+            <span class="MAvaPlace flt1" title="长沙">现居：长沙</span>
+            <span class="MAvaSet"><a title="设置" href="/account/AccountSetting" target="_self"></a></span>
+        </div>
+
+        <!--个人介绍-->
+        <div id="_j_profilearea" class="MAvaProfile">
+            <a role="button" class="addBtn _j_showintrobox">添加个人介绍</a>
+            <div class="MAvaInput hide _j_inputarea">
+                <textarea id="_j_introarea" placeholder="例如：中南大学学生" maxlength="100"></textarea>
+                <a role="button" id="_j_introsaver" class="MAvaBtn" title="保存">保存</a>
+            </div>
+        </div>
+
+        <!--数据展示-->
+        <div class="MAvaMore clearfix">
+            <div class="MAvaNums">
+                <strong><a href="#">5</a></strong>
+                <p>关注</p>
+            </div>
+            <div class="MAvaNums">
+                <strong><a href="#">20</a></strong>
+                <p>粉丝</p>
+            </div>
+            <div class="MAvaNums last">
+                <strong><a href="#">3</a></strong>
+                <p>游记</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!--我的关注-->
+    <div class="MUsers">
+        <div class="MUsersTitle">我的关注</div>
+        <div class="MUsersDetail" id="_j_followcnt">
+            <div class="MUsersAtom">
+                <ul class="clearfix _j_followlist">
+                    <li>
+                        <a href="/u/10024.html" target="_blank">
+                            <img src="http://p4-q.mafengwo.net/s11/M00/44/FF/wKgBEFqx9GeAMw4mAADuZSQe9AY372.png?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                 height="48" width="48" alt="小蜂" title="小蜂">
+                        </a>
+                        <p><a href="/u/10024.html" target="_blank" title="张恺庭">张恺庭</a></p>
+                    </li>
+                    <li>
+                        <a href="/u/114259.html" target="_blank">
+                            <img src="http://n1-q.mafengwo.net/s9/M00/0D/F5/wKgBs1hPb8WAEruUAAGXKCGfy4U06.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                 height="48" width="48" alt="蜂窝机器人" title="蜂窝机器人">
+                        </a>
+                        <p><a href="/u/114259.html" target="_blank" title="陈志轩">陈志轩</a></p>
+                    </li>
+                    <li>
+                        <a href="/u/388631.html" target="_blank">
+                            <img src="http://p1-q.mafengwo.net/s11/M00/E6/B5/wKgBEFsWUTmAexhvAANf5Uux-cw10.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                 height="48" width="48" alt="马蜂窝大管家" title="马蜂窝大管家">
+                        </a>
+                        <p><a href="/u/388631.html" target="_blank" title="廖智勇">廖智勇</a></p>
+                    </li>
+                    <li>
+                        <a href="/u/461006.html" target="_blank">
+                            <img src="http://b3-q.mafengwo.net/s11/M00/63/A5/wKgBEFqyBhiABvUmAAEyFTouc2U797.png?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                 height="48" width="48" alt="小蚂" title="小蚂">
+                        </a>
+                        <p><a href="/u/461006.html" target="_blank" title="黄凯">黄凯</a></p>
+                    </li>
+                    <li>
+                        <a href="/u/90102427.html" target="_blank">
+                            <img src="http://b4-q.mafengwo.net/s10/M00/E8/CD/wKgBZ1iZk2SAGbKsAAME0TWzCHE45.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                 height="48" width="48" alt="马小蜂" title="马小蜂">
+                        </a>
+                        <p><a href="/u/90102427.html" target="_blank" title="王鹭星">王鹭星</a></p>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div th:fragment="footer" id="footer">
     <div class="ft-content" style="width: 1105px">
         <div class="footer-font">
