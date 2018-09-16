@@ -6,51 +6,53 @@
 
     <cache/>
 
-    <select id="" parameterType="" resultType="com.csu.carefree.Model.ProductDT.TicketMsg">
+    <!--获得所有门票信息-->
+    <select id="getTicketList" resultType="com.csu.carefree.Model.ProductDT.TicketMsg">
     SELECT
-      id,
-      scenic_name,
-      ticket_content,
-      scenic_address,
-      ticket_price,
-      ticket_link,
-      score,
-      img_url,
-      city_id,
-      supplier_id_id as supplier_id
+      ID,
+      SCENIC_NAME,
+      TICKET_CONTENT,
+      SCENSE_ADDRESS,
+      TICKET_PRICE,
+      TICKET_LINK,
+      SCORE,
+      IMG_URL,
+      CITY_NAME,
+      SUPPLIER_ID_ID AS supplier_id
     FROM ProductDT_ticketsmsg
     </select>
 
-    <select id="" parameterType="" resultType="com.csu.carefree.Model.ProductDT.TicketMsg">
+    <!--通过景点名字获取景点信息-->
+    <select id="getTicketListByScenicName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.ProductDT.TicketMsg">
     SELECT
-      id,
-      scenic_name,
-      ticket_content,
-      scenic_address,
-      ticket_price,
-      ticket_link,
-      score,
-      img_url,
-      city_id,
-      supplier_id_id as supplier_id
+      ID,
+      SCENIC_NAME,
+      TICKET_CONTENT,
+      SCENSE_ADDRESS,
+      TICKET_PRICE,
+      TICKET_LINK,
+      SCORE,
+      IMG_URL,
+      CITY_NAME,
+      SUPPLIER_ID_ID AS supplier_id
     FROM ProductDT_ticketsmsg
-    WHERE scenic_name = #{scenic_name}
+    WHERE lower(SCENIC_NAME) LIKE #{scenic_name}
     </select>
 
-    <select id="" parameterType="" resultType="com.csu.carefree.Model.ProductDT.TicketMsg">
+    <select id="getTicketListByCityName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.ProductDT.TicketMsg">
     SELECT
-      id,
-      scenic_name,
-      ticket_content,
-      scenic_address,
-      ticket_price,
-      ticket_link,
-      score,
-      img_url,
-      city_id,
-      supplier_id_id as supplier_id
+      ID,
+      SCENIC_NAME,
+      TICKET_CONTENT,
+      SCENSE_ADDRESS,
+      TICKET_PRICE,
+      TICKET_LINK,
+      SCORE,
+      IMG_URL,
+      CITY_NAME,
+      SUPPLIER_ID_ID AS supplier_id
     FROM ProductDT_ticketsmsg
-    WHERE city_id = #{city_id}
+    WHERE CITY_NAME = #{cityName}
     </select>
 
 </mapper>

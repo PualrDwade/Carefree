@@ -6,7 +6,7 @@ public class UserAsk {
     private String ask_content;
     private String star_num;
     private String add_time;
-    private String scenic_id;
+    private String city_id;
     private String user_id;
 
     @Override
@@ -18,7 +18,7 @@ public class UserAsk {
                 ", star_num='" + star_num + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", add_time='" + add_time + '\'' +
-                ", scenic_id='" + scenic_id + '\'' +
+                ", city_id='" + city_id + '\'' +
                 '}';
     }
 
@@ -70,12 +70,12 @@ public class UserAsk {
         this.add_time = add_time;
     }
 
-    public String getScenic_id() {
-        return scenic_id;
+    public String getCity_id() {
+        return city_id;
     }
 
-    public void setScenic_id(String scenic_id) {
-        this.scenic_id = scenic_id;
+    public void setCity_id(String scenic_id) {
+        this.city_id = city_id;
     }
 
     public UserAsk() {
@@ -83,13 +83,13 @@ public class UserAsk {
 
     public UserAsk(String id, String title, String ask_content,
                    String star_num, String user_id,
-                   String add_time, String scenic_id) {
+                   String add_time, String city_id) {
         this.id = id;
         this.title = title;
         this.ask_content = ask_content;
         this.star_num = star_num;
         this.user_id = user_id;
         this.add_time = add_time;
-        this.scenic_id = scenic_id;
+        this.city_id = city_id;
     }
 }

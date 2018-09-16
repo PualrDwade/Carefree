@@ -7,7 +7,7 @@ public class StrategyMsg {
     private String simple_content;
     private String supplier_id;
     private String img_url;
-    private String scenic_id;
+    private String scenic_name;
 
     public String getId() {
         return id;
@@ -57,24 +57,24 @@ public class StrategyMsg {
         this.img_url = img_url;
     }
 
-    public String getScenic_id() {
-        return scenic_id;
+    public String getScenic_name() {
+        return scenic_name;
     }
 
-    public void setScenic_id(String scenic_id) {
-        this.scenic_id = scenic_id;
+    public void setScenic_name(String scenic_id) {
+        this.scenic_name = scenic_name;
     }
 
     public StrategyMsg() {
     }
 
-    public StrategyMsg(String id, String title, String link_url, String simple_content, String supplier_id, String img_url, String scenic_id) {
+    public StrategyMsg(String id, String title, String link_url, String simple_content, String supplier_id, String img_url, String scenic_name) {
         this.id = id;
         this.title = title;
         this.link_url = link_url;
         this.simple_content = simple_content;
         this.supplier_id = supplier_id;
         this.img_url = img_url;
-        this.scenic_id = scenic_id;
+        this.scenic_name = scenic_name;
     }
 }

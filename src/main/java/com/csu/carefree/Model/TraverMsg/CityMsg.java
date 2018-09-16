@@ -3,18 +3,16 @@ package com.csu.carefree.Model.TraverMsg;
 public class CityMsg {
     private String id;
     private String name;
-    private String city_content;
     private String img_url;
-    private String province;
+    private String province_name;
 
     @Override
     public String toString() {
         return "ProductCityMsg{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", city_content='" + city_content + '\'' +
                 ", img_url='" + img_url + '\'' +
-                ", province='" + province + '\'' +
+                ", province_name='" + province_name + '\'' +
                 '}';
     }
 
@@ -34,14 +32,6 @@ public class CityMsg {
         this.name = name;
     }
 
-    public String getCity_content() {
-        return city_content;
-    }
-
-    public void setCity_content(String city_content) {
-        this.city_content = city_content;
-    }
-
     public String getImg_url() {
         return img_url;
     }
@@ -50,22 +40,21 @@ public class CityMsg {
         this.img_url = img_url;
     }
 
-    public String getProvince() {
-        return province;
+    public String getProvince_name() {
+        return province_name;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
+    public void setProvince_name(String province) {
+        this.province_name = province_name;
     }
 
     public CityMsg() {
     }
 
-    public CityMsg(String id, String name, String city_content, String img_url, String province) {
+    public CityMsg(String id, String name, String img_url, String province_name) {
         this.id = id;
         this.name = name;
-        this.city_content = city_content;
         this.img_url = img_url;
-        this.province = province;
+        this.province_name = province_name;
     }
 }

@@ -2,7 +2,6 @@ package com.csu.carefree.Model.TraverAsk;
 
 public class UserAnswer {
     private String id;
-    private String title;
     private String answer_content;
     private String add_time;
     private String ask_id;
@@ -12,7 +11,6 @@ public class UserAnswer {
     public String toString() {
         return "UserAnswer{" +
                 "id='" + id + '\'' +
-                ", title='" + title + '\'' +
                 ", answer_content='" + answer_content + '\'' +
                 ", ask_id='" + ask_id + '\'' +
                 ", add_time='" + add_time + '\'' +
@@ -26,14 +24,6 @@ public class UserAnswer {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getAnswer_content() {
@@ -71,10 +61,9 @@ public class UserAnswer {
     public UserAnswer() {
     }
 
-    public UserAnswer(String id, String title, String answer_content,
+    public UserAnswer(String id, String answer_content,
                       String ask_id, String add_time, String user_id) {
         this.id = id;
-        this.title = title;
         this.answer_content = answer_content;
         this.ask_id = ask_id;
         this.add_time = add_time;

@@ -11,7 +11,7 @@
     SELECT
       id,
       senic_name as scenic_name,
-      product_id_id as product_id
+      product_id as product_id
     FROM ProductDT_product_senic
     WHERE senic_name = #{scenicName}
     </select>
@@ -21,9 +21,9 @@
     SELECT
       id,
       senic_name as scenic_name,
-      product_id_id as product_id
+      product_id as product_id
     FROM ProductDT_product_senic
-    WHERE product_id_id = #{ProductId}
+    WHERE product_id = #{ProductId}
     </select>
 
 </mapper>

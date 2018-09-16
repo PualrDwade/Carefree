@@ -9,7 +9,7 @@ public class TicketMsg {
     private String ticket_link;
     private String score;
     private String img_url;
-    private String city_id;
+    private String city_name;
     private String supplier_id;
 
     public String getId() {
@@ -76,12 +76,12 @@ public class TicketMsg {
         this.img_url = img_url;
     }
 
-    public String getCity_id() {
-        return city_id;
+    public String getCity_name() {
+        return city_name;
     }
 
-    public void setCity_id(String city_id) {
-        this.city_id = city_id;
+    public void setCity_name(String city_id) {
+        this.city_name = city_id;
     }
 
     public String getSupplier_id() {
@@ -92,7 +92,7 @@ public class TicketMsg {
         this.supplier_id = supplier_id;
     }
 
-    public TicketMsg(String id, String scenic_name, String ticket_content, String scenic_address, String ticket_price, String ticket_link, String score, String img_url, String city_id, String supplier_id) {
+    public TicketMsg(String id, String scenic_name, String ticket_content, String scenic_address, String ticket_price, String ticket_link, String score, String img_url, String city_name, String supplier_id) {
         this.id = id;
         this.scenic_name = scenic_name;
         this.ticket_content = ticket_content;
@@ -101,7 +101,7 @@ public class TicketMsg {
         this.ticket_link = ticket_link;
         this.score = score;
         this.img_url = img_url;
-        this.city_id = city_id;
+        this.city_name = city_name;
         this.supplier_id = supplier_id;
     }
 

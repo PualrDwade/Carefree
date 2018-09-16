@@ -5,11 +5,11 @@ import com.csu.carefree.Model.Account.Sigon;
 // 登陆注册模块的持久化类
 public interface SigonMapper {
     //通过用户名得到登陆账号信息
-    Sigon getSigon(String username);
+    Sigon getSigonByUserName(String username);
 
-    //用过注册账号,
-    boolean setSigon(String username, String password);
+    //用来注册账号,
+    void setSigon(String username, String password);
 
     //通过找回密码
-    boolean updateSigon(String username, String password);
+    void updateSigon(String username, String password);
 }

@@ -11,12 +11,11 @@
     -->
     <select id="getUserAnswerByAsk" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
     SELECT
-          ID,
-          TITLE,
-          ANSWER_CONTENT,
-          ADD_TIME,
-          ASK_ID_ID as ask_id,
-          USER_ID_ID as user_id
+        ID,
+        ANSWER_CONTENT,
+        ADD_TIME,
+        ASK_ID_ID AS ask_id,
+        USER_ID_ID AS user_id,
     FROM TraverAsk_useranswer
         ORDER BY ${'add_time'} DESC
   </select>
@@ -26,9 +25,22 @@
     -->
     <insert id="insertUserAnswer" parameterType="com.csu.carefree.Model.TraverAsk.UserAnswer">
     INSERT INTO TraverAsk_useranswer
-      (ID, TITLE, ANSWER_CONTENT, ADD_TIME, ASK_ID_ID, USER_ID_ID)
+      (ID, ANSWER_CONTENT, ADD_TIME, ASK_ID_ID, USER_ID_ID)
     VALUES
-      (#{id}, #{title}, #{answer_content}, #{add_time}, #{user_id})=
+      (#{id}, #{answer_content}, #{add_time}, #{user_id})=
   </insert>
+
+
+    <!--通过用户名称获取用户问题列表-->
+    <select id="getUserAnswerListByName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
+    SELECT
+        ID,
+        ANSWER_CONTENT,
+        ADD_TIME,
+        ASK_ID_ID AS ask_id,
+        USER_ID_ID AS user_id,
+    FROM TraverAsk_useranswer
+    WHERE user_id_id = #{username}
+    </select>
 
 </mapper>

@@ -14,7 +14,6 @@
     SELECT
           ID,
           NAME,
-          PROVINCE_CONTENT,
           IMG_URL,
     FROM TraverMsg_provincemsg
     WHERE ID = #{value}
@@ -27,9 +26,8 @@
     SELECT
           ID,
           NAME,
-          CITY_CONTENT,
           IMG_URL,
-          PROVINCE_ID,
+          PROVINCE_NAME
     FROM TraverMsg_citymsg
     WHERE ID = #{cityId}
   </select>
@@ -42,9 +40,8 @@
     SELECT
           ID,
           NAME,
-          CITY_CONTENT,
           IMG_URL,
-          PROVINCE_ID
+          PROVINCE_NAME
     FROM TraverMsg_citymsg
     WHERE lower(name) LIKE #{cityName}
   </select>
@@ -57,9 +54,12 @@
     SELECT
           ID,
           NAME,
-          SCENIC_CONTENT,
+          CITY_NAME,
           IMG_URL,
-          CITY_ID_ID AS city_id,
+          ADDRESS,
+          BASIC_DESC,
+          LINK_URL,
+          POPULAR_LEVEL,
     FROM TraverMsg_scenicmsg
     WHERE ID = #{cityId}
   </select>
@@ -72,9 +72,12 @@
     SELECT
           ID,
           NAME,
-          SCENIC_CONTENT,
+          CITY_NAME,
           IMG_URL,
-          CITY_ID_ID AS city_id
+          ADDRESS,
+          BASIC_DESC,
+          LINK_URL,
+          POPULAR_LEVEL,
     FROM TraverMsg_scenicmsg
     WHERE Name = #{name}
     </select>

@@ -4,21 +4,31 @@
 
 <mapper namespace="com.csu.carefree.Persistence.SigonMapper">
     <cache/>
-    <!--
-    //通过用户名得到登陆账号信息
-    Sigon getSigon(String username);
 
-    //用过注册账号,
-    boolean setSigon(String username, String password);
 
-    //通过找回密码
-    boolean updateSigon(String username, String password);
-        通过省份ID查询省份信息
-    -->
 
     <!--通过用户名得到账户信息-->
-    <select id="getSigon" parameterType="java.lang.String" resultType="com.csu.carefree.Model.Account.Sigon">
-        select * from Account_signon where username=#{username}
+    <select id="getSigonByUserName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.Account.Sigon">
+    SELECT
+      USERNAME,
+      PASSWORD
+    FROM Account_signon
+    WHERE username = #{username}
     </select>
+
+    <!--注册-->
+    <insert id="setSigon">
+        INSERT INTO Account_signon
+          (USERNAME, PASSWORD)
+        VALUES
+          (#{username}, #{password})
+    </insert>
+
+    <!--修改密码-->
+    <update id="updateSigon">
+        UPDATE Account_signon SET
+          PASSWORD
+        WHERE username = #{username}
+    </update>
 
 </mapper>

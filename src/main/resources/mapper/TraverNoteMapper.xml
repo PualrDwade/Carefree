@@ -18,8 +18,8 @@
           NOTIFY_STATUS,
           ADD_TIME,
           IMG_URL,
-          SCENIC_ID_ID AS scenic_id
           USER_ID_ID AS user_id
+          CITY_ID_ID AS city_id
     FROM TraverAsk_travernote
     WHERE NOTIFY_STATUS = 'YES'
   </select>
@@ -36,8 +36,8 @@
           NOTIFY_STATUS,
           ADD_TIME,
           IMG_URL,
-          SCENIC_ID_ID AS scenic_id
           USER_ID_ID AS user_id
+          CITY_ID_ID AS city_id
     FROM TraverAsk_travernote
     WHERE lower(title) like #{value}
     AND NOTIFY_STATUS = 'YES'
@@ -55,8 +55,8 @@
           NOTIFY_STATUS,
           ADD_TIME,
           IMG_URL,
-          SCENIC_ID_ID AS scenic_id
           USER_ID_ID AS user_id
+          CITY_ID_ID AS city_id
     FROM TraverAsk_travernote
     WHERE ID = #{traverNoteId}
   </select>
@@ -66,9 +66,24 @@
     -->
     <insert id="insertUserAsk" parameterType="com.csu.carefree.Model.TraverAsk.TraverNote">
     INSERT INTO TraverAsk_travernote
-      (ID, TITLE, NOTE_CONTENT, STAR_NUM, NOTIFY_STATUS, ADD_TIME, IMG_URL, SCENIC_ID_ID, USER_ID_ID)
+      (ID, TITLE, NOTE_CONTENT, STAR_NUM, NOTIFY_STATUS, ADD_TIME, IMG_URL, USER_ID_ID, CITY_ID_ID)
     VALUES
-      (#{id}, #{title}, #{note_content}, #{star_num}, 'NO', #{add_time}, #{img_url}, #{scenic_id}, #{user_id})
+      (#{id}, #{title}, #{note_content}, #{star_num}, 'NO', #{add_time}, #{img_url}, #{user_id}, #{city_id})
   </insert>
 
+    <!--通过Username获取用户游记信息-->
+    <select id="getTraverNodeListbyName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
+    SELECT
+          ID,
+          TITLE,
+          NOTE_CONTENT,
+          STAR_NUM,
+          NOTIFY_STATUS,
+          ADD_TIME,
+          IMG_URL,
+          USER_ID_ID AS user_id
+          CITY_ID_ID AS city_id
+    FROM TraverAsk_travernote
+    WHERE user_id_id = #{username}
+    </select>
 </mapper>

@@ -116,7 +116,7 @@ public interface CatalogService {
     //门票查询筛选信息有：景点名字、城市名字
     List<TicketMsg> getTicketListByScenicName(String scenicName);
 
-    List<TicketMsg> getTicketListByCityId(String cityId);
+    List<TicketMsg> getTicketListByCityName(String cityName);
 
     /**************游记信息*******/
     //获取所有游记信息

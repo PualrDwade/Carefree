@@ -11,7 +11,7 @@
       id,
       city_id,
       product_price,
-      product_id_id as product_id
+      product_id as product_id
     FROM ProductDT_product_city
     </select>
 
@@ -21,9 +21,9 @@
       id,
       city_id,
       product_price,
-      product_id_id as product_id
+      product_id as product_id
     FROM ProductDT_product_city
-    WHERE product_id_id = #{product_id}
+    WHERE product_id = #{product_id}
     </select>
 
     <select id="getADepartCity_Price" resultType="com.csu.carefree.Model.ProductDT.ProductCityMsg">
@@ -31,8 +31,8 @@
       id,
       city_id,
       product_price,
-      product_id_id as product_id
+      product_id as product_id
     FROM ProductDT_product_city
-    WHERE product_id_id = #{0} AND city_id = #{1}
+    WHERE product_id = #{0} AND city_id = #{1}
     </select>
 </mapper>

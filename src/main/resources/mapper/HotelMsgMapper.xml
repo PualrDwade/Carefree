@@ -19,7 +19,6 @@
           LATEST_TIME,
           SUPPLIER_ID_ID AS supplier_id,
           CITY_NAME,
-          SCENIC_NAME
     FROM ProductDT_hotelmsg
     ORDER BY ${'sell_num'} DESC
     </select>
@@ -37,7 +36,6 @@
           LATEST_TIME,
           SUPPLIER_ID_ID AS supplier_id,
           CITY_NAME,
-          SCENIC_NAME
     FROM ProductDT_hotelmsg
     WHERE ID = #{id}
     </select>
@@ -59,7 +57,6 @@
           LATEST_TIME,
           SUPPLIER_ID_ID AS supplier_id,
           CITY_NAME,
-          SCENIC_NAME
     FROM ProductDT_hotelmsg
     WHERE lower(name) = #{keyword}
     </select>
@@ -83,7 +80,6 @@
             LATEST_TIME,
             SUPPLIER_ID_ID AS supplier_id,
             CITY_NAME,
-            SCENIC_NAME
       FROM ProductDT_hotelmsg
       WHERE city_name = #{value}
       ORDER BY ${'sell_num'} DESC

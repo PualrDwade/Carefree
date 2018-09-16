@@ -12,7 +12,6 @@ public class HotelMsg {
     private String latest_time;
     private String supplier_id;
     private String city_name;
-    private String scenic_name;
 
     public HotelMsg() {
     }
@@ -105,15 +104,9 @@ public class HotelMsg {
         this.city_name = city_name;
     }
 
-    public String getScenic_name() {
-        return scenic_name;
-    }
 
-    public void setScenic_name(String scenic_name) {
-        this.scenic_name = scenic_name;
-    }
 
-    public HotelMsg(String id, String name, String score, String hotel_price, String hotel_content, String city_name, String scenic_name, String img_url, String supplier_id, String hotel_link, String sell_num, String latest_time) {
+    public HotelMsg(String id, String name, String score, String hotel_price, String hotel_content, String city_name, String img_url, String supplier_id, String hotel_link, String sell_num, String latest_time) {
 
         this.id = id;
         this.name = name;
@@ -121,7 +114,6 @@ public class HotelMsg {
         this.hotel_price = hotel_price;
         this.hotel_content = hotel_content;
         this.city_name = city_name;
-        this.scenic_name = scenic_name;
         this.img_url = img_url;
         this.supplier_id = supplier_id;
         this.hotel_link = hotel_link;

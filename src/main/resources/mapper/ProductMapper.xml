@@ -50,7 +50,7 @@
     <!--
         通过旅行天数推荐产品信息
     -->
-    <select id="getProductListByTraver_days" parameterType="java.lang.String"
+    <select id="getProductListByTraverdays" parameterType="java.lang.String"
             resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
       id,
@@ -95,7 +95,7 @@
     <!--
         通过旅行类型获取产品信息
     -->
-    <select id="getProductListByProduct_type" parameterType="java.lang.String"
+    <select id="getProductListByProductType" parameterType="java.lang.String"
             resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
       id,
@@ -118,7 +118,7 @@
     <!--
         通过供应商获取产品信息
     -->
-    <select id="getProductListBySupplier_id" parameterType="java.lang.String"
+    <select id="getProductListBySupplierId" parameterType="java.lang.String"
             resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
       id,
