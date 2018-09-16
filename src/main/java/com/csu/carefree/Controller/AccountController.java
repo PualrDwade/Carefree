@@ -46,21 +46,21 @@ public class AccountController {
     @GetMapping("/account/Signon")
     public String Sigon(@RequestParam("username") String username,
                         @RequestParam("password") String password, HttpSession session) {
-        //进行业务处理(登录)
-        Sigon sigon = accountService.getSigon(username);
-        if (session != null) {
-            //判断密码是否正确
-            if (sigon.getPassword().equals(password)) {
-                //登陆成功
-                session.setAttribute("username", username);
-                return "index";
-            } else {
-                System.out.println("密码错误");
-            }
-
-        } else {
-            System.out.println("用户名不存在");
-        }
+//        //进行业务处理(登录)
+//        Sigon sigon = accountService.getSigon(username);
+//        if (session != null) {
+//            //判断密码是否正确
+//            if (sigon.getPassword().equals(password)) {
+//                //登陆成功
+//                session.setAttribute("username", username);
+//                return "index";
+//            } else {
+//                System.out.println("密码错误");
+//            }
+//
+//        } else {
+//            System.out.println("用户名不存在");
+//        }
         return "index";
     }
 
@@ -81,7 +81,7 @@ public class AccountController {
         //随机获得一个验证码
         String code = systemService.getRandomCode();
         //存入数据库
-        accountService.setVerifyCode(username, code, type);
+//        accountService.setVerifyCodeRecord(username, code, type);
         boolean result = systemService.sendEmail(username, code, type);
         if (result == false) {
             return "Account/SendEmailFail";
@@ -103,34 +103,36 @@ public class AccountController {
                            @RequestParam("code") String code,
                            @RequestParam("type") String type,
                            HttpSession session) {
-        if (code.equals(accountService.getVerifyCode(username, "register"))) {
-            //完成注册激活
-            accountService.setSigon(username, (String) session.getAttribute("password"));
-            //同时进行登陆
-            session.setAttribute("username", username);
-            return "index";
-
-        } else if (code.equals(accountService.getVerifyCode(username, "forget"))) {
-            //完成找回密码
-            session.setAttribute("resetpassword_user", username);
-            return "Account/ResetPassword";
-        } else {
-            //未知失败
-            return "Account/EmailFailError";
-        }
+//        if (code.equals(accountService.getVerifyCode(username, "register"))) {
+//            //完成注册激活
+//            accountService.setSigon(username, (String) session.getAttribute("password"));
+//            //同时进行登陆
+//            session.setAttribute("username", username);
+//            return "index";
+//
+//        } else if (code.equals(accountService.getVerifyCode(username, "forget"))) {
+//            //完成找回密码
+//            session.setAttribute("resetpassword_user", username);
+//            return "Account/ResetPassword";
+//        } else {
+//            //未知失败
+//            return "Account/EmailFailError";
+//        }
+        return null;
     }
 
     //重置密码的控制器url
     @GetMapping("/account/ResetPassword")
     public String ResetPassword(@RequestParam String password, HttpSession session) {
-        //修改密码
-        String username = (String) session.getAttribute("resetpassword_user");
-        if (username != null) {
-            accountService.updateSigon(username, password);
-            return "Account/AccountLogin";
-        } else {
-            return "Account/ResetError";
-        }
+//        //修改密码
+//        String username = (String) session.getAttribute("resetpassword_user");
+//        if (username != null) {
+//            accountService.updateSigon(username, password);
+//            return "Account/AccountLogin";
+//        } else {
+//            return "Account/ResetError";
+//        }
+        return "index";
     }
 
     //跳转到用户中心的控制器url

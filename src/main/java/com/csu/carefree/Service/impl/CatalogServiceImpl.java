@@ -130,9 +130,8 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<ScenicMsg> getScenicMsgListByCityId(String cityId) {
-        return scenicMsgMapper.getScenicMsgListByCityId(cityId);
+        return cityMsgMapper.getScenicMsgListById(cityId);
     }
-
 
     @Override
     public List<ScenicMsg> getScenicMsgListByCityName(String cityName) {
@@ -184,7 +183,6 @@ public class CatalogServiceImpl implements CatalogService {
         return strategyMsgMapper.getStrategyByScenicName(scenicName);
     }
 
-
     @Override
     public List<TicketMsg> getTicketList() {
         return ticketMsgMapper.getTicketList();
@@ -199,7 +197,6 @@ public class CatalogServiceImpl implements CatalogService {
     public List<TicketMsg> getTicketListByCityName(String cityId) {
         return ticketMsgMapper.getTicketListByCityName(cityId);
     }
-
 
     @Override
     public List<TraverNote> getTraverNoteList() {
