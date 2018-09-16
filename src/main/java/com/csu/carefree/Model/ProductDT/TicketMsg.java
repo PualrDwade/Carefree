@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.ProductDT;
 
-public class TicketMsg {
+import java.io.Serializable;
+
+public class TicketMsg implements Serializable {
     private String id;
     private String scenic_name;
     private String ticket_content;

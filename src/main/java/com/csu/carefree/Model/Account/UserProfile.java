@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.Account;
 
-public class UserProfile {
+import java.io.Serializable;
+
+public class UserProfile implements Serializable {
     private String nick_name;//用户昵称
     private String birthday;
     private String gender;

@@ -3,7 +3,7 @@ package com.csu.carefree.Service;
 import org.springframework.stereotype.Service;
 
 //系统层的服务接口,用来提供各种服务
-@Service
+
 public interface SystemService {
 
     //调用java库的邮箱发送api

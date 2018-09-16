@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.TraverAsk;
 
-public class UserAsk {
+import java.io.Serializable;
+
+public class UserAsk implements Serializable {
     private String id;
     private String title;
     private String ask_content;

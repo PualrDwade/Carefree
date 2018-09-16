@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.TraverMsg;
 
-public class CityMsg {
+import java.io.Serializable;
+
+public class CityMsg implements Serializable {
     private String id;
     private String name;
     private String img_url;

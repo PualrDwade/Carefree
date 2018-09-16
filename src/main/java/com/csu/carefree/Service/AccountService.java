@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface AccountService {
 
     /****************用户登陆注册模块Service****************************************/

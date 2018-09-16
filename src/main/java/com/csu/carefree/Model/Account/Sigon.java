@@ -1,8 +1,10 @@
 package com.csu.carefree.Model.Account;
 
 
+import java.io.Serializable;
+
 // 用户登陆注册的javabean
-public class Sigon {
+public class Sigon implements Serializable {
     private String username;
     private String password;
 

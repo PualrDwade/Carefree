@@ -1,6 +1,8 @@
 package com.csu.carefree.Model.ProductDT;
 
-public class Supplier {
+import java.io.Serializable;
+
+public class Supplier implements Serializable {
     private String id;
     private String name;
     private String link_url;
