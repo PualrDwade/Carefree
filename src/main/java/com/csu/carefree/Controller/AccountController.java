@@ -4,6 +4,7 @@ package com.csu.carefree.Controller;
 import com.csu.carefree.Model.Account.EmailVerifyRecord;
 import com.csu.carefree.Model.Account.Sigon;
 import com.csu.carefree.Service.AccountService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,25 +38,28 @@ public class AccountController {
     }
 
     //进行登陆
-    @GetMapping("/account/Signon")
-    public String Sigon(@RequestParam("username") String username,
+    @PostMapping("/account/Signon")
+    public String Sigon(@RequestParam("username") String username, Model model,
                         @RequestParam("password") String password, HttpSession session) {
         //进行业务处理(登录)
         Sigon sigon = accountService.getSigonByUserName(username);
-        if (session != null) {
+        if (sigon != null) {
             //判断密码是否正确
             if (sigon.getPassword().equals(password)) {
                 //登陆成功
                 session.setAttribute("username", username);
-                return "index";
+                //重定向到首页页面
+                return "redirect:/";
             } else {
                 System.out.println("密码错误");
+                model.addAttribute("loginResponse", 1);
+                return "Account/AccountLogin";
             }
-
         } else {
             System.out.println("用户名不存在");
+            model.addAttribute("loginResponse", 2);
+            return "Account/AccountLogin";
         }
-        return "index";
     }
 
     //跳转到注册页面
@@ -67,6 +71,7 @@ public class AccountController {
     //注册的操作(Post操作)
     @PostMapping("/account/Register")
     public String Register(
+            Model model,
             @RequestParam("username") String username,
             @RequestParam("password") String password,
             HttpSession session) {
@@ -97,7 +102,8 @@ public class AccountController {
         }
         //用户已经存在了,传递一个值到下一个页面
         else {
-            return "common/ErrorPage";
+            model.addAttribute("registerResponse", 1);//用户名已存在
+            return "Account/AccountRegister";
         }
     }
 
@@ -111,10 +117,9 @@ public class AccountController {
     //找回密码的操作(Post操作)
     @PostMapping("/account/Forget")
     public String Forget(
+            @RequestParam("username") String username,
             HttpSession session) {
-        //获取登陆状态
-        String username = (String) session.getAttribute("username");
-        if (username != null) {
+        try {
             //发送到指定邮件地址
             //使用工具类的静态方法随机获得一个8位验证码
             String code = RandomNumberUtils.getRandonString(8);
@@ -132,15 +137,18 @@ public class AccountController {
             }
             //返回到发送成功页面
             return "Account/SendEmailSuccees";
+        } catch (Exception e) {
+            //发生未知错误.打印错误消息
+            System.out.println(e);
+            return "common/ErrorPage";
         }
-        return "common/ErrorPage";
     }
 
     //用户注销登陆的控制器请求url
     @GetMapping("/account/Signup")
     public String Signup(HttpSession session) {
         session.removeAttribute("username");
-        return "index";
+        return "redirect/:";
     }
 
     //邮箱的控制器请求url
@@ -162,12 +170,12 @@ public class AccountController {
                     accountService.setSigon(username, (String) session.getAttribute("register_password"));
                     //同时进行登陆
                     session.setAttribute("username", username);
-                    return "index";
+                    return "redirect:/";
                 }
                 //如果是找回密码
                 else {
                     //跳转到重置密码的界面
-                    session.setAttribute("resetpassword_user", username);
+                    session.setAttribute("forget_username", username);
                     return "Account/ResetPassWord";
                 }
             } else {
@@ -184,14 +192,18 @@ public class AccountController {
     @GetMapping("/account/ResetPassword")
     public String ResetPassword(@RequestParam String password, HttpSession session) {
         //修改密码
-        String username = (String) session.getAttribute("resetpassword_user");
-        if (username != null) {
-            accountService.updateSigon(username, password);
-            //重置完成,重新进行登陆
-            return "Account/AccountLogin";
-        } else {
-            //重置失败
-            return "Account/ResetError";
+        try {
+            String username = (String) session.getAttribute("forget_username");
+            if (username != null) {
+                accountService.updateSigon(username, password);
+                //重置完成,重新进行登陆
+                return "Account/AccountLogin";
+            } else {
+                //重置失败
+                return "Account/ResetError";
+            }
+        } catch (Exception e) {
+            return "common/ErrorPage";
         }
     }
 
