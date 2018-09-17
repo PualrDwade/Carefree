@@ -1,5 +1,6 @@
 <!doctype html >
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <body>
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
@@ -163,7 +164,7 @@
             <h2 class="title_color">为您推荐</h2>
         </div>
         <div class="container">
-            <div class="section-top-border" th:each="productMsg:${productMsgList}">
+            <div class="section-top-border" th:each="productMsg:${pageInfo.getPageData()}">
                 <div class="row">
                     <div class="col-md-3 hotel_img">
                         <div class=" hotel_img">
@@ -186,10 +187,10 @@
                             </p>
                         </div>
                         <div class="logo-size">
-                            <img th:if="${productMsg.supplier_id}=='00001'" src="../static/image/logo/美团.svg">
-                            <img th:if="${productMsg.supplier_id}=='00002'" src="../static/image/logo/携程.svg">
+                            <img th:if="${productMsg.supplier_id}=='00001'" src="/static/image/logo/美团.svg">
+                            <img th:if="${productMsg.supplier_id}=='00002'" src="/static/image/logo/携程.svg">
                             <img th:if="${productMsg.supplier_id}=='00003'" src="/image/logo/携程.svg">
-                            <img th:if="${productMsg.supplier_id}=='00004'" src="../static/image/logo/携程.svg">
+                            <img th:if="${productMsg.supplier_id}=='00004'" src="/static/image/logo/携程.svg">
                         </div>
                         <div class="container">
                             <a>评分：</a><span class="badge badge-primary"
@@ -199,7 +200,34 @@
                     </div>
                 </div>
             </div>
+            <center>
+                <nav>
+                    <ul class="pagination">
+                        <li>
+                            <a th:href="@{${'/Catalog/HotProductList'}(pageNum = 1,pageSize=5)}"> 首页 </a>
+                        </li>
+                        <li>
+                            <a th:if="${not isFirstPage}" th:href="@{${'/Catalog/HotProductList'}(pageNum = ${pageNum - 1},pageSize=${pageSize})}">前一页</a>
+                            <a th:if="${isFirstPage}" href="javascript: void(0);">Previous</a>
+                        </li>
+                        <li th:each="pageNo : ${#numbers.sequence(pageNum, pageNum+10)}">
+                            <a th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                            <a th:if="${not (pageNum eq pageNo)}" th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo},size=${pageSize})}">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                        </li>
 
+                        <li>
+                            <a th:if="${not isLastPage}" th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNum+1},size=${pageSize})}">后一页</a>
+                            <a th:if="${isLastPage}" href="javascript:void(0);">Next</a>
+                        </li>
+
+                        <li><a th:href="@{${'/Catalog/HotProductList'}(pageNum = ${pageInfo.getMaxPage() - 5} ,pageSize=5)}"> 尾页 </a ></li>
+                    </ul>
+                </nav>
+            </center>
         </div>
     </div>
     <!--================ 产品  =================-->

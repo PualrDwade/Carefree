@@ -1,6 +1,7 @@
 package com.csu.carefree.Service;
 
 
+import com.csu.carefree.Model.PageInfo;
 import com.csu.carefree.Model.ProductDT.*;
 import com.csu.carefree.Model.TraverAsk.TraverNote;
 import com.csu.carefree.Model.TraverMsg.CityMsg;
@@ -126,4 +127,5 @@ public interface CatalogService {
 
     //通过游记ID获取游记信息
     TraverNote getTraverNoteById(String traverNoteId);
+
 }

@@ -1,18 +1,20 @@
 package com.csu.carefree.Controller;
 
 
+import com.csu.carefree.Model.PageInfo;
 import com.csu.carefree.Model.ProductDT.FullProductInfo;
 import com.csu.carefree.Model.ProductDT.HotelMsg;
-import com.csu.carefree.Model.ProductDT.ProductCityMsg;
 import com.csu.carefree.Model.ProductDT.ProductMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
 import com.csu.carefree.Service.CatalogService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
@@ -28,7 +30,6 @@ public class CatalogController {
 
     @Autowired
     private CatalogService catalogService;
-
 
     @GetMapping("ProductDT/viewHotel")
     public String viewHotelMsgList(Model model) {
@@ -136,14 +137,38 @@ public class CatalogController {
 
 
     //进入热门产品的界面控制器url
-    @GetMapping("/Catalog/HotProductList")
-    public String HotProductList(Model model) {
-        //业务操作增删查改
+    @RequestMapping("/Catalog/HotProductList")
+    public String HotProductList(Model model,
+                                 @RequestParam(defaultValue = "1") Integer pageNum,
+                                 @RequestParam(defaultValue = "5") Integer pageSize) {
+        System.out.println(pageNum+"    "+pageSize);
         List<ProductMsg> productMsgList = catalogService.getProductList();
-        System.out.println(productMsgList.size());
-        // List<ProductCityMsg> productCityMsgList = catalogService.getProductCityList();
-        model.addAttribute("productMsgList", productMsgList);
-        //  model.addAttribute("productCityMsgList",productCityMsgList);
+        List<ProductMsg> CurrentPageList = productMsgList.subList(pageNum,pageNum+5);
+
+        PageInfo<ProductMsg> pageInfo = new PageInfo<>();
+        pageInfo.setTotal(productMsgList.size());
+        pageInfo.setPageData(CurrentPageList);
+        //设置当前界面
+        pageInfo.setCurrentPage(pageNum);
+        if (pageInfo.getCurrentPage()==0)
+            pageInfo.setFirstPage(true);
+        else
+            pageInfo.setFirstPage(false);
+        if (pageInfo.getCurrentPage()==pageInfo.getMaxPage())
+            pageInfo.setLastPage(true);
+        else
+            pageInfo.setLastPage(false);
+        model.addAttribute("pageInfo", pageInfo);
+        //获得一页显示的条数
+        model.addAttribute("pageSize", pageInfo.getPageSize());
+        model.addAttribute("pageNum", pageInfo.getCurrentPage());
+        //是否是第一页
+        model.addAttribute("isFirstPage", pageInfo.isFirstPage());
+        //获得总页数
+        model.addAttribute("totalPages", pageInfo.getMaxPage());
+        //是否是最后一页
+        model.addAttribute("isLastPage", pageInfo.isLastPage());
+
         return "ProductDT/Product";
     }
 
