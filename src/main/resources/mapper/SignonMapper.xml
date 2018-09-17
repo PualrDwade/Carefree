@@ -24,7 +24,7 @@
     <!--修改密码-->
     <update id="updateSigon">
         UPDATE Account_signon SET
-          PASSWORD
+          PASSWORD=#{password}
         WHERE username = #{username}
     </update>
 
