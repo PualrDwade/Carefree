@@ -6,14 +6,25 @@
     <meta property="mfw:partner-platform" content="">
     <link href="https://css.mafengwo.net/css/cv/css+login+login_v2:mobile+css+omc+login-omc+login-omc^ZlY^1526627473.css"
           rel="stylesheet" type="text/css"/>
-    <script language="javascript" src="https://js.mafengwo.net/js/cv/js+global+json2:js+m.statistics^YFQ^1536006240.js"
-            type="text/javascript" crossorigin="anonymous"></script>
 </head>
 <body>
-
+<style>
+    .input-submit {
+        width: 320px;
+        height: 42px;
+        border: 0;
+        background-color: #ffa800;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>
 <div class="wrapper">
     <div class="container">
-
         <div class="signup-forms">
             <div class="signup-box">
                 <div class="add-info">
@@ -33,7 +44,7 @@
                         </div>
                         <div class="form-link"><a th:href="@{/account/ViewForgetForm}">忘记密码</a></div>
                         <div class="submit-btn">
-                            <button type="submit">登 录</button>
+                            <input type="submit" class="input-submit" value="登陆">
                         </div>
                     </form>
                 </div>
@@ -44,13 +55,11 @@
         </div>
     </div>
 </div>
-
 <script language="javascript"
         src="https://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+plugins+jquery.placeholder:passport+js+app^ZVA^1493174420.js"
         type="text/javascript" crossorigin="anonymous"></script>
 <script language="javascript" src="https://js.mafengwo.net/js/cv/js+mfw.verification:passport+js+form^YFM^1534757150.js"
         type="text/javascript" crossorigin="anonymous"></script>
-
 
 </body>
 </html>
