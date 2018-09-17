@@ -38,20 +38,49 @@ public class CatalogController {
     //请求主界面
     @GetMapping("/")
     public String viewIndex(HttpSession session, Model model) {
-        //首先判断是否登陆
-        String username = (String) session.getAttribute("username");
-        //返回数据给前端页面
-        if (username == null) {
-            model.addAttribute("login", false);
-        } else {
-            model.addAttribute("login", true);
-        }
+
+        //写死长沙,后面调用百度地图api设置当前位置
+        session.setAttribute("location", "长沙");
+//        //不需要判断是否登陆,前端可以直接从session中取得登陆的状态
+//        //行程信息存在session当中
+//        TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
+//        //还没有填写表单信息
+//        if (traverMsg == null)
+//            session.setAttribute("traverMsg", new TraverMsg());
+//        traverMsg = (TraverMsg) session.getAttribute("traverMsg");
+//
+//        //热门产品推荐，每天都要进行更新
+//        List<FullProductInfo> hotProductList;
+//
+//        FullProductInfo product1;
+//        if (session.getAttribute("product1") == null)
+//            product1 = new FullProductInfo();
+//        else
+//            product1 = (FullProductInfo) session.getAttribute("product1");
+//        //updateProduct1()
+//        System.out.println("**********************");
+//        if (catalogService.getDepartCityPrice(product1.getId(), getDepartCity(session)) == null)
+//            System.out.println("时空！！！");
+//        String product1Price = (catalogService.getDepartCityPrice(product1.getId(), getDepartCity(session))).getProduct_price();
+//        product1.setPrice(product1Price);
+//
+//        FullProductInfo product2;
+//        if (session.getAttribute("product2") == null)
+//            product2 = new FullProductInfo();
+//        else
+//            product2 = (FullProductInfo) session.getAttribute("product2");
+//        String product2Price = (catalogService.getDepartCityPrice(product2.getId(), getDepartCity(session))).getProduct_price();
+//        product2.setPrice(product2Price);
+//
+//        //将结果插入到model当中，用于返回给界面
+//        model.addAttribute("traverMsg", traverMsg);
+//        model.addAttribute("product1", product1);
+//        model.addAttribute("product2", product2);
         //行程信息存在session当中
         TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
         if (traverMsg == null)
             session.setAttribute("traverMsg", new TraverMsg());
         traverMsg = (TraverMsg) session.getAttribute("traverMsg");
-
         //将结果插入到model当中，用于返回给界面
         model.addAttribute("traverMsg", traverMsg);
         return "index";
@@ -110,7 +139,7 @@ public class CatalogController {
         List<ProductMsg> productMsgList = catalogService.getProductList();
         System.out.println(productMsgList.size());
         // List<ProductCityMsg> productCityMsgList = catalogService.getProductCityList();
-        model.addAttribute("productMsgList",productMsgList);
+        model.addAttribute("productMsgList", productMsgList);
         //  model.addAttribute("productCityMsgList",productCityMsgList);
         return "ProductDT/Product";
     }
@@ -119,12 +148,12 @@ public class CatalogController {
     @GetMapping("/Catalog/HotHotelList")
     public String HotHotelList(@RequestParam("destination") String destination, Model model) {
         //获取当前用户位置,推荐酒店
-        if(destination != null) {
+        if (destination != null) {
             //  List<HotelMsg> hotelMsgList = catalogService.getHotelListByDestination(destination);
             List<HotelMsg> hotelMsgList = catalogService.getHotelMsgList();
             System.out.println(hotelMsgList.size());
-            model.addAttribute("hotelMsgList",hotelMsgList);
-            model.addAttribute("destination",destination);
+            model.addAttribute("hotelMsgList", hotelMsgList);
+            model.addAttribute("destination", destination);
         }
         return "ProductDT/Hotel";
     }

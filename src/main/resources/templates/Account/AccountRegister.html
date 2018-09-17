@@ -14,7 +14,7 @@
             <div class="signup-box">
                 <div class="add-info">
                     <div class="hd">用户注册</div>
-                    <form th:action="@{/account/Register}" method="post" id="_j_login_form">
+                    <form th:action="@{/account/Register}" method="post" id="_j_login_form" name="fileForm">
                         <div class="form-field">
                             <input name="username" type="text" placeholder="您的邮箱" autocomplete="off"
                                    data-verification-name="帐号"
@@ -35,9 +35,14 @@
                             <div class="err-tip"></div>
                         </div>
                         <div class="submit-btn">
-                            <!--<input type="submit" th:value="完成注册"/>-->
+                            <button class="btn-submit" onclick="submitBtnClick()">完成注册</button>
+                            <script type="text/javascript">
+                                function submitBtnClick() {
+                                    //提交表单
+                                    document.fileForm.submit();
+                                }
+                            </script>
                         </div>
-                        <input type="submit" th:value="完成注册"/>
                     </form>
                 </div>
                 <div class="bottom-link">
@@ -47,7 +52,5 @@
         </div>
     </div>
 </div>
-
-
 </body>
 </html>

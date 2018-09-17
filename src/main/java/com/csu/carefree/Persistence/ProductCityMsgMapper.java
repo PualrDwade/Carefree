@@ -13,6 +13,5 @@ public interface ProductCityMsgMapper {
     List<ProductCityMsg> getAllDepartCityListByProductId(String productId);
 
     //根据产品ID以及出发城市名字查找相应的起价
-
     ProductCityMsg getDepartCityPriceByProductId(@Param("productId") String productId, @Param("cityName") String cityName);
 }

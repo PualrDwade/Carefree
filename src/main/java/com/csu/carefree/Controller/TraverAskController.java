@@ -45,7 +45,7 @@ public class TraverAskController {
     }
 
     //进入用户提出问题模块
-    @GetMapping("TraverAsk/ViewCreateAsk")
+    @GetMapping("/TraverAsk/ViewCreateAsk")
     public String ViewCreateAsk() {
 
         return "TraverAsk/CreateAsk";
