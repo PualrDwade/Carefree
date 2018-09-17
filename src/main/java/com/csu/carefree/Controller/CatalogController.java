@@ -5,6 +5,7 @@ import com.csu.carefree.Model.ProductDT.FullProductInfo;
 import com.csu.carefree.Model.ProductDT.HotelMsg;
 import com.csu.carefree.Model.ProductDT.ProductCityMsg;
 import com.csu.carefree.Model.ProductDT.ProductMsg;
+import com.csu.carefree.Model.TraverMsg.CityMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
 import com.csu.carefree.Service.CatalogService;
@@ -15,7 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -44,6 +49,9 @@ public class CatalogController {
 
         //写死长沙,后面调用百度地图api设置当前位置
         session.setAttribute("location", "长沙");
+        session.setAttribute("hotProductcheckedDaysAll",true);
+        session.setAttribute("hotProductcheckedStoreAll",true);
+        session.setAttribute("hotProductcheckedTypeAll",true);
 //        //不需要判断是否登陆,前端可以直接从session中取得登陆的状态
 //        //行程信息存在session当中
 //        TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
@@ -137,23 +145,77 @@ public class CatalogController {
 
     //进入热门产品的界面控制器url
     @GetMapping("/Catalog/HotProductList")
-    public String HotProductList(Model model) {
+    public String HotProductList(@RequestParam("destination") String destination,Model model) {
         //业务操作增删查改
+
         List<ProductMsg> productMsgList = catalogService.getProductList();
-        System.out.println(productMsgList.size());
-        // List<ProductCityMsg> productCityMsgList = catalogService.getProductCityList();
+        System.out.println("找到符合条件的产品"+ productMsgList.size() +"条");
+        setDepartCityPrice(destination,productMsgList);
         model.addAttribute("productMsgList", productMsgList);
-        //  model.addAttribute("productCityMsgList",productCityMsgList);
         return "ProductDT/Product";
     }
+
+
+    /////////////////////////////////////////////////
+    //进入热门产品的界面控制器url
+    @PostMapping("/Catalog/HotProductListByConditions")
+    public String HotProductListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model) {
+        String[] checkedDaysValues = httpServletRequest.getParameterValues("days");
+        String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
+        String[] checkedTypeValues = httpServletRequest.getParameterValues("type");
+        System.out.println(checkedDaysValues[0]);
+        System.out.println(checkedStoreValues[0]);
+        System.out.println(checkedTypeValues[0]);
+        String traverDays = checkedDaysValues[0];
+        String supplierId = checkedStoreValues[0];
+        String productType = checkedTypeValues[0];
+
+        List<ProductMsg> productMsgList = new ArrayList<ProductMsg>();
+        if(checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
+            productMsgList = catalogService.getProductList();
+        }
+        if(!checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
+            productMsgList = catalogService.getProductListByTraverdays(traverDays);
+        }
+        if(checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
+            productMsgList = catalogService.getProductListBySupplierId(supplierId);
+        }
+        if(checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+            productMsgList = catalogService.getProductListByProductType(productType);
+        }
+        if(!checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
+            productMsgList = catalogService.getProductListByDaysAndStore(traverDays,supplierId);
+        }
+        if(!checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+            productMsgList = catalogService.getProductListByDaysAndType(traverDays,productType);
+        }
+        if(checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+            productMsgList = catalogService.getProductListByTypeAndStore(productType,supplierId);
+        }
+        if(!checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+            productMsgList = catalogService.getProductListByThree(traverDays,productType,supplierId);
+        }
+
+        System.out.println("找到符合条件的产品"+ productMsgList.size() +"条");
+
+        String destination = session.getAttribute("location").toString();
+
+        setDepartCityPrice(destination,productMsgList);
+
+        model.addAttribute("productMsgList", productMsgList);
+        return "ProductDT/Product";
+    }
+
+
+
+
 
     //进入酒店页面的界面控制器
     @GetMapping("/Catalog/HotHotelList")
     public String HotHotelList(@RequestParam("destination") String destination, Model model) {
         //获取当前用户位置,推荐酒店
         if (destination != null) {
-            //  List<HotelMsg> hotelMsgList = catalogService.getHotelListByDestination(destination);
-            List<HotelMsg> hotelMsgList = catalogService.getHotelMsgList();
+            List<HotelMsg> hotelMsgList = catalogService.getHotelListByDestination(destination+"市");
             System.out.println(hotelMsgList.size());
             model.addAttribute("hotelMsgList", hotelMsgList);
             model.addAttribute("destination", destination);
@@ -183,5 +245,16 @@ public class CatalogController {
         else
             city = traverMsg.getStart_city();
         return city;
+    }
+
+    private void setDepartCityPrice(String destination,List<ProductMsg> productMsgList){
+        if (destination != null) {
+            for (int i = 0; i < productMsgList.size(); i++) {
+                ProductCityMsg productCityMsg = catalogService.getDepartCityPrice(productMsgList.get(i).getId(), destination);
+                if(productCityMsg != null) {
+                    productMsgList.get(i).setCurrent_price(productCityMsg.getProduct_price());
+                }
+            }
+        }
     }
 }

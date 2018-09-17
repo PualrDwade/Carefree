@@ -106,6 +106,21 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
+    public List<ProductMsg> getProductListByDaysAndStore(String traverDays , String supplierId) {
+        return productMapper.getProductListByDaysAndStore(traverDays,supplierId);
+    }
+
+    @Override
+    public List<ProductMsg> getProductListByDaysAndType(String traverDays , String productType) {
+        return productMapper.getProductListByDaysAndType(traverDays,productType);
+    }
+
+    @Override
+    public List<ProductMsg> getProductListByTypeAndStore( String productType, String supplierId) {
+        return productMapper.getProductListByTypeAndStore(productType,supplierId);
+    }
+
+    @Override
     public List<Supplier> getSupplierList() {
         return supplierMapper.getSupplierList();
     }
