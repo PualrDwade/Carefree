@@ -38,7 +38,8 @@ public class TraverAskServiceImpl implements TraverAskService {
         return userAskMapper.getUserAskById(userAskId);
     }
 
-    @Overridehttps://github.com/PualrDwade/Carefree/pull/18/conflict?name=src%252Fmain%252Fjava%252Fcom%252Fcsu%252Fcarefree%252FService%252Fimpl%252FTraverAskServiceImpl.java&ancestor_oid=bde993bc05357d8695d3d56035f0ee8054e1c884&base_oid=032e7618f74af15bd9ec30528c504a63602686d5&head_oid=519138beffc07762578114d82923545ff1e31def
+    //@Overridehttps://github.com/PualrDwade/Carefree/pull/18/conflict?name=src%252Fmain%252Fjava%252Fcom%252Fcsu%252Fcarefree%252FService%252Fimpl%252FTraverAskServiceImpl.java&ancestor_oid=bde993bc05357d8695d3d56035f0ee8054e1c884&base_oid=032e7618f74af15bd9ec30528c504a63602686d5&head_oid=519138beffc07762578114d82923545ff1e31def
+    @Override
     public void insertUserAsk(UserAsk userAsk) {
         userAskMapper.insertUserAsk(userAsk);
     }
@@ -58,8 +59,4 @@ public class TraverAskServiceImpl implements TraverAskService {
         return userAnswerMapper.getUserAnswerListByName(username);
     }
 
-    @Override
-    public List<UserAnswer> getUserAnswerListByName(String username) {
-        return userAnswerMapper.getUserAnswerListByName(username);
-    }
 }

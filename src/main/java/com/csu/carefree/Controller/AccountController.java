@@ -391,8 +391,8 @@ public class AccountController {
     // 跳转到游记专区
     @GetMapping("/account/GotoCreateNote")
     public String GotoCreateNote(HttpSession session) {
-        //请求转发到游记界面
-        return "redirect:/TraverAsk/ViewTraverNote";
+        //请求转发到写游记界面
+        return "TraverAsk/CreateNote";
     }
 
     //跳转到问答专区
