@@ -13,6 +13,7 @@ import com.csu.carefree.Service.TraverAskService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,8 +50,7 @@ public class AccountController {
 
     //进行登陆的请求
     @PostMapping("/account/Signon")
-    public String Sigon(@RequestParam("username") String username, Model model,
-                        @RequestParam("password") String password, HttpSession session) {
+    public String Sigon(@RequestParam("username") String username, Model model, @RequestParam("password") String password, HttpSession session) {
         //进行业务处理(登录)
         Sigon sigon = accountService.getSigonByUserName(username);
         if (sigon != null) {
@@ -82,11 +82,7 @@ public class AccountController {
 
     //注册的操作的请求(Post操作)
     @PostMapping("/account/Register")
-    public String Register(
-            Model model,
-            @RequestParam("username") String username,
-            @RequestParam("password") String password,
-            HttpSession session) {
+    public String Register(Model model, @RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) {
         //首先判断用户是否存在
         Sigon sigon = accountService.getSigonByUserName(username);
         //如果不存在
@@ -129,10 +125,7 @@ public class AccountController {
 
     //找回密码的操作(Post操作)的请求
     @PostMapping("/account/FindPassWord")
-    public String Forget(
-            Model model,
-            @RequestParam("username") String username,
-            HttpSession session) {
+    public String Forget(Model model, @RequestParam("username") String username, HttpSession session) {
         try {
             //首先判断这个用户是否存在
             if (accountService.getSigonByUserName(username) == null) {
@@ -148,6 +141,8 @@ public class AccountController {
             EmailVerifyRecord emailVerifyRecord = new EmailVerifyRecord(code, username, "forget", df.format(new Date()));
             //存入数据库
             accountService.setVerifyCodeRecord(emailVerifyRecord);
+            //返回到发送成功页面,同时放入数据
+            model.addAttribute("emailSender", username);
             //发送邮件,同时捕获异常进行处理
             try {
                 EmailSendUtils.sendHtmlEmail(username, code, "forget");
@@ -156,11 +151,9 @@ public class AccountController {
                 //发送失败,跳转到失败页面
                 return "Account/SendEmailFail";
             }
-            //返回到发送成功页面,同时放入数据
-            model.addAttribute("emailSender", username);
             return "Account/SendEmailSuccees";
         } catch (Exception e) {
-            //发生未知错误.打印错误消息
+            //发生未知错误.打印错误消息,返回错误页面
             System.out.println(e);
             return "common/ErrorPage";
         }
@@ -175,10 +168,7 @@ public class AccountController {
 
     //邮箱的控制器请求
     @GetMapping("/account/EmailVerify")
-    public String EmailVerify(
-            @RequestParam("code") String code,
-            @RequestParam("type") String type,
-            HttpSession session) {
+    public String EmailVerify(@RequestParam("code") String code, @RequestParam("type") String type, HttpSession session) {
         try {
             //存在username
             System.out.println("try.....");
@@ -214,9 +204,7 @@ public class AccountController {
 
     //进行重置密码的请求
     @PostMapping("/account/ResetPassword")
-    public String ResetPassword(@RequestParam String password,
-                                Model model,
-                                HttpSession session) {
+    public String ResetPassword(@RequestParam String password, Model model, HttpSession session) {
         //修改密码
         try {
             String username = (String) session.getAttribute("forget_username");
@@ -241,7 +229,7 @@ public class AccountController {
             String username = (String) session.getAttribute("username");
             if (username == null) {
                 //返回登陆页面
-                return "redirect:/acccount/ViewSigonForm";
+                return "redirect:/account/ViewSignonForm";
             }
             /*** 用户问题以及问题的回复 ***/
             HashMap<UserAsk, List<UserAnswer>> askListHashMap = new HashMap<>();
@@ -261,9 +249,9 @@ public class AccountController {
             //回答数
             int answerNum = traverAskService.getUserAnswerListByName(username).size();
             //渲染到model,用户的问题容器
-            model.addAttribute(askNum);
-            model.addAttribute(answerNum);
-            model.addAttribute(askAnswerContainer);
+            model.addAttribute("askNum", askNum);
+            model.addAttribute("answerNum", answerNum);
+            model.addAttribute("askAnswerContainer", askAnswerContainer);
 
             /***** 游记内容获取*******/
             //通过用户名获取所有游记
@@ -277,9 +265,9 @@ public class AccountController {
                 userProfile.setEmail(username);//设置邮箱字段为用户名
                 userProfile.setImage("http://img4.imgtn.bdimg.com/it/u=1106367332,2196124484&fm=26&gp=0.jpg");//设置为默认头像
                 userProfile.setNick_name("畅游网用户");//默认昵称
-                accountService.updateUserProfile(userProfile);
+                accountService.setUserProfile(userProfile);
             }
-            model.addAttribute(userProfile);
+            model.addAttribute("userProfile", userProfile);
 
             //完成数据渲染,返回到前端页面
             return "Account/UserCenter";
