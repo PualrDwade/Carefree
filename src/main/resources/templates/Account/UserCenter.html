@@ -77,7 +77,9 @@
                 <div th:if="${askNum}==0" class="notes_default ask_default">
                     <i class="ico_notes"></i>
                     <div class="notes_default_detail">
-                        <p>生活就是一行旅行,问题总是接踵而至<br>提出你的问题,让他人帮你解答</p>
+                        <p>生活就是一行旅行<br>
+                            问题总是接踵而至<br>
+                            提出你的问题,让他人帮你解答</p>
                     </div>
                 </div>
                 <!--回答列表-->
@@ -90,19 +92,14 @@
                                         <div class="ask_ava">
                                             <a href="#" target="_blank">
                                                 <!--用户头像url-->
-                                                <img th:src="${userProfile.getImage()}"
-                                                     height="48" width="48" alt="水滴" title="水滴">
+                                                <img th:src="${userProfile.image}" height="48" width="48"
+                                                     th:alt="${userProfile.nick_name}">
                                             </a>
                                         </div>
                                         <div class="ask_info">
-                                            <h2><a href="#" th:title="${askitem.getTitle()}" target="_blank">登哈巴雪山哪些装备可以在现场租？</a>
+                                            <h2><a href="#" th:text="${askitem.title}" target="_blank"></a>
                                             </h2>
-                                            <p>
-                                                <span>提问者<a href="/wenda/u/79821721/answer.html" title="水滴" class="name"
-                                                            target="_blank">水滴</a><a href="/rank/lv.php?uid=79821721"
-                                                                                     title="Lv.2" class="level"
-                                                                                     target="_blank">Lv.2</a></span>
-                                                <span th:text="${askAnswerContainer.getAnswerListByask(askitem).size()}">9个回答</span>
+                                            <span th:text="'此问题共'+${askAnswerContainer.getAnswerListByask(askitem).size()}+'个人参与了回答'"></span>
                                             </p>
                                         </div>
                                     </dt>
@@ -110,56 +107,12 @@
                                     <dd th:each="answeritem : ${askAnswerContainer.getAnswerListByask(askitem)}"
                                         class="answers_dd">
                                         <div class="answer_word"
-                                             th:text="${answeritem.getUser_id()}+${answeritem.getAnswer_content()}">
-                                            我的回答：头盔，冰镐，冰爪，安全带，哈巴雪山属于初级雪山，商业俱乐部都全包的。
-                                        </div>
-                                    </dd>
-                                </dl>
-                            </li>
-                            <li>
-                                <dl>
-                                    <dt class="common_dt">
-                                        <div class="ask_ava">
-                                            <a href="/wenda/u/62982011/answer.html" target="_blank">
-                                                <img src="http://n4-q.mafengwo.net/s10/M00/E9/6B/wKgBZ1o6IRKAKmByAAEP80IW7A093.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
-                                                     height="48" width="48" alt="LU" title="LU">
-                                            </a>
-                                        </div>
-                                        <div class="ask_info">
-                                            <h2><a href="/wenda/detail-12736880.html" title="" target="_blank">怎么直接找哈巴雪山的地接协作</a>
-                                            </h2>
-                                            <p>
-                                                <span>提问者<a href="/wenda/u/62982011/answer.html" title="LU" class="name"
-                                                            target="_blank">LU</a><a href="/rank/lv.php?uid=62982011"
-                                                                                     title="Lv.2" class="level"
-                                                                                     target="_blank">Lv.2</a></span>
-                                                <span>4个回答</span>
-                                            </p>
-                                        </div>
-                                    </dt>
-                                    <dd class="answers_dd">
-                                        <div class="answer_word">
-                                            TA的回答：我是直接找的云南顶峰户外。
+                                             th:text="${'来自用户'+answeritem.user_id}+'的回答:'+${answeritem.answer_content}">
                                         </div>
                                     </dd>
                                 </dl>
                             </li>
                         </ul>
-                    </div>
-                </div>
-                <div class="more_notes">
-                    <a href="/wenda/u/93962965/answer.html">更多回答 </a>
-                </div>
-            </div>
-            <!--我的评论-->
-            <div class="common_block my_notes">
-                <div class="common_title clearfix">
-                    <h2>我的评论</h2>
-                </div>
-                <div class="notes_default dp_default">
-                    <i class="ico_notes"></i>
-                    <div class="notes_default_detail">
-                        <p>评论，不仅是旅途记忆，<br>更是帮助他人的宝贵财富。</p>
                     </div>
                 </div>
             </div>
