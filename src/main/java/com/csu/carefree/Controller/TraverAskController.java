@@ -1,19 +1,21 @@
 package com.csu.carefree.Controller;
 
 
+import com.csu.carefree.Model.Account.UserProfile;
 import com.csu.carefree.Model.ProductDT.HotelMsg;
+import com.csu.carefree.Model.TraverAsk.TraverNote;
 import com.csu.carefree.Model.TraverAsk.UserAnswer;
 import com.csu.carefree.Model.TraverAsk.UserAsk;
+import com.csu.carefree.Service.AccountService;
 import com.csu.carefree.Service.CatalogService;
 import com.csu.carefree.Service.TraverAskService;
 import com.csu.carefree.Service.impl.CatalogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -22,6 +24,11 @@ public class TraverAskController {
     @Autowired
     private TraverAskService traverAskService;
 
+    @Autowired
+    private CatalogService catalogService;
+
+    @Autowired
+    private AccountService accountService;
     /*****************用户问答模块****************/
 
     //进入问答专区的控制层url
@@ -64,9 +71,12 @@ public class TraverAskController {
 
     //搜索问题列表
     @GetMapping("/TraverAsk/searchAskList")
-    public String searchAskList() {
+    public String searchAskList(@RequestParam("keyword") String keyword,Model model) {
         //通过用户输入信息搜索问题列表
         //排序是顺序暂定为点赞数量star_num
+        List<UserAsk> askList = traverAskService.searchUserAskList(keyword);
+        model.addAttribute("askList", askList);
+
         return "TraverAsk/QuestionAnswer";
     }
 
@@ -87,14 +97,55 @@ public class TraverAskController {
         return "TraverAsk/AskAnswerDetail";
     }
 
+    @RequestMapping(value = "/TraverAsk/createAsk" , method = RequestMethod.POST)
+    public String createAsk(@RequestParam("title") String title, @RequestParam("askContent") String askContent, HttpSession session, Model model){
+        //获得表单内容
+        //以HTML形式保存用户问题
+        //获得用户ID
+
+        //String userName = (String) session.getAttribute("username");
+        System.out.println("title:  "+title);
+        System.out.println("askContent:   "+askContent);
+
+        return "TraverAsk/QuestionAnswer";
+    }
+
 
     /*****************用户游记模块******************/
 
     //进入用户游记的控制器url
-    @GetMapping("/TraverAsk/ViewTraverNote")
-    public String ViewTraverNote() {
+    @GetMapping("TraverAsk/ViewTraverNote")
+    public String ViewTraverNote(Model model) {
         //进行业务操作
         //返回页面进行渲染
+        //获取游记列表
+        List<TraverNote> traverNoteList = catalogService.getTraverNoteList();
+        model.addAttribute("traverNoteList", traverNoteList);
+
+        return "TraverAsk/TraverNoteList";
+    }
+
+    //进入用户游记详细信息界面
+    @GetMapping("TraverAsk/ViewTraverNoteDetail")
+    public String viewTraverNoteDetail(@RequestParam("traverNoteId") String traverNoteId, Model model){
+        //  获取游记ID
+        // 通过游记ID获取游记内容
+        TraverNote traverNote = catalogService.getTraverNoteById(traverNoteId);
+        UserProfile userProfile = accountService.getUserProfileByUserName(traverNote.getUser_id());
+
+        model.addAttribute("traverNote" , traverNote);
+        model.addAttribute("userProfile",userProfile);
+
+        return "TraverAsk/TraverNoteDetail";
+    }
+
+    //搜索游记功能
+    @GetMapping("TraverAsk/searchNoteList")
+    public String searchNoteList(@RequestParam("keyword") String keyword,Model model){
+        //根据关键词搜索游记
+        List<TraverNote> traverNoteList = catalogService.searchTraverNoteList(keyword);
+        model.addAttribute("traverNoteList", traverNoteList);
+
         return "TraverAsk/TraverNoteList";
     }
 }

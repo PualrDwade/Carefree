@@ -25,19 +25,21 @@
                             <a class="drop-hd" th:href="@{/account/ViewMyTraverAnswers}" target="_blank"><i></i>我的问答</a>
                         </div>
                     </div>
-                    <div class="search-box ">
+                     <div class="search-box ">
                         <div class="search-panel" data-cs-t="wenda">
-                            <div class="clearfix _j_suggest_hd">
-                                <div class="sp-input" style="height: auto!important;">
-                                    <input type="text" id="_j_wenda_seach_input" value="" placeholder="提问前请先搜索">
-                                </div>
-                                <input th:href="@{/TraverAsk/searchAskList}" type="button" id="_j_wenda_seach_button" class="sp-button" data-mddid="0">
-                            </div>
-                            <div class="bd _j_suggest_box hide">
-                            </div>
+                            <div class="clearfix _j_suggest_hd" >
+                                <form th:action="@{/TraverAsk/searchAskList}">
+                                    <div class="sp-input" style="height: auto!important;">
+                                        <input type="text" id="_j_wenda_seach_input" name="keyword" value="" placeholder="提问前请先搜索">
+                                    </div>
+                                    <input  type="submit" value="" id="_j_wenda_seach_button" class="sp-button" data-mddid="0">
+                                </form>
+                        </div>
+                        <div class="bd _j_suggest_box hide">
                         </div>
                     </div>
                 </div>
+            </div>
                 <div class="newcate-wrap _j_qa_list">
                     <div class="hd">
                         <ul class="cate-tab">
@@ -107,6 +109,7 @@
                     </div>
                 </div>
             </div>
+
             <!-------提问模块以及显示当前参加问题的人数------->
             <div class="col-side">
 

@@ -33,4 +33,5 @@
     FROM ProductDT_product_city
     WHERE product_id = #{productId} AND city_id = #{cityName}
     </select>
+  
 </mapper>

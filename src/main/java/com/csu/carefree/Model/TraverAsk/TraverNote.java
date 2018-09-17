@@ -2,7 +2,7 @@ package com.csu.carefree.Model.TraverAsk;
 
 import java.io.Serializable;
 
-public class TraverNote implements Serializable {
+public class TraverNote implements Serializable{
     private String id;
     private String title;
     private String note_content;
@@ -12,6 +12,8 @@ public class TraverNote implements Serializable {
     private String img_url;
     private String city_id;
     private String user_id;
+
+
     @Override
     public String toString() {
         return "TraverNote{" +
@@ -115,5 +117,8 @@ public class TraverNote implements Serializable {
         this.add_time = add_time;
         this.img_url = img_url;
         this.city_id = city_id;
+
     }
+
+
 }
