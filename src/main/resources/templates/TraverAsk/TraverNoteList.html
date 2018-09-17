@@ -25,7 +25,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="blog_left_sidebar">
+                    <div class="blog_left_sidebar" th:each="traverNote : ${traverNoteList}">
+
                         <article class="row blog_item">
                             <div class="col-md-3">
                                 <div class="blog_info text-right">
@@ -47,140 +48,17 @@
                                 <div class="blog_post">
                                     <img src="../../static/image/blog/main-blog/m-blog-1.jpg" alt="">
                                     <div class="blog_details">
-                                        <a href="#"><h2>第一篇游记</h2></a>
-                                        <p>MCSE boot camps have its supporters and its detractors. Some people do not
+                                        <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId = ${traverNote.id})}"><h2 th:text="${traverNote.title}">第一篇游记</h2></a>
+                                        <p th:text="${traverNote.note_content.substring(0,20)}+'....'">MCSE boot camps have its supporters and its detractors. Some people do not
                                             understand why you should have to spend money on boot camp when you can get
                                             the
                                             MCSE study materials yourself at a fraction.</p>
-                                        <a href="TraverNoteDetail.html" class="view_btn button_hover">View More</a>
+                                        <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId = ${traverNote.id})}" class="view_btn button_hover">View More</a>
                                     </div>
                                 </div>
                             </div>
                         </article>
-                        <article class="row blog_item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <div class="post_tag">
-                                        <a href="#">美食,</a>
-                                        <a href="#">美景</a>
-                                        <a href="#">攻略</a>
-                                        <a href="#">游玩</a>
-                                    </div>
-                                    <ul class="blog_meta list_style">
-                                        <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="../../static/image/blog/main-blog/m-blog-2.jpg" alt="">
-                                    <div class="blog_details">
-                                        <a href="#"><h2>The Basics Of Buying A Telescope</h2></a>
-                                        <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                            understand why you should have to spend money on boot camp when you can get
-                                            the
-                                            MCSE study materials yourself at a fraction.</p>
-                                        <a href="#" class="view_btn button_hover">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row blog_item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <div class="post_tag">
-                                        <a href="#">Food,</a>
-                                        <a href="#">Technology,</a>
-                                        <a href="#">Politics,</a>
-                                        <a href="#">Lifestyle</a>
-                                    </div>
-                                    <ul class="blog_meta list_style">
-                                        <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="../../static/image/blog/main-blog/m-blog-3.jpg" alt="">
-                                    <div class="blog_details">
-                                        <a href="#"><h2>The Glossary Of Telescopes</h2></a>
-                                        <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                            understand why you should have to spend money on boot camp when you can get
-                                            the
-                                            MCSE study materials yourself at a fraction.</p>
-                                        <a href="#" class="view_btn button_hover">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row blog_item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <div class="post_tag">
-                                        <a href="#">Food,</a>
-                                        <a href="#">Technology,</a>
-                                        <a href="#">Politics,</a>
-                                        <a href="#">Lifestyle</a>
-                                    </div>
-                                    <ul class="blog_meta list_style">
-                                        <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="../../static/image/blog/main-blog/m-blog-4.jpg" alt="">
-                                    <div class="blog_details">
-                                        <a href="#"><h2>The Night Sky</h2></a>
-                                        <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                            understand why you should have to spend money on boot camp when you can get
-                                            the
-                                            MCSE study materials yourself at a fraction.</p>
-                                        <a href="#" class="view_btn button_hover">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row blog_item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <div class="post_tag">
-                                        <a href="#">Food,</a>
-                                        <a href="#">Technology,</a>
-                                        <a href="#">Politics,</a>
-                                        <a href="#">Lifestyle</a>
-                                    </div>
-                                    <ul class="blog_meta list_style">
-                                        <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="../../static/image/blog/main-blog/m-blog-5.jpg" alt="">
-                                    <div class="blog_details">
-                                        <a href="#"><h2>Telescopes 101</h2></a>
-                                        <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                            understand why you should have to spend money on boot camp when you can get
-                                            the
-                                            MCSE study materials yourself at a fraction.</p>
-                                        <a href="#" class="view_btn button_hover">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
+
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">
@@ -210,10 +88,11 @@
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="搜索游记">
-                                <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
-                                    </span>
+                                <form th:action="@{/TraverAsk/searchNoteList}">
+                                    <input type="text" name="keyword" class="form-control" placeholder="搜索游记">
+                                    <span class="input-group-btn"></span>
+                                    <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
+                                </form>
                             </div><!-- /input-group -->
                             <div class="br"></div>
                         </aside>

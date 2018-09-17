@@ -3,12 +3,10 @@ package com.csu.carefree.Controller;
 
 import com.csu.carefree.Model.ProductDT.FullProductInfo;
 import com.csu.carefree.Model.ProductDT.HotelMsg;
-import com.csu.carefree.Model.ProductDT.ProductCityMsg;
 import com.csu.carefree.Model.ProductDT.ProductMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
 import com.csu.carefree.Service.CatalogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +24,8 @@ public class CatalogController {
      * 酒店信息展示，热门酒店推荐
      */
 
-    @Autowired
+//    @Autowired
     private CatalogService catalogService;
-
 
     @GetMapping("ProductDT/viewHotel")
     public String viewHotelMsgList(Model model) {
@@ -41,9 +38,6 @@ public class CatalogController {
     //请求主界面
     @GetMapping("/")
     public String viewIndex(HttpSession session, Model model) {
-
-        //写死长沙
-        session.setAttribute("location","长沙");
         //首先判断是否登陆
         String username = (String) session.getAttribute("username");
         //返回数据给前端页面
@@ -58,33 +52,8 @@ public class CatalogController {
             session.setAttribute("traverMsg", new TraverMsg());
         traverMsg = (TraverMsg) session.getAttribute("traverMsg");
 
-        //热门产品推荐，每天都要进行更新
-        List<FullProductInfo> hotProductList;
-
-        FullProductInfo product1;
-        if (session.getAttribute("product1") == null)
-            product1 = new FullProductInfo();
-        else
-            product1 = (FullProductInfo) session.getAttribute("product1");
-        //updateProduct1()
-        System.out.println("**********************");
-        if (catalogService.getDepartCityPrice(product1.getId(), getDepartCity(session)) == null)
-            System.out.println("时空！！！");
-        String product1Price = (catalogService.getDepartCityPrice(product1.getId(), getDepartCity(session))).getProduct_price();
-        product1.setPrice(product1Price);
-
-        FullProductInfo product2;
-        if (session.getAttribute("product2") == null)
-            product2 = new FullProductInfo();
-        else
-            product2 = (FullProductInfo) session.getAttribute("product2");
-        String product2Price = (catalogService.getDepartCityPrice(product2.getId(), getDepartCity(session))).getProduct_price();
-        product2.setPrice(product2Price);
-
         //将结果插入到model当中，用于返回给界面
         model.addAttribute("traverMsg", traverMsg);
-        model.addAttribute("product1", product1);
-        model.addAttribute("product2", product2);
         return "index";
     }
 
@@ -140,9 +109,9 @@ public class CatalogController {
         //业务操作增删查改
         List<ProductMsg> productMsgList = catalogService.getProductList();
         System.out.println(productMsgList.size());
-       // List<ProductCityMsg> productCityMsgList = catalogService.getProductCityList();
+        // List<ProductCityMsg> productCityMsgList = catalogService.getProductCityList();
         model.addAttribute("productMsgList",productMsgList);
-      //  model.addAttribute("productCityMsgList",productCityMsgList);
+        //  model.addAttribute("productCityMsgList",productCityMsgList);
         return "ProductDT/Product";
     }
 
@@ -151,7 +120,7 @@ public class CatalogController {
     public String HotHotelList(@RequestParam("destination") String destination, Model model) {
         //获取当前用户位置,推荐酒店
         if(destination != null) {
-         //  List<HotelMsg> hotelMsgList = catalogService.getHotelListByDestination(destination);
+            //  List<HotelMsg> hotelMsgList = catalogService.getHotelListByDestination(destination);
             List<HotelMsg> hotelMsgList = catalogService.getHotelMsgList();
             System.out.println(hotelMsgList.size());
             model.addAttribute("hotelMsgList",hotelMsgList);
@@ -183,4 +152,5 @@ public class CatalogController {
             city = traverMsg.getStart_city();
         return city;
     }
+
 }

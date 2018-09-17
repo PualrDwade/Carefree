@@ -30,7 +30,7 @@ public class TraverAskServiceImpl implements TraverAskService {
 
     @Override
     public List<UserAsk> searchUserAskList(String keyword) {
-        return null;
+        return userAskMapper.searchUserAskList("%"+keyword+"%");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TraverAskServiceImpl implements TraverAskService {
 
     @Override
     public void insertUserAsk(UserAsk userAsk) {
-
+        userAskMapper.insertUserAsk(userAsk);
     }
 
     @Override
@@ -50,6 +50,11 @@ public class TraverAskServiceImpl implements TraverAskService {
 
     @Override
     public void insertUserAnswer(UserAnswer userAnswer) {
+        userAnswerMapper.insertUserAnswer(userAnswer);
+    }
 
+    @Override
+    public List<UserAnswer> getUserAnswerListByName(String username){
+        return userAnswerMapper.getUserAnswerListByName(username);
     }
 }

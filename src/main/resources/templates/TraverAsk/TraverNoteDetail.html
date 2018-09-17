@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <body>
 <!--================Header Area =================-->
@@ -53,31 +53,16 @@
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9 blog_details">
-                            <h2>Astronomy Binoculars A Great Alternative</h2>
-                            <p class="excert">
+                            <h2 th:text="${traverNote.title}">Astronomy Binoculars A Great Alternative</h2>
+                            <p class="excert" th:utext="${traverNote.note_content}">
                                 MCSE boot camps have its supporters and its detractors. Some people do not understand
                                 why
                                 you should have to spend money on boot camp when you can get the MCSE study materials
                                 yourself at a fraction.
                             </p>
-                            <p>
-                                Boot camps have its supporters and its detractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get the MCSE study materials
-                                yourself
-                                at a fraction of the camp price. However, who has the willpower to actually sit through
-                                a
-                                self-imposed MCSE training. who has the willpower to actually sit through a self-imposed
-                            </p>
-                            <p>
-                                Boot camps have its supporters and its detractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get the MCSE study materials
-                                yourself
-                                at a fraction of the camp price. However, who has the willpower to actually sit through
-                                a
-                                self-imposed MCSE training. who has the willpower to actually sit through a self-imposed
-                            </p>
                         </div>
-                        <div class="col-lg-12">
+                        <!--
+                         <div class="col-lg-12">
                             <div class="quotes">
                                 MCSE boot camps have its supporters and its detractors. Some people do not understand
                                 why
@@ -110,118 +95,124 @@
                                 </div>
                             </div>
                         </div>
+                        -->
                     </div>
 
-                    <div class="comments-area">
-                        <h3>Comments</h3>
-                        <br><br><br>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="../../static/image/blog/c1.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Emilly Blunt</a></h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list left-padding">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="../../static/image/blog/c2.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Elsie Cunningham</a></h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list left-padding">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="../../static/image/blog/c3.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Annie Stephens</a></h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="../../static/image/blog/c4.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Maria Luna</a></h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="../../static/image/blog/c5.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Ina Hayes</a></h5>
-                                        <p class="date">December 4, 2017 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment-form">
-                        <h4>写 留 言</h4>
-                        <form>
-                            <div class="form-group">
-                            <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege"
-                                      onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
-                                      required=""></textarea>
-                            </div>
-                            <a href="#" class="primary-btn button_hover">提 交</a>
-                        </form>
-                    </div>
+                    <!-- 用户评论模块
+
+                             <div class="comments-area">
+                                 <h3>Comments</h3>
+                                 <br><br><br>
+                                 <div class="comment-list">
+                                     <div class="single-comment justify-content-between d-flex">
+                                         <div class="user justify-content-between d-flex">
+                                             <div class="thumb">
+                                                 <img src="../../static/image/blog/c1.jpg" alt="">
+                                             </div>
+                                             <div class="desc">
+                                                 <h5><a href="#">Emilly Blunt</a></h5>
+                                                 <p class="date">December 4, 2017 at 3:12 pm </p>
+                                                 <p class="comment">
+                                                     Never say goodbye till the end comes!
+                                                 </p>
+                                             </div>
+                                         </div>
+                                         <div class="reply-btn">
+                                             <a href="" class="btn-reply text-uppercase">reply</a>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="comment-list left-padding">
+                                     <div class="single-comment justify-content-between d-flex">
+                                         <div class="user justify-content-between d-flex">
+                                             <div class="thumb">
+                                                 <img src="../../static/image/blog/c2.jpg" alt="">
+                                             </div>
+                                             <div class="desc">
+                                                 <h5><a href="#">Elsie Cunningham</a></h5>
+                                                 <p class="date">December 4, 2017 at 3:12 pm </p>
+                                                 <p class="comment">
+                                                     Never say goodbye till the end comes!
+                                                 </p>
+                                             </div>
+                                         </div>
+                                         <div class="reply-btn">
+                                             <a href="" class="btn-reply text-uppercase">reply</a>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="comment-list left-padding">
+                                     <div class="single-comment justify-content-between d-flex">
+                                         <div class="user justify-content-between d-flex">
+                                             <div class="thumb">
+                                                 <img src="../../static/image/blog/c3.jpg" alt="">
+                                             </div>
+                                             <div class="desc">
+                                                 <h5><a href="#">Annie Stephens</a></h5>
+                                                 <p class="date">December 4, 2017 at 3:12 pm </p>
+                                                 <p class="comment">
+                                                     Never say goodbye till the end comes!
+                                                 </p>
+                                             </div>
+                                         </div>
+                                         <div class="reply-btn">
+                                             <a href="" class="btn-reply text-uppercase">reply</a>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="comment-list">
+                                     <div class="single-comment justify-content-between d-flex">
+                                         <div class="user justify-content-between d-flex">
+                                             <div class="thumb">
+                                                 <img src="../../static/image/blog/c4.jpg" alt="">
+                                             </div>
+                                             <div class="desc">
+                                                 <h5><a href="#">Maria Luna</a></h5>
+                                                 <p class="date">December 4, 2017 at 3:12 pm </p>
+                                                 <p class="comment">
+                                                     Never say goodbye till the end comes!
+                                                 </p>
+                                             </div>
+                                         </div>
+                                         <div class="reply-btn">
+                                             <a href="" class="btn-reply text-uppercase">reply</a>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="comment-list">
+                                     <div class="single-comment justify-content-between d-flex">
+                                         <div class="user justify-content-between d-flex">
+                                             <div class="thumb">
+                                                 <img src="../../static/image/blog/c5.jpg" alt="">
+                                             </div>
+                                             <div class="desc">
+                                                 <h5><a href="#">Ina Hayes</a></h5>
+                                                 <p class="date">December 4, 2017 at 3:12 pm </p>
+                                                 <p class="comment">
+                                                     Never say goodbye till the end comes!
+                                                 </p>
+                                             </div>
+                                         </div>
+                                         <div class="reply-btn">
+                                             <a href="" class="btn-reply text-uppercase">reply</a>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="comment-form">
+                                 <h4>写 留 言</h4>
+                                 <form>
+                                     <div class="form-group">
+                                     <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege"
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
+                                               required=""></textarea>
+                                     </div>
+                                     <a href="#" class="primary-btn button_hover">提 交</a>
+                                 </form>
+                             </div>
+                         </div>
+                         -->
+
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
@@ -236,7 +227,9 @@
                         </aside>
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="../../static/image/blog/author.png" alt="">
-                            <h4>Charlie Barber</h4>
+                            <h4 >
+                                Charlie Barber
+                            </h4>
                             <p>Senior blog writer</p>
                             <div class="social_icon">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
