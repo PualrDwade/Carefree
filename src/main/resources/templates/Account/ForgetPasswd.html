@@ -14,16 +14,21 @@
             <div class="signup-box" id="_j_forget_box">
                 <div class="add-info">
                     <div class="hd">找回密码</div>
-                    <form action="" method="post" id="_j_forget_form">
+                    <form th:action="@{/account/FindPassWord}" method="post" id="_j_forget_form" name="fileForm">
                         <input type="hidden" name="token" value="6bed324f5d06c2f1ea76822f67814579"/>
                         <div class="form-field">
-                            <input name="passport" type="text" placeholder="您的邮箱" autocomplete="off" data-type="email"
-                                   data-verification-name="邮箱" class="verification[required,maxSize[50],custom[email]]"
-                                   value=""/>
+                            <input name="username" type="text" placeholder="您的邮箱" autocomplete="off" data-type="email"
+                                   data-verification-name="邮箱"/>
                             <div class="err-tip"></div>
                         </div>
                         <div class="submit-btn">
-                            <button type="submit">立即找回</button>
+                            <button class="btn-submit" onclick="submitBtnClick()">找回密码</button>
+                            <script type="text/javascript">
+                                function submitBtnClick() {
+                                    //提交表单
+                                    document.fileForm.submit();
+                                }
+                            </script>
                         </div>
                     </form>
                 </div>
@@ -31,13 +36,6 @@
         </div>
     </div>
 </div>
-
-<script language="javascript"
-        src="https://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+plugins+jquery.placeholder:passport+js+app^ZVA^1493174420.js"
-        type="text/javascript" crossorigin="anonymous"></script>
-<script language="javascript" src="https://js.mafengwo.net/js/cv/js+mfw.verification:passport+js+form^YFM^1534757150.js"
-        type="text/javascript" crossorigin="anonymous"></script>
-
 
 </body>
 </html>

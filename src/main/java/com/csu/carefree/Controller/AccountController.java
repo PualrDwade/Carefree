@@ -3,8 +3,15 @@ package com.csu.carefree.Controller;
 
 import com.csu.carefree.Model.Account.EmailVerifyRecord;
 import com.csu.carefree.Model.Account.Sigon;
+import com.csu.carefree.Model.Account.UserProfile;
+import com.csu.carefree.Model.TraverAsk.AskAnswerContainer;
+import com.csu.carefree.Model.TraverAsk.TraverNote;
+import com.csu.carefree.Model.TraverAsk.UserAnswer;
+import com.csu.carefree.Model.TraverAsk.UserAsk;
 import com.csu.carefree.Service.AccountService;
+import com.csu.carefree.Service.TraverAskService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +24,8 @@ import com.csu.carefree.Util.EmailSendUtils;//邮箱发送类
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 
 @Controller
@@ -25,9 +34,11 @@ public class AccountController {
      * 实现用户登陆注册模块的业务
      * 实现用户中心模块的业务
      */
-    //springmvc自动装配,创建一个用户的服务接口
+    //springmvc自动装配,创建一个用户的服务层接口
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private TraverAskService traverAskService;
 
 
     //跳转到登陆页面的请求
@@ -225,22 +236,47 @@ public class AccountController {
     //跳转到用户中心的控制器url
     @GetMapping("/account/ViewUserCenter")
     public String ViewUserCenter(Model model, HttpSession session) {
-//        //错误处理,没有登陆就发起请求
-//        String username = (String) session.getAttribute("username");
-//        if (username == null) {
-//            //返回登陆页面
-//            return "Account/AccountLogin";
-//        }
-//        //用户名不为空,则通过username获取需要的信息进行渲染
-//        List<TraverNote> traverNoteList = accountService.getTraverNodeListbyName(username);
-//        List<UserAsk> userAskList = accountService.getUserAskListbyName(username);
-//        List<UserAnswer> userAnswerList = accountService.getUserAnswerListByName(username);
-//        UserProfile userProfile = accountService.getUserProfile(username);
-//        model.addAttribute("traverNoteList", traverNoteList);
-//        model.addAttribute("userAskList", userAskList);
-//        model.addAttribute("userAnswerList", userAnswerList);
-//        model.addAttribute("userProfile", userProfile);
-        return "Account/UserCenter";
+        //错误处理,没有登陆就发起请求
+        try {
+            String username = (String) session.getAttribute("username");
+            if (username == null) {
+                //返回登陆页面
+                return "redirect:/acccount/ViewSigonForm";
+            }
+            /*** 用户问题以及问题的回复 ***/
+            HashMap<UserAsk, List<UserAnswer>> askListHashMap = new HashMap<>();
+            //通过用户名获取所有提问
+            List<UserAsk> userAskList = accountService.getUserAskListbyName(username);
+            //循环,通过每一个提问获取提问的回答
+            for (UserAsk userAsk : userAskList) {
+                //通过提问获取所有的回答
+                List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(userAsk.getId());
+                //保存到map容器中
+                askListHashMap.put(userAsk, userAnswerList);
+            }
+            //最后添加到问答容器
+            AskAnswerContainer askAnswerContainer = new AskAnswerContainer(askListHashMap);
+            //渲染到model,用户的问题容器
+            model.addAttribute(askAnswerContainer);
+
+            /***** 游记内容获取*******/
+            //通过用户名获取所有游记
+            List<TraverNote> traverNoteList = accountService.getTraverNodeListbyName(username);
+
+            /***用户详细信息获取***/
+            //首先判断是否有详细信息字段//
+            UserProfile userProfile = accountService.getUserProfileByUserName(username);
+            if (userProfile == null) {
+                userProfile = new UserProfile();
+                userProfile.setEmail(username);
+                accountService.updateUserProfile(userProfile);
+            }
+            model.addAttribute(userProfile);
+            return "Account/UserCenter";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "common/ErrorPage";
+        }
     }
 
     //跳转到我的游记界面
@@ -342,16 +378,18 @@ public class AccountController {
         return "account/SettingSecurity";
     }
 
-    // 跳转到写游记
+    // 跳转到游记专区
     @GetMapping("/account/GotoCreateNote")
     public String GotoCreateNote(HttpSession session) {
-        return "TraverAsk/CreateNote";
+        //请求转发到游记界面
+        return "redirect:/TraverAsk/ViewTraverNote";
     }
 
-    //跳转到写问题
+    //跳转到问答专区
     @GetMapping("/account/GotoCreateAsk")
     public String GotoCreateAsk(HttpSession session) {
-        return "TraverAsk/CreateAsk";
+        //请求转发到写问题界面
+        return "redirect:/TraverAsk/QuestionAnswer";
     }
 
 

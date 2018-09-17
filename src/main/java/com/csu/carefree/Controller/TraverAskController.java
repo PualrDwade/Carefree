@@ -38,7 +38,7 @@ public class TraverAskController {
     }
 
     //进入用户提出问题模块
-    @GetMapping("TraverAsk/ViewCreateAsk")
+    @GetMapping("/TraverAsk/ViewCreateAsk")
     public String ViewCreateAsk() {
 
         return "TraverAsk/CreateAsk";
@@ -91,7 +91,7 @@ public class TraverAskController {
     /*****************用户游记模块******************/
 
     //进入用户游记的控制器url
-    @GetMapping("TraverAsk/ViewTraverNote")
+    @GetMapping("/TraverAsk/ViewTraverNote")
     public String ViewTraverNote() {
         //进行业务操作
         //返回页面进行渲染

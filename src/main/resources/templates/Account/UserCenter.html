@@ -70,27 +70,27 @@
                     <a class="btn_deleted" href="/u/note/delete.html"><i></i>已删除游记</a>
                 </div>
             </div>
-            <!--我的回答-->
+            <!--我的提问-->
             <div class="common_block my_notes">
                 <div class="common_title clearfix">
-                    <h2>我的回答</h2>
+                    <h2>我的提问</h2>
                 </div>
                 <div class="notes_default ask_default">
                     <i class="ico_notes"></i>
                     <div class="notes_default_detail">
-                        <p>问答是一个所有人帮所有人的平台，<br>用你的旅行经验，去帮助其他人。</p>
+                        <p>生活就是一行旅行,问题总是接踵而至<br>提出你的问题,让他人帮你解答</p>
                     </div>
                 </div>
                 <!--回答列表-->
                 <div class="common_title clearfix">
                     <div class="ask_list">
                         <ul class="_j_qa_answer_list">
-                            <li>
+                            <li th:each="askitem : ${askAnswerContainer.getUserAskList()}">
                                 <dl>
                                     <dt class="common_dt">
                                         <div class="ask_ava">
-                                            <a href="/wenda/u/79821721/answer.html" target="_blank">
-                                                <img src="http://p2-q.mafengwo.net/s10/M00/8E/73/wKgBZ1jGu4OAX38cAAB_kTzjduk54.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                            <a href="#" target="_blank">
+                                                <img th:src="${askitem}"
                                                      height="48" width="48" alt="水滴" title="水滴">
                                             </a>
                                         </div>
@@ -107,8 +107,8 @@
                                         </div>
                                     </dt>
                                     <dd class="answers_dd">
-                                        <div class="answer_word">
-                                            TA的回答：头盔，冰镐，冰爪，安全带，哈巴雪山属于初级雪山，商业俱乐部都全包的。
+                                        <div class="answer_word" th:text="${session}">
+                                            我的回答：头盔，冰镐，冰爪，安全带，哈巴雪山属于初级雪山，商业俱乐部都全包的。
                                         </div>
                                     </dd>
                                 </dl>
