@@ -25,19 +25,18 @@ public class AccountController {
      * 实现用户登陆注册模块的业务
      * 实现用户中心模块的业务
      */
-
-
     //springmvc自动装配,创建一个用户的服务接口
     @Autowired
     private AccountService accountService;
 
-    //跳转到登陆页面
+
+    //跳转到登陆页面的请求
     @GetMapping("/account/ViewSignonForm")
     public String ViewSigonForm() {
         return "Account/AccountLogin";
     }
 
-    //进行登陆
+    //进行登陆的请求
     @PostMapping("/account/Signon")
     public String Sigon(@RequestParam("username") String username, Model model,
                         @RequestParam("password") String password, HttpSession session) {
@@ -52,23 +51,25 @@ public class AccountController {
                 return "redirect:/";
             } else {
                 System.out.println("密码错误");
+                //返回给页面进行渲染
                 model.addAttribute("loginResponse", 1);
-                return "Account/AccountLogin";
+                return "redirect:/account/ViewSignonForm";
             }
         } else {
             System.out.println("用户名不存在");
+            //返回给页面进行渲染
             model.addAttribute("loginResponse", 2);
-            return "Account/AccountLogin";
+            return "redirect:/account/ViewSignonForm";
         }
     }
 
-    //跳转到注册页面
+    //跳转到注册页面的请求
     @GetMapping("/account/ViewRegister")
     public String ViewRegister() {
         return "Account/AccountRegister";
     }
 
-    //注册的操作(Post操作)
+    //注册的操作的请求(Post操作)
     @PostMapping("/account/Register")
     public String Register(
             Model model,
@@ -81,7 +82,7 @@ public class AccountController {
         if (sigon == null) {
             //发送到指定邮件地址
             //把用户名和密码存入session中
-            session.setAttribute("register_username", username);
+            session.setAttribute("verify_username", username);
             session.setAttribute("register_password", password);
             //使用工具类的静态方法随机获得一个8位验证码
             String code = RandomNumberUtils.getRandonString(8);
@@ -98,28 +99,37 @@ public class AccountController {
                 //发送失败,跳转到失败页面
                 return "Account/SendEmailFail";
             }
+            //传入下一个页面获取邮箱号码进行显示
+            model.addAttribute("emailSender", username);
             return "Account/SendEmailSuccees";
         }
         //用户已经存在了,传递一个值到下一个页面
         else {
             model.addAttribute("registerResponse", 1);//用户名已存在
-            return "Account/AccountRegister";
+            return "redirect:/account/ViewRegister";
         }
     }
 
-
-    //跳转到找回密码的页面
+    //跳转到找回密码的页面的请求
     @GetMapping("/account/ViewForgetForm")
     public String ViewForgetForm() {
         return "Account/ForgetPasswd";
     }
 
-    //找回密码的操作(Post操作)
-    @PostMapping("/account/Forget")
+    //找回密码的操作(Post操作)的请求
+    @PostMapping("/account/FindPassWord")
     public String Forget(
+            Model model,
             @RequestParam("username") String username,
             HttpSession session) {
         try {
+            //首先判断这个用户是否存在
+            if (accountService.getSigonByUserName(username) == null) {
+                System.out.println("不存在这个用户,请注册");
+                return "common/ErrorPage";
+            }
+            //把用户名和密码存入session中
+            session.setAttribute("verify_username", username);
             //发送到指定邮件地址
             //使用工具类的静态方法随机获得一个8位验证码
             String code = RandomNumberUtils.getRandonString(8);
@@ -135,7 +145,8 @@ public class AccountController {
                 //发送失败,跳转到失败页面
                 return "Account/SendEmailFail";
             }
-            //返回到发送成功页面
+            //返回到发送成功页面,同时放入数据
+            model.addAttribute("emailSender", username);
             return "Account/SendEmailSuccees";
         } catch (Exception e) {
             //发生未知错误.打印错误消息
@@ -144,14 +155,14 @@ public class AccountController {
         }
     }
 
-    //用户注销登陆的控制器请求url
+    //用户注销登陆的控制器请求
     @GetMapping("/account/Signup")
     public String Signup(HttpSession session) {
         session.removeAttribute("username");
-        return "redirect/:";
+        return "redirect:/";
     }
 
-    //邮箱的控制器请求url
+    //邮箱的控制器请求
     @GetMapping("/account/EmailVerify")
     public String EmailVerify(
             @RequestParam("code") String code,
@@ -160,7 +171,7 @@ public class AccountController {
         try {
             //存在username
             System.out.println("try.....");
-            String username = (String) session.getAttribute("register_username");
+            String username = (String) session.getAttribute("verify_username");
             System.out.println(username);
             if (username.equals(accountService.getEmailVerifyRecordByCodeAndType(code, type).getEmail())) {
                 //如果是注册
@@ -170,6 +181,7 @@ public class AccountController {
                     accountService.setSigon(username, (String) session.getAttribute("register_password"));
                     //同时进行登陆
                     session.setAttribute("username", username);
+                    //直接登陆,重定向到主页
                     return "redirect:/";
                 }
                 //如果是找回密码
@@ -179,6 +191,7 @@ public class AccountController {
                     return "Account/ResetPassWord";
                 }
             } else {
+                //邮箱验证失败
                 return "Account/EmailVerifyFail";
             }
         } catch (Exception e) {
@@ -188,20 +201,22 @@ public class AccountController {
         }
     }
 
-    //重置密码的控制器url
-    @GetMapping("/account/ResetPassword")
-    public String ResetPassword(@RequestParam String password, HttpSession session) {
+    //进行重置密码的请求
+    @PostMapping("/account/ResetPassword")
+    public String ResetPassword(@RequestParam String password,
+                                Model model,
+                                HttpSession session) {
         //修改密码
         try {
             String username = (String) session.getAttribute("forget_username");
-            if (username != null) {
-                accountService.updateSigon(username, password);
-                //重置完成,重新进行登陆
-                return "Account/AccountLogin";
-            } else {
-                //重置失败
-                return "Account/ResetError";
-            }
+            System.out.println("更新用户信息....");
+            accountService.updateSigon(username, password);
+            System.out.println("修成功");
+            //重置完成,重新进行登陆
+            //给前台页面返回信息
+            session.removeAttribute("username");//移除登陆状态
+            model.addAttribute("resetInfo", "修改密码成功,请重新登陆");
+            return "Account/AccountLogin";
         } catch (Exception e) {
             return "common/ErrorPage";
         }
