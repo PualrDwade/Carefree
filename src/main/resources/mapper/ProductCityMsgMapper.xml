@@ -3,10 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.csu.carefree.Persistence.ProductCityMsgMapper">
-
     <cache/>
-
-    <select id="getProduct_CityList" resultType="com.csu.carefree.Model.ProductDT.ProductCityMsg">
+    <select id="getProductCityList" resultType="com.csu.carefree.Model.ProductDT.ProductCityMsg">
     SELECT
       id,
       city_id,
@@ -21,18 +19,18 @@
       id,
       city_id,
       product_price,
-      product_id as product_id
+      product_id as productId
     FROM ProductDT_product_city
-    WHERE product_id = #{product_id}
+    WHERE product_id = #{productId}
     </select>
 
-    <select id="getADepartCity_Price" resultType="com.csu.carefree.Model.ProductDT.ProductCityMsg">
+    <select id="getDepartCityPriceByProductId" resultType="com.csu.carefree.Model.ProductDT.ProductCityMsg">
     SELECT
       id,
       city_id,
       product_price,
       product_id as product_id
     FROM ProductDT_product_city
-    WHERE product_id = #{0} AND city_id = #{1}
+    WHERE product_id = #{productId} AND city_id = #{cityName}
     </select>
 </mapper>
