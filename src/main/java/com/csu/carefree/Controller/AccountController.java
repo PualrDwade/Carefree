@@ -256,7 +256,13 @@ public class AccountController {
             }
             //最后添加到问答容器
             AskAnswerContainer askAnswerContainer = new AskAnswerContainer(askListHashMap);
+            //提问数
+            int askNum = userAskList.size();
+            //回答数
+            int answerNum = traverAskService.getUserAnswerListByName(username).size();
             //渲染到model,用户的问题容器
+            model.addAttribute(askNum);
+            model.addAttribute(answerNum);
             model.addAttribute(askAnswerContainer);
 
             /***** 游记内容获取*******/
@@ -268,10 +274,14 @@ public class AccountController {
             UserProfile userProfile = accountService.getUserProfileByUserName(username);
             if (userProfile == null) {
                 userProfile = new UserProfile();
-                userProfile.setEmail(username);
+                userProfile.setEmail(username);//设置邮箱字段为用户名
+                userProfile.setImage("http://img4.imgtn.bdimg.com/it/u=1106367332,2196124484&fm=26&gp=0.jpg");//设置为默认头像
+                userProfile.setNick_name("畅游网用户");//默认昵称
                 accountService.updateUserProfile(userProfile);
             }
             model.addAttribute(userProfile);
+
+            //完成数据渲染,返回到前端页面
             return "Account/UserCenter";
         } catch (Exception e) {
             System.out.println(e);

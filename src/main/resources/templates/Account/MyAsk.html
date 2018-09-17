@@ -8,23 +8,9 @@
         <!--页面内容-->
         <div class="center clearfix">
             <!--左侧边栏-->
-            <div class="side_bar flt1">
-                <!--用户信息-->
-                <div class="MAvatar">
-                    <!--昵称和性别标签-->
-                    <div class="MAvaName">畅游用户625
-                        <i class="MGenderMale"></i>
-                        <!--<i class="MGenderFemale"></i>-->
-                        <!--<i class="MGender"></i>-->
-                    </div>
-                    <!--生日和居住地，设置图标-->
-                    <div class="MAvaInfo clearfix MAvaMyInfo">
-                        <span class="MAvaLevel flt1" title="11.15">生日：11.15</a></span>
-                        <span class="MAvaPlace flt1" title="鹿儿岛">现居：鹿儿岛</span>
-                        <span class="MAvaSet"><a title="设置" href="AccountSetting.html" target="_self"></a></span>
-                    </div>
-                </div>
-            </div>
+            <!--左侧边栏-->
+            <div th:replace="common/userCenter::userLeft"></div>
+            <!--内容-->
             <div class="content flt2">
                 <div class="achievement clearfix">
                     <ul>
@@ -42,7 +28,7 @@
                     <a class="btn" th:href="@{/TraverAsk/ViewCreateAsk}" target="_blank">我要提问</a>
                 </div>
                 <div class="wd-main">
-                    <div class="wd-navbar clearfix">
+                    <div class=" wd-navbar clearfix">
                         <ul class="wd-nav _j_qa_nav">
                             <li><a href="MyAnswer.html">我的回答</a></li>
                             <li class="on"><a href="MyAsk.html">我的提问</a></li>

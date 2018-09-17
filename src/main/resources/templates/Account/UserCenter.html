@@ -15,14 +15,14 @@
             <!--快捷功能-->
             <div class="common_block main_links">
                 <ul class="clearfix">
-                    <li><a href="/TraverAsk/ViewTraverNote" target="_blank">
+                    <li><a th:href="@{/TraverAsk/ViewTraverNote}" target="_blank">
                         <i class="write_note"></i><span class="tags_link">看游记</span></a>
                     </li>
-                    <li><a href="/TraverAsk/QuestionAnswer" target="_blank"><i
+                    <li><a th:href="@{/TraverAsk/QuestionAnswer}" target="_blank"><i
                             class="ask_expert"></i><span class="tags_link">问达人</span></a></li>
-                    <li><a href="">
+                    <li><a href="#">
                         <i class="add_footprint"></i><span class="tags_link">查攻略</span></a></li>
-                    <li class="last"><a href="">
+                    <li class="last"><a href="#">
                         <i class="invite_friends"></i><span class="tags_link">收消息</span></a>
                     </li>
                 </ul>
@@ -33,14 +33,13 @@
                     <h2>我的游记</h2>
                 </div>
                 <div class="notes_default_v2">
-                    <a href="/account/GotoCreateNote" target="_blank" title="写游记" class="btn_write"><i></i>写游记</a>
+                    <a th:href="@{/account/GotoCreateNote}" target="_blank" title="写游记" class="btn_write"><i></i>写游记</a>
                 </div>
                 <!--游记列表-->
                 <div class="notes_list">
                     <ul>
                         <li data-order="4" data-top="0">
                             <dl>
-
                                 <dd>
                                     <div class="note_title clearfix">
                                         <div class="note_info">
@@ -75,14 +74,14 @@
                 <div class="common_title clearfix">
                     <h2>我的提问</h2>
                 </div>
-                <div class="notes_default ask_default">
+                <div th:if="${askNum}==0" class="notes_default ask_default">
                     <i class="ico_notes"></i>
                     <div class="notes_default_detail">
                         <p>生活就是一行旅行,问题总是接踵而至<br>提出你的问题,让他人帮你解答</p>
                     </div>
                 </div>
                 <!--回答列表-->
-                <div class="common_title clearfix">
+                <div th:if="${askNum}!=0" class="common_title clearfix">
                     <div class="ask_list">
                         <ul class="_j_qa_answer_list">
                             <li th:each="askitem : ${askAnswerContainer.getUserAskList()}">
@@ -90,24 +89,28 @@
                                     <dt class="common_dt">
                                         <div class="ask_ava">
                                             <a href="#" target="_blank">
-                                                <img th:src="${askitem}"
+                                                <!--用户头像url-->
+                                                <img th:src="${userProfile.getImage()}"
                                                      height="48" width="48" alt="水滴" title="水滴">
                                             </a>
                                         </div>
                                         <div class="ask_info">
-                                            <h2><a href="/wenda/detail-12926271.html" title="" target="_blank">登哈巴雪山哪些装备可以在现场租？</a>
+                                            <h2><a href="#" th:title="${askitem.getTitle()}" target="_blank">登哈巴雪山哪些装备可以在现场租？</a>
                                             </h2>
                                             <p>
                                                 <span>提问者<a href="/wenda/u/79821721/answer.html" title="水滴" class="name"
                                                             target="_blank">水滴</a><a href="/rank/lv.php?uid=79821721"
                                                                                      title="Lv.2" class="level"
                                                                                      target="_blank">Lv.2</a></span>
-                                                <span>9个回答</span>
+                                                <span th:text="${askAnswerContainer.getAnswerListByask(askitem).size()}">9个回答</span>
                                             </p>
                                         </div>
                                     </dt>
-                                    <dd class="answers_dd">
-                                        <div class="answer_word" th:text="${session}">
+                                    <!--下面是回答列表-->
+                                    <dd th:each="answeritem : ${askAnswerContainer.getAnswerListByask(askitem)}"
+                                        class="answers_dd">
+                                        <div class="answer_word"
+                                             th:text="${answeritem.getUser_id()}+${answeritem.getAnswer_content()}">
                                             我的回答：头盔，冰镐，冰爪，安全带，哈巴雪山属于初级雪山，商业俱乐部都全包的。
                                         </div>
                                     </dd>
