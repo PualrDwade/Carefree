@@ -1,8 +1,6 @@
 package com.csu.carefree.Model.TraverAsk;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 //这是一个功能bean的容器,用来实现用户问答的抽象
 public class AskAnswerContainer {
@@ -23,7 +21,7 @@ public class AskAnswerContainer {
                 return userAsk;
             }
         }
-        //循环完了还是没有找到对应的问题
+        //循环完了还是没有找到对应的问题,返回空
         return null;
     }
 
@@ -34,7 +32,11 @@ public class AskAnswerContainer {
 
     //得到用户所有的问题
     public List<UserAsk> getUserAskList() {
-        return (List<UserAsk>) askListHashMap.keySet();
+        List<UserAsk> list = new ArrayList<>();
+        for (Map.Entry<UserAsk, List<UserAnswer>> entry : askListHashMap.entrySet()) {
+            list.add(entry.getKey());
+        }
+        return list;
     }
 
     //得到用户所有的回答
@@ -46,4 +48,22 @@ public class AskAnswerContainer {
         }
         return list;
     }
+
+    //得到最热门的问题List排序(按照回复数进行排序)
+    List<UserAsk> getHotestAskList() {
+        List<Map.Entry<UserAsk, Integer>> userAskList = new ArrayList<>();
+        List<UserAsk> list = new ArrayList<>();
+        Collections.sort(userAskList, new Comparator<Map.Entry<UserAsk, Integer>>() {
+            @Override
+            public int compare(Map.Entry<UserAsk, Integer> o1, Map.Entry<UserAsk, Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+        for (Map.Entry<UserAsk, Integer> entry : userAskList) {
+            list.add(entry.getKey());
+        }
+        return list;
+    }
+
+    //得到最新的问题
 }
