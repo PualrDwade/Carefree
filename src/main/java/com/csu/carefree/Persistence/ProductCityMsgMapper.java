@@ -1,6 +1,7 @@
 package com.csu.carefree.Persistence;
 
 import com.csu.carefree.Model.ProductDT.ProductCityMsg;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ public interface ProductCityMsgMapper {
     List<ProductCityMsg> getAllDepartCityListByProductId(String productId);
 
     //根据产品ID以及出发城市名字查找相应的起价
-    ProductCityMsg getDepartCityPriceByProductId(String productId, String cityName);
+    ProductCityMsg getDepartCityPriceByProductId(@Param("productId") String productId, @Param("cityName") String cityName);
 }
