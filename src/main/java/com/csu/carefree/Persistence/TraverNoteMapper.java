@@ -20,4 +20,7 @@ public interface TraverNoteMapper {
 
     //通过username得到用户游记列表
     List<TraverNote> getTraverNodeListbyName(String username);
+
+    //通过城市名来查询相应的游记
+    List<TraverNote> getTraverNodeListbyCityName(String cityId);
 }

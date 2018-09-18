@@ -84,7 +84,7 @@ public class EmailSendUtils {
                         "?type=" + type + "&code=" + code +
                         "'>畅游网账号注册</a></p>\n" +
                         "<p>&nbsp;</p>\n" +
-                        "<p><code>技术提供:</code>陈志轩,张恺庭,陈志轩,王鹭星,廖智勇</p>\n" +
+                        "<p><code>技术提供:</code>陈志轩,张恺庭,黄凯,王鹭星,廖智勇</p>\n" +
                         "</body>\n" +
                         "</html>";
         String ResetContent =
@@ -99,7 +99,7 @@ public class EmailSendUtils {
                         "?type=" + type + "&code=" + code +
                         "'>畅游网密码重置</a></p>\n" +
                         "<p>&nbsp;</p>\n" +
-                        "<p><code>技术提供:</code>陈志轩,张恺庭,陈志轩,王鹭星,廖智勇</p>\n" +
+                        "<p><code>技术提供:</code>陈志轩,张恺庭,黄凯,王鹭星,廖智勇</p>\n" +
                         "</body>\n" +
                         "</html>";
         // 创建Session实例对象
