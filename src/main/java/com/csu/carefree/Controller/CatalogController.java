@@ -6,6 +6,8 @@ import com.csu.carefree.Model.TraverAsk.TraverNote;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
 import com.csu.carefree.Service.CatalogService;
+import com.csu.carefree.Util.CatalogUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +29,10 @@ public class CatalogController {
      * 酒店信息展示，热门酒店推荐
      */
 
-//    @Autowired
+    @Autowired
     private CatalogService catalogService;
+
+    private CatalogUtils catalogUtils = new CatalogUtils();
 
     @GetMapping("ProductDT/viewHotel")
     public String viewHotelMsgList(Model model) {
@@ -169,7 +173,7 @@ public class CatalogController {
 
         List<ProductMsg> productMsgList = catalogService.getProductList();
         System.out.println("找到符合条件的产品"+ productMsgList.size() +"条");
-        setDepartCityPrice(destination,productMsgList);
+        catalogUtils.setDepartCityPrice(catalogService,destination,productMsgList);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
@@ -190,28 +194,28 @@ public class CatalogController {
         String productType = checkedTypeValues[0];
 
         List<ProductMsg> productMsgList = new ArrayList<ProductMsg>();
-        if(checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
+        if(traverDays.equals("0") && supplierId.equals("0") && productType.equals("0")) {
             productMsgList = catalogService.getProductList();
         }
-        if(!checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
+        if(!traverDays.equals("0") && supplierId.equals("0") && productType.equals("0")) {
             productMsgList = catalogService.getProductListByTraverdays(traverDays);
         }
-        if(checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
+        if(traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
             productMsgList = catalogService.getProductListBySupplierId(supplierId);
         }
-        if(checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+        if(traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
             productMsgList = catalogService.getProductListByProductType(productType);
         }
-        if(!checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
+        if(!traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
             productMsgList = catalogService.getProductListByDaysAndStore(traverDays,supplierId);
         }
-        if(!checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+        if(!traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
             productMsgList = catalogService.getProductListByDaysAndType(traverDays,productType);
         }
-        if(checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+        if(traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
             productMsgList = catalogService.getProductListByTypeAndStore(productType,supplierId);
         }
-        if(!checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+        if(!traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
             productMsgList = catalogService.getProductListByThree(traverDays,productType,supplierId);
         }
 
@@ -219,7 +223,7 @@ public class CatalogController {
 
         String destination = session.getAttribute("location").toString();
 
-        setDepartCityPrice(destination,productMsgList);
+        catalogUtils.setDepartCityPrice(catalogService,destination,productMsgList);
 
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
@@ -231,7 +235,7 @@ public class CatalogController {
 
     //进入酒店页面的界面控制器
     @GetMapping("/Catalog/HotHotelList")
-    public String HotHotelList(Model model) {
+    public String HotHotelList(@RequestParam("destination") String destination,Model model) {
         //获取当前用户位置,推荐酒店
         if (destination != null) {
             List<HotelMsg> hotelMsgList = catalogService.getHotelListByDestination(destination+"市");
@@ -241,6 +245,40 @@ public class CatalogController {
         }
         return "ProductDT/Hotel";
     }
+
+    @PostMapping("/Catalog/HotHotelListByConditions")
+    public String HotHotelListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model) {
+        String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
+        String[] checkedPriceValues = httpServletRequest.getParameterValues("price");
+
+        System.out.println(checkedStoreValues[0]);
+        System.out.println(checkedPriceValues[0]);
+
+        String supplierId = checkedStoreValues[0];
+        String price = checkedPriceValues[0];
+
+        String destination = session.getAttribute("location").toString();
+
+        List<HotelMsg> hotelMsgList = new ArrayList<HotelMsg>();
+
+        if(supplierId.equals("0") && price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestination(destination+"市");
+        }
+        if(!supplierId.equals("0") && price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination+"市",supplierId);
+        }
+        if(supplierId.equals("0") && !price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestination(destination+"市");
+            catalogUtils.setHotelListByPrices(hotelMsgList,price);
+        }
+        if(!supplierId.equals("0") && !price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination+"市",supplierId);
+            catalogUtils.setHotelListByPrices(hotelMsgList,price);
+        }
+        model.addAttribute("hotelMsgList", hotelMsgList);
+        return "ProductDT/Hotel";
+    }
+
 
     /****************************攻略推荐模块**********************************/
 
@@ -256,17 +294,40 @@ public class CatalogController {
 //         return city;
 //     }
 
-// <<<<<<< master
 //     private void setDepartCityPrice(String destination,List<ProductMsg> productMsgList){
-//         if (destination != null) {
-//             for (int i = 0; i < productMsgList.size(); i++) {
-//                 ProductCityMsg productCityMsg = catalogService.getDepartCityPrice(productMsgList.get(i).getId(), destination);
-//                 if(productCityMsg != null) {
-//                     productMsgList.get(i).setCurrent_price(productCityMsg.getProduct_price());
-//                 }
-//             }
-//         }
-//     }
-// }
+//        if (destination != null) {
+//            for (int i = 0; i < productMsgList.size(); i++) {
+//                ProductCityMsg productCityMsg = catalogService.getDepartCityPrice(productMsgList.get(i).getId(), destination);
+//                if(productCityMsg != null) {
+//                    productMsgList.get(i).setCurrent_price(productCityMsg.getProduct_price());
+//                }
+//            }
+//        }
+//    }
+
+//    private void setHotelListByPrices(List<HotelMsg> hotelMsgList,String price) {
+//        if(price.equals("100")) {
+//            chooseHotelMsgFromListByPrice(hotelMsgList,0,100);
+//        }
+//        if(price.equals("250")) {
+//            chooseHotelMsgFromListByPrice(hotelMsgList,100,250);
+//        }
+//        if(price.equals("500")) {
+//            chooseHotelMsgFromListByPrice(hotelMsgList,250,500);
+//        }
+//        if(price.equals("1000")) {
+//            chooseHotelMsgFromListByPrice(hotelMsgList,500,1000);
+//        }
+//    }
+//
+//    private void chooseHotelMsgFromListByPrice(List<HotelMsg> hotelMsgList,int a ,int b) {
+//        if (hotelMsgList != null) {
+//            for (int i = 0; i < hotelMsgList.size(); i++) {
+//                if(!(Integer.parseInt(hotelMsgList.get(i).getHotel_price())>a && Integer.parseInt(hotelMsgList.get(i).getHotel_price())<b))
+//                hotelMsgList.get(i).setHotel_price("0");
+//            }
+//        }
+//    }
+ }
   
-}
+
