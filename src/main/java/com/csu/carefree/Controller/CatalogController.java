@@ -197,7 +197,7 @@ public class CatalogController {
         List<ProductMsg> productMsgList = catalogService.getProductListByCityName(destination);
         Map<String, List<ProductMsg>> map = new HashMap<>();
         for (int i = 0; i < productMsgList.size() / PRODUCTPAGESIZE; ++i) {
-            map.put(String.valueOf(++i), productMsgList.subList(i, i + PRODUCTPAGESIZE));
+            map.put(String.valueOf(i + 1), productMsgList.subList(i, i + PRODUCTPAGESIZE));
         }
         map.get(pageNum);
 
