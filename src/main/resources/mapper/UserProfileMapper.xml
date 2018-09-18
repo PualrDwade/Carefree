@@ -9,15 +9,18 @@
     -->
     <insert id="setUserProfile" parameterType="com.csu.carefree.Model.Account.UserProfile">
     INSERT INTO Account_userprofile
-    (NICK_NAME, BIRTHDAY, GENDER, ADDRESS, MOBILE, IMAGE, EMAIL)
+    (NICK_NAME, BIRTHDAY, GENDER, ADDRESS, MOBILE, IMAGE, EMAIL,password,
+    is_superuser,username,first_name,last_name,is_staff,is_active,date_joined)
     VALUES
-    (#{nick_name}, #{birthday}, #{gender}, #{address}, #{mobile}, #{image}, #{email})
+    (#{nick_name}, #{birthday}, #{gender}, #{address}, #{mobile}, #{image}, #{email},"加密",0,
+    #{email},"" ,"",0,0,CURRENT_DATE())
     </insert>
 
     <!--
         查询用户信息
     -->
-    <select id="getUserProfileByUserName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.Account.UserProfile">
+    <select id="getUserProfileByUserName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.Account.UserProfile">
     SELECT
           NICK_NAME,
           BIRTHDAY,

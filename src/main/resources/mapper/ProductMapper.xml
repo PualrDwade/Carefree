@@ -149,7 +149,58 @@
       product_grade,
       supplier_id
     FROM ProductDT_productmsg
-    WHERE traver_days = #{0} AND product_type = #{1} AND supplier_id = #{2}
+    WHERE traver_days = #{traver_days} AND product_type = #{product_type} AND supplier_id = #{suppliper_id}
+    </select>
+
+    <select id="getProductListByDaysAndStore" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+        SELECT
+        id,
+        name,
+        traver_days,
+        product_type,
+        img_url,
+        product_link,
+        score,
+        sell_num,
+        comments_num,
+        product_grade,
+        supplier_id
+        FROM ProductDT_productmsg
+        WHERE traver_days = #{traver_days} AND supplier_id = #{suppliper_id}
+    </select>
+
+    <select id="getProductListByDaysAndType" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+        SELECT
+        id,
+        name,
+        traver_days,
+        product_type,
+        img_url,
+        product_link,
+        score,
+        sell_num,
+        comments_num,
+        product_grade,
+        supplier_id
+        FROM ProductDT_productmsg
+        WHERE traver_days = #{traver_days} AND product_type = #{product_type}
+    </select>
+
+    <select id="getProductListByTypeAndStore" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+        SELECT
+        id,
+        name,
+        traver_days,
+        product_type,
+        img_url,
+        product_link,
+        score,
+        sell_num,
+        comments_num,
+        product_grade,
+        supplier_id
+        FROM ProductDT_productmsg
+        WHERE product_type = #{product_type} AND supplier_id = #{suppliper_id}
     </select>
 
 </mapper>

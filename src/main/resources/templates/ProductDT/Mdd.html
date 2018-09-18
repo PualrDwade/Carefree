@@ -16,25 +16,23 @@
                 </div>
                 <div class="col-md-9">
                     <div class="boking_table">
-                        <form action="Mdd.html" method="post">
+                        <form th:action="@{/Catalog/Mdd}" method="post">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="book_tabel_item">
                                         <div class="form-group">
                                             <div class='input-group date' id='datetimepicker11'>
-                                                <input id="startTime" type='text' class="form-control"
-                                                       placeholder="出发时间"/>
-                                                <span class="input-group-addon">
-                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                <input th:value="${session.traverMsg.start_city}" name="startCity"
+                                                       type='text' class="form-control"
+                                                       placeholder="出发城市"/>
                                                     </span>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class='input-group date' id='datetimepicker1'>
-                                                <input id="backTime" type='text' class="form-control"
-                                                       placeholder="返程时间"/>
-                                                <span class="input-group-addon">
-                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                <input th:value="${session.traverMsg.end_city}" name="destination"
+                                                       type='text' class="form-control"
+                                                       placeholder="目的地城市"/>
                                                     </span>
                                             </div>
                                         </div>
@@ -44,11 +42,14 @@
                                     <div class="book_tabel_item">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input id="adultNum" type='text' class="form-control"
+                                                <input th:value="${session.traverMsg.adult_num}" name="adultNum"
+                                                       type='text' class="form-control"
                                                        placeholder="成人数"/>
                                             </div>
                                             <div class="input-group">
-                                                <input id="childrenNum" type='text' class="form-control"
+                                                <input th:value="${session.traverMsg.child_num}"
+                                                       name="childrenNum"
+                                                       type='text' class="form-control"
                                                        placeholder="儿童数"/>
                                             </div>
                                         </div>
@@ -58,12 +59,13 @@
                                     <div class="book_tabel_item">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input id="destination" type='text' class="form-control"
-                                                       placeholder="目的地"/>
+                                                <input th:text="${session.traverMsg.traverdays}"
+                                                       name="travelDays"
+                                                       type='text' class="form-control"
+                                                       placeholder="行程天数"/>
                                             </div>
                                         </div>
-                                        <input type="submit" value="选好了" class="book_now_btn button_hover"
-                                               href="ProductDT/CityMsg.html">
+                                        <input type="submit" value="选好了" class="book_now_btn button_hover">
                                     </div>
                                 </div>
                             </div>
@@ -78,107 +80,52 @@
     <div class="container" style="margin-top: 0px">
         <div class="section-top-border">
             <div class="row">
-                <!--酒店侧边栏开始-->
+                <!--景点侧边栏开始-->
                 <div class="col-lg-2 col-md-4 mt-sm-30 element-wrap"
                      style="background-color: rgba(235,252,255,0.98) ; height: 700px ;overflow:auto">
-                    <div class="single-element-widget">
-                        <h3 style="margin-left: 10px;font-size: 25px" class="mb-30 title_color">想要怎样的酒店？</h3>
-                        <!--酒店1-->
+                    <h3 style="margin-left: 10px;font-size: 25px" class="mb-30 title_color">想去哪些景点？</h3>
+                    <div class="single-element-widget" th:each="recommendScenic : ${session.recommendScenicList}">
                         <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">1. 酒 店 1</h4></a>
-                        </div>
-                        <hr>
-                        <!--酒店1-->
-                        <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">2. 酒 店 2</h4></a>
-                        </div>
-                        <hr>
-                        <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">3. 酒 店 3</h4></a>
-                        </div>
-                        <hr>
-                        <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">4. 酒 店 4</h4></a>
-                        </div>
-                        <hr>
-                        <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">5. 酒 店 5</h4></a>
-                        </div>
-                        <hr>
-                        <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">6. 酒 店 6</h4></a>
+                            <a th:href="${recommendScenic.link_url}"><h4 th:text="${recommendScenic.name}"
+                                                                         style="margin-left: 20px"></h4></a>
                         </div>
                         <hr>
                     </div>
+
+                    <div class="pager">
+                        <a class="page_num" href="">1</a>
+                        <a class="page_num" href="">2</a>
+                        <a class="page_num" href="">3</a>
+                    </div>
                 </div>
-                <!--酒店侧边栏结束-->
+                <!--景点侧边栏结束-->
 
                 <!--地图-->
                 <div class="col-lg-8 col-md-8" id="allmap"></div>
                 <!--地图-->
 
-                <!--景点侧边栏开始-->
+                <!--酒店侧边栏开始-->
                 <div class="col-lg-2 col-md-4 mt-sm-30 element-wrap"
                      style="background-color: rgba(235,252,255,0.98) ; height: 700px ;overflow:auto">
-                    <div class="single-element-widget">
-                        <h3 style="margin-left: 10px;font-size: 25px" class="mb-30 title_color">想去哪些景点？</h3>
-                        <!--景点1-->
+                    <h3 style="margin-left: 10px;font-size: 25px" class="mb-30 title_color">想要怎样的酒店？</h3>
+                    <div class="single-element-widget" th:each="recommendHotel : ${session.recommendHotelList}">
                         <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">1. 景 点 1</h4></a>
+                            <a th:href="${recommendHotel.hotel_link}"><h4 th:text="${recommendHotel.name}"
+                                                                          style="margin-left: 20px"></h4></a>
                             <div class="primary-checkbox">
                                 <input type="checkbox" id="site-1">
                                 <label for="site-1"></label>
                             </div>
                         </div>
                         <hr>
-                        <!--景点1-->
-
-                        <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">2. 景 点 2</h4></a>
-                            <div class="primary-checkbox">
-                                <input type="checkbox" id="site-2">
-                                <label for="site-2"></label>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">3. 景 点 3</h4></a>
-                            <div class="primary-checkbox">
-                                <input type="checkbox" id="site-3">
-                                <label for="site-3"></label>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">4. 景 点 4</h4></a>
-                            <div class="primary-checkbox">
-                                <input type="checkbox" id="site-4">
-                                <label for="site-4"></label>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">5. 景 点 5</h4></a>
-                            <div class="primary-checkbox">
-                                <input type="checkbox" id="site-5">
-                                <label for="site-5"></label>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="switch-wrap d-flex justify-content-between">
-                            <a href="#"><h4 style="margin-left: 20px">6. 景 点 6</h4></a>
-                            <div class="primary-checkbox">
-                                <input type="checkbox" id="site-6">
-                                <label for="site-6"></label>
-                            </div>
-                        </div>
-                        <hr>
-
-                        <a href="Product.html" style="background-color: #f3c300"
-                           class="genric-btn default circle">选好了</a>
+                    </div>
+                    <div class="pager">
+                        <a class="page_num" href="">1</a>
+                        <a class="page_num" href="">2</a>
+                        <a class="page_num" href="">3</a>
                     </div>
                 </div>
-                <!--景点侧边栏结束-->
+                <!--酒店侧边栏结束-->
             </div>
         </div>
     </div>
@@ -189,14 +136,14 @@
             <!--游记-->
             <div class="col-lg-6 " style="border-right: 5px solid #f3c300; padding-right: 50px ">
                 <div class="section_title text-center">
-                    <a href="../TraverAsk/TraverNoteList.html"><h2 class="title_color">推 荐 游 记</h2></a>
+                    <a th:href="@{TraverAsk/ViewTraverNote}"><h2 class="title_color">推 荐 游 记</h2></a>
                     <p>这 里 有 最 精 彩 的 旅 行 游 记，给 你 更 多 的 旅 行 知 识</p>
                 </div>
-                <div class="row mb_30">
+                <div class="row mb_30" th:each="recommendTraverNote : ${session.recommendTraverNoteList}">
                     <div class="col-lg-4 col-md-6">
                         <div class="single-recent-blog-post">
                             <div class="thumb">
-                                <img class="img-fluid" src="../../static/image/blog/blog-1.jpg" alt="post">
+                                <img class="img-fluid" th:src="${recommendTraverNote.img_url}" alt="post">
                             </div>
                             <div class="details">
                                 <div class="tags">
@@ -210,86 +157,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-recent-blog-post">
-                            <div class="thumb">
-                                <img class="img-fluid" src="../../static/image/blog/blog-2.jpg" alt="post">
-                            </div>
-                            <div class="details">
-                                <div class="tags">
-                                    <a href="#" class="button_hover tag_btn">Travel</a>
-                                    <a href="#" class="button_hover tag_btn">Life Style</a>
-                                </div>
-                                <a href="#"><h4 class="sec_h4">Creative Outdoor Ads</h4></a>
-                                <p>Self-doubt and fear interfere with our ability to achieve or set goals. Self-doubt
-                                    and
-                                    fear are</p>
-                                <h6 class="date title_color">31st January,2018</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-recent-blog-post">
-                            <div class="thumb">
-                                <img class="img-fluid" src="../../static/image/blog/blog-3.jpg" alt="post">
-                            </div>
-                            <div class="details">
-                                <div class="tags">
-                                    <a href="#" class="button_hover tag_btn">Travel</a>
-                                    <a href="#" class="button_hover tag_btn">Life Style</a>
-                                </div>
-                                <a href="#"><h4 class="sec_h4">It S Classified How To Utilize Free</h4></a>
-                                <p>Why do you want to motivate yourself? Actually, just answering that question fully
-                                    can </p>
-                                <h6 class="date title_color">31st January,2018</h6>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!--游记-->
+
             <!--攻略-->
-            <div class="col-lg-6" style="padding-left: 50px">
-                <div class="section_title text-center">
-                    <a href="#"><h2 class="title_color">推 荐 攻 略</h2></a>
-                    <p>这 里 有 最 全 面 的 旅 行 攻 略，为 您 的 旅 行 出 谋 划 策</p>
-                </div>
+            <div class="section_title text-center">
+                <a><h2 class="title_color">推 荐 攻 略</h2></a>
+                <p>这 里 有 最 全 面 的 旅 行 攻 略，为 您 的 旅 行 出 谋 划 策</p>
+            </div>
+            <div class="col-lg-6" style="padding-left: 50px"
+                 th:each="recommendStrategy : ${session.recommendStrategyList}">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="../../static/image/elements/d.jpg" alt="" class="img-fluid">
+                        <img th:src="${recommendStrategy.img_url}" alt="" class="img-fluid">
                     </div>
                     <div class="col-md-8 ">
-                        <a href="#"><h4 class="sec_h4">这里是标题</h4></a>
-                        <p> 这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
+                        <a th:href="${recommendStrategy.link_url}"><h4 th:text="${recommendStrategy.title}"
+                                                                       class="sec_h4">标题</h4></a>
+                        <p th:text="${recommendStrategy.simple_content}">
+                            这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
                             <img style="width: 90px;height: 35px;float: right" src="../../static/image/logo/携程.svg">
                         </p>
                     </div>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="../../static/image/elements/d.jpg" alt="" class="img-fluid">
-                    </div>
-                    <div class="col-md-8 ">
-                        <a href="#"><h4 class="sec_h4">这里是标题</h4></a>
-                        <p> 这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
-                            <img style="width: 90px;height: 35px;float: right" src="../../static/image/logo/携程.svg">
-                        </p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="../../static/image/elements/d.jpg" alt="" class="img-fluid">
-                    </div>
-                    <div class="col-md-8 ">
-                        <a href="#"><h4 class="sec_h4">这里是标题</h4></a>
-                        <p> 这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
-                            <img style="width: 90px;height: 35px;float: right" src="../../static/image/logo/携程.svg">
-                        </p>
-                    </div>
-                </div>
-                <hr>
             </div>
             <!--攻略-->
         </div>

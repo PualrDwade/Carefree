@@ -86,4 +86,21 @@
     FROM TraverAsk_travernote
     WHERE user_id_id = #{username}
     </select>
+
+    <!--通过cityName获取用户游记信息-->
+    <select id="getTraverNodeListbyCityName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
+    SELECT
+          ID,
+          TITLE,
+          NOTE_CONTENT,
+          STAR_NUM,
+          NOTIFY_STATUS,
+          ADD_TIME,
+          IMG_URL,
+          USER_ID_ID AS user_id,
+          CITY_ID_ID AS city_id
+    FROM TraverAsk_travernote
+    WHERE user_id_id = #{cityId}
+    </select>
 </mapper>

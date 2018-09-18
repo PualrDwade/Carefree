@@ -165,4 +165,12 @@ public class FullProductInfo {
         this.supplierImgUrl = supplierImgUrl;
         this.price = price;
     }
+
+    public String getSupplierUrl() {
+        return supplierUrl;
+    }
+
+    public void setSupplierUrl(String supplierUrl) {
+        this.supplierUrl = supplierUrl;
+    }
 }
