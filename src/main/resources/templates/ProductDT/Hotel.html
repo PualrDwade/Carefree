@@ -153,8 +153,7 @@
             </div>
         </div>
     </div>
-</div>
-<!--================定制模块================-->
+    <!--================定制模块================-->
 
 <!--================ 精选酒店模块 =================-->
 <section class="accomodation_area section_gap">
@@ -177,6 +176,35 @@
                     </h5>
                 </div>
             </div>
+
+            <center>
+                <nav>
+                    <ul class="pagination">
+                        <li>
+                            <a th:href="@{/Catalog/HotHotelList(destination=${session.location} ,pageNum = 0,pageSize=8)}"> 首页 </a>
+                        </li>
+                        <li>
+                            <a th:if="${not hotelPageInfo.isFirstPage() }" th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum = ${hotelPageInfo.getCurrentPage() - 1},pageSize=8)}">前一页</a>
+                            <a th:if="${hotelPageInfo.isFirstPage()}" href="javascript: void(0);">Previous</a>
+                        </li>
+                        <li th:each="pageNo : ${#numbers.sequence(hotelPageInfo.getCurrentPage(), hotelPageInfo.getCurrentPage()+10)}">
+                            <a th:if="${hotelPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                            <a th:if="${not (hotelPageInfo.getCurrentPage() eq pageNo)}" th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum=${pageNo},pageSize=8)}">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a th:if="${not hotelPageInfo.isLastPage() }" th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum = ${hotelPageInfo.getCurrentPage() - 1},pageSize=8)}">前一页</a>
+                            <a th:if="${hotelPageInfo.isLastPage()}" href="javascript: void(0);">Previous</a>
+                        </li>
+
+                        <li><a th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum = ${hotelPageInfo.getMaxPage() - 8} ,pageSize=8)}"> 尾页 </a ></li>
+                    </ul>
+                </nav>
+            </center>
         </div>
     </div>
 </section>

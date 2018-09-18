@@ -9,6 +9,7 @@ import com.csu.carefree.Persistence.*;
 import com.csu.carefree.Service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -17,6 +18,7 @@ import java.util.*;
  *   Great by WLX
  */
 @Service
+@Transactional
 public class CatalogServiceImpl implements CatalogService {
     @Autowired
     private HotelMsgMapper hotelMsgMapper;
