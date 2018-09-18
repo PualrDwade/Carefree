@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.awt.*;
 import java.util.List;
 
 @Controller
@@ -97,24 +98,26 @@ public class TraverAskController {
         return "TraverAsk/AskAnswerDetail";
     }
 
-    @RequestMapping(value = "/TraverAsk/createAsk" , method = RequestMethod.POST)
-    public String createAsk(@RequestParam("title") String title, @RequestParam("askContent") String askContent, HttpSession session, Model model){
+    //创建新用户问答
+    //@RequestMapping(value = "/TraverAsk/createAsk" , method = RequestMethod.POST)
+    @GetMapping("/TraverAsk/createAsk")
+    public String createAsk( HttpSession session, Model model){
         //获得表单内容
         //以HTML形式保存用户问题
         //获得用户ID
 
         //String userName = (String) session.getAttribute("username");
-        System.out.println("title:  "+title);
-        System.out.println("askContent:   "+askContent);
+        //List<UserAsk> askList = traverAskService.getUserAskList();//获得所有UserAsk
+       // model.addAttribute("askList", askList);
 
-        return "TraverAsk/QuestionAnswer";
+        return "redirect:/TraverAsk/QuestionAnswer";
     }
 
 
     /*****************用户游记模块******************/
 
     //进入用户游记的控制器url
-    @GetMapping("TraverAsk/ViewTraverNote")
+    @GetMapping("/TraverAsk/ViewTraverNote")
     public String ViewTraverNote(Model model) {
         //进行业务操作
         //返回页面进行渲染
@@ -126,7 +129,7 @@ public class TraverAskController {
     }
 
     //进入用户游记详细信息界面
-    @GetMapping("TraverAsk/ViewTraverNoteDetail")
+    @GetMapping("/TraverAsk/ViewTraverNoteDetail")
     public String viewTraverNoteDetail(@RequestParam("traverNoteId") String traverNoteId, Model model){
         //  获取游记ID
         // 通过游记ID获取游记内容
@@ -148,4 +151,17 @@ public class TraverAskController {
 
         return "TraverAsk/TraverNoteList";
     }
+
+    //创建新用户游记
+    //@RequestMapping(value = "/TraverAsk/createNote", method = RequestMethod.POST)
+    @GetMapping("/TraverAsk/createNote")
+    public String createNote(Model model){
+        //获取用户写的游记TITLE
+        //获得游记写的游记内容
+        //List<TraverNote> traverNoteList = catalogService.getTraverNoteList();
+        //model.addAttribute("traverNoteList", traverNoteList);
+
+        return "redirect:/TraverAsk/ViewTraverNote";
+    }
+
 }

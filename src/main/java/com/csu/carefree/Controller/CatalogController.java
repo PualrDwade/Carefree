@@ -37,6 +37,7 @@ public class CatalogController {
     }
 
 
+
     //请求主界面
     @GetMapping("/")
     public String viewIndex(HttpSession session, Model model) {
@@ -52,7 +53,7 @@ public class CatalogController {
         if (traverMsg == null)
             session.setAttribute("traverMsg", new TraverMsg());
         traverMsg = (TraverMsg) session.getAttribute("traverMsg");
-
+      
         /*****************************热门产品推荐*********************************/
         List<FullProductInfo> hotProductList = catalogService.getHotProductList(session);
         session.setAttribute("product1", hotProductList.get(0));
@@ -91,6 +92,7 @@ public class CatalogController {
         model.addAttribute("hotHotelList", hotHotelList);
         return "index";
     }
+
 
     //不填写表单直接跳转到目的地界面
     @GetMapping("/Catalog/Mdd")
