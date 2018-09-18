@@ -34,7 +34,8 @@ public interface CatalogService {
     /*******************获取热门信息**********/
     ArrayList<FullProductInfo> getHotProductList(HttpSession session);
 
-    ArrayList<HotelMsg> getHotHotelList();
+    //通过城市名获取热门酒店信息,按照给定的指标进行筛选
+    ArrayList<HotelMsg> getHotHotelListByCityName(String cityName, int orderType);
 
     ArrayList<TraverNote> getHotTraverNoteList();
 
@@ -79,13 +80,13 @@ public interface CatalogService {
     List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId);
 
     //行程天数和供应商
-    List<ProductMsg> getProductListByDaysAndStore(String traverDays , String supplierId);
+    List<ProductMsg> getProductListByDaysAndStore(String traverDays, String supplierId);
 
     //行程天数和产品类型
-    List<ProductMsg> getProductListByDaysAndType(String traverDays , String productType);
+    List<ProductMsg> getProductListByDaysAndType(String traverDays, String productType);
 
     //产品类型和供应商
-    List<ProductMsg> getProductListByTypeAndStore( String productType, String supplierId);
+    List<ProductMsg> getProductListByTypeAndStore(String productType, String supplierId);
 
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找
@@ -97,6 +98,9 @@ public interface CatalogService {
 
     //例如当点击产品当中的供应商信息时候，要返回相应的信息
     Supplier getSupplierByName(String name);
+
+    //通过供应商id得到供应商
+    Supplier getSupplierById(String id);
 
     /*******城市省份信息*******/
     //通过省份ID获取省份信息

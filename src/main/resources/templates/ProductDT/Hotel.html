@@ -19,9 +19,8 @@
 
     <!--================定制模块================-->
     <div class="container" style="padding-top: 50px">
-        <form method="post" action="/Catalog/HotHotelListByConditions">
+        <form method="post" action="/Catalog/HotProductListByConditions">
             <div class="row margin-div">
-
                 <div class="col-lg-9">
                     <hr>
                     <div class="row">
@@ -102,6 +101,8 @@
                             <div class="primary-checkbox">
                                 <input name="price" type="radio" value="100" id="price-1">
                                 <label for="price-1"></label>
+                                <input name="type" type="radio" value="100" id="type-1">
+                                <label for="type-1"></label>
                             </div>
                         </div>
                         <div class="switch-wrap d-flex justify-content-between select-margin"
@@ -110,6 +111,8 @@
                             <div class="primary-checkbox">
                                 <input name="price" type="radio" value="250" id="price-2">
                                 <label for="price-2"></label>
+                                <input name="type" type="radio" value="250" id="type-2">
+                                <label for="type-2"></label>
                             </div>
                         </div>
                         <div class="switch-wrap d-flex justify-content-between select-margin"
@@ -118,6 +121,8 @@
                             <div class="primary-checkbox">
                                 <input name="price" type="radio" value="500" id="price-3">
                                 <label for="price-3"></label>
+                                <input name="type" type="radio" value="500" id="type-3">
+                                <label for="type-3"></label>
                             </div>
                         </div>
                         <div class="switch-wrap d-flex justify-content-between select-margin"
@@ -126,6 +131,8 @@
                             <div class="primary-checkbox">
                                 <input name="price" type="radio" value="1000" id="price-4">
                                 <label for="price-4"></label>
+                                <input name="type" type="radio" value="1000" id="type-4">
+                                <label for="type-4"></label>
                             </div>
                         </div>
                     </div>
@@ -135,7 +142,6 @@
                             <input type="submit" value="按条件筛选" class="book_now_btn button_hover">
                         </div>
                     </div>
-
                 </div>
             </div>
         </form>
@@ -147,36 +153,34 @@
             </div>
         </div>
     </div>
-    <!--================定制模块================-->
+</div>
+<!--================定制模块================-->
 
-    <!--================ 精选酒店模块 =================-->
-    <section class="accomodation_area section_gap">
-        <div class="container">
-            <div class="section_title text-center">
-                <h2 class="title_color">为 您 精 选</h2>
-                <p>为 您 提 供 最 优 质 的 酒 店 选 择</p>
-            </div>
-            <div class="row accomodation_two">
-                <div class="col-lg-3 col-sm-6" th:each="hotelMsg:${hotelMsgList}" th:if="${hotelMsg.hotel_price}!='0'">
-                    <div class="accomodation_item text-center">
-                        <div class="hotel_img">
-                            <img th:src="${hotelMsg.img_url}" alt="">
-                            <a class="btn theme_btn button_hover" th:href="${hotelMsg.hotel_link}"
-                               target="_blank">立即预定</a>
-                        </div>
-                        <a th:href="${hotelMsg.hotel_link}" target="_blank"><h4 class="sec_h4"
-                                                                                th:text="${hotelMsg.name}">Double Deluxe
-                            Room</h4></a>
-                        <h5 th:utext="${hotelMsg.hotel_price}+'<small>/日</small>'">$250
-
-                        </h5>
+<!--================ 精选酒店模块 =================-->
+<section class="accomodation_area section_gap">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_color">为 您 精 选</h2>
+            <p>为 您 提 供 最 优 质 的 酒 店 选 择</p>
+        </div>
+        <div class="row accomodation_two">
+            <div class="col-lg-3 col-sm-6" th:each="hotelMsg:${hotelMsgList}">
+                <div class="accomodation_item text-center">
+                    <div class="hotel_img">
+                        <img th:src="${hotelMsg.img_url}" alt="">
+                        <a class="btn theme_btn button_hover" th:href="${hotelMsg.hotel_link}" target="_blank">立即预定</a>
                     </div>
+                    <a th:href="${hotelMsg.hotel_link}" target="_blank"><h4 class="sec_h4" th:text="${hotelMsg.name}">
+                        Double Deluxe Room</h4></a>
+                    <h5 th:utext="${hotelMsg.hotel_price}+'<small>/日</small>'">$250
+
+                    </h5>
                 </div>
             </div>
         </div>
-    </section>
-    <!--================ 精选酒店模块  =================-->
-</div>
+    </div>
+</section>
+<!--================ 精选酒店模块  =================-->
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>
 <!--================ End footer Area  =================-->
