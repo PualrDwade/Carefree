@@ -225,7 +225,7 @@ public class CatalogController {
         }
         //为pageInfo设置当前页的数据
         pageInfo.setPageData(map.get(pageNum));
-        if (pageInfo.getCurrentPage() == 0)
+        if (pageInfo.getCurrentPage() == 1)
             pageInfo.setFirstPage(true);
         else
             pageInfo.setFirstPage(false);
@@ -329,7 +329,7 @@ public class CatalogController {
             }
         }
 
-        if (hotelMsgPageInfo.getCurrentPage() == 0)
+        if (hotelMsgPageInfo.getCurrentPage() == 1)
             hotelMsgPageInfo.setFirstPage(true);
         else
             hotelMsgPageInfo.setFirstPage(false);
