@@ -21,7 +21,6 @@
     <div class="container" style="padding-top: 50px">
         <form method="post" action="/Catalog/HotProductListByConditions">
             <div class="row margin-div">
-
                 <div class="col-lg-9">
                     <hr>
                     <div class="row">
@@ -37,42 +36,50 @@
                         </div>
                         <div class="switch-wrap d-flex justify-content-between select-margin"
                              style="margin-right: 10px;">
+                            <p>美团</p>
+                            <div class="primary-checkbox">
+                                <input name="store" type="radio" value="00001" id="store-1">
+                                <label for="store-1"></label>
+                            </div>
+                        </div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
                             <p>携程</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00003" id="store-1">
-                                <label for="store-1"></label>
+                                <input name="store" type="radio" value="00003" id="store-2">
+                                <label for="store-2"></label>
                             </div>
                         </div>
                         <div class="switch-wrap d-flex justify-content-between select-margin"
                              style="margin-right: 10px;">
                             <p>马蜂窝</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00002" id="store-2">
-                                <label for="store-2"></label>
+                                <input name="store" type="radio" value="00002" id="store-3">
+                                <label for="store-3"></label>
                             </div>
                         </div>
                         <div class="switch-wrap d-flex justify-content-between select-margin"
                              style="margin-right: 10px;">
                             <p>去哪儿</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00004" id="store-3">
-                                <label for="store-3"></label>
+                                <input name="store" type="radio" value="00004" id="store-4">
+                                <label for="store-4"></label>
                             </div>
                         </div>
                         <div class="switch-wrap d-flex justify-content-between select-margin"
                              style="margin-right: 10px;">
                             <p>飞猪</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00005" id="store-4">
-                                <label for="store-4"></label>
+                                <input name="store" type="radio" value="00005" id="store-5">
+                                <label for="store-5"></label>
                             </div>
                         </div>
                         <div class="switch-wrap d-flex justify-content-between select-margin"
                              style="margin-right: 10px;">
                             <p>途牛</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00006" id="store-5">
-                                <label for="store-5"></label>
+                                <input name="store" type="radio" value="00006" id="store-6">
+                                <label for="store-6"></label>
                             </div>
                         </div>
                     </div>
@@ -83,15 +90,17 @@
                              style="margin-right: 10px;">
                             <p>全部</p>
                             <div class="primary-checkbox">
-                                <input name="type" type="radio" value="0" id="type-all"
+                                <input name="price" type="radio" value="0" id="price-all"
                                        th:checked="${session.hotProductcheckedTypeAll}">
-                                <label for="type-all"></label>
+                                <label for="price-all"></label>
                             </div>
                         </div>
                         <div class="switch-wrap d-flex justify-content-between select-margin"
                              style="margin-right: 10px;">
                             <p>100元以内</p>
                             <div class="primary-checkbox">
+                                <input name="price" type="radio" value="100" id="price-1">
+                                <label for="price-1"></label>
                                 <input name="type" type="radio" value="100" id="type-1">
                                 <label for="type-1"></label>
                             </div>
@@ -100,6 +109,8 @@
                              style="margin-right: 10px;">
                             <p>100-250元</p>
                             <div class="primary-checkbox">
+                                <input name="price" type="radio" value="250" id="price-2">
+                                <label for="price-2"></label>
                                 <input name="type" type="radio" value="250" id="type-2">
                                 <label for="type-2"></label>
                             </div>
@@ -108,6 +119,8 @@
                              style="margin-right: 10px;">
                             <p>250-500元</p>
                             <div class="primary-checkbox">
+                                <input name="price" type="radio" value="500" id="price-3">
+                                <label for="price-3"></label>
                                 <input name="type" type="radio" value="500" id="type-3">
                                 <label for="type-3"></label>
                             </div>
@@ -116,6 +129,8 @@
                              style="margin-right: 10px;">
                             <p>500元以上</p>
                             <div class="primary-checkbox">
+                                <input name="price" type="radio" value="1000" id="price-4">
+                                <label for="price-4"></label>
                                 <input name="type" type="radio" value="1000" id="type-4">
                                 <label for="type-4"></label>
                             </div>
@@ -127,7 +142,6 @@
                             <input type="submit" value="按条件筛选" class="book_now_btn button_hover">
                         </div>
                     </div>
-
                 </div>
             </div>
         </form>
@@ -138,7 +152,6 @@
                         class="glyphicon glyphicon-search myYellow"> <span class="myYellow">搜索</span></i></a></span>
             </div>
         </div>
-
     </div>
 </div>
 <!--================定制模块================-->
@@ -168,7 +181,6 @@
     </div>
 </section>
 <!--================ 精选酒店模块  =================-->
-</div>
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>
 <!--================ End footer Area  =================-->

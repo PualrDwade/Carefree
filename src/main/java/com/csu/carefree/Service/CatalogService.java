@@ -52,6 +52,9 @@ public interface CatalogService {
     //根据目的地获得酒店信息
     List<HotelMsg> getHotelListByDestination(String destination);
 
+    //目的地和供应商
+    List<HotelMsg> getHotelListByDestinationAndStore(String destination ,String supplierId);
+
 
     /*****************通过筛选条件获取产品*****************/
 

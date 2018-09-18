@@ -83,4 +83,22 @@
       WHERE city_name like '%${destination}%'
     </select>
 
+    <select id="getHotelListByDestinationAndStore" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.HotelMsg">
+        SELECT
+        ID,
+        NAME,
+        SCORE,
+        HOTEL_PRICE,
+        HOTEL_CONTENT,
+        IMG_URL,
+        HOTEL_LINK,
+        SELL_NUM,
+        LATEST_TIME,
+        SUPPLIER_ID_ID AS supplier_id,
+        CITY_NAME
+        FROM ProductDT_hotelmsg
+        WHERE city_name = #{destination} AND SUPPLIER_ID_ID = #{suppliper_id}
+    </select>
+
 </mapper>

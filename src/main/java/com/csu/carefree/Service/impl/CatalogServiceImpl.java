@@ -229,6 +229,12 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
+    public List<HotelMsg> getHotelListByDestinationAndStore(String destination ,String supplierId) {
+        return hotelMsgMapper.getHotelListByDestinationAndStore(destination,supplierId);
+    }
+
+    /*******************产品信息**********/
+    @Override
     public List<ProductMsg> getProductList() {
         return productMapper.getProductList();
     }

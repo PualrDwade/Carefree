@@ -6,6 +6,7 @@ import com.csu.carefree.Model.TraverAsk.TraverNote;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
 import com.csu.carefree.Service.CatalogService;
+import com.csu.carefree.Util.CatalogUtils;
 import com.csu.carefree.Util.LocationUtil;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +35,14 @@ public class CatalogController {
     @Autowired
     private CatalogService catalogService;
 
-//    //
-//    @GetMapping("ProductDT/viewHotel")
-//    public String viewHotelMsgList(Model model) {
-//        model.addAttribute("HotelList");
-//        return "Hotel";
-//    }
+    private CatalogUtils catalogUtils = new CatalogUtils();
+
+    @GetMapping("ProductDT/viewHotel")
+    public String viewHotelMsgList(Model model) {
+        model.addAttribute("HotelList");
+        return "Hotel";
+    }
+
 
 
     //请求主界面
@@ -188,8 +191,8 @@ public class CatalogController {
         //业务操作增删查改
 
         List<ProductMsg> productMsgList = catalogService.getProductList();
-        System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
-        setDepartCityPrice(destination, productMsgList);
+        System.out.println("找到符合条件的产品"+ productMsgList.size() +"条");
+        catalogUtils.setDepartCityPrice(catalogService,destination,productMsgList);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
@@ -208,7 +211,6 @@ public class CatalogController {
         String traverDays = checkedDaysValues[0];
         String supplierId = checkedStoreValues[0];
         String productType = checkedTypeValues[0];
-
         List<ProductMsg> productMsgList = new ArrayList<ProductMsg>();
         if (checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
             productMsgList = catalogService.getProductList();
@@ -234,13 +236,9 @@ public class CatalogController {
         if (!checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
             productMsgList = catalogService.getProductListByThree(traverDays, productType, supplierId);
         }
-
         System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
-
         String destination = session.getAttribute("location").toString();
-
-        setDepartCityPrice(destination, productMsgList);
-
+        catalogUtils.setDepartCityPrice(catalogService,destination,productMsgList);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
@@ -260,27 +258,37 @@ public class CatalogController {
         return "ProductDT/Hotel";
     }
 
-    /****************************攻略推荐模块**********************************/
+    @PostMapping("/Catalog/HotHotelListByConditions")
+    public String HotHotelListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model) {
+        String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
+        String[] checkedPriceValues = httpServletRequest.getParameterValues("price");
 
+        System.out.println(checkedStoreValues[0]);
+        System.out.println(checkedPriceValues[0]);
 
-    private String getDepartCity(HttpSession session) {
-        TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
-        String city;
-        if (traverMsg.getStart_city() == null)
-            city = (String) session.getAttribute("positioningCity");
-        else
-            city = traverMsg.getStart_city();
-        return city;
-    }
+        String supplierId = checkedStoreValues[0];
+        String price = checkedPriceValues[0];
 
-    private void setDepartCityPrice(String destination, List<ProductMsg> productMsgList) {
-        if (destination != null) {
-            for (int i = 0; i < productMsgList.size(); i++) {
-                ProductCityMsg productCityMsg = catalogService.getDepartCityPrice(productMsgList.get(i).getId(), destination);
-                if (productCityMsg != null) {
-                    productMsgList.get(i).setCurrent_price(productCityMsg.getProduct_price());
-                }
-            }
+        String destination = session.getAttribute("location").toString();
+
+        List<HotelMsg> hotelMsgList = new ArrayList<HotelMsg>();
+
+        if(supplierId.equals("0") && price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestination(destination+"市");
         }
+        if(!supplierId.equals("0") && price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination+"市",supplierId);
+        }
+        if(supplierId.equals("0") && !price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestination(destination+"市");
+            catalogUtils.setHotelListByPrices(hotelMsgList,price);
+        }
+        if(!supplierId.equals("0") && !price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination+"市",supplierId);
+            catalogUtils.setHotelListByPrices(hotelMsgList,price);
+        }
+        model.addAttribute("hotelMsgList", hotelMsgList);
+        return "ProductDT/Hotel";
     }
+    /****************************攻略推荐模块**********************************/
 }
