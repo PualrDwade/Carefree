@@ -1,13 +1,11 @@
 package com.csu.carefree.Service;
 
 
-import com.csu.carefree.Model.PageInfo;
 import com.csu.carefree.Model.ProductDT.*;
 import com.csu.carefree.Model.TraverAsk.TraverNote;
 import com.csu.carefree.Model.TraverMsg.CityMsg;
 import com.csu.carefree.Model.TraverMsg.ProvinceMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
-import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -172,4 +170,6 @@ public interface CatalogService {
   
     //通过城市名获取游记
     List<TraverNote> getTraverNoteListByCityName(String cityName);
+
+    List<ProductMsg> getProductListByCityName(String destination);
 }

@@ -1,4 +1,4 @@
-package com.csu.carefree.Model;
+package com.csu.carefree.Util;
 
 import java.util.ArrayList;
 import java.util.List;

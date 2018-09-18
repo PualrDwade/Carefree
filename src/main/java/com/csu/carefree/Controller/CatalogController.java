@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class CatalogController {
@@ -30,6 +32,8 @@ public class CatalogController {
      * 酒店信息展示，热门酒店推荐
      */
 
+
+    private static final int PRODUCTPAGESIZE = 8;
     @Autowired
     private CatalogService catalogService;
 
@@ -186,12 +190,19 @@ public class CatalogController {
     @RequestMapping("/Catalog/HotProductList")
     public String HotProductList(Model model,
                                  HttpSession session,
-                                 @RequestParam(defaultValue = "1") Integer pageNum,
-                                 @RequestParam(defaultValue = "5") Integer pageSize) {
+                                 @RequestParam(defaultValue = "1") Integer pageNum) {
+
         String destination = (String) session.getAttribute("location");
-        System.out.println(pageNum + "    " + pageSize);
-        List<ProductMsg> productMsgList = catalogService.getProductList();
-        List<ProductMsg> CurrentPageList = productMsgList.subList(pageNum * 8, pageNum * 8 + 8);
+        //首先获得数据
+        List<ProductMsg> productMsgList = catalogService.getProductListByCityName(destination);
+        Map<String, List<ProductMsg>> map = new HashMap<>();
+        for (int i = 0; i < productMsgList.size() / PRODUCTPAGESIZE; ++i) {
+            map.put(String.valueOf(++i), productMsgList.subList(i, i + PRODUCTPAGESIZE));
+        }
+        map.get(pageNum);
+
+        System.out.println(pageNum + "    " + PRODUCTPAGESIZE);
+        List<ProductMsg> CurrentPageList = productMsgList.subList(pageNum * PRODUCTPAGESIZE, pageNum * PRODUCTPAGESIZE + PRODUCTPAGESIZE);
         PageInfo<ProductMsg> pageInfo = new PageInfo<>();
         pageInfo.setTotal(productMsgList.size());
         pageInfo.setPageData(CurrentPageList);
@@ -216,7 +227,6 @@ public class CatalogController {
         //是否是最后一页
         model.addAttribute("isLastPage", pageInfo.isLastPage());
         System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
-        catalogUtils.setDepartCityPrice(catalogService, destination, productMsgList);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
@@ -272,10 +282,10 @@ public class CatalogController {
     @GetMapping("/Catalog/HotHotelList")
     public String HotHotelList(
             @RequestParam(defaultValue = "1") Integer pageNum,
-            @RequestParam(defaultValue = "8") Integer pageSize,
             HttpSession session,
             Model model) {
         String destination = (String) session.getAttribute("location");
+
 
         //获取当前用户位置,推荐酒店
         if (destination != null) {
@@ -287,7 +297,7 @@ public class CatalogController {
 
         PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
         List<HotelMsg> hotelMsgList = catalogService.getHotelMsgList();
-        List<HotelMsg> currentPageList = hotelMsgList.subList(pageNum * 8, pageNum * 8 + 8);
+        List<HotelMsg> currentPageList = hotelMsgList.subList(pageNum * PRODUCTPAGESIZE, pageNum * PRODUCTPAGESIZE + PRODUCTPAGESIZE);
         hotelMsgPageInfo.setPageData(currentPageList);
         hotelMsgPageInfo.setTotal(hotelMsgList.size());
 

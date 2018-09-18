@@ -231,8 +231,8 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public List<HotelMsg> getHotelListByDestinationAndStore(String destination ,String supplierId) {
-        return hotelMsgMapper.getHotelListByDestinationAndStore(destination,supplierId);
+    public List<HotelMsg> getHotelListByDestinationAndStore(String destination, String supplierId) {
+        return hotelMsgMapper.getHotelListByDestinationAndStore(destination, supplierId);
     }
 
     /*******************产品信息**********/
@@ -410,5 +410,10 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public List<TraverNote> getTraverNoteListByCityName(String cityId) {
         return traverNoteMapper.getTraverNodeListbyCityName(cityId);
+    }
+
+    @Override
+    public List<ProductMsg> getProductListByCityName(String destination) {
+        return productMapper.getProductListByCityName(destination);
     }
 }
