@@ -75,6 +75,15 @@ public interface CatalogService {
     //三个筛选条件都有
     List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId);
 
+    //行程天数和供应商
+    List<ProductMsg> getProductListByDaysAndStore(String traverDays , String supplierId);
+
+    //行程天数和产品类型
+    List<ProductMsg> getProductListByDaysAndType(String traverDays , String productType);
+
+    //产品类型和供应商
+    List<ProductMsg> getProductListByTypeAndStore( String productType, String supplierId);
+
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找
     //推荐（排序）条件：score, sell_num, comments_num, product_grade

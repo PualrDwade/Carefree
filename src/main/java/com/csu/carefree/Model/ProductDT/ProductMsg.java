@@ -14,7 +14,7 @@ public class ProductMsg implements Serializable {
     private String comments_num;
     private String product_grade;
     private String supplier_id;
-
+    private String current_price = "价格未知";
 
     public String getId() {
         return id;
@@ -119,5 +119,14 @@ public class ProductMsg implements Serializable {
         this.img_url = img_url;
         this.comments_num = comments_num;
         this.product_grade = product_grade;
+        this.current_price = "价格未知";
+    }
+
+    public String getCurrent_price() {
+        return current_price;
+    }
+
+    public void setCurrent_price(String current_price) {
+        this.current_price = current_price;
     }
 }
