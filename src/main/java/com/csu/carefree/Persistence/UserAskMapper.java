@@ -25,5 +25,6 @@ public interface UserAskMapper {
     //通过username得到用户问题列表
     List<UserAsk> getUserAskListbyName(String username);
 
-
+    //通过时间进行排序获得所有的List
+    List<UserAsk> getUserAskListByTime();
 }

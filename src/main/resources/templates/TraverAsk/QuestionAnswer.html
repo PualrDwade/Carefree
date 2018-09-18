@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="http://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+app+topbar_v2^alw^1527308432.css"
@@ -6,7 +7,51 @@
     <link href="http://css.mafengwo.net/css/mfw-ask/mfw-ask.css?1492702270" rel="stylesheet" type="text/css"/>
     <script language="javascript"
             src="http://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js"
-            type="text/javascript" crossorigin="anonymous"></script>
+            type="text/javascript" crossorigin="anonymous">
+
+    </script>
+
+    <!--这里实现搜索AJAX-->
+    <script>
+        function searchAskList() {
+            var xmlhttp = null;
+            var keyword = document.getElementsByName("keyword");
+            //判断浏览器类型，创建 XMLHttpRequest 对象
+
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            /**
+             xmlhttp.open("GET","test1.txt",true); method：请求的类型；GET 或 POST
+             url：文件在服务器上的位置
+             async：true（异步）或 false（同步）
+
+             xmlhttp.send();            string：仅用于 POST 请求
+             **/
+            // xmlhttp.onreadystatechange() = function () {
+            //     if(xmlhttp.status==200 && xmlhttp.readyState==4){
+            //         document.getElementById("").innerText = xmlhttp.responseText;
+            //     }
+            // }
+            xmlhttp.open("GET","http://localhost:8080/TraverAsk/searchAskList?keyword="+ keyword[0].value,true);
+            xmlhttp.send();
+
+        }
+        <!-- 回调函数
+            function doResult() {
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                document.getElementById("keyword") = xmlhttp.responseText;
+            }
+        }
+        -->
+    </script>
+
 </head>
 <body>
 <!--================ 导航栏区域 =================-->
@@ -28,7 +73,13 @@
                      <div class="search-box ">
                         <div class="search-panel" data-cs-t="wenda">
                             <div class="clearfix _j_suggest_hd" >
-                                <form th:action="@{/TraverAsk/searchAskList}">
+                                 <!--
+                                    <div class="sp-input" style="height: auto!important;">
+                                        <input type="text" id="_j_wenda_seach_input" name="keyword" value="" placeholder="提问前请先搜索">
+                                    </div>
+                                    <input  type="button" value="" id="_j_wenda_seach_button" class="sp-button" data-mddid="0" onclick="searchAskList()">
+                                 -->
+                                 <form th:action="@{/TraverAsk/searchAskList}">
                                     <div class="sp-input" style="height: auto!important;">
                                         <input type="text" id="_j_wenda_seach_input" name="keyword" value="" placeholder="提问前请先搜索">
                                     </div>

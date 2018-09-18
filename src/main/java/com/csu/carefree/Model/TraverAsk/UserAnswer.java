@@ -64,7 +64,7 @@ public class UserAnswer implements Serializable {
     }
 
     public UserAnswer(String id, String answer_content,
-                      String ask_id, String add_time, String user_id) {
+                      String add_time,  String ask_id, String user_id) {
         this.id = id;
         this.answer_content = answer_content;
         this.ask_id = ask_id;

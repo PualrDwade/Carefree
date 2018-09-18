@@ -36,7 +36,7 @@ public interface CatalogService {
 
     ArrayList<HotelMsg> getHotHotelList();
 
-    ArrayList<TraverNote> getHotTraverNoteList();
+    ArrayList<TraverNote> getHotTraverNoteList(int traverNoteNum);
 
     /*******************酒店信息**********/
     //获取所有酒店信息
@@ -84,6 +84,8 @@ public interface CatalogService {
     //产品类型和供应商
     List<ProductMsg> getProductListByTypeAndStore( String productType, String supplierId);
 
+    //根据城市名获得产品
+    List<ProductMsg> getProductListByCityName(String cityname);
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找
     //推荐（排序）条件：score, sell_num, comments_num, product_grade
@@ -164,4 +166,7 @@ public interface CatalogService {
 
     //通过城市名获取游记
     List<TraverNote> getTraverNoteListByCityName(String cityName);
+
+    //插入游记信息
+    void insertTraverNote(TraverNote traverNote);
 }

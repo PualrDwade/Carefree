@@ -8,6 +8,7 @@ public class AskAnswerContainer {
     private HashMap<UserAsk, List<UserAnswer>> askListHashMap;
 
     public AskAnswerContainer() {
+
     }
 
     public AskAnswerContainer(HashMap<UserAsk, List<UserAnswer>> askListHashMap) {

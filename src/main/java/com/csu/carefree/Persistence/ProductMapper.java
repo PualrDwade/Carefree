@@ -40,6 +40,9 @@ public interface ProductMapper {
     //产品类型和供应商
     List<ProductMsg> getProductListByTypeAndStore(@Param("product_type") String productType, @Param("suppliper_id") String supplierId);
 
+    //根据城市名获得产品
+    List<ProductMsg> getProductListByCityName(String cityname);
+
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找
     //推荐（排序）条件：score, sell_num, comments_num, product_grade

@@ -21,6 +21,46 @@
             src="http://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js"
             type="text/javascript" crossorigin="anonymous"></script>
 
+    <!--这里实现发送HTML AJAX-->
+    <script>
+        function searchAskList() {
+            var xmlhttp = null;
+            var keyword = document.getElementsByName("keyword");
+            //判断浏览器类型，创建 XMLHttpRequest 对象
+
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            /**
+             xmlhttp.open("GET","test1.txt",true); method：请求的类型；GET 或 POST
+             url：文件在服务器上的位置
+             async：true（异步）或 false（同步）
+
+             xmlhttp.send();            string：仅用于 POST 请求
+             **/
+            // xmlhttp.onreadystatechange() = function () {
+            //     if(xmlhttp.status==200 && xmlhttp.readyState==4){
+            //         document.getElementById("").innerText = xmlhttp.responseText;
+            //     }
+            // }
+            xmlhttp.open("GET","http://localhost:8080/TraverAsk/searchAskList?keyword="+ keyword[0].value,true);
+            xmlhttp.send();
+
+        }
+        <!-- 回调函数
+            function doResult() {
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                document.getElementById("keyword") = xmlhttp.responseText;
+            }
+        }
+        -->
+    </script>
 
 </head>
 <body>
@@ -91,8 +131,8 @@
                                                 <a class="btn-exitfullscreen _j_exitfullscreen" role="button"><i></i>退出全屏模式</a>
                                             </div>
                                         </div>
-                                        <div class="editor-container" id="_j_answer_editor">
-                                        </div>
+                                        <textarea class="" id="" name = "noteContent">
+                                        </textarea>
                                     </div>
                                     <div class="aa-ft">
                                         <div class="count">

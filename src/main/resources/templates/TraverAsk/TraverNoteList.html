@@ -30,12 +30,14 @@
                         <article class="row blog_item">
                             <div class="col-md-3">
                                 <div class="blog_info text-right">
-                                    <div class="post_tag">
+                                    <!--
+                                        <div class="post_tag">
                                         <a href="#">美食</a>
                                         <a href="#">生活方式,</a>
                                         <a href="#">攻略</a>
                                         <a href="#">游玩</a>
                                     </div>
+                                    -->
                                     <ul class="blog_meta list_style">
                                         <li><a href="#">小小轩<i class="lnr lnr-user"></i></a></li>
                                         <li><a href="#">12 月, 2017<i class="lnr lnr-calendar-full"></i></a></li>
@@ -49,7 +51,7 @@
                                     <img src="../../static/image/blog/main-blog/m-blog-1.jpg" alt="">
                                     <div class="blog_details">
                                         <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId = ${traverNote.id})}"><h2 th:text="${traverNote.title}">第一篇游记</h2></a>
-                                        <p th:text="${traverNote.note_content.substring(0,20)}+'....'">MCSE boot camps have its supporters and its detractors. Some people do not
+                                        <p th:text="${traverNote.note_content}">MCSE boot camps have its supporters and its detractors. Some people do not
                                             understand why you should have to spend money on boot camp when you can get
                                             the
                                             MCSE study materials yourself at a fraction.</p>
@@ -58,7 +60,7 @@
                                 </div>
                             </div>
                         </article>
-
+                    </div>
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">
@@ -82,7 +84,7 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
@@ -96,44 +98,30 @@
                             </div><!-- /input-group -->
                             <div class="br"></div>
                         </aside>
+
                         <br><br><br><br><br>
+
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">热门游记</h3>
-                            <div class="media post_item">
-                                <img src="../../static/image/blog/post1.jpg" alt="post">
+                            <div class="media post_item" th:each="hotTraverNote : ${hotTraverNoteList}">
+                                <img th:src="${hotTraverNote.img_url}" alt="post">
                                 <div class="media-body">
-                                    <a href="blog-details.html"><h3>第一游记</h3></a>
-                                    <p>2000喜欢</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="../../static/image/blog/post2.jpg" alt="post">
-                                <div class="media-body">
-                                    <a href="blog-details.html"><h3>第二游记</h3></a>
-                                    <p>1000喜欢</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="../../static/image/blog/post3.jpg" alt="post">
-                                <div class="media-body">
-                                    <a href="blog-details.html"><h3>第三游记</h3></a>
-                                    <p>500喜欢</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="../../static/image/blog/post4.jpg" alt="post">
-                                <div class="media-body">
-                                    <a href="blog-details.html"><h3>第四游记</h3></a>
-                                    <p>100喜欢</p>
+                                    <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId = ${hotTraverNote.id})}"
+                                       th:text="${hotTraverNote.title}"><h3>第一游记</h3></a>
+                                    <p th:text="${hotTraverNote.star_num}+喜欢">2000喜欢</p>
                                 </div>
                             </div>
                             <div class="br"></div>
                         </aside>
+                    </div>
+
                         <br><br><br><br><br>
                         <aside class="single_sidebar_widget ads_widget">
-                            <a href="#"><img class="img-fluid" src="../../static/image/blog/add.jpg" alt=""></a>
+                            <a href="#">
+                                <img class="img-fluid" src="../../static/image/blog/add.jpg" alt=""></a>
                             <div class="br"></div>
                         </aside>
+                        <!--
 
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">游记分类</h4>
@@ -167,10 +155,11 @@
                             <div class="br"></div>
                         </aside>
 
+                        -->
                     </div>
                 </div>
             </div>
-        </div>
+
     </section>
     <!--================Blog Area =================-->
 </div>

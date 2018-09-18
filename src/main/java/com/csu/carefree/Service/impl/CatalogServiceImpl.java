@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -130,6 +129,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     }
 
+
     @Override
     public void sortHotelList(List<HotelMsg> sortHotelList) {
         for (HotelMsg hotel : sortHotelList) {
@@ -186,14 +186,23 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public ArrayList<TraverNote> getHotTraverNoteList() {
-        List<TraverNote> TraverNoteList = this.getTraverNoteList();
-        System.out.println("TraverNoteList包含个数：" + TraverNoteList.size());
-        ArrayList<TraverNote> hotTraverNoteList = new ArrayList<>();
-        hotTraverNoteList.add(TraverNoteList.get(0));
-        //hotTraverNoteList.add(TraverNoteList.get(1));
-        //hotTraverNoteList.add(TraverNoteList.get(2));
-        return hotTraverNoteList;
+    public ArrayList<TraverNote> getHotTraverNoteList(int traverNoteNum) {
+        List<TraverNote> traverNoteList = traverNoteMapper.getTraverNoteList();
+        traverNoteList.sort(Comparator.reverseOrder());
+
+        ArrayList<TraverNote> resultList = new ArrayList<>();
+
+        if(traverNoteNum < traverNoteList.size()){
+            for (int i=0; i < traverNoteNum; ++i){
+                resultList.add(traverNoteList.get(i));
+            }
+        }else{
+            for (int i=0; i< traverNoteList.size(); ++i){
+                resultList.add(traverNoteList.get(i));
+            }
+        }
+
+        return  resultList;
     }
 
     /*******************酒店信息**********/
@@ -250,6 +259,11 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId) {
         return productMapper.getProductListByThree(traverDays, productType, supplierId);
+    }
+
+    @Override
+    public List<ProductMsg> getProductListByCityName(String cityname){
+        return productMapper.getProductListByCityName(cityname);
     }
 
     @Override
@@ -386,5 +400,10 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public List<TraverNote> getTraverNoteListByCityName(String cityId) {
         return traverNoteMapper.getTraverNodeListbyCityName(cityId);
+    }
+
+    @Override
+    public void insertTraverNote(TraverNote traverNote){
+        traverNoteMapper.insertTraverNote(traverNote);
     }
 }
