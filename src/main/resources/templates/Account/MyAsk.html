@@ -30,8 +30,8 @@
                 <div class="wd-main">
                     <div class=" wd-navbar clearfix">
                         <ul class="wd-nav _j_qa_nav">
-                            <li><a href="MyAnswer.html">我的回答</a></li>
-                            <li class="on"><a href="MyAsk.html">我的提问</a></li>
+                            <li><a th:href="@{/TraverAsk/ViewMyTraverAsks}">我的回答</a></li>
+                            <li class="on"><a th:href="@{/TraverAsk/ViewMyTraverAnswers}">我的提问</a></li>
                         </ul>
                     </div>
                     <div class="wd-total">共有<span class="_j_total_item">0条</span>提问</div>
@@ -41,16 +41,15 @@
                                  alt="">
                             <p>这里的还没有东西</p>
                         </div>
-
                     </div>
-
                     <div class="wd-list _j_qa_list">
                         <!--这是一个条目-->
-                        <div class="wd-item">
+                        <div class="wd-item" th:each="answerItem:${userAnswerList}">
                             <div class="wd-medal">
                             </div>
                             <div class="wd-title">
-                                <a href="/wenda/detail-12610448-12625441.html" target="_blank">中秋期间想去稻城亚丁和色达，有推荐靠谱的拼车司机吗？</a>
+                                <a href="/wenda/detail-12610448-12625441.html"
+                                   target="_blank" th:text="">中秋期间想去稻城亚丁和色达，有推荐靠谱的拼车司机吗？</a>
                             </div>
                             <div class="wd-detail">
                                 谢邀啦可以试试我上个月找的拼车团队，非常nice~随时想停车都可以，主要是带队的人好，特别体贴我们。什么旅拍，航拍，氧气瓶都有的。还可以去看看我的游记哟~
@@ -63,7 +62,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="pagin" id="smallpager"></div>
                     </div>
                 </div>
