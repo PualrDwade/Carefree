@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <style>
     .priceTag {
-        font-size: 25px;
+        font-size: 18px;
         margin-top: 5px;
         color: #F3C300;
         font-weight: 800;
@@ -58,20 +58,22 @@
                     </div>
                     <div class="col-md-9">
                         <div class="boking_table">
-                            <form action="ProductDT/Mdd.html" method="post">
+                            <form th:action="@{/Catalog/Mdd}" method="post">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="book_tabel_item">
                                             <div class="form-group">
                                                 <div class='input-group date' id='datetimepicker11'>
-                                                    <input th:value="${session.traverMsg.getStart_city()}" id="startCity"
+                                                    <input th:value="${session.traverMsg.getStart_city()}"
+                                                           name="startCity"
                                                            type='text' class="form-control"
                                                            placeholder="出发城市"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class='input-group date' id='datetimepicker1'>
-                                                    <input th:value="${session.traverMsg.getEnd_city()}" id="destination"
+                                                    <input th:value="${session.traverMsg.getEnd_city()}"
+                                                           name="destination"
                                                            type='text' class="form-control"
                                                            placeholder="目的地城市"/>
                                                 </div>
@@ -82,13 +84,14 @@
                                         <div class="book_tabel_item">
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <input th:value="${session.traverMsg.getAdult_num()}" id="adultNum"
+                                                    <input th:value="${session.traverMsg.getAdult_num()}"
+                                                           name="adultNum"
                                                            type='text' class="form-control"
                                                            placeholder="成人数"/>
                                                 </div>
                                                 <div class="input-group">
                                                     <input th:value="${session.traverMsg.getChild_num()}"
-                                                           id="childrenNum"
+                                                           name="childrenNum"
                                                            type='text' class="form-control"
                                                            placeholder="儿童数"/>
                                                 </div>
@@ -100,13 +103,12 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <input th:text="${session.traverMsg.getTraverdays()}"
-                                                           id="travelDays"
+                                                           name="travelDays"
                                                            type='text' class="form-control"
                                                            placeholder="行程天数"/>
                                                 </div>
                                             </div>
-                                            <input type="submit" value="选好了" class="book_now_btn button_hover"
-                                                   href="/Catalog/Mdd">
+                                            <input type="submit" value="选好了" class="book_now_btn button_hover">
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +127,7 @@
     <div class="whole-wrap">
         <!--<br>-->
         <div class="section_title text-center">
-            <a href="TraverAsk/ViewTraverNote">
+            <a th:href="@{/Catalog/HotProductList}">
                 <h2 class="title_color">热门旅游</h2>
             </a>
         </div>
@@ -134,31 +136,35 @@
                 <div class="row">
                     <div class="col-md-3 ">
                         <div>
-                            <img th:src="${session.product1.img_url}"
+                            <img th:src="${product1.img_url}"
                                  class="productImg">
                         </div>
 
                     </div>
                     <div class="col-md-7 mt-sm-20 left-align-p">
-                        <a th:href="${session.product1.product_link}"
+                        <a th:href="${product1.product_link}"
                            target="_blank">
-                            <h4 th:text="${session.product1.name}" class="mb-30 title_color "></h4>
+                            <h4 th:text="${product1.name}" class="mb-30 title_color "></h4>
                         </a>
                     </div>
                     <div class="col-md-2">
                         <div class="priceTag">
-                            <p>￥ <span th:text="${session.product1.price}"></span>
+                            <p>￥<span th:text="${product1.price}"></span>
                                 <small>/人起</small>
                             </p>
                         </div>
                         <div class="logo-size">
-                            <a th:href="${session.product1.supplierUrl}"><img
-                                    th:src="${session.product1.supplierImgUrl}"></a>
+                            <a th:href="${product1.supplierUrl}">
+                                <img th:if="${product1.supplier_id}=='00001'" src="/image/logo/美团.svg">
+                                <img th:if="${product1.supplier_id}=='00002'" src="/image/logo/马蜂窝.svg">
+                                <img th:if="${product1.supplier_id}=='00003'" src="/image/logo/携程.svg">
+                                <img th:if="${product1.supplier_id}=='00004'" src="/image/logo/去哪儿.svg">
+                            </a>
                         </div>
                         <div class="container">
-                            <a>评分：</a><span th:text="${session.product1.product_grade}" class="badge badge-primary"
+                            <a>评分：</a><span th:text="${product1.product_grade}" class="badge badge-primary"
                                             style="background-color: #f3c300;"></span><br><br>
-                            <a>销量：</a><span th:text="${session.product1.sell_num}" class="badge badge-primary"
+                            <a>销量：</a><span th:text="${product1.sell_num}" class="badge badge-primary"
                                             style="background-color: #f3aecc;"></span>
                         </div>
                     </div>
@@ -167,31 +173,35 @@
                 <div class="row">
                     <div class="col-md-3 ">
                         <div>
-                            <img th:src="${session.product2.img_url}"
+                            <img th:src="${product2.img_url}"
                                  class="productImg">
                         </div>
 
                     </div>
                     <div class="col-md-7 mt-sm-20 left-align-p">
-                        <a th:href="${session.product2.product_link}"
+                        <a th:href="${product2.product_link}"
                            target="_blank">
-                            <h4 th:text="${session.product2.name}" class="mb-30 title_color "></h4>
+                            <h4 th:text="${product2.name}" class="mb-30 title_color "></h4>
                         </a>
                     </div>
                     <div class="col-md-2">
                         <div class="priceTag">
-                            <p>￥ <span th:text="${session.product2.price}"></span>
+                            <p>￥ <span th:text="${product2.price}"></span>
                                 <small>/人起</small>
                             </p>
                         </div>
                         <div class="logo-size">
-                            <a th:href="${session.product2.supplierUrl}"><img
-                                    th:src="${session.product2.supplierImgUrl}"></a>
+                            <a th:href="${product2.supplierUrl}">
+                                <img th:if="${product1.supplier_id}=='00001'" src="/image/logo/美团.svg">
+                                <img th:if="${product2.supplier_id}=='00002'" src="/image/logo/马蜂窝.svg">
+                                <img th:if="${product2.supplier_id}=='00003'" src="/image/logo/携程.svg">
+                                <img th:if="${product2.supplier_id}=='00004'" src="/image/logo/去哪儿.svg">
+                            </a>
                         </div>
                         <div class="container">
-                            <a>评分：</a><span th:text="${session.product2.product_grade}" class="badge badge-primary"
+                            <a>评分：</a><span th:text="${product2.product_grade}" class="badge badge-primary"
                                             style="background-color: #f3c300;"></span><br><br>
-                            <a>销量：</a><span th:text="${session.product2.sell_num}" class="badge badge-primary"
+                            <a>销量：</a><span th:text="${product2.sell_num}" class="badge badge-primary"
                                             style="background-color: #f3aecc;"></span>
                         </div>
                     </div>
@@ -208,14 +218,14 @@
     <section class="latest_blog_area section_gap">
         <div class="container" style="padding-bottom: 1px">
             <div class="section_title text-center">
-                <a href="TraverAsk/TraverNoteList.html"><h2 class="title_color">精 品 游 记</h2></a>
+                <a th:href="@{TraverAsk/ViewTraverNote}"><h2 class="title_color">精 品 游 记</h2></a>
                 <p style="text-align: center">这 里 有 最 精 彩 的 旅 行 游 记，能 给 你 更 多 的 旅 行 知 识</p>
             </div>
-            <div class="row mb_30">
+            <div class="row mb_30" th:each="hotTraverNote : ${session.hotTraverNoteList}">
                 <div class="col-lg-4 col-md-6">
                     <div class="single-recent-blog-post">
                         <div class="thumb">
-                            <img class="img-fluid" src="/image/blog/blog-1.jpg" alt="post">
+                            <img class="img-fluid" th:src="${hotTraverNote.img_url}" alt="post">
                         </div>
                         <div class="details">
                             <div class="tags">
@@ -225,41 +235,6 @@
                             <a href="#"><h4 class="sec_h4">Low Cost Advertising</h4></a>
                             <p>Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
                                 farmer.</p>
-                            <h6 class="date title_color">31st January,2018</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-recent-blog-post">
-                        <div class="thumb">
-                            <img class="img-fluid" src="/image/blog/blog-2.jpg" alt="post">
-                        </div>
-                        <div class="details">
-                            <div class="tags">
-                                <a href="#" class="button_hover tag_btn">Travel</a>
-                                <a href="#" class="button_hover tag_btn">Life Style</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">Creative Outdoor Ads</h4></a>
-                            <p>Self-doubt and fear interfere with our ability to achieve or set goals. Self-doubt and
-                                fear
-                                are</p>
-                            <h6 class="date title_color">31st January,2018</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-recent-blog-post">
-                        <div class="thumb">
-                            <img class="img-fluid" src="/image/blog/blog-3.jpg" alt="post">
-                        </div>
-                        <div class="details">
-                            <div class="tags">
-                                <a href="#" class="button_hover tag_btn">Travel</a>
-                                <a href="#" class="button_hover tag_btn">Life Style</a>
-                            </div>
-                            <a href="#"><h4 class="sec_h4">It S Classified How To Utilize Free</h4></a>
-                            <p>Why do you want to motivate yourself? Actually, just answering that question fully
-                                can </p>
                             <h6 class="date title_color">31st January,2018</h6>
                         </div>
                     </div>
@@ -274,97 +249,71 @@
     <section class="accomodation_area section_gap">
         <div class="container">
             <div class="section_title text-center">
-                <a href="ProductDT/Hotel.html"><h2 class="title_color">优 质 酒 店</h2></a>
+                <a th:href="@{/Catalog/HotHotelList}"><h2 class="title_color">精品酒店</h2></a>
                 <p class="text-center">我 们 竭 力 为 您 推 荐 最 舒 适 最 优 质 性 价 比 最 高 的 酒 店，让 您 在 旅 途 的 奔 波 当 中 能 够 安 心 舒 睡 ，消 除
                     一 天
                     的 疲 惫</p>
+                <br><br>
             </div>
+            <h4 class="section_title text-center" style="font-size: 20px!important;">最实惠</h4>
             <div class="row mb_30">
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-3 col-sm-6" th:each="hotHotel : ${hotHotelList_01}">
                     <div class="accomodation_item text-center">
-                        <style>
-                            p {
-                                letter-spacing: 1px;
-                                text-align: left;
-                            }
-                        </style>
                         <div class="hotel_img">
-                            <img src="https://p1.meituan.net/320.0/tdchotel/5fa0abab06f1fed9049e6ad6a0f93702648344.jpg"
+                            <img th:src="${hotHotel.img_url}"
                                  alt="">
-                            <a href="http://hotel.meituan.com/123211356/" target="view_window"
+                            <a th:href="${hotHotel.hotel_link}"
                                class="btn theme_btn button_hover">立即预定</a>
                         </div>
-                        <a href="http://hotel.meituan.com/123211356/" target="view_window"><h4 class="sec_h4">浮乐德酒店</h4>
+                        <a th:href="${hotHotel.hotel_link}" target="view_window"><h4 class="sec_h4"
+                                                                                     th:text="${hotHotel.name}"></h4>
                         </a>
-                        <h5>￥222
+                        <h5>￥<span th:text="${hotHotel.hotel_price}"></span>
                             <small>/晚</small>
                         </h5>
-                        <p>韶山市清溪镇新颜路新天地步行街御园8栋</p>
-                        <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.8</span>
+                        <p th:text="${hotHotel.hotel_content}"></p>
+                        <div style="bottom: 5px;position: absolute;left: 40%">
+                            评分：<span th:text="${hotHotel.score}" class="badge badge-primary"
+                                     style="background-color: #f3c300;"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+            </div>
+            <br>
+            <br>
+            <br>
+            <h4 class="section_title text-center" style="font-size: 20px!important;">最受欢迎</h4>
+            <div class="row mb_30">
+                <div class="col-lg-3 col-sm-6" th:each="hotHotel : ${hotHotelList_02}">
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
-                            <img src="https://p1.meituan.net/320.0/tdchotel/f5a94413f7d5ba94a0dde9d53c2fb252349948.png"
+                            <img th:src="${hotHotel.img_url}"
                                  alt="">
-                            <a href="http://hotel.meituan.com/2208101/" target="view_window"
+                            <a th:href="${hotHotel.hotel_link}"
                                class="btn theme_btn button_hover">立即预定</a>
                         </div>
-                        <a href="http://hotel.meituan.com/2208101/" target="view_window"><h4 class="sec_h4">华龙山庄大酒店</h4>
+                        <a th:href="${hotHotel.hotel_link}" target="view_window"><h4 class="sec_h4"
+                                                                                     th:text="${hotHotel.name}">
+                        </h4>
                         </a>
-                        <h5>￥288
+                        <h5>￥<span th:text="${hotHotel.hotel_price}"></span>
                             <small>/晚</small>
                         </h5>
-                        <p>韶山市南环路韶山冲青狮塘（近毛泽东故居、毛泽东铜像广场）</p>
-                        <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.1</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="accomodation_item text-center">
-                        <div class="hotel_img">
-                            <img src="https://p1.meituan.net/320.0/hotelbiz/43e3b8e6bb02b95cf5422b5bf64f1e5a283122.jpg"
-                                 alt="">
-                            <a href="http://hotel.meituan.com/162138190/	" target="view_window"
-                               class="btn theme_btn button_hover">立即预定</a>
+                        <p th:text="${hotHotel.hotel_content}"></p>
+                        <div style="bottom: 5px;position: absolute;left: 40%">
+                            评分：<span th:text="${hotHotel.score}" class="badge badge-primary"
+                                     style="background-color: #f3c300;"></span>
                         </div>
-                        <a href="http://hotel.meituan.com/162138190/" target="view_window"><h4 class="sec_h4">千古情客栈</h4>
-                        </a>
-                        <h5>￥138
-                            <small>/晚</small>
-                        </h5>
-                        <p> 珠晖区合福村师范学院南门西行100米路南（125路公交车终点站对面）</p>
-                        <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.8</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="accomodation_item text-center">
-                        <div class="hotel_img">
-                            <img src="https://p0.meituan.net/320.0/tdchotel/d3101a6a4e5f9d68b5570fb5c8a83b4756933.jpg"
-                                 alt="">
-                            <a href="http://hotel.meituan.com/117915144/" target="view_window"
-                               class="btn theme_btn button_hover">立即预定</a>
-                        </div>
-                        <a href="http://hotel.meituan.com/117915144/	" target="view_window"><h4 class="sec_h4">
-                            水岸假日酒店</h4></a>
-                        <h5>￥100
-                            <small>/晚</small>
-                        </h5>
-                        <p>雁峰区天马山南路51号</p>
-                        <br>
-                        <a>评分：</a><span class="badge badge-primary" style="background-color: #f3c300;">4.5</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--================ 酒店  =================-->
-
     <!--================ 问答展示  =================-->
     <section class="testimonial_area section_gap">
         <div class="container">
             <div class="section_title text-center">
-                <a href="TraverAsk/QuestionAnswer.html"><h2 class="title_color">问 答 专 区</h2></a>
+                <a th:href="@{/TraverAsk/QuestionAnswer}"><h2 class="title_color">问 答 专 区</h2></a>
                 <p style="text-align: center">为 你 答 疑 解 惑， 更 加 了 解 这 个 城 市</p>
             </div>
             <div class="testimonial_slider owl-carousel">

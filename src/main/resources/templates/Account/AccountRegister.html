@@ -7,21 +7,6 @@
     <link href="https://css.mafengwo.net/css/cv/css+login+login_v2:mobile+css+omc+login-omc+login-omc^ZlY^1526627473.css"
           rel="stylesheet" type="text/css"/>
 </head>
-<style>
-    .input-submit {
-        width: 320px;
-        height: 42px;
-        border: 0;
-        background-color: #ffa800;
-        border-radius: 5px;
-        text-align: center;
-        line-height: 40px;
-        color: #fff;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-</style>
 <body>
 <div class="wrapper">
     <div class="container">
@@ -29,7 +14,7 @@
             <div class="signup-box">
                 <div class="add-info">
                     <div class="hd">用户注册</div>
-                    <form th:action="@{/account/Register}" method="post" id="_j_login_form">
+                    <form th:action="@{/account/Register}" method="post" id="_j_login_form" name="fileForm">
                         <div class="form-field">
                             <input name="username" type="text" placeholder="您的邮箱" autocomplete="off"
                                    data-verification-name="帐号"
@@ -50,9 +35,14 @@
                             <div class="err-tip"></div>
                         </div>
                         <div class="submit-btn">
-                            <!--<input type="submit" th:value="完成注册"/>-->
+                            <button class="btn-submit" onclick="submitBtnClick()">完成注册</button>
+                            <script type="text/javascript">
+                                function submitBtnClick() {
+                                    //提交表单
+                                    document.fileForm.submit();
+                                }
+                            </script>
                         </div>
-                        <input type="submit" class="input-submit" th:value="完成注册"/>
                     </form>
                 </div>
                 <div class="bottom-link">
@@ -62,12 +52,5 @@
         </div>
     </div>
 </div>
-<
-<script language="javascript"
-        src="https://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+plugins+jquery.placeholder:passport+js+app^ZVA^1493174420.js"
-        type="text/javascript" crossorigin="anonymous"></script>
-<script language="javascript" src="https://js.mafengwo.net/js/cv/js+mfw.verification:passport+js+form^YFM^1534757150.js"
-        type="text/javascript" crossorigin="anonymous"></script>
-
 </body>
 </html>

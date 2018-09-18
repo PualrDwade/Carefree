@@ -9,9 +9,36 @@ import com.csu.carefree.Model.TraverMsg.ProvinceMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface CatalogService {
+
+    /*******************根据行程推荐景点、酒店、攻略、游记等**********/
+    ArrayList<ScenicMsg> getRecommendScenicList(HttpSession session);
+
+    ArrayList<HotelMsg> getRecommendHotelList(HttpSession session);
+
+    ArrayList<StrategyMsg> getRecommendStrategyList(HttpSession session);
+
+    ArrayList<TraverNote> getRecommendTraverNoteList(HttpSession session);
+
+    void sortScenicList(List<ScenicMsg> recommendScenicList);
+
+    void sortHotelList(List<HotelMsg> sortHotelList);
+
+    void sortStrategyList(List<StrategyMsg> recommendStrategyList);
+
+    void sortTraverNoteList(List<TraverNote> recommendTraverNoteList);
+
+    /*******************获取热门信息**********/
+    ArrayList<FullProductInfo> getHotProductList(HttpSession session);
+
+    //通过城市名获取热门酒店信息,按照给定的指标进行筛选
+    ArrayList<HotelMsg> getHotHotelListByCityName(String cityName, int orderType);
+
+    ArrayList<TraverNote> getHotTraverNoteList();
 
     /*******************酒店信息**********/
     //获取所有酒店信息
@@ -25,6 +52,9 @@ public interface CatalogService {
 
     //根据目的地获得酒店信息
     List<HotelMsg> getHotelListByDestination(String destination);
+
+    //目的地和供应商
+    List<HotelMsg> getHotelListByDestinationAndStore(String destination ,String supplierId);
 
 
     /*****************通过筛选条件获取产品*****************/
@@ -50,6 +80,15 @@ public interface CatalogService {
     //三个筛选条件都有
     List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId);
 
+    //行程天数和供应商
+    List<ProductMsg> getProductListByDaysAndStore(String traverDays, String supplierId);
+
+    //行程天数和产品类型
+    List<ProductMsg> getProductListByDaysAndType(String traverDays, String productType);
+
+    //产品类型和供应商
+    List<ProductMsg> getProductListByTypeAndStore(String productType, String supplierId);
+
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找
     //推荐（排序）条件：score, sell_num, comments_num, product_grade
@@ -60,6 +99,9 @@ public interface CatalogService {
 
     //例如当点击产品当中的供应商信息时候，要返回相应的信息
     Supplier getSupplierByName(String name);
+
+    //通过供应商id得到供应商
+    Supplier getSupplierById(String id);
 
     /*******城市省份信息*******/
     //通过省份ID获取省份信息
@@ -127,5 +169,7 @@ public interface CatalogService {
 
     //通过游记ID获取游记信息
     TraverNote getTraverNoteById(String traverNoteId);
-
+  
+    //通过城市名获取游记
+    List<TraverNote> getTraverNoteListByCityName(String cityName);
 }
