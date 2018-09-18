@@ -14,7 +14,10 @@ public interface ProductMapper {
 
     ProductMsg getProductById(String id);
 
-    //筛选条件：traver_days, product_type, supplier_id
+    //筛选条件：traver_days, product_type, supplier_id, cityname
+
+    //城市名
+    List<ProductMsg> getProductListByCityName(String cityname);
 
     //行程天数
     List<ProductMsg> getProductListByTraverdays(String traverDays);

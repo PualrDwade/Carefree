@@ -4,7 +4,7 @@
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
 <!--================Header Area =================-->
-<div id="content">
+<div id="content" style="margin-top: 10px">
     <!--================Breadcrumb Area =================-->
     <section class="breadcrumb_area">
         <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0"
@@ -18,10 +18,9 @@
     <!--================Breadcrumb Area =================-->
 
     <!--================定制模块================-->
-    <div class="container" style="padding-top: 50px">
-        <form method="post" action="/Catalog/HotHotelListByConditions">
+    <div class="container">
+        <form method="get" action="/Catalog/HotHotelList">
             <div class="row margin-div">
-
                 <div class="col-lg-9">
                     <hr>
                     <div class="row">
@@ -137,9 +136,8 @@
                     </div>
 
                 </div>
-            </div>
         </form>
-        <div class="col-lg-3">
+        <div class="col-lg-3"  style="margin-top: 10px">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="输入您想搜索的内容">
                 <span class="input-group-addon myYellow"><a href="#"><i
@@ -147,6 +145,7 @@
             </div>
         </div>
     </div>
+</div>
     <!--================定制模块================-->
 
     <!--================ 精选酒店模块 =================-->
