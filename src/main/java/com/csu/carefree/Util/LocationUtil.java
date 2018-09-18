@@ -13,6 +13,8 @@ import java.nio.charset.Charset;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static org.apache.logging.log4j.message.MapMessage.MapFormat.JSON;
+
 /**
  * java根据url获取json对象
  *
@@ -47,7 +49,7 @@ public class LocationUtil {
         //这里调用百度的ip定位api服务 详见 http://api.map.baidu.com/lbsapi/cloud/ip-location-api.htm
         JSONObject json = null;
         try {
-            json = readJsonFromUrl("http://api.map.baidu.com/location/ip?ak=OvqRVPBQcNEbC3KyH9hRLGns36DfgmT3&");
+            json = readJsonFromUrl("http://api.map.baidu.com/location/ip?ak=OvqRVPBQcNEbC3KyH9hRLGns36DfgmT3");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -55,7 +57,10 @@ public class LocationUtil {
         }
         System.out.println(json.toString());
         System.out.println();
-        return (((JSONObject) json.get("content")).get("address").toString());
-
+        String cityname = ((JSONObject) json.get("content")).getJSONObject("address_detail").get("city").toString();
+        if (cityname.charAt(cityname.length() - 1) == '市') {
+            cityname = cityname.substring(0, cityname.length() - 1);
+        }
+        return (cityname);
     }
 }

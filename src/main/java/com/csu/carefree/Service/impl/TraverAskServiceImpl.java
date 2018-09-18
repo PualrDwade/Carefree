@@ -53,5 +53,10 @@ public class TraverAskServiceImpl implements TraverAskService {
         userAnswerMapper.insertUserAnswer(userAnswer);
     }
 
+    @Override
+    public List<UserAnswer> getUserAnswerListByName(String username) {
+        return userAnswerMapper.getUserAnswerListByName(username);
+    }
+
 
 }

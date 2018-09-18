@@ -1,6 +1,7 @@
 package com.csu.carefree.Persistence;
 
 import com.csu.carefree.Model.ProductDT.HotelMsg;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,5 +17,5 @@ public interface HotelMsgMapper {
     List<HotelMsg> searchHotelMsgList(String keyword);
 
     //根据目的地获得酒店信息
-    List<HotelMsg> getHotelListByDestination(String destination);
+    List<HotelMsg> getHotelListByDestination(@Param("destination") String destination);
 }

@@ -9,7 +9,9 @@
                     <li class="nav-item active"><a class="nav-link" th:href="@{/}">主页</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/Catalog/Mdd}">目的地</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/Catalog/HotProductList(destination=${session.location})}">热门旅游</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                                            th:href="@{/Catalog/HotProductList(destination=${session.location})}">热门旅游</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link"
                                             th:href="@{/Catalog/HotHotelList(destination=${session.location})}">酒店</a>
                     </li>
@@ -31,6 +33,10 @@
                     <li th:if="${session.username}" class="nav-item">
                         <a class="nav-link"
                            th:href="@{/account/ViewUserCenter}">用户中心</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:text="'当前位置:'+${session.location}"></a>
                     </li>
                 </ul>
             </div>

@@ -80,7 +80,7 @@
             SUPPLIER_ID_ID AS supplier_id,
             CITY_NAME
       FROM ProductDT_hotelmsg
-      WHERE city_name = #{value}
+      WHERE city_name like '%${destination}%'
     </select>
 
 </mapper>
