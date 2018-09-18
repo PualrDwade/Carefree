@@ -34,6 +34,7 @@ public class CatalogController {
 
 
     private static final int PRODUCTPAGESIZE = 8;
+    private static final int HOTELPAGESIZE = 8;
     @Autowired
     private CatalogService catalogService;
 
@@ -195,19 +196,35 @@ public class CatalogController {
         String destination = (String) session.getAttribute("location");
         //首先获得数据
         List<ProductMsg> productMsgList = catalogService.getProductListByCityName(destination);
-        Map<String, List<ProductMsg>> map = new HashMap<>();
-        for (int i = 0; i < productMsgList.size() / PRODUCTPAGESIZE; ++i) {
-            map.put(String.valueOf(i + 1), productMsgList.subList(i, i + PRODUCTPAGESIZE));
-        }
-        map.get(pageNum);
 
         System.out.println(pageNum + "    " + PRODUCTPAGESIZE);
-        List<ProductMsg> CurrentPageList = productMsgList.subList(pageNum * PRODUCTPAGESIZE, pageNum * PRODUCTPAGESIZE + PRODUCTPAGESIZE);
+        //创建pageInfo的对象
         PageInfo<ProductMsg> pageInfo = new PageInfo<>();
+        Map<Integer, List<ProductMsg>> map = new HashMap<>();
+        //为pageInfo赋值总的游记大小
         pageInfo.setTotal(productMsgList.size());
-        pageInfo.setPageData(CurrentPageList);
-        //设置当前界面
+
+        //设置当前页码
         pageInfo.setCurrentPage(pageNum);
+
+        System.out.println(pageInfo.getMaxPage());
+        if (productMsgList.size()%8==0){
+            for (int i = 0; i < pageInfo.getMaxPage(); ++i) {
+                map.put(i + 1, productMsgList.subList(i * PRODUCTPAGESIZE, i * PRODUCTPAGESIZE + PRODUCTPAGESIZE));
+            }
+        }else
+        {
+            for (int i = 0; i < pageInfo.getMaxPage(); ++i) {
+                if (i == pageInfo.getMaxPage()-1){
+                    map.put(i + 1, productMsgList.subList(i * PRODUCTPAGESIZE, i * PRODUCTPAGESIZE + productMsgList.size()%8));
+                    break;
+                }
+                map.put(i + 1, productMsgList.subList(i * PRODUCTPAGESIZE, i * PRODUCTPAGESIZE + PRODUCTPAGESIZE));
+
+            }
+        }
+        //为pageInfo设置当前页的数据
+        pageInfo.setPageData(map.get(pageNum));
         if (pageInfo.getCurrentPage() == 0)
             pageInfo.setFirstPage(true);
         else
@@ -216,18 +233,11 @@ public class CatalogController {
             pageInfo.setLastPage(true);
         else
             pageInfo.setLastPage(false);
+
         model.addAttribute("pageInfo", pageInfo);
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        model.addAttribute("pageNum", pageInfo.getCurrentPage());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getMaxPage());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isLastPage());
         System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
-        model.addAttribute("productMsgList", productMsgList);
+        System.out.println("界面内容大小" + pageInfo.getPageData().size() + "条");
+
         return "ProductDT/Product";
     }
 
@@ -282,10 +292,8 @@ public class CatalogController {
     @GetMapping("/Catalog/HotHotelList")
     public String HotHotelList(
             @RequestParam(defaultValue = "1") Integer pageNum,
-            HttpSession session,
-            Model model) {
+            HttpSession session, Model model) {
         String destination = (String) session.getAttribute("location");
-
 
         //获取当前用户位置,推荐酒店
         if (destination != null) {
@@ -296,12 +304,31 @@ public class CatalogController {
         }
 
         PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
-        List<HotelMsg> hotelMsgList = catalogService.getHotelMsgList();
-        List<HotelMsg> currentPageList = hotelMsgList.subList(pageNum * PRODUCTPAGESIZE, pageNum * PRODUCTPAGESIZE + PRODUCTPAGESIZE);
-        hotelMsgPageInfo.setPageData(currentPageList);
-        hotelMsgPageInfo.setTotal(hotelMsgList.size());
+        List<HotelMsg> hotelMsgList = catalogService.getHotelListByDestination(destination);
+        PageInfo<HotelMsg> hotelPageInfo = new PageInfo<>();
+        Map<Integer, List<HotelMsg>> hotelMap = new HashMap<>();
 
+        hotelMsgPageInfo.setTotal(hotelMsgList.size());
+        System.out.println("页面大小"+hotelPageInfo.getPageSize());
+        System.out.println("list大小"+hotelMsgList.size());
+        System.out.println("最多的界面数"+hotelMsgPageInfo.getMaxPage());
+        //设置当前页码
         hotelMsgPageInfo.setCurrentPage(pageNum);
+        if (hotelMsgList.size() / HOTELPAGESIZE == 0){
+            for (int i=0;i<hotelMsgPageInfo.getMaxPage();i++){
+                hotelMap.put(i+1,hotelMsgList.subList(i*HOTELPAGESIZE, i*HOTELPAGESIZE+HOTELPAGESIZE));
+            }
+        }
+        else{
+            for (int i=0; i< hotelMsgPageInfo.getMaxPage();i++){
+                if (i == hotelMsgPageInfo.getMaxPage()-1){
+                    hotelMap.put(i+1, hotelMsgList.subList(i*HOTELPAGESIZE, i*HOTELPAGESIZE+hotelMsgList.size()%HOTELPAGESIZE));
+                    break;
+                }
+                hotelMap.put(i+1,hotelMsgList.subList(i*HOTELPAGESIZE, i*HOTELPAGESIZE+HOTELPAGESIZE));
+            }
+        }
+
         if (hotelMsgPageInfo.getCurrentPage() == 0)
             hotelMsgPageInfo.setFirstPage(true);
         else
@@ -310,7 +337,9 @@ public class CatalogController {
             hotelMsgPageInfo.setLastPage(true);
         else
             hotelMsgPageInfo.setLastPage(false);
-        model.addAttribute("hotelPageInfo", hotelMsgPageInfo);
+
+        hotelMsgPageInfo.setPageData(hotelMap.get(pageNum));
+        model.addAttribute("hotelMsgPageInfo", hotelMsgPageInfo);
 
         return "ProductDT/Hotel";
     }
