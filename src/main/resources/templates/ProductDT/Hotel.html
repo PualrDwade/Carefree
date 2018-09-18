@@ -166,7 +166,7 @@
                 <p>为 您 提 供 最 优 质 的 酒 店 选 择</p>
             </div>
             <div class="row accomodation_two">
-                <div class="col-lg-3 col-sm-6" th:each="hotelMsg:${hotelMsgList}">
+                <div class="col-lg-3 col-sm-6" th:each="hotelMsg:${hotelMsgPageInfo.getPageData()}">
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
                             <img th:src="${hotelMsg.img_url}" alt="">
@@ -181,42 +181,64 @@
                         </h5>
                     </div>
                 </div>
-
-                <center>
-                    <nav>
-                        <ul class="pagination">
-                            <li>
-                                <a th:href="@{/Catalog/HotHotelList(destination=${session.location} ,pageNum = 0,pageSize=8)}">
-                                    首页 </a>
-                            </li>
-                            <li>
-                                <a th:if="${not hotelPageInfo.isFirstPage() }"
-                                   th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum = ${hotelPageInfo.getCurrentPage() - 1},pageSize=8)}">前一页</a>
-                                <a th:if="${hotelPageInfo.isFirstPage()}" href="javascript: void(0);">Previous</a>
-                            </li>
-                            <li th:each="pageNo : ${#numbers.sequence(hotelPageInfo.getCurrentPage(), hotelPageInfo.getCurrentPage()+10)}">
-                                <a th:if="${hotelPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
-                                    <span th:text="${pageNo}"></span>
-                                </a>
-                                <a th:if="${not (hotelPageInfo.getCurrentPage() eq pageNo)}"
-                                   th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum=${pageNo},pageSize=8)}">
-                                    <span th:text="${pageNo}"></span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a th:if="${not hotelPageInfo.isLastPage() }"
-                                   th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum = ${hotelPageInfo.getCurrentPage() - 1},pageSize=8)}">前一页</a>
-                                <a th:if="${hotelPageInfo.isLastPage()}" href="javascript: void(0);">Previous</a>
-                            </li>
-
-                            <li>
-                                <a th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum = ${hotelPageInfo.getMaxPage() - 8} ,pageSize=8)}">
-                                    尾页 </a></li>
-                        </ul>
-                    </nav>
-                </center>
             </div>
+            <center>
+                <nav>
+                    <ul class="pagination">
+                        <li>
+                            <a th:href="@{/Catalog/HotHotelList(destination=${session.location} ,pageNum=1)}">
+                                首页 </a>
+                        </li>
+                        <li>
+                            <a th:if="${not hotelMsgPageInfo.isFirstPage() }"
+                               th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum = ${hotelMsgPageInfo.getCurrentPage() - 1})}">上一页</a>
+                        </li>
+
+                        <li th:if="${hotelMsgPageInfo.getMaxPage()<=10}"
+                            th:each="pageNo : ${#numbers.sequence(hotelMsgPageInfo.getCurrentPage(), hotelMsgPageInfo.getMaxPage())}">
+                            <a th:if="${hotelMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                            <a th:if="${not (hotelMsgPageInfo.getCurrentPage() eq pageNo)}"
+                               th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum=${pageNo})}">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                        </li>
+
+                        <li th:if="${hotelMsgPageInfo.getMaxPage()>10 && hotelMsgPageInfo.getCurrentPage()+10 >hotelMsgPageInfo.getMaxPage()}"
+                            th:each="pageNo : ${#numbers.sequence(hotelMsgPageInfo.getMaxPage()-10, hotelMsgPageInfo.getMaxPage())}">
+                            <a th:if="${hotelMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                            <a th:if="${not (hotelMsgPageInfo.getCurrentPage() eq pageNo)}"
+                               th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum=${pageNo})}">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                        </li>
+
+                        <li th:if="${hotelMsgPageInfo.getMaxPage()>10 && hotelMsgPageInfo.getCurrentPage()+10 <= hotelMsgPageInfo.getMaxPage()}"
+                            th:each="pageNo : ${#numbers.sequence(hotelMsgPageInfo.getCurrentPage(), hotelMsgPageInfo.getCurrentPage()+10)}">
+                            <a th:if="${hotelMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                            <a th:if="${not (hotelMsgPageInfo.getCurrentPage() eq pageNo)}"
+                               th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum=${pageNo})}">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a th:if="${not hotelMsgPageInfo.isLastPage() }"
+                               th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum = ${hotelMsgPageInfo.getCurrentPage() + 1})}">下一页</a>
+                        </li>
+
+                        <li>
+                            <a th:href="@{/Catalog/HotHotelList(destination=${session.location},pageNum = ${hotelMsgPageInfo.getMaxPage()})}">
+                                尾页 </a>
+                        </li>
+                    </ul>
+                </nav>
+            </center>
         </div>
     </section>
     <!--================ 精选酒店模块  =================-->
