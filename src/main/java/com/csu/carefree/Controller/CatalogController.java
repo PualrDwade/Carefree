@@ -1,5 +1,10 @@
 package com.csu.carefree.Controller;
 
+
+import com.csu.carefree.Model.PageInfo;
+import com.csu.carefree.Model.TraverMsg.ScenicMsg;
+import com.csu.carefree.Model.TraverMsg.TraverMsg;
+import com.csu.carefree.Service.CatalogService;
 import com.csu.carefree.Model.ProductDT.*;
 import com.csu.carefree.Model.TraverMsg.CityMsg;
 import com.csu.carefree.Model.TraverAsk.TraverNote;
@@ -14,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +42,7 @@ public class CatalogController {
     private CatalogService catalogService;
 
     private CatalogUtils catalogUtils = new CatalogUtils();
-
+  
     @GetMapping("ProductDT/viewHotel")
     public String viewHotelMsgList(Model model) {
         model.addAttribute("HotelList");
@@ -186,6 +192,37 @@ public class CatalogController {
 
 
     //进入热门产品的界面控制器url
+    @RequestMapping("/Catalog/HotProductList")
+    public String HotProductList(Model model,
+                                 @RequestParam(defaultValue = "1") Integer pageNum,
+                                 @RequestParam(defaultValue = "5") Integer pageSize) {
+        System.out.println(pageNum+"    "+pageSize);
+        List<ProductMsg> productMsgList = catalogService.getProductList();
+        List<ProductMsg> CurrentPageList = productMsgList.subList(pageNum*8,pageNum*8+8);
+
+        PageInfo<ProductMsg> pageInfo = new PageInfo<>();
+        pageInfo.setTotal(productMsgList.size());
+        pageInfo.setPageData(CurrentPageList);
+        //设置当前界面
+        pageInfo.setCurrentPage(pageNum);
+        if (pageInfo.getCurrentPage()==0)
+            pageInfo.setFirstPage(true);
+        else
+            pageInfo.setFirstPage(false);
+        if (pageInfo.getCurrentPage()==pageInfo.getMaxPage())
+            pageInfo.setLastPage(true);
+        else
+            pageInfo.setLastPage(false);
+        model.addAttribute("pageInfo", pageInfo);
+        //获得一页显示的条数
+        model.addAttribute("pageSize", pageInfo.getPageSize());
+        model.addAttribute("pageNum", pageInfo.getCurrentPage());
+        //是否是第一页
+        model.addAttribute("isFirstPage", pageInfo.isFirstPage());
+        //获得总页数
+        model.addAttribute("totalPages", pageInfo.getMaxPage());
+        //是否是最后一页
+        model.addAttribute("isLastPage", pageInfo.isLastPage());
     @GetMapping("/Catalog/HotProductList")
     public String HotProductList(@RequestParam("destination") String destination, Model model) {
         //业务操作增删查改
@@ -246,8 +283,12 @@ public class CatalogController {
 
     //进入酒店页面的界面控制器
     @GetMapping("/Catalog/HotHotelList")
-    public String HotHotelList(Model model, HttpSession session) {
+    public String HotHotelList(@RequestParam("destination") String destination,
+                               @RequestParam(defaultValue = "1") Integer pageNum,
+                               @RequestParam(defaultValue = "8") Integer pageSize,
+                               Model model) {
         String destination = (String) session.getAttribute("location");
+
         //获取当前用户位置,推荐酒店
         if (destination != null) {
             List<HotelMsg> hotelMsgList = catalogService.getHotelListByDestination(destination + "市");
@@ -255,6 +296,24 @@ public class CatalogController {
             model.addAttribute("hotelMsgList", hotelMsgList);
             model.addAttribute("destination", destination);
         }
+
+        PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
+        List<HotelMsg> hotelMsgList = catalogService.getHotelMsgList();
+        List<HotelMsg> currentPageList = hotelMsgList.subList(pageNum*8,pageNum*8+8);
+        hotelMsgPageInfo.setPageData(currentPageList);
+        hotelMsgPageInfo.setTotal(hotelMsgList.size());
+
+        hotelMsgPageInfo.setCurrentPage(pageNum);
+        if (hotelMsgPageInfo.getCurrentPage()==0)
+            hotelMsgPageInfo.setFirstPage(true);
+        else
+            hotelMsgPageInfo.setFirstPage(false);
+        if (hotelMsgPageInfo.getCurrentPage()==hotelMsgPageInfo.getMaxPage())
+            hotelMsgPageInfo.setLastPage(true);
+        else
+            hotelMsgPageInfo.setLastPage(false);
+        model.addAttribute("hotelPageInfo", hotelMsgPageInfo);
+
         return "ProductDT/Hotel";
     }
 
