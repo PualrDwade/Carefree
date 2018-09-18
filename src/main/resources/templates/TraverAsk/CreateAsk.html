@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
 <body>
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
@@ -14,8 +17,8 @@
         <div class="ap-wrap">
             <div class="ap-main">
 
-                <form class="forms" id="infoform" th:action="@{/TraverAsk/createAsk}" th:method="post"
-                      enctype="multipart/form-data" target="postinfo">
+                <form class="forms" id="infoform" th:action="@{/TraverAsk/createAsk}" th:method="get"
+                      enctype="multipart/form-data" target="postinfo" name="fileForm">
                     <dl class="title cf">
                         <dd>
                             <input id="title" name="title" type="text" maxlength="48" placeholder="请输入问题标题" value="">
@@ -47,14 +50,28 @@
                                                 <div class="separator"></div>
                                             </div>
                                         </div>
-                                        <div class="editor-container" id="_j_answer_editor" name="askContent"></div>
+                                        <div class="editor-container" id="_j_answer_editor"  name="askContent">
+                                        </div>
                                     </div>
 
                                     <div class="aa-ft">
                                         <div class="count">
                                             <span class="word"><b id="_j_word_count">0</b>字</span>
                                         </div>
-                                        <input class="btn-comment _j_submit_answer_btn" type="submit" value="提交问题">
+
+                                        <input  type="submit" value="提交问题">
+
+                                        <!--
+                                        <div class="btn-submit">
+                                            <button class="btn-comment _j_submit_answer_btn" onclick="submitBtnClick()">提交问题</button>
+                                            <script type="text/javascript">
+                                                function submitBtnClick() {
+                                                    //提交问题
+                                                    document.fileForm.submit();
+                                                }
+                                            </script>
+                                        </div>
+                                        -->
                                     </div>
                                 </div>
                             </div>
@@ -67,9 +84,12 @@
         </div>
     </div>
 </div>
+
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>
 <!--================ End footer Area  =================-->
+
+
 <link href="http://css.mafengwo.net/mobile/css/omc/coupon-pop/coupon-pop.css?1526627473" rel="stylesheet"
       type="text/css"/>
 <script language="javascript" src="http://js.mafengwo.net/mobile/js/activity/app_newer_180.js?1526627474"
@@ -243,35 +263,17 @@
     }
 </style>
 
-<!--
-<script type="text/javascript">
-    window.Env = {
-        "Qid": 13051644,
-        "Aid": null,
-        "mddid": 10466,
-        "WWW_HOST": "www.mafengwo.cn",
-        "IMG_HOST": "images.mafengwo.net",
-        "P_HOST": "passport.mafengwo.cn",
-        "P_HTTP": "https:\/\/passport.mafengwo.cn",
-        "PAGELET_HTTP": "http:\/\/pagelet.mafengwo.cn",
-        "JS_HOST": "js.mafengwo.net",
-        "UID": 85353052,
-        "CSTK": "6bc46ed9bdf9cb800961f6e35c0a51ff_0ba37ec1bc66ed263b7d9fbe7d951843",
-        "GOOGLE_MAP_KEY": "AIzaSyD-Su0x_rPy1xehlMBcMyTqWkU49Bk53nQ",
-        "TONGJI_HOST": "tongji.mafengwo.cn"
-    };
-</script>
--->
-
 <link href="http://css.mafengwo.net/css/cv/css+mfw-ask+detail_v3:css+mfw-ask+img_pop:css+mfw-ask+detail_answer_foldup:css+mfw-ask+upload_pics^al0^1533612615.css"
       rel="stylesheet" type="text/css"/>
 <link href="http://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css"
       rel="stylesheet" type="text/css"/>
 <link href="http://css.mafengwo.net/css/cv/css+mfweditor+mfweditor:css+post+addpost:css+jquery-ui-1.9.1.custom.min^ZFQ^1493174418.css"
       rel="stylesheet" type="text/css"/>
+
 <script language="javascript"
         src="http://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js"
         type="text/javascript" crossorigin="anonymous"></script>
+
 <link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
 <div class="mfw-toolbar" id="_j_mfwtoolbar">
     <div class="toolbar-item-top">
@@ -287,6 +289,7 @@
         </a>
     </div>
 </div>
+
 <script language="javascript" type="text/javascript">
     if (typeof M !== "undefined" && typeof M.loadResource === "function") {
         M.loadResource("http://js.mafengwo.net/js/cv/js+pageletcommon+pageHeadUserInfoWWWDark:js+M+module+dialog+Layer:js+M+module+dialog+DialogBase:js+M+module+dialog+Dialog:js+M+module+dialog+alert:js+M+module+dialog+confirm:js+M+module+FrequencyVerifyControl:js+M+module+FrequencyAppVerify:js+jquery.scrollTo:js+qa+videoPlay:js+M+module+Storage:js+qa+wysiwyg:js+qa+wysiwyg-editor:js+qa+qa_module+selection:js+plupload:js+module+uploader+Pluploader:js+jquery.tmpl:js+plugins+jquery.rotate:js+qa+QaPicDialog:js+qa+QaPicUploader:js+qa+qa_module+PasteInEditor:js+qa+qa_module+FilterHtml:js+qiniu+qiniuFileUpload:js+M+module+TopTip:js+qa+VideoUploadPop:js+M+module+InputListener:js+M+module+SuggestionXHR:js+M+module+DropList:js+M+module+Suggestion:js+qa+initPlaceSuggestion:js+qa+QaRichTextEditor:js+mfwCountdown:js+qa+QaDetailV1:js+mSnsShare:js+qa+DoShare:js+qa+QaShare:js+M+module+Pagination:js+qa+QaCaret:js+qa+QaComments:js+qa+QaSeach:js+M+module+Toggle:js+qa+InviteUserAnswer:js+jquery.lazyload:js+jquery.upnum:js+M+module+ScrollObserver:js+qa+ControllerDetailAnswerList:js+qa+ARecommentQu:js+M+module+PageAdmin:js+M+module+Cookie:js+M+module+ResourceKeeper:js+jquery.jgrowl.min:js+AMessage:js+M+module+FrequencySystemVerify:js+ALogin:js+M+module+QRCode:js+AToolbar:js+ACnzzGaLog:js+ARecruit:js+ALazyLoad^YldWRw^1534732433.js");

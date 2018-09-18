@@ -10,6 +10,10 @@ import com.csu.carefree.Service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /*
@@ -50,6 +54,149 @@ public class CatalogServiceImpl implements CatalogService {
     @Autowired
     private TraverNoteMapper traverNoteMapper;
 
+    /*******************根据行程推荐景点、酒店、攻略、游记等**********/
+
+    @Override
+    public ArrayList<ScenicMsg> getRecommendScenicList(HttpSession session) {
+        List<ScenicMsg> scenicList = this.getScenicMsgListByCityName((String) session.getAttribute("location") + "市");
+        //对景点进行排序
+        sortScenicList(scenicList);
+        ArrayList<ScenicMsg> recommendScenicList = new ArrayList<>();
+        if (scenicList.size() > 18) {
+            recommendScenicList.addAll(scenicList.subList(0, 18));
+        } else {
+            recommendScenicList.addAll(scenicList);
+        }
+        return recommendScenicList;
+    }
+
+    @Override
+    public ArrayList<HotelMsg> getRecommendHotelList(HttpSession session) {
+        List<HotelMsg> hotelList = this.getHotelListByDestination((String) session.getAttribute("location") + "市");
+        //根据酒店的评分对酒店进行排序
+        sortHotelList(hotelList);
+        ArrayList<HotelMsg> recommendHotelList = new ArrayList<>();
+        if (hotelList.size() > 18) {
+            recommendHotelList.addAll(hotelList.subList(0, 18));
+        } else {
+            recommendHotelList.addAll(hotelList);
+        }
+        return recommendHotelList;
+    }
+
+    @Override
+    public ArrayList<StrategyMsg> getRecommendStrategyList(HttpSession session) {
+        //首先通过城市信息找到相应的景点，在通过景点找到相应的攻略
+//        List<ScenicMsg> recommendScenicList = this.getRecommendScenicList(session);
+        ArrayList<StrategyMsg> strategyList = new ArrayList<>();
+//        for (ScenicMsg s: recommendScenicList)
+//            strategyList.add(this.getStrategyByScenicName(s.getName()));
+        strategyList.addAll(this.getStrategyList());
+        return strategyList;
+    }
+
+    @Override
+    public ArrayList<TraverNote> getRecommendTraverNoteList(HttpSession session) {
+        //先根据城市名得到ID
+        String cityId = this.searchCityMsgByName((String) session.getAttribute("location") + "市").get(0).getId();
+        System.out.println("cityID" + cityId);
+        List<TraverNote> traverNoteList = this.getTraverNoteListByCityName(cityId);
+        ArrayList<TraverNote> recommendTraverNoteList = new ArrayList<>();
+        if (traverNoteList.size() > 18) {
+            recommendTraverNoteList.addAll(traverNoteList.subList(0, 18));
+        } else {
+            recommendTraverNoteList.addAll(traverNoteList);
+        }
+        return recommendTraverNoteList;
+    }
+
+    @Override
+    public void sortScenicList(List<ScenicMsg> sortScenicList) {
+        //这里根据景点的热度进行排序，通过Collections提供的排序方法
+        for (ScenicMsg scenicMsg : sortScenicList) {
+            System.out.print(" " + scenicMsg.getName() + "：" + scenicMsg.getPopular_level() + "；");
+        }
+        sortScenicList.sort((o1, o2) -> {
+            int i = (int) (10 * (Double.parseDouble(o2.getPopular_level()) - Double.parseDouble(o1.getPopular_level())));
+            if (i == 0) {
+                return 0;
+            }
+            return i;
+        });
+        System.out.println("**********************************");
+        for (ScenicMsg scenicMsg : sortScenicList) {
+            System.out.print(" " + scenicMsg.getName() + "：" + scenicMsg.getPopular_level() + "；");
+        }
+
+    }
+
+    @Override
+    public void sortHotelList(List<HotelMsg> sortHotelList) {
+        for (HotelMsg hotel : sortHotelList) {
+            System.out.print(" " + hotel.getName() + "：" + hotel.getScore() + "；");
+        }
+        sortHotelList.sort((o1, o2) -> {
+            int i = (int) (10 * (Double.parseDouble(o2.getScore()) - Double.parseDouble(o1.getScore())));
+            if (i == 0) {
+                return 0;
+            }
+            return i;
+        });
+        System.out.println("**********************************");
+        for (HotelMsg hotel : sortHotelList) {
+            System.out.print(" " + hotel.getName() + "：" + hotel.getScore() + "；");
+        }
+
+    }
+
+    @Override
+    public void sortStrategyList(List<StrategyMsg> recommendStrategyList) {
+
+    }
+
+    @Override
+    public void sortTraverNoteList(List<TraverNote> recommendTraverNoteList) {
+
+    }
+
+
+    /*******************获取热门信息**********/
+    @Override
+    public ArrayList<FullProductInfo> getHotProductList(HttpSession session) {
+        List<ProductMsg> productList = this.getProductList();
+        ArrayList<FullProductInfo> hotProductList = new ArrayList<>();
+        //热门产品推荐指标
+        for (int i = 0; i < productList.size(); i++) {
+            break;
+        }
+        hotProductList.add(new FullProductInfo(productList.get(0)));
+        hotProductList.add(new FullProductInfo(productList.get(1)));
+        return hotProductList;
+    }
+
+    @Override
+    public ArrayList<HotelMsg> getHotHotelList() {
+        List<HotelMsg> hotelList = this.getHotelMsgList();
+        ArrayList<HotelMsg> hotHotelList = new ArrayList<>();
+        hotHotelList.add(hotelList.get(0));
+        hotHotelList.add(hotelList.get(1));
+        hotHotelList.add(hotelList.get(2));
+        hotHotelList.add(hotelList.get(3));
+        return hotHotelList;
+    }
+
+    @Override
+    public ArrayList<TraverNote> getHotTraverNoteList() {
+        List<TraverNote> TraverNoteList = this.getTraverNoteList();
+        System.out.println("TraverNoteList包含个数：" + TraverNoteList.size());
+        ArrayList<TraverNote> hotTraverNoteList = new ArrayList<>();
+        hotTraverNoteList.add(TraverNoteList.get(0));
+        //hotTraverNoteList.add(TraverNoteList.get(1));
+        //hotTraverNoteList.add(TraverNoteList.get(2));
+        return hotTraverNoteList;
+    }
+
+    /*******************酒店信息**********/
     @Override
     public List<HotelMsg> getHotelMsgList() {
         return hotelMsgMapper.getHotelMsgList();
@@ -103,6 +250,21 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId) {
         return productMapper.getProductListByThree(traverDays, productType, supplierId);
+    }
+
+    @Override
+    public List<ProductMsg> getProductListByDaysAndStore(String traverDays , String supplierId) {
+        return productMapper.getProductListByDaysAndStore(traverDays,supplierId);
+    }
+
+    @Override
+    public List<ProductMsg> getProductListByDaysAndType(String traverDays , String productType) {
+        return productMapper.getProductListByDaysAndType(traverDays,productType);
+    }
+
+    @Override
+    public List<ProductMsg> getProductListByTypeAndStore( String productType, String supplierId) {
+        return productMapper.getProductListByTypeAndStore(productType,supplierId);
     }
 
     @Override
@@ -175,6 +337,8 @@ public class CatalogServiceImpl implements CatalogService {
         return productscenicMsgMapper.getScenicNamesByProductId(productId);
     }
 
+    /*******************攻略信息**********/
+
     @Override
     public List<StrategyMsg> getStrategyList() {
         return strategyMsgMapper.getStrategyList();
@@ -184,6 +348,8 @@ public class CatalogServiceImpl implements CatalogService {
     public StrategyMsg getStrategyByScenicName(String scenicName) {
         return strategyMsgMapper.getStrategyByScenicName(scenicName);
     }
+
+    /*******************门票信息**********/
 
     @Override
     public List<TicketMsg> getTicketList() {
@@ -200,6 +366,8 @@ public class CatalogServiceImpl implements CatalogService {
         return ticketMsgMapper.getTicketListByCityName(cityId);
     }
 
+    /*******************游记信息**********/
+
     @Override
     public List<TraverNote> getTraverNoteList() {
         return traverNoteMapper.getTraverNoteList();
@@ -213,5 +381,10 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public TraverNote getTraverNoteById(String traverNoteId) {
         return traverNoteMapper.getTraverNoteById(traverNoteId);
+    }
+
+    @Override
+    public List<TraverNote> getTraverNoteListByCityName(String cityId) {
+        return traverNoteMapper.getTraverNodeListbyCityName(cityId);
     }
 }

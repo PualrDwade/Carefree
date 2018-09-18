@@ -8,9 +8,35 @@ import com.csu.carefree.Model.TraverMsg.ProvinceMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface CatalogService {
+
+    /*******************根据行程推荐景点、酒店、攻略、游记等**********/
+    ArrayList<ScenicMsg> getRecommendScenicList(HttpSession session);
+
+    ArrayList<HotelMsg> getRecommendHotelList(HttpSession session);
+
+    ArrayList<StrategyMsg> getRecommendStrategyList(HttpSession session);
+
+    ArrayList<TraverNote> getRecommendTraverNoteList(HttpSession session);
+
+    void sortScenicList(List<ScenicMsg> recommendScenicList);
+
+    void sortHotelList(List<HotelMsg> sortHotelList);
+
+    void sortStrategyList(List<StrategyMsg> recommendStrategyList);
+
+    void sortTraverNoteList(List<TraverNote> recommendTraverNoteList);
+
+    /*******************获取热门信息**********/
+    ArrayList<FullProductInfo> getHotProductList(HttpSession session);
+
+    ArrayList<HotelMsg> getHotHotelList();
+
+    ArrayList<TraverNote> getHotTraverNoteList();
 
     /*******************酒店信息**********/
     //获取所有酒店信息
@@ -48,6 +74,15 @@ public interface CatalogService {
 
     //三个筛选条件都有
     List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId);
+
+    //行程天数和供应商
+    List<ProductMsg> getProductListByDaysAndStore(String traverDays , String supplierId);
+
+    //行程天数和产品类型
+    List<ProductMsg> getProductListByDaysAndType(String traverDays , String productType);
+
+    //产品类型和供应商
+    List<ProductMsg> getProductListByTypeAndStore( String productType, String supplierId);
 
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找
@@ -126,4 +161,7 @@ public interface CatalogService {
 
     //通过游记ID获取游记信息
     TraverNote getTraverNoteById(String traverNoteId);
+
+    //通过城市名获取游记
+    List<TraverNote> getTraverNoteListByCityName(String cityName);
 }
