@@ -1,19 +1,14 @@
 package com.csu.carefree.Controller;
 
 
-import com.csu.carefree.Model.PageInfo;
+import com.csu.carefree.Util.PageInfo;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
 import com.csu.carefree.Service.CatalogService;
 import com.csu.carefree.Model.ProductDT.*;
-import com.csu.carefree.Model.TraverMsg.CityMsg;
 import com.csu.carefree.Model.TraverAsk.TraverNote;
-import com.csu.carefree.Model.TraverMsg.ScenicMsg;
-import com.csu.carefree.Model.TraverMsg.TraverMsg;
-import com.csu.carefree.Service.CatalogService;
 import com.csu.carefree.Util.CatalogUtils;
 import com.csu.carefree.Util.LocationUtil;
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -42,13 +34,12 @@ public class CatalogController {
     private CatalogService catalogService;
 
     private CatalogUtils catalogUtils = new CatalogUtils();
-  
+
     @GetMapping("ProductDT/viewHotel")
     public String viewHotelMsgList(Model model) {
         model.addAttribute("HotelList");
         return "Hotel";
     }
-
 
 
     //请求主界面
@@ -194,22 +185,23 @@ public class CatalogController {
     //进入热门产品的界面控制器url
     @RequestMapping("/Catalog/HotProductList")
     public String HotProductList(Model model,
+                                 HttpSession session,
                                  @RequestParam(defaultValue = "1") Integer pageNum,
                                  @RequestParam(defaultValue = "5") Integer pageSize) {
-        System.out.println(pageNum+"    "+pageSize);
+        String destination = (String) session.getAttribute("location");
+        System.out.println(pageNum + "    " + pageSize);
         List<ProductMsg> productMsgList = catalogService.getProductList();
-        List<ProductMsg> CurrentPageList = productMsgList.subList(pageNum*8,pageNum*8+8);
-
+        List<ProductMsg> CurrentPageList = productMsgList.subList(pageNum * 8, pageNum * 8 + 8);
         PageInfo<ProductMsg> pageInfo = new PageInfo<>();
         pageInfo.setTotal(productMsgList.size());
         pageInfo.setPageData(CurrentPageList);
         //设置当前界面
         pageInfo.setCurrentPage(pageNum);
-        if (pageInfo.getCurrentPage()==0)
+        if (pageInfo.getCurrentPage() == 0)
             pageInfo.setFirstPage(true);
         else
             pageInfo.setFirstPage(false);
-        if (pageInfo.getCurrentPage()==pageInfo.getMaxPage())
+        if (pageInfo.getCurrentPage() == pageInfo.getMaxPage())
             pageInfo.setLastPage(true);
         else
             pageInfo.setLastPage(false);
@@ -223,13 +215,8 @@ public class CatalogController {
         model.addAttribute("totalPages", pageInfo.getMaxPage());
         //是否是最后一页
         model.addAttribute("isLastPage", pageInfo.isLastPage());
-    @GetMapping("/Catalog/HotProductList")
-    public String HotProductList(@RequestParam("destination") String destination, Model model) {
-        //业务操作增删查改
-
-        List<ProductMsg> productMsgList = catalogService.getProductList();
-        System.out.println("找到符合条件的产品"+ productMsgList.size() +"条");
-        catalogUtils.setDepartCityPrice(catalogService,destination,productMsgList);
+        System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
+        catalogUtils.setDepartCityPrice(catalogService, destination, productMsgList);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
@@ -275,7 +262,7 @@ public class CatalogController {
         }
         System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
         String destination = session.getAttribute("location").toString();
-        catalogUtils.setDepartCityPrice(catalogService,destination,productMsgList);
+        catalogUtils.setDepartCityPrice(catalogService, destination, productMsgList);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
@@ -283,10 +270,11 @@ public class CatalogController {
 
     //进入酒店页面的界面控制器
     @GetMapping("/Catalog/HotHotelList")
-    public String HotHotelList(@RequestParam("destination") String destination,
-                               @RequestParam(defaultValue = "1") Integer pageNum,
-                               @RequestParam(defaultValue = "8") Integer pageSize,
-                               Model model) {
+    public String HotHotelList(
+            @RequestParam(defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "8") Integer pageSize,
+            HttpSession session,
+            Model model) {
         String destination = (String) session.getAttribute("location");
 
         //获取当前用户位置,推荐酒店
@@ -299,16 +287,16 @@ public class CatalogController {
 
         PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
         List<HotelMsg> hotelMsgList = catalogService.getHotelMsgList();
-        List<HotelMsg> currentPageList = hotelMsgList.subList(pageNum*8,pageNum*8+8);
+        List<HotelMsg> currentPageList = hotelMsgList.subList(pageNum * 8, pageNum * 8 + 8);
         hotelMsgPageInfo.setPageData(currentPageList);
         hotelMsgPageInfo.setTotal(hotelMsgList.size());
 
         hotelMsgPageInfo.setCurrentPage(pageNum);
-        if (hotelMsgPageInfo.getCurrentPage()==0)
+        if (hotelMsgPageInfo.getCurrentPage() == 0)
             hotelMsgPageInfo.setFirstPage(true);
         else
             hotelMsgPageInfo.setFirstPage(false);
-        if (hotelMsgPageInfo.getCurrentPage()==hotelMsgPageInfo.getMaxPage())
+        if (hotelMsgPageInfo.getCurrentPage() == hotelMsgPageInfo.getMaxPage())
             hotelMsgPageInfo.setLastPage(true);
         else
             hotelMsgPageInfo.setLastPage(false);
@@ -332,19 +320,19 @@ public class CatalogController {
 
         List<HotelMsg> hotelMsgList = new ArrayList<HotelMsg>();
 
-        if(supplierId.equals("0") && price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestination(destination+"市");
+        if (supplierId.equals("0") && price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestination(destination + "市");
         }
-        if(!supplierId.equals("0") && price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination+"市",supplierId);
+        if (!supplierId.equals("0") && price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination + "市", supplierId);
         }
-        if(supplierId.equals("0") && !price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestination(destination+"市");
-            catalogUtils.setHotelListByPrices(hotelMsgList,price);
+        if (supplierId.equals("0") && !price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestination(destination + "市");
+            catalogUtils.setHotelListByPrices(hotelMsgList, price);
         }
-        if(!supplierId.equals("0") && !price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination+"市",supplierId);
-            catalogUtils.setHotelListByPrices(hotelMsgList,price);
+        if (!supplierId.equals("0") && !price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination + "市", supplierId);
+            catalogUtils.setHotelListByPrices(hotelMsgList, price);
         }
         model.addAttribute("hotelMsgList", hotelMsgList);
         return "ProductDT/Hotel";
