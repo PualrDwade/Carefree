@@ -28,8 +28,8 @@
     <div class="tags_bar">
         <div class="center clearfix">
             <ul class="flt2">
-                <li><a class="tags_link" th:href="@{/}" title="返回主页">返回主页</a></li>
-                <li class="on"><a class="tags_link" th:href="@{/account/ViewUserCenter}" title="我的主页">我的主页</a></li>
+                <li><a class="tags_link" th:href="@{/}" title="返回主页">回到首页</a></li>
+                <li><a class="tags_link" th:href="@{/account/ViewUserCenter}" title="我的主页">我的主页</a></li>
                 <li><a class="tags_link" th:href="@{/account/ViewMyTraverNotes}" title="我的游记">我的游记</a></li>
                 <li><a class="tags_link" th:href="@{/account/ViewMyTraverAnswers}" title="我的问答">我的问答</a></li>
                 <li><a class="tags_link" href="#" title="我的收藏">我的收藏</a></li>
@@ -55,34 +55,27 @@
 </div>
 <div th:fragment="userLeft" class="side_bar flt1">
     <!--用户信息-->
-    <div class="MAvatar">
+    <div class="MAvatar" style="margin-top: 60px">
         <!--头像-->
         <div class="MAvaImg hasAva">
-            <img src="/image/favicon.png" height="120" width="120">
+            <img th:src="${session.userProfile.image}" height="120" width="120">
             <!--设置头像-->
             <a th:href="@{/account/GotoSettingInfo}" class="MAvaUp">
                 <i class="Mphoto"></i>
             </a>
         </div>
         <!--昵称和性别标签-->
-        <div class="MAvaName">陈志轩
-            <i class="MGenderMale"></i>
-            <!--<i class="MGenderFemale"></i>-->
-            <!--<i class="MGender"></i>-->
+        <div class="MAvaName" th:text="${session.userProfile.nick_name}">陈志轩
+            <i th:if="${session.userProfile.gender}=='male'" class="MGenderMale"></i>
+            <i th:if="${session.userProfile.gender}=='female'" class="MGenderFemale"></i>
+            <i th:if="${session.userProfile.gender}==null" class="MGender"></i>
         </div>
         <!--生日和居住地，设置图标-->
         <div class="MAvaInfo clearfix MAvaMyInfo">
-            <span class="MAvaLevel flt1" title="11.15">生日：11.15</a></span>
-            <span class="MAvaPlace flt1" title="长沙">现居：长沙</span>
-            <span class="MAvaSet"><a title="设置" th:href="@{/account/AccountSetting}" target="_self"></a></span>
-        </div>
-        <!--个人介绍-->
-        <div id="_j_profilearea" class="MAvaProfile">
-            <a role="button" class="addBtn _j_showintrobox">添加个人介绍</a>
-            <div class="MAvaInput hide _j_inputarea">
-                <textarea id="_j_introarea" placeholder="例如：中南大学学生" maxlength="100"></textarea>
-                <a role="button" id="_j_introsaver" class="MAvaBtn" title="保存">保存</a>
-            </div>
+            <span class="MAvaLevel flt1" title="11.15"
+                  th:text="'生日: '+${session.userProfile.birthday}">生日：请完善信息</a></span>
+            <span class="MAvaPlace flt1" th:text="${session.userProfile.address}">现居地: 请完善信息</span>
+            <span class="MAvaSet"><a title="设置" th:href="@{/account/AccountSetting}"></a></span>
         </div>
         <!--数据展示-->
         <div class="MAvaMore clearfix">

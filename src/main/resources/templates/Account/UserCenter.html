@@ -65,9 +65,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="more_notes">
-                    <a class="btn_deleted" href="/u/note/delete.html"><i></i>已删除游记</a>
-                </div>
             </div>
             <!--我的提问-->
             <div class="common_block my_notes">
@@ -92,15 +89,17 @@
                                         <div class="ask_ava">
                                             <a href="#" target="_blank">
                                                 <!--用户头像url-->
-                                                <img th:src="${userProfile.image}" height="48" width="48"
-                                                     th:alt="${userProfile.nick_name}">
+                                                <img th:src="${session.userProfile.image}" height="48" width="48"
+                                                     th:alt="${session.userProfile.nick_name}">
                                             </a>
                                         </div>
                                         <div class="ask_info">
-                                            <h2><a href="#" th:text="${askitem.title}" target="_blank"></a>
+                                            <h2><a th:href="@{/TraverAsk/viewAskAnswerDetail(askId=${askitem.id})}"
+                                                   th:text="${askitem.title}" target="_blank"></a>
                                             </h2>
                                             <span th:text="'此问题共'+${askAnswerContainer.getAnswerListByask(askitem).size()}+'个人参与了回答'"></span>
-                                            </p>
+                                            <span th:text="'发表时间:'+${askitem.add_time}"
+                                                  style="right: 0px;position:absolute"></span>
                                         </div>
                                     </dt>
                                     <!--下面是回答列表-->
