@@ -209,7 +209,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<HotelMsg> searchHotelMsgList(String keyword) {
-        return searchHotelMsgList(keyword);
+        return searchHotelMsgList("%"+keyword+"%");
     }
 
     @Override
@@ -274,7 +274,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<CityMsg> searchCityMsgByName(String cityName) {
-        return cityMsgMapper.searchCityMsgByName(cityName);
+        return cityMsgMapper.searchCityMsgByName("%"+cityName+"%");
     }
 
     @Override
@@ -360,7 +360,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<TraverNote> searchTraverNoteList(String keyword) {
-        return traverNoteMapper.searchTraverNoteList(keyword);
+        return traverNoteMapper.searchTraverNoteList("%"+keyword+"%");
     }
 
     @Override

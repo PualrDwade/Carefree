@@ -13,7 +13,8 @@
         </div>
         <div class="ap-wrap">
             <div class="ap-main">
-                <form class="forms" id="infoform" action="/ginfo/create.php/save" method="post"
+
+                <form class="forms" id="infoform" th:action="@{/TraverAsk/createAsk}" th:method="post"
                       enctype="multipart/form-data" target="postinfo">
                     <dl class="title cf">
                         <dd>
@@ -25,7 +26,6 @@
                             <a name="answer"></a>
                             <div class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  ">
                                 <div class="editor-scroll">
-
                                     <div class="answer-editor">
                                         <div class="toolbar-out">
                                             <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar">
@@ -37,8 +37,7 @@
                                                     <div class="tooltip"><span>标题</span></div>
                                                 </div>
 
-                                                <div class="item _js_unordered_list"><a class="btn-ul"
-                                                                                        role="button"></a>
+                                                <div class="item _js_unordered_list"><a class="btn-ul" role="button"></a>
                                                     <div class="tooltip"><span>无序列表</span></div>
                                                 </div>
 
@@ -48,20 +47,21 @@
                                                 <div class="separator"></div>
                                             </div>
                                         </div>
-                                        <div class="editor-container" id="_j_answer_editor">
-                                        </div>
+                                        <div class="editor-container" id="_j_answer_editor" name="askContent"></div>
                                     </div>
+
                                     <div class="aa-ft">
                                         <div class="count">
                                             <span class="word"><b id="_j_word_count">0</b>字</span>
                                         </div>
-                                        <input class="btn-comment _j_submit_answer_btn" type="button" value="提交问题">
+                                        <input class="btn-comment _j_submit_answer_btn" type="submit" value="提交问题">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form>
+
             </div>
 
         </div>
@@ -242,6 +242,8 @@
         opacity: 0;
     }
 </style>
+
+<!--
 <script type="text/javascript">
     window.Env = {
         "Qid": 13051644,
@@ -259,6 +261,8 @@
         "TONGJI_HOST": "tongji.mafengwo.cn"
     };
 </script>
+-->
+
 <link href="http://css.mafengwo.net/css/cv/css+mfw-ask+detail_v3:css+mfw-ask+img_pop:css+mfw-ask+detail_answer_foldup:css+mfw-ask+upload_pics^al0^1533612615.css"
       rel="stylesheet" type="text/css"/>
 <link href="http://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css"

@@ -27,4 +27,7 @@ public interface TraverAskService {
 
     //用户回答问题
     void insertUserAnswer(UserAnswer userAnswer);
+
+    //通过username得到用户回答列表
+    List<UserAnswer> getUserAnswerListByName(String username);
 }
