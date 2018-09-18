@@ -143,7 +143,7 @@ public class CatalogController {
                                  @RequestParam(defaultValue = "5") Integer pageSize) {
         System.out.println(pageNum+"    "+pageSize);
         List<ProductMsg> productMsgList = catalogService.getProductList();
-        List<ProductMsg> CurrentPageList = productMsgList.subList(pageNum,pageNum+5);
+        List<ProductMsg> CurrentPageList = productMsgList.subList(pageNum*8,pageNum*8+8);
 
         PageInfo<ProductMsg> pageInfo = new PageInfo<>();
         pageInfo.setTotal(productMsgList.size());
@@ -174,7 +174,10 @@ public class CatalogController {
 
     //进入酒店页面的界面控制器
     @GetMapping("/Catalog/HotHotelList")
-    public String HotHotelList(@RequestParam("destination") String destination, Model model) {
+    public String HotHotelList(@RequestParam("destination") String destination,
+                               @RequestParam(defaultValue = "1") Integer pageNum,
+                               @RequestParam(defaultValue = "8") Integer pageSize,
+                               Model model) {
         //获取当前用户位置,推荐酒店
         if (destination != null) {
             //  List<HotelMsg> hotelMsgList = catalogService.getHotelListByDestination(destination);
@@ -183,6 +186,24 @@ public class CatalogController {
             model.addAttribute("hotelMsgList", hotelMsgList);
             model.addAttribute("destination", destination);
         }
+
+        PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
+        List<HotelMsg> hotelMsgList = catalogService.getHotelMsgList();
+        List<HotelMsg> currentPageList = hotelMsgList.subList(pageNum*8,pageNum*8+8);
+        hotelMsgPageInfo.setPageData(currentPageList);
+        hotelMsgPageInfo.setTotal(hotelMsgList.size());
+
+        hotelMsgPageInfo.setCurrentPage(pageNum);
+        if (hotelMsgPageInfo.getCurrentPage()==0)
+            hotelMsgPageInfo.setFirstPage(true);
+        else
+            hotelMsgPageInfo.setFirstPage(false);
+        if (hotelMsgPageInfo.getCurrentPage()==hotelMsgPageInfo.getMaxPage())
+            hotelMsgPageInfo.setLastPage(true);
+        else
+            hotelMsgPageInfo.setLastPage(false);
+        model.addAttribute("hotelPageInfo", hotelMsgPageInfo);
+
         return "ProductDT/Hotel";
     }
 

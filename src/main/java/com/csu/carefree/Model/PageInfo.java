@@ -15,7 +15,7 @@ public class PageInfo <E> {
     //当前页
     private int currentPage=1;
     //每页的记录数
-    private int pageSize=5;
+    private int pageSize=8;
     //总页数
     private int maxPage;
 

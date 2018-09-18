@@ -1,5 +1,4 @@
 <!doctype html >
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <body>
 <!--================Header Area =================-->
@@ -182,7 +181,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="priceTag">
-                            <p>￥1754
+                            <p >￥1754
                                 <small>/人起</small>
                             </p>
                         </div>
@@ -204,7 +203,7 @@
                 <nav>
                     <ul class="pagination">
                         <li>
-                            <a th:href="@{${'/Catalog/HotProductList'}(pageNum = 1,pageSize=5)}"> 首页 </a>
+                            <a th:href="@{${'/Catalog/HotProductList'}(pageNum = 0,pageSize=8)}"> 首页 </a>
                         </li>
                         <li>
                             <a th:if="${not isFirstPage}" th:href="@{${'/Catalog/HotProductList'}(pageNum = ${pageNum - 1},pageSize=${pageSize})}">前一页</a>
@@ -214,17 +213,17 @@
                             <a th:if="${pageNum eq pageNo}" href="javascript:void(0);">
                                 <span th:text="${pageNo}"></span>
                             </a>
-                            <a th:if="${not (pageNum eq pageNo)}" th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo},size=${pageSize})}">
+                            <a th:if="${not (pageNum eq pageNo)}" th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo},pageSize=${pageSize})}">
                                 <span th:text="${pageNo}"></span>
                             </a>
                         </li>
 
                         <li>
-                            <a th:if="${not isLastPage}" th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNum+1},size=${pageSize})}">后一页</a>
+                            <a th:if="${not isLastPage}" th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNum+1},pageSize=${pageSize})}">后一页</a>
                             <a th:if="${isLastPage}" href="javascript:void(0);">Next</a>
                         </li>
 
-                        <li><a th:href="@{${'/Catalog/HotProductList'}(pageNum = ${pageInfo.getMaxPage() - 5} ,pageSize=5)}"> 尾页 </a ></li>
+                        <li><a th:href="@{${'/Catalog/HotProductList'}(pageNum = ${pageInfo.getMaxPage() - 8} ,pageSize=${pageSize})}"> 尾页 </a ></li>
                     </ul>
                 </nav>
             </center>
