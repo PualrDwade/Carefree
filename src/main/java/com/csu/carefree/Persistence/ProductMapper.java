@@ -12,36 +12,41 @@ public interface ProductMapper {
 
     List<ProductMsg> getProductList();
 
-    ProductMsg getProductById(String id);
+    ProductMsg getProductById(@Param("id") String id);
 
     //筛选条件：traver_days, product_type, supplier_id, cityname
 
     //城市名
-    List<ProductMsg> getProductListByCityName(String cityname);
+    List<ProductMsg> getProductListByCityName(@Param("cityname") String cityname);
 
     //行程天数
-    List<ProductMsg> getProductListByTraverdays(String traverDays);
+    List<ProductMsg> getProductListByTraverdays(@Param("traver_days") String traverDays, @Param("cityname") String cityname);
 
     //产品类型
-    List<ProductMsg> getProductListByProductType(String productType);
+    List<ProductMsg> getProductListByProductType(@Param("product_type") String productType, @Param("cityname") String cityname);
 
     //供应商
-    List<ProductMsg> getProductListBySupplierId(String supplierId);
+    List<ProductMsg> getProductListBySupplierId(@Param("supplier_id") String supplierId, @Param("cityname") String cityname);
 
-    //产品名称
-    List<ProductMsg> getProductListByName(String productName);
+    //产品名称,模糊查询,查询产品内容
+    List<ProductMsg> getProductListByName(@Param("product_name") String productName);
 
     //三个筛选条件都有
-    List<ProductMsg> getProductListByThree(@Param("traver_days") String traverDays, @Param("product_type") String productType, @Param("suppliper_id") String supplierId);
+    List<ProductMsg> getProductListByThree(@Param("traver_days") String traverDays, @Param("product_type") String productType,
+                                           @Param("suppliper_id") String supplierId, @Param("cityname") String cityname);
 
     //行程天数和供应商
-    List<ProductMsg> getProductListByDaysAndStore(@Param("traver_days") String traverDays, @Param("suppliper_id") String supplierId);
+    List<ProductMsg> getProductListByDaysAndStore(@Param("traver_days") String traverDays,
+                                                  @Param("suppliper_id") String supplierId, @Param("cityname") String cityname);
 
     //行程天数和产品类型
-    List<ProductMsg> getProductListByDaysAndType(@Param("traver_days") String traverDays, @Param("product_type") String productType);
+    List<ProductMsg> getProductListByDaysAndType(@Param("traver_days") String traverDays,
+                                                 @Param("product_type") String productType, @Param("cityname") String cityname);
+
 
     //产品类型和供应商
-    List<ProductMsg> getProductListByTypeAndStore(@Param("product_type") String productType, @Param("suppliper_id") String supplierId);
+    List<ProductMsg> getProductListByTypeAndStore(@Param("product_type") String productType,
+                                                  @Param("suppliper_id") String supplierId, @Param("cityname") String cityname);
 
 
     //*****************通过推荐条件来排序、推荐*****************/

@@ -4,10 +4,16 @@
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
 <!--================Header Area =================-->
+<style>
+    body input {
+        border: 0.5px;
+        solid: #585858;
+    }
+</style>
 <div id="content" style="margin-top: 10px">
     <br><br><br>
     <div class="container ">
-        <form method="get" action="/Catalog/HotProductList">
+        <form method="get" th:action="@{/Catalog/HotProductList}">
             <div class="row margin-div">
                 <div class="col-lg-9">
                     <hr>
@@ -17,7 +23,7 @@
                              style="margin-right: 10px;">
                             <p>全部 </p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="0" id="days-all"
+                                <input name="days" type="radio" value="0" id="days-all" class="days-all"
                                        th:checked="${session.hotProductcheckedDaysAll}">
                                 <label for="days-all"></label>
                             </div>
@@ -26,7 +32,7 @@
                              style="margin-right: 10px;">
                             <p>1天 </p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="1" id="days-1">
+                                <input name="days" type="radio" value="1" id="days-1" class="days-1">
                                 <label for="days-1"></label>
                             </div>
                         </div>
@@ -34,7 +40,7 @@
                              style="margin-right: 10px;">
                             <p>2天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="2" id="days-2">
+                                <input name="days" type="radio" value="2" id="days-2" class="days-2">
                                 <label for="days-2"></label>
                             </div>
                         </div>
@@ -42,7 +48,7 @@
                              style="margin-right: 10px;">
                             <p>3天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="3" id="days-3">
+                                <input name="days" type="radio" value="3" id="days-3" class="days-3">
                                 <label for="days-3"></label>
                             </div>
                         </div>
@@ -50,7 +56,7 @@
                              style="margin-right: 10px;">
                             <p>4天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="4" id="days-4">
+                                <input name="days" type="radio" value="4" id="days-4" class="days-4">
                                 <label for="days-4"></label>
                             </div>
                         </div>
@@ -58,7 +64,7 @@
                              style="margin-right: 10px;">
                             <p>5天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="5" id="days-5">
+                                <input name="days" type="radio" value="5" id="days-5" class="days-5">
                                 <label for="days-5"></label>
                             </div>
                         </div>
@@ -66,7 +72,7 @@
                              style="margin-right: 10px;">
                             <p>6天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="6" id="days-6">
+                                <input name="days" type="radio" value="6" id="days-6" class="days-6">
                                 <label for="days-6"></label>
                             </div>
                         </div>
@@ -74,7 +80,7 @@
                              style="margin-right: 10px;">
                             <p>7天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="7" id="days-7">
+                                <input name="days" type="radio" value="7" id="days-7" class="days-7">
                                 <label for="days-7"></label>
                             </div>
                         </div>
@@ -82,7 +88,7 @@
                              style="margin-right: 10px;">
                             <p>8天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="8" id="days-8">
+                                <input name="days" type="radio" value="8" id="days-8" class="days-8">
                                 <label for="days-8"></label>
                             </div>
                         </div>
@@ -90,7 +96,7 @@
                              style="margin-right: 10px;">
                             <p>9天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="9" id="days-9">
+                                <input name="days" type="radio" value="9" id="days-9" class="days-9">
                                 <label for="days-9"></label>
                             </div>
                         </div>
@@ -98,10 +104,22 @@
                              style="margin-right: 10px;">
                             <p>10天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="10" id="days-10">
+                                <input name="days" type="radio" value="10" id="days-10" class="days-10">
                                 <label for="days-10"></label>
                             </div>
                         </div>
+                        <script th:inline="javascript">
+                            var traverDays = [[${session.productForm.traverDays}]]
+                            var check = document.getElementsByClassName("days-" + traverDays)[0]
+                            console.log("days-" + traverDays)
+                            if (check != null) {
+                                check.checked = true
+                            }
+                            else {
+                                check = document.getElementsByClassName("days-all")[0]
+                                check.checked = true
+                            }
+                        </script>
                     </div>
                     <hr>
                     <div class="row">
@@ -110,7 +128,7 @@
                              style="margin-right: 10px;">
                             <p>全部</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="0" id="store-all"
+                                <input name="store" type="radio" value="0" id="store-all" class="store-all"
                                        th:checked="${session.hotProductcheckedStoreAll}">
                                 <label for="store-all"></label>
                             </div>
@@ -119,7 +137,7 @@
                              style="margin-right: 10px;">
                             <p>携程</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00003" id="store-1">
+                                <input name="store" type="radio" value="00003" id="store-1" class="store-00003">
                                 <label for="store-1"></label>
                             </div>
                         </div>
@@ -127,7 +145,7 @@
                              style="margin-right: 10px;">
                             <p>马蜂窝</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00002" id="store-2">
+                                <input name="store" type="radio" value="00002" id="store-2" class="store-00002">
                                 <label for="store-2"></label>
                             </div>
                         </div>
@@ -135,7 +153,7 @@
                              style="margin-right: 10px;">
                             <p>去哪儿</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00004" id="store-3">
+                                <input name="store" type="radio" value="00004" id="store-3" class="store-00004">
                                 <label for="store-3"></label>
                             </div>
                         </div>
@@ -143,7 +161,7 @@
                              style="margin-right: 10px;">
                             <p>飞猪</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00005" id="store-4">
+                                <input name="store" type="radio" value="00005" id="store-4" class="store-00005">
                                 <label for="store-4"></label>
                             </div>
                         </div>
@@ -151,10 +169,22 @@
                              style="margin-right: 10px;">
                             <p>途牛</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00006" id="store-5">
+                                <input name="store" type="radio" value="00006" id="store-5" class="store-00006">
                                 <label for="store-5"></label>
                             </div>
                         </div>
+                        <script th:inline="javascript">
+                            var store = [[${session.productForm.supplierId}]]
+                            var check2 = document.getElementsByClassName("store-" + store)[0]
+                            console.log("store-" + store)
+                            if (check2 != null) {
+                                check2.checked = true
+                            }
+                            else {
+                                check2 = document.getElementsByClassName("store-all")[0]
+                                check2.checked = true
+                            }
+                        </script>
                     </div>
                     <hr>
                     <div class="row">
@@ -163,7 +193,7 @@
                              style="margin-right: 10px;">
                             <p>全部</p>
                             <div class="primary-checkbox">
-                                <input name="type" type="radio" value="0" id="type-all"
+                                <input name="type" type="radio" value="0" id="type-all" class="type-all"
                                        th:checked="${session.hotProductcheckedTypeAll}">
                                 <label for="type-all"></label>
                             </div>
@@ -172,7 +202,7 @@
                              style="margin-right: 10px;">
                             <p>半自助</p>
                             <div class="primary-checkbox">
-                                <input name="type" type="radio" value="半自助" id="type-1">
+                                <input name="type" type="radio" value="半自助" id="type-1" class="type-半自助">
                                 <label for="type-1"></label>
                             </div>
                         </div>
@@ -180,7 +210,7 @@
                              style="margin-right: 10px;">
                             <p>跟团游</p>
                             <div class="primary-checkbox">
-                                <input name="type" type="radio" value="跟团游" id="type-2">
+                                <input name="type" type="radio" value="跟团游" id="type-2" class="type-跟团游">
                                 <label for="type-2"></label>
                             </div>
                         </div>
@@ -188,10 +218,22 @@
                              style="margin-right: 10px;">
                             <p>私家团</p>
                             <div class="primary-checkbox">
-                                <input name="type" type="radio" value="私家团" id="type-3">
+                                <input name="type" type="radio" value="私家团" id="type-3" class="type-私家团">
                                 <label for="type-3"></label>
                             </div>
                         </div>
+                        <script th:inline="javascript">
+                            var type = [[${session.productForm.productType}]]
+                            var check3 = document.getElementsByClassName("type-" + type)[0]
+                            console.log("type-" + type)
+                            if (check3 != null) {
+                                check3.checked = true
+                            }
+                            else {
+                                check3 = document.getElementsByClassName("type-all")[0]
+                                check3.checked = true
+                            }
+                        </script>
                     </div>
                     <hr>
                 </div>

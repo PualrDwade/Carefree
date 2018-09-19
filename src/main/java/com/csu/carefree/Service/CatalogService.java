@@ -6,6 +6,7 @@ import com.csu.carefree.Model.TraverAsk.TraverNote;
 import com.csu.carefree.Model.TraverMsg.CityMsg;
 import com.csu.carefree.Model.TraverMsg.ProvinceMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
+import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -63,33 +64,38 @@ public interface CatalogService {
 
     //筛选条件：traver_days, product_type, supplier_id, cityname
 
+    //城市名
+    List<ProductMsg> getProductListByCityName(String cityname);
 
     //行程天数
-    List<ProductMsg> getProductListByTraverdays(String traverDays);
+    List<ProductMsg> getProductListByTraverdays(String traverDays, String cityname);
 
     //产品类型
-    List<ProductMsg> getProductListByProductType(String productType);
+    List<ProductMsg> getProductListByProductType(String productType, String cityname);
 
     //供应商
-    List<ProductMsg> getProductListBySupplierId(String supplierId);
+    List<ProductMsg> getProductListBySupplierId(String supplierId, String cityname);
 
-    //产品名称
+    //产品名称,模糊查询,查询产品内容
     List<ProductMsg> getProductListByName(String productName);
 
     //三个筛选条件都有
-    List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId);
+    List<ProductMsg> getProductListByThree(String traverDays, String productType,
+                                           String supplierId, String cityname);
 
     //行程天数和供应商
-    List<ProductMsg> getProductListByDaysAndStore(String traverDays, String supplierId);
+    List<ProductMsg> getProductListByDaysAndStore(String traverDays,
+                                                  String supplierId, String cityname);
 
     //行程天数和产品类型
-    List<ProductMsg> getProductListByDaysAndType(String traverDays, String productType);
+    List<ProductMsg> getProductListByDaysAndType(String traverDays,
+                                                 String productType, String cityname);
+
 
     //产品类型和供应商
-    List<ProductMsg> getProductListByTypeAndStore(String productType, String supplierId);
+    List<ProductMsg> getProductListByTypeAndStore(String productType,
+                                                  String supplierId, String cityname);
 
-    //根据城市名获得产品
-    List<ProductMsg> getProductListByCityName(String cityname);
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找
     //推荐（排序）条件：score, sell_num, comments_num, product_grade

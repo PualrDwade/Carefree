@@ -185,59 +185,59 @@ public class CatalogController {
 
 
     @GetMapping("/Catalog/HotProductList")
-    public String HotProductList(HttpServletRequest httpServletRequest, HttpSession session, Model model,
-                                 @RequestParam(defaultValue = "1") Integer pageNum) {
-        String traverDays = "0";
-        String supplierId = "0";
-        String productType = "0";
-        String destination = session.getAttribute("location").toString();
-        String[] checkedDaysValues = httpServletRequest.getParameterValues("days");
-        String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
-        String[] checkedTypeValues = httpServletRequest.getParameterValues("type");
-        if (checkedDaysValues != null && checkedStoreValues != null && checkedTypeValues != null) {
-            System.out.println(checkedDaysValues[0]);
-            System.out.println(checkedStoreValues[0]);
-            System.out.println(checkedTypeValues[0]);
-            traverDays = checkedDaysValues[0];
-            supplierId = checkedStoreValues[0];
-            productType = checkedTypeValues[0];
+    public String HotProductList(HttpServletRequest httpServletRequest, HttpSession session, Model model) {
+        //首先从session中得到
+        ProductForm productForm = (ProductForm) session.getAttribute("productForm");
+        //从session中取出当前位置
+        String destination = (String) session.getAttribute("location");
+        if (productForm == null) {
+            //首次登陆为null,设置初始值
+            productForm = new ProductForm("0", "0", "0");
+            session.setAttribute("productForm", productForm);
+        } else {
+            //已经存在session了,只需要获得请求过来的参数,获得一次请求
+            if (httpServletRequest.getParameter("days") != null) {
+                //只要一个存在肯定都存在
+                productForm.setTraverDays(httpServletRequest.getParameter("days"));
+                productForm.setProductType(httpServletRequest.getParameter("type"));
+                productForm.setSupplierId(httpServletRequest.getParameter("store"));
+            }
         }
-
         List<ProductMsg> productMsgList = new ArrayList<ProductMsg>();
-        if (traverDays.equals("0") && supplierId.equals("0") && productType.equals("0")) {
+        System.out.println("选择内容为" + productForm.toString());
+        if (productForm.getTraverDays().equals("0") && productForm.getSupplierId().equals("0") && productForm.getProductType().equals("0")) {
             productMsgList = catalogService.getProductListByCityName(destination);
         }
-        if (!traverDays.equals("0") && supplierId.equals("0") && productType.equals("0")) {
-            productMsgList = catalogService.getProductListByTraverdays(traverDays);
+        if (!productForm.getTraverDays().equals("0") && productForm.getSupplierId().equals("0") && productForm.getProductType().equals("0")) {
+            productMsgList = catalogService.getProductListByTraverdays(productForm.getTraverDays(), destination);
         }
-        if (traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
-            productMsgList = catalogService.getProductListBySupplierId(supplierId);
+        if (productForm.getTraverDays().equals("0") && !productForm.getSupplierId().equals("0") && productForm.getProductType().equals("0")) {
+            productMsgList = catalogService.getProductListBySupplierId(productForm.getSupplierId(), destination);
         }
-        if (traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
-            productMsgList = catalogService.getProductListByProductType(productType);
+        if (productForm.getTraverDays().equals("0") && productForm.getSupplierId().equals("0") && !productForm.getProductType().equals("0")) {
+            productMsgList = catalogService.getProductListByProductType(productForm.getProductType(), destination);
         }
-        if (!traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
-            productMsgList = catalogService.getProductListByDaysAndStore(traverDays, supplierId);
+        if (!productForm.getTraverDays().equals("0") && !productForm.getSupplierId().equals("0") && productForm.getProductType().equals("0")) {
+            productMsgList = catalogService.getProductListByDaysAndStore(productForm.getTraverDays(), productForm.getSupplierId(), destination);
         }
-        if (!traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
-            productMsgList = catalogService.getProductListByDaysAndType(traverDays, productType);
+        if (!productForm.getTraverDays().equals("0") && productForm.getSupplierId().equals("0") && !productForm.getProductType().equals("0")) {
+            productMsgList = catalogService.getProductListByDaysAndType(productForm.getTraverDays(), productForm.getProductType(), destination);
         }
-        if (traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
-            productMsgList = catalogService.getProductListByTypeAndStore(productType, supplierId);
+        if (productForm.getTraverDays().equals("0") && !productForm.getSupplierId().equals("0") && !productForm.getProductType().equals("0")) {
+            productMsgList = catalogService.getProductListByTypeAndStore(productForm.getProductType(), productForm.getSupplierId(), destination);
         }
-        if (!traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
-            productMsgList = catalogService.getProductListByThree(traverDays, productType, supplierId);
+        if (!productForm.getTraverDays().equals("0") && !productForm.getSupplierId().equals("0") && !productForm.getProductType().equals("0")) {
+            productMsgList = catalogService.getProductListByThree(productForm.getTraverDays(), productForm.getProductType(), productForm.getSupplierId(), destination);
         }
-
+        //把最新的表单存入session
+        session.setAttribute("productForm", productForm);
         System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
-
         PageInfo<ProductMsg> productMsgPageInfo = new PageInfo<>();
         productMsgPageInfo.setPageData(productMsgList,PRODUCTPAGESIZE,pageNum);
         model.addAttribute("productMsgPageInfo",productMsgPageInfo);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
-
 
     // 进入热门酒店的控制器url
     @GetMapping("/Catalog/HotHotelList")
