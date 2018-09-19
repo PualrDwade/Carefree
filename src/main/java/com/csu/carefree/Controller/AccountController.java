@@ -10,6 +10,7 @@ import com.csu.carefree.Model.TraverAsk.UserAnswer;
 import com.csu.carefree.Model.TraverAsk.UserAsk;
 import com.csu.carefree.Service.AccountService;
 import com.csu.carefree.Service.TraverAskService;
+import com.csu.carefree.Util.PageInfo;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class AccountController {
     @Autowired
     private TraverAskService traverAskService;
 
+    private static final int ANSWERPAGESIZE = 3;
 
     //跳转到登陆页面的请求
     @GetMapping("/account/ViewSignonForm")
@@ -243,7 +245,7 @@ public class AccountController {
 
     //跳转到用户中心的控制器url
     @GetMapping("/account/ViewUserCenter")
-    public String ViewUserCenter(Model model, HttpSession session) {
+    public String ViewUserCenter(Model model, HttpSession session,@RequestParam(defaultValue = "1") Integer pageNum) {
         //错误处理,没有登陆就发起请求
         try {
             String username = (String) session.getAttribute("username");
@@ -269,6 +271,12 @@ public class AccountController {
             //通过用户名获取所有游记
             List<TraverNote> traverNoteList = accountService.getTraverNodeListbyName(username);
             /***用户详细信息获取***/
+
+            PageInfo<UserAsk> userAskPageInfo = new PageInfo<>();
+            userAskPageInfo.setPageData(askAnswerContainer.getUserAskList(),ANSWERPAGESIZE,pageNum);
+
+            model.addAttribute("userAskPageInfo", userAskPageInfo);
+
             //完成数据渲染,返回到前端页面
             return "Account/UserCenter";
         } catch (Exception e) {

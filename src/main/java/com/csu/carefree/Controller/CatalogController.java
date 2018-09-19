@@ -232,29 +232,8 @@ public class CatalogController {
         System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
 
         PageInfo<ProductMsg> productMsgPageInfo = new PageInfo<>();
-        Map<Integer, List<ProductMsg>> productMap = new HashMap<>();
-
-        productMsgPageInfo.setPageSize(PRODUCTPAGESIZE);
-        productMsgPageInfo.setTotal(productMsgList.size());
-
-        if (productMsgList.size() / PRODUCTPAGESIZE == 0){
-            for (int i = 0 ; i < productMsgPageInfo.getMaxPage() ; i++ ){
-                productMap.put(i + 1 , productMsgList.subList(i * PRODUCTPAGESIZE , i * PRODUCTPAGESIZE + PRODUCTPAGESIZE) );
-            }
-        }
-        else {
-            for (int i = 0 ; i < productMsgPageInfo.getMaxPage() ; i++ ){
-                if ( i == productMsgPageInfo.getMaxPage() - 1 ){
-                    productMap.put(i + 1 , productMsgList.subList(i * PRODUCTPAGESIZE , i * PRODUCTPAGESIZE + productMsgList.size() % PRODUCTPAGESIZE) );
-                    break;
-                }
-                productMap.put(i + 1 , productMsgList.subList(i * PRODUCTPAGESIZE , i * PRODUCTPAGESIZE +PRODUCTPAGESIZE) );
-            }
-        }
-        productMsgPageInfo.setPageData(productMap.get(pageNum));
-
+        productMsgPageInfo.setPageData(productMsgList,PRODUCTPAGESIZE,pageNum);
         model.addAttribute("productMsgPageInfo",productMsgPageInfo);
-
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
@@ -291,36 +270,7 @@ public class CatalogController {
         }
         /****分页模块***/
         PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
-        Map<Integer, List<HotelMsg>> hotelMap = new HashMap<>();
-
-        hotelMsgPageInfo.setTotal(hotelMsgList.size());
-        System.out.println("页面大小" + hotelMsgPageInfo.getPageSize());
-        System.out.println("list大小" + hotelMsgList.size());
-        System.out.println("最多的界面数" + hotelMsgPageInfo.getMaxPage());
-        //设置当前页码
-        hotelMsgPageInfo.setCurrentPage(pageNum);
-        if (hotelMsgList.size() / HOTELPAGESIZE == 0) {
-            for (int i = 0; i < hotelMsgPageInfo.getMaxPage(); i++) {
-                hotelMap.put(i + 1, hotelMsgList.subList(i * HOTELPAGESIZE, i * HOTELPAGESIZE + HOTELPAGESIZE));
-            }
-        } else {
-            for (int i = 0; i < hotelMsgPageInfo.getMaxPage(); i++) {
-                if (i == hotelMsgPageInfo.getMaxPage() - 1) {
-                    hotelMap.put(i + 1, hotelMsgList.subList(i * HOTELPAGESIZE, i * HOTELPAGESIZE + hotelMsgList.size() % HOTELPAGESIZE));
-                    break;
-                }
-                hotelMap.put(i + 1, hotelMsgList.subList(i * HOTELPAGESIZE, i * HOTELPAGESIZE + HOTELPAGESIZE));
-            }
-        }
-        if (hotelMsgPageInfo.getCurrentPage() == 1)
-            hotelMsgPageInfo.setFirstPage(true);
-        else
-            hotelMsgPageInfo.setFirstPage(false);
-        if (hotelMsgPageInfo.getCurrentPage() == hotelMsgPageInfo.getMaxPage())
-            hotelMsgPageInfo.setLastPage(true);
-        else
-            hotelMsgPageInfo.setLastPage(false);
-        hotelMsgPageInfo.setPageData(hotelMap.get(pageNum));
+        hotelMsgPageInfo.setPageData(hotelMsgList,HOTELPAGESIZE,pageNum);
         model.addAttribute("hotelMsgPageInfo", hotelMsgPageInfo);
         model.addAttribute("hotelMsgList", hotelMsgList);
         return "ProductDT/Hotel";
