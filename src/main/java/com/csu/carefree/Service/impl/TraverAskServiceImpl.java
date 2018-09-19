@@ -86,4 +86,9 @@ public class TraverAskServiceImpl implements TraverAskService {
 
         return  resultList;
     }
+
+    @Override
+    public List<UserAnswer> getUserAnswerList(){
+        return userAnswerMapper.getUserAnswerList();
+    }
 }

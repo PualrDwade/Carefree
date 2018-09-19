@@ -111,4 +111,19 @@
       values
       (#{id},#{title},#{note_content},#{star_num},#{notify_status},#{add_time},#{img_url},#{user_id},#{city_id})
     </insert>
+
+    <!--获得所有游记-->
+    <select id="getAllTraverNoteList" resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
+    SELECT
+          ID,
+          TITLE,
+          NOTE_CONTENT,
+          STAR_NUM,
+          NOTIFY_STATUS,
+          ADD_TIME,
+          IMG_URL,
+          USER_ID_ID AS user_id,
+          CITY_ID_ID AS city_id
+    FROM TraverAsk_travernote
+    </select>
 </mapper>

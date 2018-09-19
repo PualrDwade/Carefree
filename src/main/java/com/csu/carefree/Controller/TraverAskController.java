@@ -104,11 +104,12 @@ public class TraverAskController {
 
     //进入问题详细信息模块
     @GetMapping("/TraverAsk/viewAskAnswerDetail")
-    public String viewAskAnswerDetail(@RequestParam("askId") String askId, Model model) {
+    public String viewAskAnswerDetail(@RequestParam("askId") String askId, HttpSession session, Model model) {
         //获得当前问题ID
         //获取问题答案List
             UserAsk userAsk = traverAskService.getUserAskById(askId);
             List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(userAsk.getId());
+            session.setAttribute("askId",askId);
             model.addAttribute("userAsk", userAsk);
             model.addAttribute("userAnswerList", userAnswerList);
 
@@ -117,32 +118,41 @@ public class TraverAskController {
 
     //创建新用户问答
     //@RequestMapping(value = "/TraverAsk/createAsk" , method = RequestMethod.POST)
-    @GetMapping("/TraverAsk/createAsk")
+    //@GetMapping("/TraverAsk/createAsk")
+    @RequestMapping(value = "/TraverAsk/createAsk",method = RequestMethod.POST)
     public String createAsk(@RequestParam("title") String title, @RequestParam("askContent") String askContent, HttpSession session, Model model){
         //获得表单内容
         //以HTML形式保存用户问题
         //获得用户ID
         //设置日期格式
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-
-        UserAsk userAsk = new UserAsk("",title,askContent,"0",df.format(new Date()),"2391255979@qq.com","CN_city10");
+        String askId = "test_"+(traverAskService.getUserAskList().size()-13);
+        String username = (String) session.getAttribute("username");
+        UserAsk userAsk = new UserAsk(askId,title,askContent,"0",df.format(new Date()),username,"CN_city10");
         traverAskService.insertUserAsk(userAsk);
 
         return "redirect:/TraverAsk/QuestionAnswer";
     }
 
     //问题回复
-    @GetMapping("/TraverAsk/answerAsk")
-    public String answerUserAsk(@RequestParam("askId") String askId,@RequestParam("answerContent") String answerContent,Model model){
+    //@GetMapping("/TraverAsk/answerAsk")
+    @RequestMapping(value = "/TraverAsk/answerAsk", method = RequestMethod.POST)
+    public String answerUserAsk(@RequestParam("answerContent") String answerContent,HttpSession session, Model model){
+
         //获得当前问题ID
         //获取问题答案List
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-//        UserAsk userAsk = traverAskService.getUserAskById(askId);
-//        UserAnswer userAnswer = new UserAnswer("",answerContent,df.format(new Date()),askId,"544493924@qq.com");
-//        traverAskService.insertUserAnswer(userAnswer);
-//        List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(userAsk.getId());
-//        model.addAttribute("userAsk", userAsk);
-//        model.addAttribute("userAnswerList", userAnswerList);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String askId = (String) session.getAttribute("askId");
+        String userId = (String) session.getAttribute("username");
+                UserAsk userAsk = traverAskService.getUserAskById(askId);
+        String answerId = "test_"+(traverAskService.getUserAnswerList().size()-23);
+
+        UserAnswer userAnswer = new UserAnswer(answerId,answerContent,df.format(new Date()),askId,userId);
+        traverAskService.insertUserAnswer(userAnswer);
+        List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(userAsk.getId());
+
+        model.addAttribute("userAsk", userAsk);
+        model.addAttribute("userAnswerList", userAnswerList);
 
         return "TraverAsk/AskAnswerDetail";
     }
@@ -173,7 +183,7 @@ public class TraverAskController {
         model.addAttribute("traverNote" , traverNote);
         model.addAttribute("userProfile",userProfile);
 
-        return "TraverAsk/AskAnswerDetail";
+        return "TraverAsk/TraverNoteDetail";
     }
 
     //搜索游记功能
@@ -190,14 +200,18 @@ public class TraverAskController {
 
     //创建新用户游记
     //@RequestMapping(value = "/TraverAsk/createNote", method = RequestMethod.POST)
-    @GetMapping("/TraverAsk/createNote")
-    public String createNote(@RequestParam("title") String title, @RequestParam("noteContent") String noteContent, Model model){
+    //@GetMapping("/TraverAsk/createNote")
+    @RequestMapping(value = "/TraverAsk/createNote",method = RequestMethod.POST)
+    public String createNote(@RequestParam("title") String title, @RequestParam("noteContent") String noteContent,HttpSession session, Model model){
         //获取用户写的游记TITLE
         //获得游记写的游记内容
         //List<TraverNote> traverNoteList = catalogService.getTraverNoteList();
         //model.addAttribute("traverNoteList", traverNoteList);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        TraverNote traverNote = new TraverNote("",title,noteContent,"0","1",df.format(new Date()),"http://software.csu.edu.cn/","544493924@qq.com","CN_city68");
+        String traverNoteId = "CN_traverNote_test_"+(catalogService.getAllTraverNoteList().size()-97);
+        String username = (String) session.getAttribute("username");
+
+        TraverNote traverNote = new TraverNote(traverNoteId,title,noteContent,"0","1",df.format(new Date()),"http://software.csu.edu.cn/",username,"CN_city68");
         catalogService.insertTraverNote(traverNote);
 
         List<TraverNote> traverNoteList = catalogService.getTraverNoteList();

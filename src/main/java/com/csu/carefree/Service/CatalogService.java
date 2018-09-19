@@ -177,4 +177,6 @@ public interface CatalogService {
     //插入游记信息
     void insertTraverNote(TraverNote traverNote);
 
+    //获得所有traverNote
+    List<TraverNote> getAllTraverNoteList();
 }

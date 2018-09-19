@@ -121,23 +121,19 @@ public class CatalogController {
     public String ViewMdd(HttpSession session) {
         /*****************************景点推荐*********************************/
         List<ScenicMsg> recommendScenicList = catalogService.getRecommendScenicList(session);
-        System.out.println("-----------------------景点的个数" + recommendScenicList.size());
         session.setAttribute("recommendScenicList", recommendScenicList);
 
 
         /*****************************酒店推荐*********************************/
         List<HotelMsg> recommendHotelList = catalogService.getRecommendHotelList(session);
-        System.out.println("-----------------------宾馆的个数" + recommendHotelList.size());
         session.setAttribute("recommendHotelList", recommendHotelList);
 
         /*****************************攻略推荐*********************************/
         List<StrategyMsg> recommendStrategyList = catalogService.getRecommendStrategyList(session);
-        System.out.println("-----------------------攻略的个数" + recommendStrategyList.size());
         session.setAttribute("recommendStrategyList", recommendStrategyList);
 
         /*****************************游记推荐*********************************/
         List<TraverNote> recommendTraverNoteList = catalogService.getRecommendTraverNoteList(session);
-        System.out.println("-----------------------游记的个数" + recommendTraverNoteList.size());
         session.setAttribute("recommendTraverNoteList", recommendTraverNoteList);
         return "ProductDT/Mdd";
     }
@@ -162,23 +158,19 @@ public class CatalogController {
 
         /*****************************景点推荐*********************************/
         List<ScenicMsg> recommendScenicList = catalogService.getRecommendScenicList(session);
-        System.out.println("-----------------------景点的个数" + recommendScenicList.size());
         session.setAttribute("recommendScenicList", recommendScenicList);
 
 
         /*****************************酒店推荐*********************************/
         List<HotelMsg> recommendHotelList = catalogService.getRecommendHotelList(session);
-        System.out.println("-----------------------宾馆的个数" + recommendHotelList.size());
         session.setAttribute("recommendHotelList", recommendHotelList);
 
         /*****************************攻略推荐*********************************/
         List<StrategyMsg> recommendStrategyList = catalogService.getRecommendStrategyList(session);
-        System.out.println("-----------------------攻略的个数" + recommendStrategyList.size());
         session.setAttribute("recommendStrategyList", recommendStrategyList);
 
         /*****************************游记推荐*********************************/
         List<TraverNote> recommendTraverNoteList = catalogService.getRecommendTraverNoteList(session);
-        System.out.println("-----------------------游记的个数" + recommendTraverNoteList.size());
         session.setAttribute("recommendTraverNoteList", recommendTraverNoteList);
         return "ProductDT/Mdd";
     }
@@ -282,9 +274,6 @@ public class CatalogController {
         String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
         String[] checkedTypeValues = httpServletRequest.getParameterValues("type");
         if (checkedDaysValues != null && checkedStoreValues != null && checkedTypeValues != null) {
-            System.out.println(checkedDaysValues[0]);
-            System.out.println(checkedStoreValues[0]);
-            System.out.println(checkedTypeValues[0]);
             traverDays = checkedDaysValues[0];
             supplierId = checkedStoreValues[0];
             productType = checkedTypeValues[0];
@@ -316,14 +305,11 @@ public class CatalogController {
             productMsgList = catalogService.getProductListByThree(traverDays, productType, supplierId);
         }
 
-        System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
 
-        System.out.println("开始计算价格");
         Map<ProductMsg, String> map = new HashMap<>();
         for (ProductMsg productMsg : productMsgList) {
             map.put(productMsg, catalogService.getDepartCityPrice(productMsg.getId(), destination).getProduct_price());
         }
-        System.out.println("计算完成");
         model.addAttribute("product_price_map", map);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
@@ -364,9 +350,6 @@ public class CatalogController {
         Map<Integer, List<HotelMsg>> hotelMap = new HashMap<>();
 
         hotelMsgPageInfo.setTotal(hotelMsgList.size());
-        System.out.println("页面大小" + hotelMsgPageInfo.getPageSize());
-        System.out.println("list大小" + hotelMsgList.size());
-        System.out.println("最多的界面数" + hotelMsgPageInfo.getMaxPage());
         //设置当前页码
         hotelMsgPageInfo.setCurrentPage(pageNum);
         if (hotelMsgList.size() / HOTELPAGESIZE == 0) {

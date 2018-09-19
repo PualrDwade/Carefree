@@ -152,10 +152,11 @@
                             <a class="aa-avatar" href="/wenda/u/85353052/answer.html"><img
                                     src="http://b2-q.mafengwo.net/s12/M00/5E/5C/wKgED1uY0fWAWbYCAAJ937FhNIQ53.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
                                     class="photo"></a>
-                            <a class="aa-name" th:text="${userAsk.user_id}">Dreams °🍀</a>
+                            <a class="aa-name" th:text="${session.username}">Dreams °🍀</a>
                         </div>
                         <form class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  "
-                              th:action="@{/TraverAsk/answerAsk(askId = ${userAsk.id})}">
+                              th:action="@{/TraverAsk/answerAsk}"
+                              th:method="post">
                             <div class="editor-scroll">
                                 <div class="question-title" th:text="${userAsk.title}">请问长沙谢子龙影像馆要收门票吗？</div>
                                 <div class="answer-editor">

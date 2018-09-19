@@ -19,4 +19,7 @@ public interface UserAnswerMapper {
 
     //通过username得到用户回答列表
     List<UserAnswer> getUserAnswerListByName(String username);
+
+    //获得用户所有回答
+    List<UserAnswer> getUserAnswerList();
 }
