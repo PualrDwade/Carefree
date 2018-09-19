@@ -236,21 +236,22 @@
                         </script>
                     </div>
                     <hr>
-                    <div class="col-lg-3">
-                        <div class="input-group">
-                            <input type="submit" value="按条件筛选" class="book_now_btn button_hover">
-                        </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group" style="margin-top: 50px">
+                        <input type="text" class="form-control" placeholder="输入您想搜索的内容">
+                        <span class="input-group-addon myYellow"><a href="#"><i
+                                class="glyphicon glyphicon-search myYellow"> <span class="myYellow">搜索</span></i></a></span>
                     </div>
 
+                    <div class="input-group" style="margin-top: 50px">
+                        <input type="submit" value="按条件筛选" class="book_now_btn button_hover">
+                    </div>
                 </div>
             </div>
         </form>
         <div class="col-lg-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="输入您想搜索的内容">
-                <span class="input-group-addon myYellow"><a href="#"><i
-                        class="glyphicon glyphicon-search myYellow"> <span class="myYellow">搜索</span></i></a></span>
-            </div>
+
         </div>
     </div>
 </div>
@@ -263,7 +264,7 @@
         <h2 class="title_color">为您推荐</h2>
     </div>
     <div class="container">
-        <div class="section-top-border" th:each="productMsg:${productMsgList}"
+        <div class="section-top-border" th:each="productMsg:${productMsgPageInfo.getPageData()}"
              th:if="${productMsg.product_price}!='价格未知'">
             <div class="row">
                 <div class="col-md-3 hotel_img">
@@ -303,7 +304,59 @@
                 </div>
             </div>
         </div>
+        <center>
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a th:href="@{${'/Catalog/HotProductList'}(pageNum = 1)}"> 首页 </a>
+                    </li>
+                    <li>
+                        <a th:if="${not productMsgPageInfo.isFirstPage()}"
+                           th:href="@{${'/Catalog/HotProductList'}(pageNum = ${productMsgPageInfo.getCurrentPage() - 1})}">上一页</a>
+                    </li>
 
+                    <li th:if="${productMsgPageInfo.getMaxPage() <= 10}" th:each="pageNo : ${#numbers.sequence(1, productMsgPageInfo.getMaxPage())}">
+                        <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                        <a th:if="${not (productMsgPageInfo.getCurrentPage() eq pageNo)}"
+                           th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                    </li>
+
+                    <li th:if="${productMsgPageInfo.getCurrentPage()+10 >= productMsgPageInfo.getMaxPage() && productMsgPageInfo.getMaxPage() > 10}" th:each="pageNo : ${#numbers.sequence(productMsgPageInfo.getMaxPage() -10, productMsgPageInfo.getMaxPage())}">
+                        <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                        <a th:if="${not (productMsgPageInfo.getCurrentPage() eq pageNo)}"
+                           th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                    </li>
+
+                    <li th:if="${productMsgPageInfo.getCurrentPage()+10 < productMsgPageInfo.getMaxPage() && productMsgPageInfo.getMaxPage() > 10}" th:each="pageNo : ${#numbers.sequence(productMsgPageInfo.getCurrentPage(), productMsgPageInfo.getCurrentPage()+10)}">
+                        <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                        <a th:if="${not (productMsgPageInfo.getCurrentPage() eq pageNo)}"
+                           th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:if="${not productMsgPageInfo.isLastPage()}"
+                           th:href="@{${'/Catalog/HotProductList'}(pageNum=${productMsgPageInfo.getCurrentPage()+1})}">下一页</a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{${'/Catalog/HotProductList'}(pageNum = ${productMsgPageInfo.getMaxPage()})}">
+                            尾页 </a>
+                    </li>
+                </ul>
+            </nav>
+        </center>
     </div>
 </div>
 <!--================ 产品  =================-->

@@ -11,6 +11,7 @@ import com.csu.carefree.Service.CatalogService;
 import com.csu.carefree.Service.TraverAskService;
 import com.csu.carefree.Service.impl.CatalogServiceImpl;
 import com.csu.carefree.Util.HtmlEncode;
+import com.csu.carefree.Util.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,8 @@ public class TraverAskController {
     @Autowired
     private AccountService accountService;
     /*****************用户问答模块****************/
+
+    private static final int TRAVELNOTEPAGESIZE = 8;
 
     //进入问答专区的控制层url
     @GetMapping("/TraverAsk/QuestionAnswer")
@@ -151,14 +154,19 @@ public class TraverAskController {
 
     //进入用户游记的控制器url
     @GetMapping("/TraverAsk/ViewTraverNote")
-    public String ViewTraverNote(Model model) {
+    public String ViewTraverNote(Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
         //进行业务操作
         //返回页面进行渲染
         //获取游记列表
         List<TraverNote> traverNoteList = catalogService.getTraverNoteList();
         List<TraverNote> hotTraverNoteList = catalogService.getHotTraverNoteList(6);
+
+        PageInfo<TraverNote> traverNotePageInfo = new PageInfo<>();
+        traverNotePageInfo.setPageData(traverNoteList,TRAVELNOTEPAGESIZE,pageNum);
+
         model.addAttribute("traverNoteList", traverNoteList);
         model.addAttribute("hotTraverNoteList", hotTraverNoteList);
+        model.addAttribute("travelNotePageInfo", traverNotePageInfo);
 
         return "TraverAsk/TraverNoteList";
     }
