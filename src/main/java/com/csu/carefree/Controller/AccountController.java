@@ -58,6 +58,26 @@ public class AccountController {
             if (sigon.getPassword().equals(password)) {
                 //登陆成功
                 session.setAttribute("username", username);
+                //加载用户信息(回答数,提问数)
+                /**用户信息加载模块*/
+                List<UserAsk> userAskList = accountService.getUserAskListbyName(username);
+                int askNum = userAskList.size();//提问数
+                int answerNum = traverAskService.getUserAnswerListByName(username).size();//回答数
+                //渲染到视图,用户的问题容器
+                session.setAttribute("askNum", askNum);
+                session.setAttribute("answerNum", answerNum);
+                //首先判断是否有详细信息字段//
+                UserProfile userProfile = accountService.getUserProfileByUserName(username);
+                if (userProfile == null) {
+                    userProfile = new UserProfile();
+                    userProfile.setEmail(username);//设置邮箱字段为用户名
+                    userProfile.setImage("http://img4.imgtn.bdimg.com/it/u=1106367332,2196124484&fm=26&gp=0.jpg");//设置为默认头像
+                    userProfile.setNick_name("畅游网新用户");//默认昵称
+                    accountService.setUserProfile(userProfile);
+                }
+                model.addAttribute("userProfile", userProfile);
+                session.setAttribute("userProfile", userProfile);
+                /**用户信息加载完成*/
                 //重定向到首页页面
                 return "redirect:/";
             } else {
@@ -210,12 +230,12 @@ public class AccountController {
             String username = (String) session.getAttribute("forget_username");
             System.out.println("更新用户信息....");
             accountService.updateSigon(username, password);
-            System.out.println("修成功");
+            System.out.println("修改成功");
             //重置完成,重新进行登陆
             //给前台页面返回信息
             session.removeAttribute("username");//移除登陆状态
-            model.addAttribute("resetInfo", "修改密码成功,请重新登陆");
-            return "Account/AccountLogin";
+            model.addAttribute("resetResponse", "修改密码成功,请重新登陆");
+            return "redirect:/account/ViewSignonForm";
         } catch (Exception e) {
             return "common/ErrorPage";
         }
@@ -244,37 +264,61 @@ public class AccountController {
             }
             //最后添加到问答容器
             AskAnswerContainer askAnswerContainer = new AskAnswerContainer(askListHashMap);
-            //提问数
-            int askNum = userAskList.size();
-            //回答数
-            int answerNum = traverAskService.getUserAnswerListByName(username).size();
-            //渲染到model,用户的问题容器
-            model.addAttribute("askNum", askNum);
-            model.addAttribute("answerNum", answerNum);
             model.addAttribute("askAnswerContainer", askAnswerContainer);
-
             /***** 游记内容获取*******/
             //通过用户名获取所有游记
             List<TraverNote> traverNoteList = accountService.getTraverNodeListbyName(username);
-
             /***用户详细信息获取***/
-            //首先判断是否有详细信息字段//
-            UserProfile userProfile = accountService.getUserProfileByUserName(username);
-            if (userProfile == null) {
-                userProfile = new UserProfile();
-                userProfile.setEmail(username);//设置邮箱字段为用户名
-                userProfile.setImage("http://img4.imgtn.bdimg.com/it/u=1106367332,2196124484&fm=26&gp=0.jpg");//设置为默认头像
-                userProfile.setNick_name("畅游网用户");//默认昵称
-                accountService.setUserProfile(userProfile);
-            }
-            model.addAttribute("userProfile", userProfile);
-
             //完成数据渲染,返回到前端页面
             return "Account/UserCenter";
         } catch (Exception e) {
             System.out.println(e);
             return "common/ErrorPage";
         }
+    }
+
+
+    //跳转到我的回答界面
+    @GetMapping("/account/ViewMyTraverAnswers")
+    public String ViewMyTraverAnswers(Model model, HttpSession session) {
+        //错误处理,没有登陆就发起请求
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            //返回登陆页面
+            return "redirect:/account/ViewSignonForm";
+        }
+        //获取用户所有的回答
+        List<UserAnswer> userAnswerList = accountService.getUserAnswerListByName(username);
+        //渲染到前端
+        model.addAttribute("userAnswerList", userAnswerList);
+        return "Account/MyAnswer";
+    }
+
+
+    //跳转到我的问题界面
+    @GetMapping("/account/ViewMyTraverAsks")
+    public String ViewMyTraverAsks(Model model, HttpSession session) {
+        //错误处理,没有登陆就发起请求
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            //返回登陆页面
+            return "redirect:/account/ViewSignonForm";
+        }
+        /*** 用户问题以及问题的回复 ***/
+        HashMap<UserAsk, List<UserAnswer>> askListHashMap = new HashMap<>();
+        //通过用户名获取所有提问
+        List<UserAsk> userAskList = accountService.getUserAskListbyName(username);
+        //循环,通过每一个提问获取提问的回答
+        for (UserAsk userAsk : userAskList) {
+            //通过提问获取所有的回答
+            List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(userAsk.getId());
+            //保存到map容器中
+            askListHashMap.put(userAsk, userAnswerList);
+        }
+        //最后添加到问答容器
+        AskAnswerContainer askAnswerContainer = new AskAnswerContainer(askListHashMap);
+        model.addAttribute("askAnswerContainer", askAnswerContainer);
+        return "Account/MyAsk";
     }
 
     //跳转到我的游记界面
@@ -297,60 +341,6 @@ public class AccountController {
         return "Account/MyTravelNote";
     }
 
-
-    //跳转到我的回答界面
-    @GetMapping("/account/ViewMyTraverAnswers")
-    public String ViewMyTraverAnswers(Model model, HttpSession session) {
-//        //错误处理,没有登陆就发起请求
-//        String username = (String) session.getAttribute("username");
-//        if (username == null) {
-//            //返回登陆页面
-//            return "Account/AccountLogin";
-//        }
-//        //用户名不为空,则通过username获取需要的信息进行渲染
-//        UserProfile userProfile = accountService.getUserProfile(username);
-//        List<UserAsk> userAskList = accountService.getUserAskListbyName(username);
-//        List<UserAnswer> userAnswerList = accountService.getUserAnswerByAsk(username);
-//        int askNum = userAskList.size();
-//        int answeredNum = 0;
-//        for (UserAsk userAsk : userAskList) {
-//            //遍历用户问题,得出回答总数
-//            answeredNum += accountService.getUserAnswerByAsk(userAsk.getId()).size();
-//        }
-//        System.out.println("回答总数:" + answeredNum);
-//        model.addAttribute("userProfile", userProfile);
-//        model.addAttribute("userAnswerList", userAnswerList);
-//        model.addAttribute("askNum", askNum);
-//        model.addAttribute("answeredNum", answeredNum);//他人回答数
-        return "Account/MyAnswer";
-    }
-
-
-    //跳转到我的问题界面
-    @GetMapping("/account/ViewMyTraverAsks")
-    public String ViewMyTraverAsks(Model model, HttpSession session) {
-//        //错误处理,没有登陆就发起请求
-//        String username = (String) session.getAttribute("username");
-//        if (username == null) {
-//            //返回登陆页面
-//            return "Account/AccountLogin";
-//        }
-//        //用户名不为空,则通过username获取需要的信息进行渲染
-//        UserProfile userProfile = accountService.getUserProfile(username);
-//        List<UserAsk> userAskList = accountService.getUserAskListbyName(username);
-//        int askNum = userAskList.size();
-//        int answeredNum = 0;
-//        for (UserAsk userAsk : userAskList) {
-//            //遍历用户问题,得出回答总数
-//            answeredNum += accountService.getUserAnswerByAsk(userAsk.getId()).size();
-//        }
-//        System.out.println("回答总数:" + answeredNum);
-//        model.addAttribute("userProfile", userProfile);
-//        model.addAttribute("userAskList", userAskList);
-//        model.addAttribute("askNum", askNum);
-//        model.addAttribute("answeredNum", answeredNum);//他人回答数
-        return "Account/MyAsk";
-    }
 
     //跳转到用户信息设置
     @GetMapping("/account/AccountSetting")

@@ -6,7 +6,6 @@ import com.csu.carefree.Model.TraverAsk.TraverNote;
 import com.csu.carefree.Model.TraverMsg.CityMsg;
 import com.csu.carefree.Model.TraverMsg.ProvinceMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
-import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -34,7 +33,8 @@ public interface CatalogService {
     /*******************获取热门信息**********/
     ArrayList<FullProductInfo> getHotProductList(HttpSession session);
 
-    ArrayList<HotelMsg> getHotHotelList();
+    //通过城市名获取热门酒店信息,按照给定的指标进行筛选
+    ArrayList<HotelMsg> getHotHotelListByCityName(String cityName, int orderType);
 
     ArrayList<TraverNote> getHotTraverNoteList(int traverNoteNum);
 
@@ -51,6 +51,9 @@ public interface CatalogService {
     //根据目的地获得酒店信息
     List<HotelMsg> getHotelListByDestination(String destination);
 
+    //目的地和供应商
+    List<HotelMsg> getHotelListByDestinationAndStore(String destination ,String supplierId);
+
 
     /*****************通过筛选条件获取产品*****************/
 
@@ -58,7 +61,10 @@ public interface CatalogService {
 
     ProductMsg getProductById(String id);
 
-    //筛选条件：traver_days, product_type, supplier_id
+    //筛选条件：traver_days, product_type, supplier_id, cityname
+
+    //城市名
+    List<ProductMsg> getProductListByCityName(String cityname);
 
     //行程天数
     List<ProductMsg> getProductListByTraverdays(String traverDays);
@@ -76,13 +82,13 @@ public interface CatalogService {
     List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId);
 
     //行程天数和供应商
-    List<ProductMsg> getProductListByDaysAndStore(String traverDays , String supplierId);
+    List<ProductMsg> getProductListByDaysAndStore(String traverDays, String supplierId);
 
     //行程天数和产品类型
-    List<ProductMsg> getProductListByDaysAndType(String traverDays , String productType);
+    List<ProductMsg> getProductListByDaysAndType(String traverDays, String productType);
 
     //产品类型和供应商
-    List<ProductMsg> getProductListByTypeAndStore( String productType, String supplierId);
+    List<ProductMsg> getProductListByTypeAndStore(String productType, String supplierId);
 
     //根据城市名获得产品
     List<ProductMsg> getProductListByCityName(String cityname);
@@ -96,6 +102,9 @@ public interface CatalogService {
 
     //例如当点击产品当中的供应商信息时候，要返回相应的信息
     Supplier getSupplierByName(String name);
+
+    //通过供应商id得到供应商
+    Supplier getSupplierById(String id);
 
     /*******城市省份信息*******/
     //通过省份ID获取省份信息
@@ -163,10 +172,13 @@ public interface CatalogService {
 
     //通过游记ID获取游记信息
     TraverNote getTraverNoteById(String traverNoteId);
-
+  
     //通过城市名获取游记
     List<TraverNote> getTraverNoteListByCityName(String cityName);
 
     //插入游记信息
     void insertTraverNote(TraverNote traverNote);
+
+    //通过cityname查找供应产品
+    List<ProductMsg> getProductListByCityName(String destination);
 }

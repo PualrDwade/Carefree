@@ -1,24 +1,28 @@
 package com.csu.carefree.Controller;
 
-import com.csu.carefree.Model.ProductDT.*;
-import com.csu.carefree.Model.TraverMsg.CityMsg;
-import com.csu.carefree.Model.TraverAsk.TraverNote;
+
+import com.csu.carefree.Util.PageInfo;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
 import com.csu.carefree.Service.CatalogService;
+import com.csu.carefree.Model.ProductDT.*;
+import com.csu.carefree.Model.TraverAsk.TraverNote;
+import com.csu.carefree.Util.CatalogUtils;
+import com.csu.carefree.Util.LocationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class CatalogController {
@@ -27,48 +31,60 @@ public class CatalogController {
      * 实现与酒店有关的业务逻辑
      * 酒店信息展示，热门酒店推荐
      */
-
+    private static final int PRODUCTPAGESIZE = 8;
+    private static final int HOTELPAGESIZE = 8;
     @Autowired
     private CatalogService catalogService;
+
+    private CatalogUtils catalogUtils = new CatalogUtils();
 
     @GetMapping("ProductDT/viewHotel")
     public String viewHotelMsgList(Model model) {
         model.addAttribute("HotelList");
         return "Hotel";
     }
-
-
-
     //请求主界面
     @GetMapping("/")
     public String viewIndex(HttpSession session, Model model) {
 
-        //写死长沙,后面调用百度地图api设置当前位置
-        session.setAttribute("location", "长沙");
-        session.setAttribute("hotProductcheckedDaysAll",true);
-        session.setAttribute("hotProductcheckedStoreAll",true);
-        session.setAttribute("hotProductcheckedTypeAll",true);
+        //首先调用百度地图api获得当前城市信息,如果获取失败,则设为长沙
+        String location = null;
+        try {
+            location = LocationUtil.getCityLocation();
+        } catch (Exception e) {
+            location = "长沙";
+        }
+        if (location == null) {
+            location = "长沙";
+        }
+        if (session.getAttribute("location") == null) {
+            //第一次访问,首先设置session存入当前位置
+            //设置会话中的location,全局使用
+            session.setAttribute("location", location);
+        }
+        session.setAttribute("hotProductcheckedDaysAll", true);
+        session.setAttribute("hotProductcheckedStoreAll", true);
+        session.setAttribute("hotProductcheckedTypeAll", true);
         //行程信息存在session当中
         TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
         //还没有填写表单信息
-        if (traverMsg == null)
-            session.setAttribute("traverMsg", new TraverMsg());
-        traverMsg = (TraverMsg) session.getAttribute("traverMsg");
-      
+        if (traverMsg == null) {
+            traverMsg = new TraverMsg();
+            //设置默认起始地为session中的当前位置
+            traverMsg.setStart_city((String) session.getAttribute("location"));
+            //行程信息存到session中
+            session.setAttribute("traverMsg", traverMsg);
+        }
+
         /*****************************热门产品推荐*********************************/
         List<FullProductInfo> hotProductList = catalogService.getHotProductList(session);
         session.setAttribute("product1", hotProductList.get(0));
         session.setAttribute("product2", hotProductList.get(1));
 
-        FullProductInfo product1;
-        if (session.getAttribute("product1") == null)
-            product1 = new FullProductInfo();
-        else
-            product1 = (FullProductInfo) session.getAttribute("product1");
-        //updateProduct1()
+        FullProductInfo product1 = session.getAttribute("product1")
+                == null ? new FullProductInfo() : (FullProductInfo) session.getAttribute("product1");
         String product1Price = (catalogService.getDepartCityPrice(product1.getId(), (String) session.getAttribute("location"))).getProduct_price();
-        product1.setPrice(product1Price);
-
+        product1.setPrice(product1Price);//设置价格
         FullProductInfo product2;
         if (session.getAttribute("product2") == null)
             product2 = new FullProductInfo();
@@ -83,14 +99,18 @@ public class CatalogController {
 //        session.setAttribute("hotTraverNoteList", hotTraverNoteList);
 
         /****************************热门酒店推荐********************************/
-        List<HotelMsg> hotHotelList = catalogService.getHotHotelList();
-        session.setAttribute("hotHotelList", hotHotelList);
-
-        //将结果插入到model当中，用于返回给界面
-        model.addAttribute("traverMsg", traverMsg);
+        //热门酒店推荐这个城市排名最高个酒店
+        //1.价格最便宜的酒店
+        List<HotelMsg> hotHotelList_01 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location"), 1).subList(0, 4);
+        //2.评分最高的酒店
+        List<HotelMsg> hotHotelList_02 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location"), 2).subList(0, 4);
+        //存储数据到前端页面
+        //1. 酒店信息
+        model.addAttribute("hotHotelList_01", hotHotelList_01);
+        model.addAttribute("hotHotelList_02", hotHotelList_02);
+        //2. 热门产品信息
         model.addAttribute("product1", product1);
         model.addAttribute("product2", product2);
-        model.addAttribute("hotHotelList", hotHotelList);
         return "index";
     }
 
@@ -163,111 +183,160 @@ public class CatalogController {
     }
 
 
+  
     //进入热门产品的界面控制器url
     @GetMapping("/Catalog/HotProductList")
-    public String HotProductList(@RequestParam("destination") String destination,Model model) {
-        //业务操作增删查改
-
-        List<ProductMsg> productMsgList = catalogService.getProductList();
-        System.out.println("找到符合条件的产品"+ productMsgList.size() +"条");
-        //setDepartCityPrice(destination,productMsgList);
-        model.addAttribute("productMsgList", productMsgList);
-        return "ProductDT/Product";
-    }
-
-
-    /////////////////////////////////////////////////
-    //进入热门产品的界面控制器url
-    @PostMapping("/Catalog/HotProductListByConditions")
-    public String HotProductListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model) {
+    public String HotProductList(HttpServletRequest httpServletRequest, HttpSession session, Model model,@RequestParam(defaultValue = "1") Integer pageNum) {
+        String traverDays = "0";
+        String supplierId = "0";
+        String productType = "0";
+        String destination = session.getAttribute("location").toString();
         String[] checkedDaysValues = httpServletRequest.getParameterValues("days");
         String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
         String[] checkedTypeValues = httpServletRequest.getParameterValues("type");
-        System.out.println(checkedDaysValues[0]);
-        System.out.println(checkedStoreValues[0]);
-        System.out.println(checkedTypeValues[0]);
-        String traverDays = checkedDaysValues[0];
-        String supplierId = checkedStoreValues[0];
-        String productType = checkedTypeValues[0];
-
-        List<ProductMsg> productMsgList = new ArrayList<ProductMsg>();
-        if(checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
-            productMsgList = catalogService.getProductList();
+        if(checkedDaysValues != null && checkedStoreValues != null && checkedTypeValues != null) {
+            System.out.println(checkedDaysValues[0]);
+            System.out.println(checkedStoreValues[0]);
+            System.out.println(checkedTypeValues[0]);
+            traverDays = checkedDaysValues[0];
+            supplierId = checkedStoreValues[0];
+            productType = checkedTypeValues[0];
         }
-        if(!checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
+        List<ProductMsg> productMsgList = new ArrayList<ProductMsg>();
+        if(traverDays.equals("0") && supplierId.equals("0") && productType.equals("0")) {
+            productMsgList = catalogService.getProductListByCityName(destination);
+        }
+        if(!traverDays.equals("0") && supplierId.equals("0") && productType.equals("0")) {
             productMsgList = catalogService.getProductListByTraverdays(traverDays);
         }
-        if(checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
+        if(traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
             productMsgList = catalogService.getProductListBySupplierId(supplierId);
         }
-        if(checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+        if(traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
             productMsgList = catalogService.getProductListByProductType(productType);
         }
-        if(!checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
+        if(!traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
             productMsgList = catalogService.getProductListByDaysAndStore(traverDays,supplierId);
         }
-        if(!checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+        if(!traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
             productMsgList = catalogService.getProductListByDaysAndType(traverDays,productType);
         }
-        if(checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+        if(traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
             productMsgList = catalogService.getProductListByTypeAndStore(productType,supplierId);
         }
-        if(!checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
+        if(!traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
             productMsgList = catalogService.getProductListByThree(traverDays,productType,supplierId);
         }
+        /*****分页模块的实现*****/
+        String destination = (String) session.getAttribute("location");
+        System.out.println(pageNum + "    " + PRODUCTPAGESIZE);
+        //创建pageInfo的对象
+        PageInfo<ProductMsg> pageInfo = new PageInfo<>();
+        Map<Integer, List<ProductMsg>> map = new HashMap<>();
+        //为pageInfo赋值总的游记大小
+        pageInfo.setTotal(productMsgList.size());
+        //设置当前页码
+        pageInfo.setCurrentPage(pageNum);
+        System.out.println(pageInfo.getMaxPage());
+        if (productMsgList.size() % 8 == 0) {
+            for (int i = 0; i < pageInfo.getMaxPage(); ++i) {
+                map.put(i + 1, productMsgList.subList(i * PRODUCTPAGESIZE, i * PRODUCTPAGESIZE + PRODUCTPAGESIZE));
+            }
+        } else {
+            for (int i = 0; i < pageInfo.getMaxPage(); ++i) {
+                if (i == pageInfo.getMaxPage() - 1) {
+                    map.put(i + 1, productMsgList.subList(i * PRODUCTPAGESIZE, i * PRODUCTPAGESIZE + productMsgList.size() % 8));
+                    break;
+                }
+                map.put(i + 1, productMsgList.subList(i * PRODUCTPAGESIZE, i * PRODUCTPAGESIZE + PRODUCTPAGESIZE));
 
-        System.out.println("找到符合条件的产品"+ productMsgList.size() +"条");
-
-        String destination = session.getAttribute("location").toString();
-
-       // setDepartCityPrice(destination,productMsgList);
-
+            }
+        }
+        //为pageInfo设置当前页的数据
+        pageInfo.setPageData(map.get(pageNum));
+        if (pageInfo.getCurrentPage() == 1)
+            pageInfo.setFirstPage(true);
+        else
+            pageInfo.setFirstPage(false);
+        if (pageInfo.getCurrentPage() == pageInfo.getMaxPage())
+            pageInfo.setLastPage(true);
+        else
+            pageInfo.setLastPage(false);
+        model.addAttribute("pageInfo", pageInfo);
+        System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
+        System.out.println("界面内容大小" + pageInfo.getPageData().size() + "条");
+        catalogUtils.setDepartCityPrice(catalogService,destination,productMsgList);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
 
 
-
-
-
-    //进入酒店页面的界面控制器
+    // 进入热门酒店的控制器url
     @GetMapping("/Catalog/HotHotelList")
-    public String HotHotelList(@RequestParam("destination") String destination, Model model) {
-        //获取当前用户位置,推荐酒店
-        if (destination != null) {
-            List<HotelMsg> hotelMsgList = catalogService.getHotelListByDestination(destination+"市");
-            System.out.println(hotelMsgList.size());
-            model.addAttribute("hotelMsgList", hotelMsgList);
-            model.addAttribute("destination", destination);
+    public String HotHotelListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model, @RequestParam(defaultValue = "1") Integer pageNum,) {
+        String supplierId = "0";
+        String price = "0";
+        String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
+        String[] checkedPriceValues = httpServletRequest.getParameterValues("price");
+        String destination = session.getAttribute("location").toString();
+
+        if(checkedStoreValues != null && checkedPriceValues != null) {
+            System.out.println(checkedStoreValues[0]);
+            System.out.println(checkedPriceValues[0]);
+            supplierId = checkedStoreValues[0];
+            price = checkedPriceValues[0];
         }
+
+        List<HotelMsg> hotelMsgList = new ArrayList<HotelMsg>();
+        if (supplierId.equals("0") && price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestination(destination + "市");
+        }
+        if (!supplierId.equals("0") && price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination + "市", supplierId);
+        }
+        if (supplierId.equals("0") && !price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestination(destination + "市");
+            catalogUtils.setHotelListByPrices(hotelMsgList, price);
+        }
+        if (!supplierId.equals("0") && !price.equals("0")) {
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination + "市", supplierId);
+            catalogUtils.setHotelListByPrices(hotelMsgList, price);
+        }
+        /****分页模块***/
+        PageInfo<HotelMsg> hotelPageInfo = new PageInfo<>();
+        Map<Integer, List<HotelMsg>> hotelMap = new HashMap<>();
+
+        hotelMsgPageInfo.setTotal(hotelMsgList.size());
+        System.out.println("页面大小" + hotelPageInfo.getPageSize());
+        System.out.println("list大小" + hotelMsgList.size());
+        System.out.println("最多的界面数" + hotelMsgPageInfo.getMaxPage());
+        //设置当前页码
+        hotelMsgPageInfo.setCurrentPage(pageNum);
+        if (hotelMsgList.size() / HOTELPAGESIZE == 0) {
+            for (int i = 0; i < hotelMsgPageInfo.getMaxPage(); i++) {
+                hotelMap.put(i + 1, hotelMsgList.subList(i * HOTELPAGESIZE, i * HOTELPAGESIZE + HOTELPAGESIZE));
+            }
+        } else {
+            for (int i = 0; i < hotelMsgPageInfo.getMaxPage(); i++) {
+                if (i == hotelMsgPageInfo.getMaxPage() - 1) {
+                    hotelMap.put(i + 1, hotelMsgList.subList(i * HOTELPAGESIZE, i * HOTELPAGESIZE + hotelMsgList.size() % HOTELPAGESIZE));
+                    break;
+                }
+                hotelMap.put(i + 1, hotelMsgList.subList(i * HOTELPAGESIZE, i * HOTELPAGESIZE + HOTELPAGESIZE));
+            }
+        }
+        if (hotelMsgPageInfo.getCurrentPage() == 1)
+            hotelMsgPageInfo.setFirstPage(true);
+        else
+            hotelMsgPageInfo.setFirstPage(false);
+        if (hotelMsgPageInfo.getCurrentPage() == hotelMsgPageInfo.getMaxPage())
+            hotelMsgPageInfo.setLastPage(true);
+        else
+            hotelMsgPageInfo.setLastPage(false);
+        hotelMsgPageInfo.setPageData(hotelMap.get(pageNum));
+        model.addAttribute("hotelMsgPageInfo", hotelMsgPageInfo);
+        model.addAttribute("hotelMsgList", hotelMsgList);
         return "ProductDT/Hotel";
     }
-
     /****************************攻略推荐模块**********************************/
-
-
-//   强调了多少遍,不要在控制层放其他东西,要么写到service层,要么抽象到工具类
-//     private String getDepartCity(HttpSession session) {
-//         TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
-//         String city;
-//         if (traverMsg.getStart_city() == null)
-//             city = (String) session.getAttribute("positioningCity");
-//         else
-//             city = traverMsg.getStart_city();
-//         return city;
-//     }
-
-// <<<<<<< master
-//     private void setDepartCityPrice(String destination,List<ProductMsg> productMsgList){
-//         if (destination != null) {
-//             for (int i = 0; i < productMsgList.size(); i++) {
-//                 ProductCityMsg productCityMsg = catalogService.getDepartCityPrice(productMsgList.get(i).getId(), destination);
-//                 if(productCityMsg != null) {
-//                     productMsgList.get(i).setCurrent_price(productCityMsg.getProduct_price());
-//                 }
-//             }
-//         }
-//     }
-// }
-  
 }

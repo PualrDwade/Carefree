@@ -14,7 +14,10 @@ public interface ProductMapper {
 
     ProductMsg getProductById(String id);
 
-    //筛选条件：traver_days, product_type, supplier_id
+    //筛选条件：traver_days, product_type, supplier_id, cityname
+
+    //城市名
+    List<ProductMsg> getProductListByCityName(String cityname);
 
     //行程天数
     List<ProductMsg> getProductListByTraverdays(String traverDays);
@@ -29,19 +32,18 @@ public interface ProductMapper {
     List<ProductMsg> getProductListByName(String productName);
 
     //三个筛选条件都有
-    List<ProductMsg> getProductListByThree(@Param("traver_days") String traverDays,@Param("product_type") String productType, @Param("suppliper_id") String supplierId);
+    List<ProductMsg> getProductListByThree(@Param("traver_days") String traverDays, @Param("product_type") String productType, @Param("suppliper_id") String supplierId);
 
     //行程天数和供应商
-    List<ProductMsg> getProductListByDaysAndStore(@Param("traver_days") String traverDays , @Param("suppliper_id") String supplierId);
+    List<ProductMsg> getProductListByDaysAndStore(@Param("traver_days") String traverDays, @Param("suppliper_id") String supplierId);
 
     //行程天数和产品类型
-    List<ProductMsg> getProductListByDaysAndType(@Param("traver_days") String traverDays , @Param("product_type") String productType);
+    List<ProductMsg> getProductListByDaysAndType(@Param("traver_days") String traverDays, @Param("product_type") String productType);
 
     //产品类型和供应商
     List<ProductMsg> getProductListByTypeAndStore(@Param("product_type") String productType, @Param("suppliper_id") String supplierId);
 
-    //根据城市名获得产品
-    List<ProductMsg> getProductListByCityName(String cityname);
+    List<ProductMsg> getProductListByCityName(@Param("cityname") String destination);
 
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找

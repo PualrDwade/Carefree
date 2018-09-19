@@ -71,7 +71,7 @@
         通过产品名字找出产品信息
     -->
     <select id="getProductListByName" parameterType="java.lang.String"
-        resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+            resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
       id,
       name,

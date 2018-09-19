@@ -4,12 +4,13 @@
 
 <mapper namespace="com.csu.carefree.Persistence.UserAnswerMapper">
 
-    <cache />
+    <cache/>
 
     <!--
         实现查询所有问题答案，将结果以LIST形式输出
     -->
-    <select id="getUserAnswerByAsk" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
+    <select id="getUserAnswerByAsk" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
     SELECT
         ID,
         ANSWER_CONTENT,
@@ -32,7 +33,8 @@
 
 
     <!--通过用户名称获取用户问题列表-->
-    <select id="getUserAnswerListByName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
+    <select id="getUserAnswerListByName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
     SELECT
         ID,
         ANSWER_CONTENT,
