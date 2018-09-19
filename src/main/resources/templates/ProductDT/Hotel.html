@@ -239,6 +239,11 @@
                     </ul>
                 </nav>
             </center>
+            <center >
+                <div th:if="${productMsgPageInfo.getPageData().size() == 0}">
+                    <img src="/image/sorry.png">
+                </div>
+            </center>
         </div>
     </section>
     <!--================ 精选酒店模块  =================-->
