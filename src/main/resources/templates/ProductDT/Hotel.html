@@ -19,62 +19,125 @@
 
     <!--================定制模块================-->
     <div class="container" style="padding-top: 50px">
-        <div class="hotel_booking_area position">
-            <div class="container">
-                <div class="hotel_booking_table">
-                    <div class="col-md-3">
-                        <h2>预定您的酒店<br></h2>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="boking_table">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker11'>
-                                                <input type='text' class="form-control" placeholder="出发时间"/>
-                                                <span class="input-group-addon">
-                                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker1'>
-                                                <input type='text' class="form-control" placeholder="返程时间"/>
-                                                <span class="input-group-addon">
-                                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                        </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <input type='text' class="form-control" placeholder="成人数"/>
-                                            </div>
-                                            <div class="input-group">
-                                                <input type='text' class="form-control" placeholder="儿童数"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <input type='text' class="form-control" placeholder="目的地"/>
-                                            </div>
-                                        </div>
-                                        <a class="book_now_btn button_hover" href="Mdd.html">填好了</a>
-                                    </div>
-                                </div>
+        <form method="post" action="/Catalog/HotProductListByConditions">
+            <div class="row margin-div">
+
+                <div class="col-lg-9">
+                    <hr>
+                    <div class="row">
+                        <div class="select-margin"><p><b>产品来源：</b></p></div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
+                            <p>全部</p>
+                            <div class="primary-checkbox">
+                                <input name="store" type="radio" value="0" id="store-all"
+                                       th:checked="${session.hotProductcheckedStoreAll}">
+                                <label for="store-all"></label>
+                            </div>
+                        </div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
+                            <p>携程</p>
+                            <div class="primary-checkbox">
+                                <input name="store" type="radio" value="00003" id="store-1">
+                                <label for="store-1"></label>
+                            </div>
+                        </div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
+                            <p>马蜂窝</p>
+                            <div class="primary-checkbox">
+                                <input name="store" type="radio" value="00002" id="store-2">
+                                <label for="store-2"></label>
+                            </div>
+                        </div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
+                            <p>去哪儿</p>
+                            <div class="primary-checkbox">
+                                <input name="store" type="radio" value="00004" id="store-3">
+                                <label for="store-3"></label>
+                            </div>
+                        </div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
+                            <p>飞猪</p>
+                            <div class="primary-checkbox">
+                                <input name="store" type="radio" value="00005" id="store-4">
+                                <label for="store-4"></label>
+                            </div>
+                        </div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
+                            <p>途牛</p>
+                            <div class="primary-checkbox">
+                                <input name="store" type="radio" value="00006" id="store-5">
+                                <label for="store-5"></label>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <hr>
+                    <div class="row">
+                        <div class="select-margin"><p><b>价格区间：</b></p></div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
+                            <p>全部</p>
+                            <div class="primary-checkbox">
+                                <input name="type" type="radio" value="0" id="type-all"
+                                       th:checked="${session.hotProductcheckedTypeAll}">
+                                <label for="type-all"></label>
+                            </div>
+                        </div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
+                            <p>100元以内</p>
+                            <div class="primary-checkbox">
+                                <input name="type" type="radio" value="100" id="type-1">
+                                <label for="type-1"></label>
+                            </div>
+                        </div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
+                            <p>100-250元</p>
+                            <div class="primary-checkbox">
+                                <input name="type" type="radio" value="250" id="type-2">
+                                <label for="type-2"></label>
+                            </div>
+                        </div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
+                            <p>250-500元</p>
+                            <div class="primary-checkbox">
+                                <input name="type" type="radio" value="500" id="type-3">
+                                <label for="type-3"></label>
+                                </div>
+                        </div>
+                        <div class="switch-wrap d-flex justify-content-between select-margin"
+                             style="margin-right: 10px;">
+                            <p>500元以上</p>
+                            <div class="primary-checkbox">
+                                <input name="type" type="radio" value="1000" id="type-4">
+                                <label for="type-4"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-lg-3">
+                        <div class="input-group">
+                            <input type="submit" value="按条件筛选" class="book_now_btn button_hover">
+                            </div>
+                        </div>
+
+                    </div>
+        </form>
+        <div class="col-lg-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="输入您想搜索的内容">
+                <span class="input-group-addon myYellow"><a href="#"><i
+                        class="glyphicon glyphicon-search myYellow"> <span class="myYellow">搜索</span></i></a></span>
             </div>
+        </div>
+
         </div>
     </div>
     <!--================定制模块================-->
@@ -83,7 +146,7 @@
     <section class="accomodation_area section_gap">
         <div class="container">
             <div class="section_title text-center">
-                <h2 class="title_color">精 选 酒 店</h2>
+                <h2 class="title_color">为 您 精 选</h2>
                 <p>为 您 提 供 最 优 质 的 酒 店 选 择</p>
             </div>
             <div class="row accomodation_two">
@@ -91,9 +154,12 @@
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
                             <img th:src="${hotelMsg.img_url}" alt="">
-                            <a class="btn theme_btn button_hover" th:href="${hotelMsg.hotel_link}">立即预定</a>
+                            <a class="btn theme_btn button_hover" th:href="${hotelMsg.hotel_link}"
+                               target="_blank">立即预定</a>
                         </div>
-                        <a th:href="${hotelMsg.hotel_link}"><h4 class="sec_h4" th:text="${hotelMsg.name}">Double Deluxe Room</h4></a>
+                        <a th:href="${hotelMsg.hotel_link}" target="_blank"><h4 class="sec_h4"
+                                                                                th:text="${hotelMsg.name}">Double Deluxe
+                            Room</h4></a>
                         <h5 th:utext="${hotelMsg.hotel_price}+'<small>/日</small>'">$250
 
                         </h5>

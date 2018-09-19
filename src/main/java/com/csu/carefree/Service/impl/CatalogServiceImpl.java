@@ -5,6 +5,7 @@ import com.csu.carefree.Model.TraverAsk.TraverNote;
 import com.csu.carefree.Model.TraverMsg.CityMsg;
 import com.csu.carefree.Model.TraverMsg.ProvinceMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
+import com.csu.carefree.Model.TraverMsg.TraverMsg;
 import com.csu.carefree.Persistence.*;
 import com.csu.carefree.Service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,13 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public ArrayList<ScenicMsg> getRecommendScenicList(HttpSession session) {
-        List<ScenicMsg> scenicList = this.getScenicMsgListByCityName((String) session.getAttribute("location") + "市");
+        List<ScenicMsg> scenicList;
+        TraverMsg traver = (TraverMsg) session.getAttribute("traverMsg");
+        if (traver != null && !traver.getEnd_city().equals("")) {
+            scenicList = this.getScenicMsgListByCityName(traver.getEnd_city() + "市");
+        } else {
+            scenicList = this.getScenicMsgListByCityName((String) session.getAttribute("location") + "市");
+        }
         //对景点进行排序
         sortScenicList(scenicList);
         ArrayList<ScenicMsg> recommendScenicList = new ArrayList<>();
@@ -72,7 +79,13 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public ArrayList<HotelMsg> getRecommendHotelList(HttpSession session) {
-        List<HotelMsg> hotelList = this.getHotelListByDestination((String) session.getAttribute("location") + "市");
+        List<HotelMsg> hotelList;
+        TraverMsg traver = (TraverMsg) session.getAttribute("traverMsg");
+        if (traver != null && !traver.getEnd_city().equals("")) {
+            hotelList = this.getHotelListByDestination(traver.getEnd_city() + "市");
+        } else {
+            hotelList = this.getHotelListByDestination((String) session.getAttribute("location") + "市");
+        }
         //根据酒店的评分对酒店进行排序
         sortHotelList(hotelList);
         ArrayList<HotelMsg> recommendHotelList = new ArrayList<>();
@@ -209,7 +222,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<HotelMsg> searchHotelMsgList(String keyword) {
-        return searchHotelMsgList(keyword);
+        return searchHotelMsgList("%" + keyword + "%");
     }
 
     @Override
@@ -253,6 +266,21 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
+    public List<ProductMsg> getProductListByDaysAndStore(String traverDays, String supplierId) {
+        return productMapper.getProductListByDaysAndStore(traverDays, supplierId);
+    }
+
+    @Override
+    public List<ProductMsg> getProductListByDaysAndType(String traverDays, String productType) {
+        return productMapper.getProductListByDaysAndType(traverDays, productType);
+    }
+
+    @Override
+    public List<ProductMsg> getProductListByTypeAndStore(String productType, String supplierId) {
+        return productMapper.getProductListByTypeAndStore(productType, supplierId);
+    }
+
+    @Override
     public List<Supplier> getSupplierList() {
         return supplierMapper.getSupplierList();
     }
@@ -274,7 +302,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<CityMsg> searchCityMsgByName(String cityName) {
-        return cityMsgMapper.searchCityMsgByName(cityName);
+        return cityMsgMapper.searchCityMsgByName("%" + cityName + "%");
     }
 
     @Override
@@ -360,7 +388,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<TraverNote> searchTraverNoteList(String keyword) {
-        return traverNoteMapper.searchTraverNoteList(keyword);
+        return traverNoteMapper.searchTraverNoteList("%" + keyword + "%");
     }
 
     @Override

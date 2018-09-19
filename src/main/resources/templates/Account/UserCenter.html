@@ -15,14 +15,14 @@
             <!--快捷功能-->
             <div class="common_block main_links">
                 <ul class="clearfix">
-                    <li><a href="/TraverAsk/ViewTraverNote" target="_blank">
+                    <li><a th:href="@{/TraverAsk/ViewTraverNote}" target="_blank">
                         <i class="write_note"></i><span class="tags_link">看游记</span></a>
                     </li>
-                    <li><a href="/TraverAsk/QuestionAnswer" target="_blank"><i
+                    <li><a th:href="@{/TraverAsk/QuestionAnswer}" target="_blank"><i
                             class="ask_expert"></i><span class="tags_link">问达人</span></a></li>
-                    <li><a href="">
+                    <li><a href="#">
                         <i class="add_footprint"></i><span class="tags_link">查攻略</span></a></li>
-                    <li class="last"><a href="">
+                    <li class="last"><a href="#">
                         <i class="invite_friends"></i><span class="tags_link">收消息</span></a>
                     </li>
                 </ul>
@@ -33,14 +33,13 @@
                     <h2>我的游记</h2>
                 </div>
                 <div class="notes_default_v2">
-                    <a href="/account/GotoCreateNote" target="_blank" title="写游记" class="btn_write"><i></i>写游记</a>
+                    <a th:href="@{/account/GotoCreateNote}" target="_blank" title="写游记" class="btn_write"><i></i>写游记</a>
                 </div>
                 <!--游记列表-->
                 <div class="notes_list">
                     <ul>
                         <li data-order="4" data-top="0">
                             <dl>
-
                                 <dd>
                                     <div class="note_title clearfix">
                                         <div class="note_info">
@@ -70,93 +69,50 @@
                     <a class="btn_deleted" href="/u/note/delete.html"><i></i>已删除游记</a>
                 </div>
             </div>
-            <!--我的回答-->
+            <!--我的提问-->
             <div class="common_block my_notes">
                 <div class="common_title clearfix">
-                    <h2>我的回答</h2>
+                    <h2>我的提问</h2>
                 </div>
-                <div class="notes_default ask_default">
+                <div th:if="${askNum}==0" class="notes_default ask_default">
                     <i class="ico_notes"></i>
                     <div class="notes_default_detail">
-                        <p>问答是一个所有人帮所有人的平台，<br>用你的旅行经验，去帮助其他人。</p>
+                        <p>生活就是一行旅行<br>
+                            问题总是接踵而至<br>
+                            提出你的问题,让他人帮你解答</p>
                     </div>
                 </div>
                 <!--回答列表-->
-                <div class="common_title clearfix">
+                <div th:if="${askNum}!=0" class="common_title clearfix">
                     <div class="ask_list">
                         <ul class="_j_qa_answer_list">
-                            <li>
+                            <li th:each="askitem : ${askAnswerContainer.getUserAskList()}">
                                 <dl>
                                     <dt class="common_dt">
                                         <div class="ask_ava">
-                                            <a href="/wenda/u/79821721/answer.html" target="_blank">
-                                                <img src="http://p2-q.mafengwo.net/s10/M00/8E/73/wKgBZ1jGu4OAX38cAAB_kTzjduk54.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
-                                                     height="48" width="48" alt="水滴" title="水滴">
+                                            <a href="#" target="_blank">
+                                                <!--用户头像url-->
+                                                <img th:src="${userProfile.image}" height="48" width="48"
+                                                     th:alt="${userProfile.nick_name}">
                                             </a>
                                         </div>
                                         <div class="ask_info">
-                                            <h2><a href="/wenda/detail-12926271.html" title="" target="_blank">登哈巴雪山哪些装备可以在现场租？</a>
+                                            <h2><a href="#" th:text="${askitem.title}" target="_blank"></a>
                                             </h2>
-                                            <p>
-                                                <span>提问者<a href="/wenda/u/79821721/answer.html" title="水滴" class="name"
-                                                            target="_blank">水滴</a><a href="/rank/lv.php?uid=79821721"
-                                                                                     title="Lv.2" class="level"
-                                                                                     target="_blank">Lv.2</a></span>
-                                                <span>9个回答</span>
+                                            <span th:text="'此问题共'+${askAnswerContainer.getAnswerListByask(askitem).size()}+'个人参与了回答'"></span>
                                             </p>
                                         </div>
                                     </dt>
-                                    <dd class="answers_dd">
-                                        <div class="answer_word">
-                                            TA的回答：头盔，冰镐，冰爪，安全带，哈巴雪山属于初级雪山，商业俱乐部都全包的。
-                                        </div>
-                                    </dd>
-                                </dl>
-                            </li>
-                            <li>
-                                <dl>
-                                    <dt class="common_dt">
-                                        <div class="ask_ava">
-                                            <a href="/wenda/u/62982011/answer.html" target="_blank">
-                                                <img src="http://n4-q.mafengwo.net/s10/M00/E9/6B/wKgBZ1o6IRKAKmByAAEP80IW7A093.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
-                                                     height="48" width="48" alt="LU" title="LU">
-                                            </a>
-                                        </div>
-                                        <div class="ask_info">
-                                            <h2><a href="/wenda/detail-12736880.html" title="" target="_blank">怎么直接找哈巴雪山的地接协作</a>
-                                            </h2>
-                                            <p>
-                                                <span>提问者<a href="/wenda/u/62982011/answer.html" title="LU" class="name"
-                                                            target="_blank">LU</a><a href="/rank/lv.php?uid=62982011"
-                                                                                     title="Lv.2" class="level"
-                                                                                     target="_blank">Lv.2</a></span>
-                                                <span>4个回答</span>
-                                            </p>
-                                        </div>
-                                    </dt>
-                                    <dd class="answers_dd">
-                                        <div class="answer_word">
-                                            TA的回答：我是直接找的云南顶峰户外。
+                                    <!--下面是回答列表-->
+                                    <dd th:each="answeritem : ${askAnswerContainer.getAnswerListByask(askitem)}"
+                                        class="answers_dd">
+                                        <div class="answer_word"
+                                             th:text="${'来自用户'+answeritem.user_id}+'的回答:'+${answeritem.answer_content}">
                                         </div>
                                     </dd>
                                 </dl>
                             </li>
                         </ul>
-                    </div>
-                </div>
-                <div class="more_notes">
-                    <a href="/wenda/u/93962965/answer.html">更多回答 </a>
-                </div>
-            </div>
-            <!--我的评论-->
-            <div class="common_block my_notes">
-                <div class="common_title clearfix">
-                    <h2>我的评论</h2>
-                </div>
-                <div class="notes_default dp_default">
-                    <i class="ico_notes"></i>
-                    <div class="notes_default_detail">
-                        <p>评论，不仅是旅途记忆，<br>更是帮助他人的宝贵财富。</p>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 package com.csu.carefree.Persistence;
 
 import com.csu.carefree.Model.ProductDT.ProductMsg;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,7 +29,16 @@ public interface ProductMapper {
     List<ProductMsg> getProductListByName(String productName);
 
     //三个筛选条件都有
-    List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId);
+    List<ProductMsg> getProductListByThree(@Param("traver_days") String traverDays, @Param("product_type") String productType, @Param("suppliper_id") String supplierId);
+
+    //行程天数和供应商
+    List<ProductMsg> getProductListByDaysAndStore(@Param("traver_days") String traverDays, @Param("suppliper_id") String supplierId);
+
+    //行程天数和产品类型
+    List<ProductMsg> getProductListByDaysAndType(@Param("traver_days") String traverDays, @Param("product_type") String productType);
+
+    //产品类型和供应商
+    List<ProductMsg> getProductListByTypeAndStore(@Param("product_type") String productType, @Param("suppliper_id") String supplierId);
 
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找

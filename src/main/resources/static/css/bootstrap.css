@@ -8371,4 +8371,14 @@ a.text-dark:focus, a.text-dark:hover {
 .invisible {
   visibility: hidden !important;
 }
+
+#panel {
+    position: relative;
+    background-color: white;
+    max-height: 100%;
+    overflow-y: auto;
+    top: 0;
+    right: 0;
+    width: 195px;
+}
 /*# sourceMappingURL=bootstrap.css.map */

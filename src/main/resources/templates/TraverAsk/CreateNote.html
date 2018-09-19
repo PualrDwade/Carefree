@@ -1,27 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>新游记</title>
     <meta name="renderer" content="webkit"/>
 
-    <script type="text/javascript">
-        window.Env = {
-            "Qid": 13051644,
-            "Aid": null,
-            "mddid": 10466,
-            "WWW_HOST": "www.mafengwo.cn",
-            "IMG_HOST": "images.mafengwo.net",
-            "P_HOST": "passport.mafengwo.cn",
-            "P_HTTP": "https:\/\/passport.mafengwo.cn",
-            "PAGELET_HTTP": "http:\/\/pagelet.mafengwo.cn",
-            "JS_HOST": "js.mafengwo.net",
-            "UID": 85353052,
-            "CSTK": "6bc46ed9bdf9cb800961f6e35c0a51ff_0ba37ec1bc66ed263b7d9fbe7d951843",
-            "GOOGLE_MAP_KEY": "AIzaSyD-Su0x_rPy1xehlMBcMyTqWkU49Bk53nQ",
-            "TONGJI_HOST": "tongji.mafengwo.cn"
-        };
-    </script>
+
     <link href="http://css.mafengwo.net/css/cv/css+mfw-ask+detail_v3:css+mfw-ask+img_pop:css+mfw-ask+detail_answer_foldup:css+mfw-ask+upload_pics^al0^1533612615.css"
           rel="stylesheet" type="text/css"/>
 
@@ -51,8 +35,8 @@
         </div>
         <div class="ap-wrap">
             <div class="ap-main">
-                <form class="forms" id="infoform" action="/ginfo/create.php/save" method="post"
-                      enctype="multipart/form-data" target="postinfo">
+                <form class="forms" id="infoform" th:action="@{/TraverAsk/createNote}" th:method="get"
+                      enctype="multipart/form-data" target="postinfo" name="fileForm">
                     <dl class="title cf">
                         <dd>
                             <!--<span class="char-limit hide _j_char_limit">可输入<strong>48</strong>字</span>-->
@@ -67,10 +51,8 @@
 
                     <div class="answer-wrap">
 
-
                         <div class="answer-add clearfix">
                             <a name="answer"></a>
-
                             <div class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  ">
                                 <div class="editor-scroll">
                                     <div class="question-title">新游记</div>
@@ -94,9 +76,7 @@
                                                     <div class="tooltip"><span>有序列表</span></div>
                                                 </div>
 
-
                                                 <div class="separator"></div>
-
 
                                                 <div class="item"><a class="btn-insertimg _js_upload_pic"
                                                                      role="button"></a>
@@ -120,143 +100,13 @@
                                             <span class="pic"><b id="_j_pic_count">0</b>图</span>
                                             <span class="pic"><b id="_j_video_count">0</b>视频</span>
                                         </div>
-                                        <input class="btn-comment _j_submit_answer_btn" type="button" value="发表游记">
+
+                                        <input type="submit" value="发表游记">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <style type="text/css">
-                            .video_upload {
-                                position: absolute;
-                                left: 100px;
-                                top: 58px;
-                                width: 500px;
-                                background-color: #fff;
-                                border: 1px solid #d3d3d3;
-                                box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
-                                z-index: 100;
-                            }
-
-                            .video-hd {
-                                height: 76px;
-                                border-bottom: 2px solid #e5e5e5;
-                                text-align: center;
-                                text-align: center;
-                                font-size: 18px;
-                                color: #333;
-                                line-height: 76px;
-                            }
-
-                            .video-hd .item {
-                                float: left;
-                                width: 50%;
-                                cursor: pointer;
-                                position: relative;
-                            }
-
-                            .video-hd .item i {
-                                display: inline-block;
-                                margin-right: 10px;
-                                width: 28px;
-                                height: 28px;
-                                background: url(https://images.mafengwo.net/images/post/new_notes/sprite_v34.png) no-repeat -189px -470px;
-                                vertical-align: -8px;
-                                *vertical-align: middle;
-                            }
-
-                            .video-hd .item.on .icon-vonline {
-                                background-position: -218px -470px;
-                            }
-
-                            .video-hd .item .icon-vlocal {
-                                background-position: -345px -470px;
-                            }
-
-                            .video-hd .item.on .icon-vlocal {
-                                background-position: -271px -470px;
-                            }
-
-                            .video-hd .item.on {
-                                color: #ff9d00;
-                            }
-
-                            .video-hd .item.on:after {
-                                content: '';
-                                position: absolute;
-                                width: 150px;
-                                height: 5px;
-                                background-color: #ff9d00;
-                                border-radius: 5px;
-                                bottom: -3px;
-                                left: 50%;
-                                margin-left: -75px;
-                            }
-
-                            .video-bd {
-                                padding: 35px 35px 60px;
-                                height: 95px;
-                                position: relative;
-                            }
-
-                            .video-bd .art-tips {
-                                font-size: 14px;
-                            }
-
-                            .vbd-local {
-                                text-align: center;
-                            }
-
-                            .vbd-local .art-tips {
-                                margin-top: 15px;
-                            }
-
-                            .vbd-online, .vbd-online .art-tips {
-                                text-align: left;
-                            }
-
-                            .vbd-online .a-inptxt {
-                                font-size: 14px;
-                            }
-
-                            .video_bar {
-                                margin-top: 25px;
-                                padding-left: 55px;
-                            }
-
-                            .video_bar p {
-                                width: 300px;
-                                margin-right: 15px;
-                                height: 18px;
-                                background-color: #e2e2e2;
-                                border-radius: 15px;
-                            }
-
-                            .video_bar p span {
-                                background-color: #add75c;
-                                display: block;
-                                width: 0;
-                                height: 100%;
-                                border-radius: 15px;
-                            }
-
-                            .video_bar strong {
-                                font-weight: normal;
-                                font-size: 14px;
-                                color: #999;
-                                line-height: 18px;
-                                cursor: pointer;
-                            }
-
-                            ._j_uploading_mode ._j_process {
-                                display: block;
-                            }
-
-                            .editor-toolbar .item-active:hover .tooltip {
-                                visibility: hidden;
-                                opacity: 0;
-                            }
-                        </style>
                     </div>
                 </form>
             </div>
@@ -268,6 +118,140 @@
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>
 <!--================ End footer Area  =================-->
+
+
+<style type="text/css">
+    .video_upload {
+        position: absolute;
+        left: 100px;
+        top: 58px;
+        width: 500px;
+        background-color: #fff;
+        border: 1px solid #d3d3d3;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
+        z-index: 100;
+    }
+
+    .video-hd {
+        height: 76px;
+        border-bottom: 2px solid #e5e5e5;
+        text-align: center;
+        text-align: center;
+        font-size: 18px;
+        color: #333;
+        line-height: 76px;
+    }
+
+    .video-hd .item {
+        float: left;
+        width: 50%;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .video-hd .item i {
+        display: inline-block;
+        margin-right: 10px;
+        width: 28px;
+        height: 28px;
+        background: url(https://images.mafengwo.net/images/post/new_notes/sprite_v34.png) no-repeat -189px -470px;
+        vertical-align: -8px;
+        *vertical-align: middle;
+    }
+
+    .video-hd .item.on .icon-vonline {
+        background-position: -218px -470px;
+    }
+
+    .video-hd .item .icon-vlocal {
+        background-position: -345px -470px;
+    }
+
+    .video-hd .item.on .icon-vlocal {
+        background-position: -271px -470px;
+    }
+
+    .video-hd .item.on {
+        color: #ff9d00;
+    }
+
+    .video-hd .item.on:after {
+        content: '';
+        position: absolute;
+        width: 150px;
+        height: 5px;
+        background-color: #ff9d00;
+        border-radius: 5px;
+        bottom: -3px;
+        left: 50%;
+        margin-left: -75px;
+    }
+
+    .video-bd {
+        padding: 35px 35px 60px;
+        height: 95px;
+        position: relative;
+    }
+
+    .video-bd .art-tips {
+        font-size: 14px;
+    }
+
+    .vbd-local {
+        text-align: center;
+    }
+
+    .vbd-local .art-tips {
+        margin-top: 15px;
+    }
+
+    .vbd-online, .vbd-online .art-tips {
+        text-align: left;
+    }
+
+    .vbd-online .a-inptxt {
+        font-size: 14px;
+    }
+
+    .video_bar {
+        margin-top: 25px;
+        padding-left: 55px;
+    }
+
+    .video_bar p {
+        width: 300px;
+        margin-right: 15px;
+        height: 18px;
+        background-color: #e2e2e2;
+        border-radius: 15px;
+    }
+
+    .video_bar p span {
+        background-color: #add75c;
+        display: block;
+        width: 0;
+        height: 100%;
+        border-radius: 15px;
+    }
+
+    .video_bar strong {
+        font-weight: normal;
+        font-size: 14px;
+        color: #999;
+        line-height: 18px;
+        cursor: pointer;
+    }
+
+    ._j_uploading_mode ._j_process {
+        display: block;
+    }
+
+    .editor-toolbar .item-active:hover .tooltip {
+        visibility: hidden;
+        opacity: 0;
+    }
+</style>
+
 <div class="mfw-toolbar" id="_j_mfwtoolbar">
     <div class="toolbar-item-top">
         <a role="button" class="btn _j_gotop">
