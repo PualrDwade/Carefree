@@ -247,6 +247,11 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
+    public List<ProductMsg> getProductListByCityName(String cityname) {
+        return productMapper.getProductListByCityName(cityname);
+    }
+
+    @Override
     public List<ProductMsg> getProductListByTraverdays(String traverDays) {
         return productMapper.getProductListByTraverdays(traverDays);
     }

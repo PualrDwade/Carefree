@@ -7,7 +7,7 @@
 <div id="content" style="margin-top: 10px">
     <br><br><br>
     <div class="container ">
-        <form method="post" th:action="@{/Catalog/HotProductListByConditions}">
+        <form method="get" action="/Catalog/HotProductList">
             <div class="row margin-div">
                 <div class="col-lg-9">
                     <hr>
@@ -201,7 +201,6 @@
                     </div>
 
                 </div>
-            </div>
         </form>
         <div class="col-lg-3">
             <div class="input-group">
@@ -212,21 +211,21 @@
         </div>
     </div>
 </div>
-<br><br>
-<!--================ 产品  =================-->
-<div class="whole-wrap">
-    <br>
-    <div class="section_title text-center">
-        <h2 class="title_color">为您推荐</h2>
-    </div>
-    <div class="container">
-        <div class="section-top-border" th:each="productMsg:${pageInfo.getPageData()}"
-             th:if="${productMsg.current_price=='价格未知'}">
-            <div class="row">
-                <div class="col-md-3 hotel_img">
-                    <div class=" hotel_img">
-                        <img th:src="${productMsg.img_url}"
-                             class="img-fluid">
+    <br><br>
+    <!--================ 产品  =================-->
+    <div class="whole-wrap">
+        <br>
+        <div class="section_title text-center">
+            <h2 class="title_color">为您推荐</h2>
+        </div>
+        <div class="container">
+            <div class="section-top-border" th:each="productMsg:${productMsgList}"  th:if="${productMsg.current_price}!='价格未知'">
+                <div class="row">
+                    <div class="col-md-3 hotel_img">
+                        <div class=" hotel_img">
+                            <img th:src="${productMsg.img_url}"
+                                 class="img-fluid">
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-7 mt-sm-20 left-align-p">
@@ -278,7 +277,6 @@
                             <span th:text="${pageNo}"></span>
                         </a>
                     </li>
-
                     <li th:if="${pageInfo.getCurrentPage()+10 < pageInfo.getMaxPage()}" th:each="pageNo : ${#numbers.sequence(pageInfo.getCurrentPage(), pageInfo.getCurrentPage()+10)}">
                         <a th:if="${pageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
                             <span th:text="${pageNo}"></span>
