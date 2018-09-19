@@ -58,22 +58,29 @@
                                     </div>
 
                                     <div class="aa-ft">
+                                       <!--
                                         <div class="count">
                                             <span class="word"><b id="_j_word_count">0</b>字</span>
                                         </div>
-
+                                       -->
                                         <input type="submit" value="提交问题">
-
+                                        <!--<input type="button" onclick="submitAskForm()" value="提交问题">-->
                                         <!--
-                                        <div class="btn-submit">
-                                            <button class="btn-comment _j_submit_answer_btn" onclick="submitBtnClick()">提交问题</button>
-                                            <script type="text/javascript">
-                                                function submitBtnClick() {
-                                                    //提交问题
-                                                    document.fileForm.submit();
-                                                }
-                                            </script>
-                                        </div>
+                                          <script lang="JavaScript">
+                                            function submitAskForm() {
+                                                var askForm = document.getElementById("infoform");
+                                                    if(askForm[0].value == null){
+                                                        alert("标题不能为空！");
+                                                        return false;
+                                                    }else {
+                                                        if (askForm[1].value == null){
+                                                            alert("问题内容不能为空！");
+                                                            return false;
+                                                        }
+                                                    }
+                                                    return true;
+                                            }
+                                        </script>
                                         -->
                                     </div>
                                 </div>

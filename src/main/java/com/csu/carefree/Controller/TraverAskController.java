@@ -125,13 +125,17 @@ public class TraverAskController {
         //以HTML形式保存用户问题
         //获得用户ID
         //设置日期格式
+        if(session.getAttribute("username")==null){
+            return "redirect:/account/ViewSignonForm";
+        }
+
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String askId = "test_"+(traverAskService.getUserAskList().size()-13);
         String username = (String) session.getAttribute("username");
         UserAsk userAsk = new UserAsk(askId,title,askContent,"0",df.format(new Date()),username,"CN_city10");
         traverAskService.insertUserAsk(userAsk);
 
-        return "redirect:/TraverAsk/QuestionAnswer";
+        return "/TraverAsk/QuestionAnswer";
     }
 
     //问题回复
@@ -141,6 +145,9 @@ public class TraverAskController {
 
         //获得当前问题ID
         //获取问题答案List
+        if(session.getAttribute("username")==null){
+            return "redirect:/account/ViewSignonForm";
+        }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String askId = (String) session.getAttribute("askId");
         String userId = (String) session.getAttribute("username");
@@ -207,6 +214,9 @@ public class TraverAskController {
         //获得游记写的游记内容
         //List<TraverNote> traverNoteList = catalogService.getTraverNoteList();
         //model.addAttribute("traverNoteList", traverNoteList);
+        if(session.getAttribute("username")==null){
+            return "redirect:/account/ViewSignonForm";
+        }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String traverNoteId = "CN_traverNote_test_"+(catalogService.getAllTraverNoteList().size()-97);
         String username = (String) session.getAttribute("username");
@@ -221,7 +231,7 @@ public class TraverAskController {
         model.addAttribute("hotTraverNoteList", hotTraverNoteList);
 
 
-        return "redirect:/TraverAsk/ViewTraverNote";
+        return "/TraverAsk/ViewTraverNote";
     }
 
 }
