@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 封装分页的基本信息
- * @author John
+ * @author Kai
  *
  */
 public class PageInfo <E> {
@@ -74,8 +74,26 @@ public class PageInfo <E> {
     public List<E> getPageData() {
         return pageData;
     }
-    public void setPageData(List<E> pageData) {
-        this.pageData = pageData;
+    public void setPageData(List<E> list , int pageSize ,int pageNum) {
+
+        this.pageSize = pageSize;
+        total = list.size();
+        maxPage = getMaxPage();
+        currentPage = pageNum;
+        int index = pageNum-1;
+
+        if (list.size() / pageSize == 0 || list.size() / pageSize != 0 && pageNum != maxPage )
+            pageData =  list.subList(index * pageSize , index * pageSize + pageSize);
+        else
+        if ( pageNum == maxPage )
+            pageData = list.subList(index * pageSize , index * pageSize + list.size() % pageSize);
+
+        isFirstPage = pageNum == 1;
+        isLastPage = pageNum == maxPage;
+
+        System.out.println(pageData);
+        System.out.println(list);
+
     }
 
 }

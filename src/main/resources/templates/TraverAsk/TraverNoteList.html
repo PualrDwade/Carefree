@@ -25,67 +25,87 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="blog_left_sidebar" th:each="traverNote : ${traverNoteList}">
+                    <div class="container-fluid">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="hero-unit" th:each="traverNote : ${travelNotePageInfo.getPageData()}">
+                                    <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId = ${traverNote.id})}">
+                                        <h1 th:text="${traverNote.title}"
+                                            style="width:15em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color: #F3C300"></h1>
+                                    </a>
+                                    <p th:text="${traverNote.note_content}"></p>
+                                    <p>
+                                        <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId = ${traverNote.id})}"
+                                           class="view_btn button_hover">查看详情 »</a>
+                                    </p>
+                                    <hr style="color: #73ffd6">
+                                </div>
 
-                        <article class="row blog_item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <!--
-                                        <div class="post_tag">
-                                        <a href="#">美食</a>
-                                        <a href="#">生活方式,</a>
-                                        <a href="#">攻略</a>
-                                        <a href="#">游玩</a>
-                                    </div>
-                                    -->
-                                    <ul class="blog_meta list_style">
-                                        <li><a href="#">小小轩<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 月, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 评论<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
                             </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="../../static/image/blog/main-blog/m-blog-1.jpg" alt="">
-                                    <div class="blog_details">
-                                        <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId = ${traverNote.id})}"><h2 th:text="${traverNote.title}">第一篇游记</h2></a>
-                                        <p th:text="${traverNote.note_content}">MCSE boot camps have its supporters and its detractors. Some people do not
-                                            understand why you should have to spend money on boot camp when you can get
-                                            the
-                                            MCSE study materials yourself at a fraction.</p>
-                                        <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId = ${traverNote.id})}" class="view_btn button_hover">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
+                        </div>
                     </div>
-                        <nav class="blog-pagination justify-content-center d-flex">
+
+                    <center>
+                        <nav>
                             <ul class="pagination">
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Previous">
-		                                    <span aria-hidden="true">
-		                                        <span class="lnr lnr-chevron-left"></span>
-		                                    </span>
+                                <li>
+                                    <a th:href="@{${'/TraverAsk/ViewTraverNote'}(pageNum = 1)}"> 首页 </a>
+                                </li>
+                                <li>
+                                    <a th:if="${not travelNotePageInfo.isFirstPage()}"
+                                       th:href="@{${'/TraverAsk/ViewTraverNote'}(pageNum = ${travelNotePageInfo.getCurrentPage() - 1})}">上一页</a>
+                                </li>
+
+                                <li th:if="${travelNotePageInfo.getMaxPage() <= 10}"
+                                    th:each="pageNo : ${#numbers.sequence(1, travelNotePageInfo.getMaxPage())}">
+                                    <a th:if="${travelNotePageInfo.getCurrentPage() eq pageNo}"
+                                       href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                    <a th:if="${not (travelNotePageInfo.getCurrentPage() eq pageNo)}"
+                                       th:href="@{${'/TraverAsk/ViewTraverNote'}(pageNum=${pageNo})}">
+                                        <span th:text="${pageNo}"></span>
                                     </a>
                                 </li>
-                                <li class="page-item"><a href="#" class="page-link">01</a></li>
-                                <li class="page-item active"><a href="#" class="page-link">02</a></li>
-                                <li class="page-item"><a href="#" class="page-link">03</a></li>
-                                <li class="page-item"><a href="#" class="page-link">04</a></li>
-                                <li class="page-item"><a href="#" class="page-link">09</a></li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Next">
-		                                    <span aria-hidden="true">
-		                                        <span class="lnr lnr-chevron-right"></span>
-		                                    </span>
+
+                                <li th:if="${travelNotePageInfo.getCurrentPage()+10 >= travelNotePageInfo.getMaxPage() && travelNotePageInfo.getMaxPage() > 10}"
+                                    th:each="pageNo : ${#numbers.sequence(travelNotePageInfo.getMaxPage() -10, travelNotePageInfo.getMaxPage())}">
+                                    <a th:if="${travelNotePageInfo.getCurrentPage() eq pageNo}"
+                                       href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
                                     </a>
+                                    <a th:if="${not (travelNotePageInfo.getCurrentPage() eq pageNo)}"
+                                       th:href="@{${'/TraverAsk/ViewTraverNote'}(pageNum=${pageNo})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </li>
+
+                                <li th:if="${travelNotePageInfo.getCurrentPage()+10 < travelNotePageInfo.getMaxPage() && travelNotePageInfo.getMaxPage() > 10}"
+                                    th:each="pageNo : ${#numbers.sequence(travelNotePageInfo.getCurrentPage(), travelNotePageInfo.getCurrentPage()+10)}">
+                                    <a th:if="${travelNotePageInfo.getCurrentPage() eq pageNo}"
+                                       href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                    <a th:if="${not (travelNotePageInfo.getCurrentPage() eq pageNo)}"
+                                       th:href="@{${'/TraverAsk/ViewTraverNote'}(pageNum=${pageNo})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a th:if="${not travelNotePageInfo.isLastPage()}"
+                                       th:href="@{${'/TraverAsk/ViewTraverNote'}(pageNum=${travelNotePageInfo.getCurrentPage()+1})}">下一页</a>
+                                </li>
+
+                                <li>
+                                    <a th:href="@{${'/TraverAsk/ViewTraverNote'}(pageNum = ${travelNotePageInfo.getMaxPage()})}">
+                                        尾页 </a>
                                 </li>
                             </ul>
                         </nav>
-
+                    </center>
                 </div>
+
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
@@ -93,10 +113,17 @@
                                 <form th:action="@{/TraverAsk/searchNoteList}">
                                     <input type="text" name="keyword" class="form-control" placeholder="搜索游记">
                                     <span class="input-group-btn"></span>
-                                    <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
+                                    <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i>
+                                    </button>
                                 </form>
                             </div><!-- /input-group -->
                             <div class="br"></div>
+                        </aside>
+                        <aside class="single_sidebar_widget search_widget">
+                            <div class="widget_title">
+                                <a th:href="@{/account/GotoCreateNote}" target="_blank" title="写游记"
+                                   class="btn_write"><i></i>写游记</a>
+                            </div>
                         </aside>
 
                         <br><br><br><br><br>
@@ -115,50 +142,50 @@
                         </aside>
                     </div>
 
-                        <br><br><br><br><br>
-                        <aside class="single_sidebar_widget ads_widget">
-                            <a href="#">
-                                <img class="img-fluid" src="../../static/image/blog/add.jpg" alt=""></a>
-                            <div class="br"></div>
-                        </aside>
-                        <!--
+                    <br><br><br><br><br>
+                    <aside class="single_sidebar_widget ads_widget">
+                        <a href="#">
+                            <img class="img-fluid" src="../../static/image/blog/add.jpg" alt=""></a>
+                        <div class="br"></div>
+                    </aside>
+                    <!--
 
-                        <aside class="single_sidebar_widget post_category_widget">
-                            <h4 class="widget_title">游记分类</h4>
-                            <ul class="list_style cat-list">
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>美食</p>
-                                        <p>37</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>休闲</p>
-                                        <p>24</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>城市</p>
-                                        <p>59</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>野外</p>
-                                        <p>29</p>
-                                    </a>
-                                </li>
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">游记分类</h4>
+                        <ul class="list_style cat-list">
+                            <li>
+                                <a href="#" class="d-flex justify-content-between">
+                                    <p>美食</p>
+                                    <p>37</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex justify-content-between">
+                                    <p>休闲</p>
+                                    <p>24</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex justify-content-between">
+                                    <p>城市</p>
+                                    <p>59</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex justify-content-between">
+                                    <p>野外</p>
+                                    <p>29</p>
+                                </a>
+                            </li>
 
-                            </ul>
-                            <div class="br"></div>
-                        </aside>
+                        </ul>
+                        <div class="br"></div>
+                    </aside>
 
-                        -->
-                    </div>
+                    -->
                 </div>
             </div>
+        </div>
 
     </section>
     <!--================Blog Area =================-->

@@ -5,9 +5,8 @@
 <mapper namespace="com.csu.carefree.Persistence.ProductMapper">
 
     <cache/>
-
     <!--
-        获取所有产品信息
+        获取所有城市的产品信息
     -->
     <select id="getProductList" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
@@ -43,37 +42,17 @@
       product_grade,
       supplier_id
     FROM ProductDT_productmsg
-    WHERE id = #{id}
+    WHERE ProductDT_productmsg.id = #{id}
     </select>
 
-    <!--
-        通过旅行天数推荐产品信息
-    -->
-    <select id="getProductListByTraverdays" parameterType="java.lang.String"
-            resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
-    SELECT
-      id,
-      name,
-      traver_days,
-      product_type,
-      img_url,
-      product_link,
-      score,
-      sell_num,
-      comments_num,
-      product_grade,
-      supplier_id
-    FROM ProductDT_productmsg
-    WHERE traver_days = #{traver_days}
-    </select>
 
     <!--
-        通过产品名字找出产品信息
+        通过产品名字找出产品信息(session中的当前城市)
     -->
     <select id="getProductListByName" parameterType="java.lang.String"
             resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
-      id,
+      ProductDT_productmsg.id,
       name,
       traver_days,
       product_type,
@@ -83,11 +62,39 @@
       sell_num,
       comments_num,
       product_grade,
-      supplier_id
-    FROM ProductDT_productmsg
-    WHERE lower(name) LIKE #{value}
+      supplier_id,
+      ProductDT_product_city.product_price
+    FROM ProductDT_productmsg,ProductDT_product_city
+    WHERE lower(name) LIKE #{product_name} AND city_id=#{cityname}
+    AND ProductDT_productmsg.id = ProductDT_product_city.product_id
     </select>
 
+
+    <!--产品推荐模块的功能查询,联合查询,只查询当前城市的session值-->
+
+
+    <!--
+        通过旅行天数推荐产品信息(session中的当前城市)
+    -->
+    <select id="getProductListByTraverdays" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    SELECT
+      ProductDT_productmsg.id,
+      name,
+      traver_days,
+      product_type,
+      img_url,
+      product_link,
+      score,
+      sell_num,
+      comments_num,
+      product_grade,
+      supplier_id,
+      ProductDT_product_city.product_price
+    FROM ProductDT_productmsg,ProductDT_product_city
+    WHERE traver_days = #{traver_days} and city_id=#{cityname}
+    AND ProductDT_productmsg.id = ProductDT_product_city.product_id
+    </select>
 
     <!--
         通过旅行类型获取产品信息
@@ -95,7 +102,7 @@
     <select id="getProductListByProductType" parameterType="java.lang.String"
             resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
-      id,
+      ProductDT_productmsg.id,
       name,
       traver_days,
       product_type,
@@ -105,19 +112,21 @@
       sell_num,
       comments_num,
       product_grade,
-      supplier_id
-    FROM ProductDT_productmsg
-    WHERE product_type = #{product_type}
+      supplier_id,
+      ProductDT_product_city.product_price
+    FROM ProductDT_productmsg,ProductDT_product_city
+    WHERE product_type = #{product_type} and city_id=#{cityname}
+    AND ProductDT_productmsg.id = ProductDT_product_city.product_id
     </select>
 
 
     <!--
-        通过供应商获取产品信息
+        通过供应商获取推荐产品信息
     -->
     <select id="getProductListBySupplierId" parameterType="java.lang.String"
             resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
-      id,
+      ProductDT_productmsg.id,
       name,
       traver_days,
       product_type,
@@ -127,17 +136,19 @@
       sell_num,
       comments_num,
       product_grade,
-      supplier_id
-    FROM ProductDT_productmsg
-    WHERE supplier_id = #{supplier_id}
+      supplier_id,
+      ProductDT_product_city.product_price
+    FROM ProductDT_productmsg,ProductDT_product_city
+    WHERE supplier_id = #{supplier_id} and city_id=#{cityname}
+    AND ProductDT_productmsg.id = ProductDT_product_city.product_id
     </select>
 
     <!--
-        通过旅行天数，产品类型，供应商ID获取产品信息
+        通过旅行天数，产品类型，供应商ID推荐产品信息
     -->
     <select id="getProductListByThree" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
-      id,
+      ProductDT_productmsg.id,
       name,
       traver_days,
       product_type,
@@ -147,14 +158,17 @@
       sell_num,
       comments_num,
       product_grade,
-      supplier_id
-    FROM ProductDT_productmsg
-    WHERE traver_days = #{traver_days} AND product_type = #{product_type} AND supplier_id = #{suppliper_id}
+      supplier_id,
+      ProductDT_product_city.product_price
+    FROM ProductDT_productmsg,ProductDT_product_city
+    WHERE traver_days = #{traver_days} AND product_type = #{product_type}
+    AND supplier_id = #{suppliper_id} AND city_id= #{cityname}
+    AND ProductDT_productmsg.id = ProductDT_product_city.product_id
     </select>
 
     <select id="getProductListByDaysAndStore" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
         SELECT
-        id,
+        ProductDT_productmsg.id,
         name,
         traver_days,
         product_type,
@@ -164,14 +178,16 @@
         sell_num,
         comments_num,
         product_grade,
-        supplier_id
-        FROM ProductDT_productmsg
-        WHERE traver_days = #{traver_days} AND supplier_id = #{suppliper_id}
+        supplier_id,
+        ProductDT_product_city.product_price
+        FROM ProductDT_productmsg,ProductDT_product_city
+        WHERE traver_days = #{traver_days} AND supplier_id = #{suppliper_id} AND city_id=#{cityname}
+        AND ProductDT_productmsg.id = ProductDT_product_city.product_id
     </select>
 
     <select id="getProductListByDaysAndType" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
         SELECT
-        id,
+        ProductDT_productmsg.id,
         name,
         traver_days,
         product_type,
@@ -181,14 +197,16 @@
         sell_num,
         comments_num,
         product_grade,
-        supplier_id
-        FROM ProductDT_productmsg
-        WHERE traver_days = #{traver_days} AND product_type = #{product_type}
+        supplier_id,
+        ProductDT_product_city.product_price
+        FROM ProductDT_productmsg,ProductDT_product_city
+        WHERE traver_days = #{traver_days} AND product_type = #{product_type} AND city_id=#{cityname}
+        AND ProductDT_productmsg.id = ProductDT_product_city.product_id
     </select>
 
     <select id="getProductListByTypeAndStore" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
         SELECT
-        id,
+        ProductDT_productmsg.id,
         name,
         traver_days,
         product_type,
@@ -198,13 +216,16 @@
         sell_num,
         comments_num,
         product_grade,
-        supplier_id
-        FROM ProductDT_productmsg
-        WHERE product_type = #{product_type} AND supplier_id = #{suppliper_id}
+        supplier_id,
+        ProductDT_product_city.product_price
+        FROM ProductDT_productmsg,ProductDT_product_city
+        WHERE product_type = #{product_type} AND supplier_id = #{suppliper_id} AND city_id=#{cityname}
+        AND ProductDT_productmsg.id = ProductDT_product_city.product_id
     </select>
 
-    <!--通过城市名称获得产品列表-->
-    <select id="getProductListByCityName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    <!--通过城市名称获得所有的供应产品列表-->
+    <select id="getProductListByCityName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
         SELECT
           ProductDT_productmsg.id,
           ProductDT_productmsg.name,
@@ -216,7 +237,8 @@
           ProductDT_productmsg.sell_num,
           ProductDT_productmsg.comments_num,
           ProductDT_productmsg.product_grade,
-          ProductDT_productmsg.supplier_id
+          ProductDT_productmsg.supplier_id,
+          ProductDT_product_city.product_price
           FROM  carefree.ProductDT_product_city , carefree.ProductDT_productmsg
           WHERE ProductDT_product_city.city_id = #{cityname}
 			AND ProductDT_productmsg.id = ProductDT_product_city.product_id
