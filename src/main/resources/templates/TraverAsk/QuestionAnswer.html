@@ -10,48 +10,6 @@
             type="text/javascript" crossorigin="anonymous">
 
     </script>
-
-    <!--这里实现搜索AJAX-->
-    <script>
-        function searchAskList() {
-            var xmlhttp = null;
-            var keyword = document.getElementsByName("keyword");
-            //判断浏览器类型，创建 XMLHttpRequest 对象
-
-            if (window.XMLHttpRequest)
-            {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            }
-            else
-            {// code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-
-            /**
-             xmlhttp.open("GET","test1.txt",true); method：请求的类型；GET 或 POST
-             url：文件在服务器上的位置
-             async：true（异步）或 false（同步）
-
-             xmlhttp.send();            string：仅用于 POST 请求
-             **/
-            // xmlhttp.onreadystatechange() = function () {
-            //     if(xmlhttp.status==200 && xmlhttp.readyState==4){
-            //         document.getElementById("").innerText = xmlhttp.responseText;
-            //     }
-            // }
-            xmlhttp.open("GET","http://localhost:8080/TraverAsk/searchAskList?keyword="+ keyword[0].value,true);
-            xmlhttp.send();
-
-        }
-        <!-- 回调函数
-            function doResult() {
-            if(xmlhttp.readyState==4 && xmlhttp.status==200){
-                document.getElementById("keyword") = xmlhttp.responseText;
-            }
-        }
-        -->
-    </script>
-
 </head>
 <body>
 <!--================ 导航栏区域 =================-->
@@ -70,27 +28,29 @@
                             <a class="drop-hd" th:href="@{/account/ViewMyTraverAnswers}" target="_blank"><i></i>我的问答</a>
                         </div>
                     </div>
-                     <div class="search-box ">
+                    <div class="search-box ">
                         <div class="search-panel" data-cs-t="wenda">
-                            <div class="clearfix _j_suggest_hd" >
-                                 <!--
+                            <div class="clearfix _j_suggest_hd">
+                                <!--
+                                   <div class="sp-input" style="height: auto!important;">
+                                       <input type="text" id="_j_wenda_seach_input" name="keyword" value="" placeholder="提问前请先搜索">
+                                   </div>
+                                   <input  type="button" value="" id="_j_wenda_seach_button" class="sp-button" data-mddid="0" onclick="searchAskList()">
+                                -->
+                                <form th:action="@{/TraverAsk/searchAskList}">
                                     <div class="sp-input" style="height: auto!important;">
-                                        <input type="text" id="_j_wenda_seach_input" name="keyword" value="" placeholder="提问前请先搜索">
+                                        <input type="text" id="_j_wenda_seach_input" name="keyword" value=""
+                                               placeholder="提问前请先搜索">
                                     </div>
-                                    <input  type="button" value="" id="_j_wenda_seach_button" class="sp-button" data-mddid="0" onclick="searchAskList()">
-                                 -->
-                                 <form th:action="@{/TraverAsk/searchAskList}">
-                                    <div class="sp-input" style="height: auto!important;">
-                                        <input type="text" id="_j_wenda_seach_input" name="keyword" value="" placeholder="提问前请先搜索">
-                                    </div>
-                                    <input  type="submit" value="" id="_j_wenda_seach_button" class="sp-button" data-mddid="0">
+                                    <input type="submit" value="" id="_j_wenda_seach_button" class="sp-button"
+                                           data-mddid="0">
                                 </form>
-                        </div>
-                        <div class="bd _j_suggest_box hide">
+                            </div>
+                            <div class="bd _j_suggest_box hide">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
                 <div class="newcate-wrap _j_qa_list">
                     <div class="hd">
                         <ul class="cate-tab">
@@ -115,7 +75,8 @@
                             <li class="item clearfix " data-qid="12980256">
                                 <!--问题标题-->
                                 <div class="title">
-                                    <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}" target="_blank" th:text="${userAsk.title}">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
+                                    <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}"
+                                       target="_blank" th:text="${userAsk.title}">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
                                 </div>
                                 <!--问题内容-->
                                 <div class="container">
@@ -126,11 +87,13 @@
                                     </div>
                                     <!--用户昵称-->
                                     <div class="user-info">
-                                        <a class="name _j_filter_click" target="_blank" th:text="${userAsk.user_id}">张恺庭</a>
+                                        <a class="name _j_filter_click" target="_blank"
+                                           th:text="${userAsk.user_id}">张恺庭</a>
                                     </div>
                                     <!-- 问题描述 -->
                                     <div class="desc clearfix">
-                                        <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}" target="_blank" style="color: #666;">
+                                        <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}"
+                                           target="_blank" style="color: #666;">
                                             <p th:text="${userAsk.ask_content}">
                                                 明天开车去长沙世界之窗，请问世界之窗有免费停车的地方吗？能大包小包提进去吗？因为要带吃的和泳衣。然后想问下水上乐园玩完能有地方洗澡吗？玩每个项目前，包包有地方寄存吗？寄存要钱吗？问题有点多，麻烦各位了🌸🌸</p>
                                         </a>
@@ -138,7 +101,8 @@
                                     <!--相关操作-->
                                     <div class="operate">
                                         <!--回答-->
-                                        <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}" target="_blank" style="text-decoration: none;">
+                                        <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}"
+                                           target="_blank" style="text-decoration: none;">
                                             <span class="reply">回答 (2)</span>
                                         </a>
                                         <!--发布时间-->
@@ -160,7 +124,6 @@
                     </div>
                 </div>
             </div>
-
             <!-------提问模块以及显示当前参加问题的人数------->
             <div class="col-side">
 
@@ -169,7 +132,8 @@
                 </div>
 
                 <div class="i_num">
-                    共<span id="q_total">3425001</span>问题<span id="u_total">8029366</span>人参与
+                    共<span id="q_total" th:text="${session.askSum}"></span>问题<span id="u_total"
+                                                                                   th:text="${session.answerSum}"></span>人参与
                 </div>
             </div>
         </div>

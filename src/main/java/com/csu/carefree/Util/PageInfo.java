@@ -82,11 +82,17 @@ public class PageInfo <E> {
         currentPage = pageNum;
         int index = pageNum-1;
 
-        if (list.size() / pageSize == 0 || list.size() / pageSize != 0 && pageNum != maxPage )
-            pageData =  list.subList(index * pageSize , index * pageSize + pageSize);
-        else
-        if ( pageNum == maxPage )
-            pageData = list.subList(index * pageSize , index * pageSize + list.size() % pageSize);
+        if (list.size() / pageSize == 0 || list.size() / pageSize != 0 && pageNum != maxPage ){
+            if (list.size() <= pageSize)
+                pageData = list;
+            else
+                pageData =  list.subList(index * pageSize , index * pageSize + pageSize);
+        }
+        else if ( pageNum == maxPage )
+            if (list.size() <= pageSize)
+                pageData = list;
+            else
+                pageData = list.subList(index * pageSize , index * pageSize + list.size() % pageSize);
 
         isFirstPage = pageNum == 1;
         isLastPage = pageNum == maxPage;

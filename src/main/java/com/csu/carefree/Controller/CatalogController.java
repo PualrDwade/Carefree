@@ -9,6 +9,7 @@ import com.csu.carefree.Model.ProductDT.*;
 import com.csu.carefree.Model.TraverAsk.TraverNote;
 import com.csu.carefree.Util.CatalogUtils;
 import com.csu.carefree.Util.LocationUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,8 @@ import java.util.Map;
 
 @Controller
 public class CatalogController {
+
+
     /**
      * 实现产品推荐展示模块的业务逻辑
      * 实现与酒店有关的业务逻辑
@@ -177,8 +180,9 @@ public class CatalogController {
 
 
     @GetMapping("/Catalog/HotProductList")
-    public String HotProductList(HttpServletRequest httpServletRequest, HttpSession session, Model model) {
+    public String HotProductList(@RequestParam(defaultValue = "1") Integer pageNum, HttpServletRequest httpServletRequest, HttpSession session, Model model) {
         //首先从session中得到
+        System.out.println(pageNum);
         ProductForm productForm = (ProductForm) session.getAttribute("productForm");
         //从session中取出当前位置
         String destination = (String) session.getAttribute("location");
@@ -225,9 +229,8 @@ public class CatalogController {
         session.setAttribute("productForm", productForm);
         System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
         PageInfo<ProductMsg> productMsgPageInfo = new PageInfo<>();
-        productMsgPageInfo.setPageData(productMsgList,PRODUCTPAGESIZE,pageNum);
-        model.addAttribute("productMsgPageInfo",productMsgPageInfo);
-        model.addAttribute("productMsgList", productMsgList);
+        productMsgPageInfo.setPageData(productMsgList, PRODUCTPAGESIZE, pageNum);
+        model.addAttribute("productMsgPageInfo", productMsgPageInfo);
         return "ProductDT/Product";
     }
 
@@ -262,9 +265,8 @@ public class CatalogController {
         }
         /****分页模块***/
         PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
-        hotelMsgPageInfo.setPageData(hotelMsgList,HOTELPAGESIZE,pageNum);
+        hotelMsgPageInfo.setPageData(hotelMsgList, HOTELPAGESIZE, pageNum);
         model.addAttribute("hotelMsgPageInfo", hotelMsgPageInfo);
-        model.addAttribute("hotelMsgList", hotelMsgList);
         return "ProductDT/Hotel";
     }
     /****************************攻略推荐模块**************** ******************/

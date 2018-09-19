@@ -4,64 +4,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>新游记</title>
     <meta name="renderer" content="webkit"/>
-
-
     <link href="http://css.mafengwo.net/css/cv/css+mfw-ask+detail_v3:css+mfw-ask+img_pop:css+mfw-ask+detail_answer_foldup:css+mfw-ask+upload_pics^al0^1533612615.css"
           rel="stylesheet" type="text/css"/>
-
     <link href="http://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css"
           rel="stylesheet" type="text/css"/>
 
-
     <link href="http://css.mafengwo.net/css/cv/css+mfweditor+mfweditor:css+post+addpost:css+jquery-ui-1.9.1.custom.min^ZFQ^1493174418.css"
           rel="stylesheet" type="text/css"/>
-
-
     <script language="javascript"
             src="http://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js"
             type="text/javascript" crossorigin="anonymous"></script>
-
-    <!--这里实现发送HTML AJAX-->
-    <script>
-        function searchAskList() {
-            var xmlhttp = null;
-            var keyword = document.getElementsByName("keyword");
-            //判断浏览器类型，创建 XMLHttpRequest 对象
-
-            if (window.XMLHttpRequest)
-            {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            }
-            else
-            {// code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-
-            /**
-             xmlhttp.open("GET","test1.txt",true); method：请求的类型；GET 或 POST
-             url：文件在服务器上的位置
-             async：true（异步）或 false（同步）
-
-             xmlhttp.send();            string：仅用于 POST 请求
-             **/
-            // xmlhttp.onreadystatechange() = function () {
-            //     if(xmlhttp.status==200 && xmlhttp.readyState==4){
-            //         document.getElementById("").innerText = xmlhttp.responseText;
-            //     }
-            // }
-            xmlhttp.open("GET","http://localhost:8080/TraverAsk/searchAskList?keyword="+ keyword[0].value,true);
-            xmlhttp.send();
-
-        }
-        <!-- 回调函数
-            function doResult() {
-            if(xmlhttp.readyState==4 && xmlhttp.status==200){
-                document.getElementById("keyword") = xmlhttp.responseText;
-            }
-        }
-        -->
-    </script>
-
 </head>
 <body>
 <!--================Header Area =================-->
@@ -75,22 +27,13 @@
         </div>
         <div class="ap-wrap">
             <div class="ap-main">
-                <form class="forms" id="infoform" th:action="@{/TraverAsk/createNote}" th:method="post"
-                      enctype="multipart/form-data" target="postinfo" name="fileForm">
+                <form class="forms" id="infoform" th:action="@{/TraverAsk/createNote}" th:method="post" name="fileForm">
                     <dl class="title cf">
                         <dd>
-                            <!--<span class="char-limit hide _j_char_limit">可输入<strong>48</strong>字</span>-->
                             <input id="title" name="title" type="text" maxlength="48" placeholder="请输入游记标题" value="">
-                            <!--<input id="type" name="type" type="hidden">-->
-                            <!--<input id="cid" name="cid" type="hidden">-->
-                            <!--<input id="rid" name="rid" type="hidden" value="">-->
-                            <!--<input id="sfrom" name="sfrom" type="hidden" value="">-->
-                            <!--<input type="hidden" name="target" value="iframe">-->
                         </dd>
                     </dl>
-
                     <div class="answer-wrap">
-
                         <div class="answer-add clearfix">
                             <a name="answer"></a>
                             <div class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  ">
@@ -98,7 +41,8 @@
                                     <div class="question-title">新游记</div>
                                     <div class="answer-editor">
                                         <div class="toolbar-out">
-                                            <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar" style="height: auto; width: 703px;">
+                                            <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar"
+                                                 style="height: auto; width: 703px;">
                                                 <div class="item _js_bold"><a class="btn-bold" role="button"></a>
                                                     <div class="tooltip"><span>加粗</span></div>
                                                 </div>
@@ -128,11 +72,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <textarea class="" id="" name = "noteContent"  style="width: 703px ;height: 300px">
+                                        <textarea class="" id="" name="noteContent" style="width: 703px ;height: 300px">
                                         </textarea>
                                     </div>
                                     <div class="aa-ft">
-                                        <input   type="submit" value="发表游记">
+                                        <input type="submit" value="发表游记">
                                     </div>
                                 </div>
                             </div>
@@ -141,10 +85,8 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
-
 </div>
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>
@@ -282,21 +224,6 @@
         opacity: 0;
     }
 </style>
-
-<div class="mfw-toolbar" id="_j_mfwtoolbar">
-    <div class="toolbar-item-top">
-        <a role="button" class="btn _j_gotop">
-            <i class="icon_top"></i>
-            <em>返回顶部</em>
-        </a>
-    </div>
-    <div class="toolbar-item-down">
-        <a role="button" class="btn _j_gobottom">
-            <i class="icon_down"></i>
-            <em>页面底部</em>
-        </a>
-    </div>
-</div>
 <!--加载静态资源-->
 <link href="http://css.mafengwo.net/mobile/css/omc/coupon-pop/coupon-pop.css?1526627473" rel="stylesheet"
       type="text/css"/>
@@ -304,10 +231,5 @@
         type="text/javascript" crossorigin="anonymous"></script>
 <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
 <link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
-<script language="javascript" type="text/javascript">
-    if (typeof M !== "undefined" && typeof M.loadResource === "function") {
-        M.loadResource("http://js.mafengwo.net/js/cv/js+pageletcommon+pageHeadUserInfoWWWDark:js+M+module+dialog+Layer:js+M+module+dialog+DialogBase:js+M+module+dialog+Dialog:js+M+module+dialog+alert:js+M+module+dialog+confirm:js+M+module+FrequencyVerifyControl:js+M+module+FrequencyAppVerify:js+jquery.scrollTo:js+qa+videoPlay:js+M+module+Storage:js+qa+wysiwyg:js+qa+wysiwyg-editor:js+qa+qa_module+selection:js+plupload:js+module+uploader+Pluploader:js+jquery.tmpl:js+plugins+jquery.rotate:js+qa+QaPicDialog:js+qa+QaPicUploader:js+qa+qa_module+PasteInEditor:js+qa+qa_module+FilterHtml:js+qiniu+qiniuFileUpload:js+M+module+TopTip:js+qa+VideoUploadPop:js+M+module+InputListener:js+M+module+SuggestionXHR:js+M+module+DropList:js+M+module+Suggestion:js+qa+initPlaceSuggestion:js+qa+QaRichTextEditor:js+mfwCountdown:js+qa+QaDetailV1:js+mSnsShare:js+qa+DoShare:js+qa+QaShare:js+M+module+Pagination:js+qa+QaCaret:js+qa+QaComments:js+qa+QaSeach:js+M+module+Toggle:js+qa+InviteUserAnswer:js+jquery.lazyload:js+jquery.upnum:js+M+module+ScrollObserver:js+qa+ControllerDetailAnswerList:js+qa+ARecommentQu:js+M+module+PageAdmin:js+M+module+Cookie:js+M+module+ResourceKeeper:js+jquery.jgrowl.min:js+AMessage:js+M+module+FrequencySystemVerify:js+ALogin:js+M+module+QRCode:js+AToolbar:js+ACnzzGaLog:js+ARecruit:js+ALazyLoad^YldWRw^1534732433.js");
-    }
-</script>
 </body>
 </html>

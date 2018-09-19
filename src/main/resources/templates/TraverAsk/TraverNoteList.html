@@ -30,8 +30,8 @@
                             <div class="span12">
                                 <div class="hero-unit" th:each="traverNote : ${travelNotePageInfo.getPageData()}">
                                     <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId = ${traverNote.id})}">
-                                        <h1 th:text="${traverNote.title}"
-                                            style="width:15em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color: #F3C300"></h1>
+                                        <h3 th:text="${traverNote.title}"
+                                            style="width:15em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color: #F3C300"></h3>
                                     </a>
                                     <p th:text="${traverNote.note_content}"></p>
                                     <p>
@@ -44,8 +44,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <center>
+                    <center th:if="${travelNotePageInfo.getPageData().size() != 0}">
                         <nav>
                             <ul class="pagination">
                                 <li>
@@ -141,52 +140,15 @@
                             <div class="br"></div>
                         </aside>
                     </div>
-
                     <br><br><br><br><br>
                     <aside class="single_sidebar_widget ads_widget">
                         <a href="#">
                             <img class="img-fluid" src="../../static/image/blog/add.jpg" alt=""></a>
                         <div class="br"></div>
                     </aside>
-                    <!--
-
-                    <aside class="single_sidebar_widget post_category_widget">
-                        <h4 class="widget_title">游记分类</h4>
-                        <ul class="list_style cat-list">
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>美食</p>
-                                    <p>37</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>休闲</p>
-                                    <p>24</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>城市</p>
-                                    <p>59</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>野外</p>
-                                    <p>29</p>
-                                </a>
-                            </li>
-
-                        </ul>
-                        <div class="br"></div>
-                    </aside>
-
-                    -->
                 </div>
             </div>
         </div>
-
     </section>
     <!--================Blog Area =================-->
 </div>
