@@ -43,6 +43,7 @@ public class CatalogController {
         model.addAttribute("HotelList");
         return "Hotel";
     }
+
     //请求主界面
     @GetMapping("/")
     public String viewIndex(HttpSession session, Model model) {
@@ -183,10 +184,9 @@ public class CatalogController {
     }
 
 
-  
     //进入热门产品的界面控制器url
     @GetMapping("/Catalog/HotProductList")
-    public String HotProductList(HttpServletRequest httpServletRequest, HttpSession session, Model model,@RequestParam(defaultValue = "1") Integer pageNum) {
+    public String HotProductList(HttpServletRequest httpServletRequest, HttpSession session, Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
         String traverDays = "0";
         String supplierId = "0";
         String productType = "0";
@@ -194,7 +194,7 @@ public class CatalogController {
         String[] checkedDaysValues = httpServletRequest.getParameterValues("days");
         String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
         String[] checkedTypeValues = httpServletRequest.getParameterValues("type");
-        if(checkedDaysValues != null && checkedStoreValues != null && checkedTypeValues != null) {
+        if (checkedDaysValues != null && checkedStoreValues != null && checkedTypeValues != null) {
             System.out.println(checkedDaysValues[0]);
             System.out.println(checkedStoreValues[0]);
             System.out.println(checkedTypeValues[0]);
@@ -203,32 +203,31 @@ public class CatalogController {
             productType = checkedTypeValues[0];
         }
         List<ProductMsg> productMsgList = new ArrayList<ProductMsg>();
-        if(traverDays.equals("0") && supplierId.equals("0") && productType.equals("0")) {
+        if (traverDays.equals("0") && supplierId.equals("0") && productType.equals("0")) {
             productMsgList = catalogService.getProductListByCityName(destination);
         }
-        if(!traverDays.equals("0") && supplierId.equals("0") && productType.equals("0")) {
+        if (!traverDays.equals("0") && supplierId.equals("0") && productType.equals("0")) {
             productMsgList = catalogService.getProductListByTraverdays(traverDays);
         }
-        if(traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
+        if (traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
             productMsgList = catalogService.getProductListBySupplierId(supplierId);
         }
-        if(traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
+        if (traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
             productMsgList = catalogService.getProductListByProductType(productType);
         }
-        if(!traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
-            productMsgList = catalogService.getProductListByDaysAndStore(traverDays,supplierId);
+        if (!traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
+            productMsgList = catalogService.getProductListByDaysAndStore(traverDays, supplierId);
         }
-        if(!traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
-            productMsgList = catalogService.getProductListByDaysAndType(traverDays,productType);
+        if (!traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
+            productMsgList = catalogService.getProductListByDaysAndType(traverDays, productType);
         }
-        if(traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
-            productMsgList = catalogService.getProductListByTypeAndStore(productType,supplierId);
+        if (traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
+            productMsgList = catalogService.getProductListByTypeAndStore(productType, supplierId);
         }
-        if(!traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
-            productMsgList = catalogService.getProductListByThree(traverDays,productType,supplierId);
+        if (!traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
+            productMsgList = catalogService.getProductListByThree(traverDays, productType, supplierId);
         }
         /*****分页模块的实现*****/
-        String destination = (String) session.getAttribute("location");
         System.out.println(pageNum + "    " + PRODUCTPAGESIZE);
         //创建pageInfo的对象
         PageInfo<ProductMsg> pageInfo = new PageInfo<>();
@@ -265,7 +264,7 @@ public class CatalogController {
         model.addAttribute("pageInfo", pageInfo);
         System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
         System.out.println("界面内容大小" + pageInfo.getPageData().size() + "条");
-        catalogUtils.setDepartCityPrice(catalogService,destination,productMsgList);
+        catalogUtils.setDepartCityPrice(catalogService, destination, productMsgList);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
@@ -273,14 +272,14 @@ public class CatalogController {
 
     // 进入热门酒店的控制器url
     @GetMapping("/Catalog/HotHotelList")
-    public String HotHotelListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model, @RequestParam(defaultValue = "1") Integer pageNum,) {
+    public String HotHotelListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
         String supplierId = "0";
         String price = "0";
         String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
         String[] checkedPriceValues = httpServletRequest.getParameterValues("price");
         String destination = session.getAttribute("location").toString();
 
-        if(checkedStoreValues != null && checkedPriceValues != null) {
+        if (checkedStoreValues != null && checkedPriceValues != null) {
             System.out.println(checkedStoreValues[0]);
             System.out.println(checkedPriceValues[0]);
             supplierId = checkedStoreValues[0];
@@ -303,11 +302,11 @@ public class CatalogController {
             catalogUtils.setHotelListByPrices(hotelMsgList, price);
         }
         /****分页模块***/
-        PageInfo<HotelMsg> hotelPageInfo = new PageInfo<>();
+        PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
         Map<Integer, List<HotelMsg>> hotelMap = new HashMap<>();
 
         hotelMsgPageInfo.setTotal(hotelMsgList.size());
-        System.out.println("页面大小" + hotelPageInfo.getPageSize());
+        System.out.println("页面大小" + hotelMsgPageInfo.getPageSize());
         System.out.println("list大小" + hotelMsgList.size());
         System.out.println("最多的界面数" + hotelMsgPageInfo.getMaxPage());
         //设置当前页码
