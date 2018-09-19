@@ -208,15 +208,14 @@ public class CatalogController {
         pageInfo.setCurrentPage(pageNum);
 
         System.out.println(pageInfo.getMaxPage());
-        if (productMsgList.size()%8==0){
+        if (productMsgList.size() % 8 == 0) {
             for (int i = 0; i < pageInfo.getMaxPage(); ++i) {
                 map.put(i + 1, productMsgList.subList(i * PRODUCTPAGESIZE, i * PRODUCTPAGESIZE + PRODUCTPAGESIZE));
             }
-        }else
-        {
+        } else {
             for (int i = 0; i < pageInfo.getMaxPage(); ++i) {
-                if (i == pageInfo.getMaxPage()-1){
-                    map.put(i + 1, productMsgList.subList(i * PRODUCTPAGESIZE, i * PRODUCTPAGESIZE + productMsgList.size()%8));
+                if (i == pageInfo.getMaxPage() - 1) {
+                    map.put(i + 1, productMsgList.subList(i * PRODUCTPAGESIZE, i * PRODUCTPAGESIZE + productMsgList.size() % 8));
                     break;
                 }
                 map.put(i + 1, productMsgList.subList(i * PRODUCTPAGESIZE, i * PRODUCTPAGESIZE + PRODUCTPAGESIZE));
@@ -246,44 +245,6 @@ public class CatalogController {
     //进入热门产品的界面控制器url
     @PostMapping("/Catalog/HotProductListByConditions")
     public String HotProductListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model) {
-        String[] checkedDaysValues = httpServletRequest.getParameterValues("days");
-        String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
-        String[] checkedTypeValues = httpServletRequest.getParameterValues("type");
-        System.out.println(checkedDaysValues[0]);
-        System.out.println(checkedStoreValues[0]);
-        System.out.println(checkedTypeValues[0]);
-        String traverDays = checkedDaysValues[0];
-        String supplierId = checkedStoreValues[0];
-        String productType = checkedTypeValues[0];
-        List<ProductMsg> productMsgList = new ArrayList<ProductMsg>();
-        if (checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
-            productMsgList = catalogService.getProductList();
-        }
-        if (!checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
-            productMsgList = catalogService.getProductListByTraverdays(traverDays);
-        }
-        if (checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
-            productMsgList = catalogService.getProductListBySupplierId(supplierId);
-        }
-        if (checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
-            productMsgList = catalogService.getProductListByProductType(productType);
-        }
-        if (!checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && checkedTypeValues[0].equals("0")) {
-            productMsgList = catalogService.getProductListByDaysAndStore(traverDays, supplierId);
-        }
-        if (!checkedDaysValues[0].equals("0") && checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
-            productMsgList = catalogService.getProductListByDaysAndType(traverDays, productType);
-        }
-        if (checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
-            productMsgList = catalogService.getProductListByTypeAndStore(productType, supplierId);
-        }
-        if (!checkedDaysValues[0].equals("0") && !checkedStoreValues[0].equals("0") && !checkedTypeValues[0].equals("0")) {
-            productMsgList = catalogService.getProductListByThree(traverDays, productType, supplierId);
-        }
-        System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
-        String destination = session.getAttribute("location").toString();
-        catalogUtils.setDepartCityPrice(catalogService, destination, productMsgList);
-        model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
 
@@ -309,23 +270,22 @@ public class CatalogController {
         Map<Integer, List<HotelMsg>> hotelMap = new HashMap<>();
 
         hotelMsgPageInfo.setTotal(hotelMsgList.size());
-        System.out.println("页面大小"+hotelPageInfo.getPageSize());
-        System.out.println("list大小"+hotelMsgList.size());
-        System.out.println("最多的界面数"+hotelMsgPageInfo.getMaxPage());
+        System.out.println("页面大小" + hotelPageInfo.getPageSize());
+        System.out.println("list大小" + hotelMsgList.size());
+        System.out.println("最多的界面数" + hotelMsgPageInfo.getMaxPage());
         //设置当前页码
         hotelMsgPageInfo.setCurrentPage(pageNum);
-        if (hotelMsgList.size() / HOTELPAGESIZE == 0){
-            for (int i=0;i<hotelMsgPageInfo.getMaxPage();i++){
-                hotelMap.put(i+1,hotelMsgList.subList(i*HOTELPAGESIZE, i*HOTELPAGESIZE+HOTELPAGESIZE));
+        if (hotelMsgList.size() / HOTELPAGESIZE == 0) {
+            for (int i = 0; i < hotelMsgPageInfo.getMaxPage(); i++) {
+                hotelMap.put(i + 1, hotelMsgList.subList(i * HOTELPAGESIZE, i * HOTELPAGESIZE + HOTELPAGESIZE));
             }
-        }
-        else{
-            for (int i=0; i< hotelMsgPageInfo.getMaxPage();i++){
-                if (i == hotelMsgPageInfo.getMaxPage()-1){
-                    hotelMap.put(i+1, hotelMsgList.subList(i*HOTELPAGESIZE, i*HOTELPAGESIZE+hotelMsgList.size()%HOTELPAGESIZE));
+        } else {
+            for (int i = 0; i < hotelMsgPageInfo.getMaxPage(); i++) {
+                if (i == hotelMsgPageInfo.getMaxPage() - 1) {
+                    hotelMap.put(i + 1, hotelMsgList.subList(i * HOTELPAGESIZE, i * HOTELPAGESIZE + hotelMsgList.size() % HOTELPAGESIZE));
                     break;
                 }
-                hotelMap.put(i+1,hotelMsgList.subList(i*HOTELPAGESIZE, i*HOTELPAGESIZE+HOTELPAGESIZE));
+                hotelMap.put(i + 1, hotelMsgList.subList(i * HOTELPAGESIZE, i * HOTELPAGESIZE + HOTELPAGESIZE));
             }
         }
 
