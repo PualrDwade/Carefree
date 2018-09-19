@@ -259,18 +259,18 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public List<ProductMsg> getProductListByTraverdays(String traverDays) {
-        return productMapper.getProductListByTraverdays(traverDays);
+    public List<ProductMsg> getProductListByTraverdays(String traverDays, String cityname) {
+        return productMapper.getProductListByTraverdays(traverDays, cityname);
     }
 
     @Override
-    public List<ProductMsg> getProductListByProductType(String productType) {
-        return productMapper.getProductListByProductType(productType);
+    public List<ProductMsg> getProductListByProductType(String productType, String cityname) {
+        return productMapper.getProductListByProductType(productType, cityname);
     }
 
     @Override
-    public List<ProductMsg> getProductListBySupplierId(String supplierId) {
-        return productMapper.getProductListBySupplierId(supplierId);
+    public List<ProductMsg> getProductListBySupplierId(String supplierId, String cityname) {
+        return productMapper.getProductListBySupplierId(supplierId, cityname);
     }
 
     @Override
@@ -279,24 +279,24 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId) {
-        return productMapper.getProductListByThree(traverDays, productType, supplierId);
+    public List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId, String cityname) {
+        return productMapper.getProductListByThree(traverDays, productType, supplierId, cityname);
     }
 
 
     @Override
-    public List<ProductMsg> getProductListByDaysAndStore(String traverDays, String supplierId) {
-        return productMapper.getProductListByDaysAndStore(traverDays, supplierId);
+    public List<ProductMsg> getProductListByDaysAndStore(String traverDays, String supplierId, String cityname) {
+        return productMapper.getProductListByDaysAndStore(traverDays, supplierId, cityname);
     }
 
     @Override
-    public List<ProductMsg> getProductListByDaysAndType(String traverDays, String productType) {
-        return productMapper.getProductListByDaysAndType(traverDays, productType);
+    public List<ProductMsg> getProductListByDaysAndType(String traverDays, String productType, String cityname) {
+        return productMapper.getProductListByDaysAndType(traverDays, productType, cityname);
     }
 
     @Override
-    public List<ProductMsg> getProductListByTypeAndStore(String productType, String supplierId) {
-        return productMapper.getProductListByTypeAndStore(productType, supplierId);
+    public List<ProductMsg> getProductListByTypeAndStore(String productType, String supplierId, String cityname) {
+        return productMapper.getProductListByTypeAndStore(productType, supplierId, cityname);
     }
 
     @Override

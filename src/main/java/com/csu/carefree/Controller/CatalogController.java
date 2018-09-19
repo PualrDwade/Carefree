@@ -189,17 +189,20 @@ public class CatalogController {
         String traverDays = "0";
         String supplierId = "0";
         String productType = "0";
+        //从session中取出当前位置
         String destination = session.getAttribute("location").toString();
         String[] checkedDaysValues = httpServletRequest.getParameterValues("days");
         String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
         String[] checkedTypeValues = httpServletRequest.getParameterValues("type");
         if (checkedDaysValues != null && checkedStoreValues != null && checkedTypeValues != null) {
-            System.out.println(checkedDaysValues[0]);
-            System.out.println(checkedStoreValues[0]);
-            System.out.println(checkedTypeValues[0]);
+            //设置默认为第一个选项
             traverDays = checkedDaysValues[0];
             supplierId = checkedStoreValues[0];
             productType = checkedTypeValues[0];
+            //存入session中
+            session.setAttribute("traverDays", traverDays);
+            session.setAttribute("supplierId", supplierId);
+            session.setAttribute("productType", productType);
         }
 
         List<ProductMsg> productMsgList = new ArrayList<ProductMsg>();
@@ -207,35 +210,27 @@ public class CatalogController {
             productMsgList = catalogService.getProductListByCityName(destination);
         }
         if (!traverDays.equals("0") && supplierId.equals("0") && productType.equals("0")) {
-            productMsgList = catalogService.getProductListByTraverdays(traverDays);
+            productMsgList = catalogService.getProductListByTraverdays(traverDays, destination);
         }
         if (traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
-            productMsgList = catalogService.getProductListBySupplierId(supplierId);
+            productMsgList = catalogService.getProductListBySupplierId(supplierId, destination);
         }
         if (traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
-            productMsgList = catalogService.getProductListByProductType(productType);
+            productMsgList = catalogService.getProductListByProductType(productType, destination);
         }
         if (!traverDays.equals("0") && !supplierId.equals("0") && productType.equals("0")) {
-            productMsgList = catalogService.getProductListByDaysAndStore(traverDays, supplierId);
+            productMsgList = catalogService.getProductListByDaysAndStore(traverDays, supplierId, destination);
         }
         if (!traverDays.equals("0") && supplierId.equals("0") && !productType.equals("0")) {
-            productMsgList = catalogService.getProductListByDaysAndType(traverDays, productType);
+            productMsgList = catalogService.getProductListByDaysAndType(traverDays, productType, destination);
         }
         if (traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
-            productMsgList = catalogService.getProductListByTypeAndStore(productType, supplierId);
+            productMsgList = catalogService.getProductListByTypeAndStore(productType, supplierId, destination);
         }
         if (!traverDays.equals("0") && !supplierId.equals("0") && !productType.equals("0")) {
-            productMsgList = catalogService.getProductListByThree(traverDays, productType, supplierId);
+            productMsgList = catalogService.getProductListByThree(traverDays, productType, supplierId, destination);
         }
-
         System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
-//        System.out.println("开始计算价格");
-//        Map<ProductMsg, String> map = new HashMap<>();
-//        for (ProductMsg productMsg : productMsgList) {
-//            map.put(productMsg, catalogService.getDepartCityPrice(productMsg.getId(), destination).getProduct_price());
-//        }
-//        System.out.println("计算完成");
-//        model.addAttribute("product_price_map", map);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }
