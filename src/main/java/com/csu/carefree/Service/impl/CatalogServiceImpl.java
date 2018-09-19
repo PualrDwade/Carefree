@@ -2,6 +2,7 @@ package com.csu.carefree.Service.impl;
 
 import com.csu.carefree.Model.ProductDT.*;
 import com.csu.carefree.Model.TraverAsk.TraverNote;
+import com.csu.carefree.Model.TraverAsk.UserAnswer;
 import com.csu.carefree.Model.TraverMsg.CityMsg;
 import com.csu.carefree.Model.TraverMsg.ProvinceMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
@@ -10,17 +11,13 @@ import com.csu.carefree.Persistence.*;
 import com.csu.carefree.Service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-/*
- *   Great by WLX
- */
 @Service
+@Transactional
 public class CatalogServiceImpl implements CatalogService {
     @Autowired
     private HotelMsgMapper hotelMsgMapper;
@@ -143,6 +140,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     }
 
+
     @Override
     public void sortHotelList(List<HotelMsg> sortHotelList) {
         for (HotelMsg hotel : sortHotelList) {
@@ -188,25 +186,48 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public ArrayList<HotelMsg> getHotHotelList() {
-        List<HotelMsg> hotelList = this.getHotelMsgList();
-        ArrayList<HotelMsg> hotHotelList = new ArrayList<>();
-        hotHotelList.add(hotelList.get(0));
-        hotHotelList.add(hotelList.get(1));
-        hotHotelList.add(hotelList.get(2));
-        hotHotelList.add(hotelList.get(3));
-        return hotHotelList;
+    public ArrayList<HotelMsg> getHotHotelListByCityName(String cityName, int orderType) {
+        System.out.println(cityName);
+        List<HotelMsg> hotelList = hotelMsgMapper.getHotelListByDestination(cityName);
+        System.out.println("大小" + hotelList.size());
+        Collections.sort(hotelList, new Comparator<HotelMsg>() {
+            @Override
+            //重写比较方法,按照销给定指标进行排序
+            public int compare(HotelMsg o1, HotelMsg o2) {
+                //按照价格进行排序(推荐最便宜的酒店)
+                if (orderType == 1) {
+                    return Integer.compare(Integer.parseInt(o1.getHotel_price()), Integer.parseInt(o2.getHotel_price()));
+                }
+                //按照评分进行排序(推荐最好评的酒店)
+                else if (orderType == 2) {
+                    return Double.compare(Double.parseDouble(o2.getScore()), Double.parseDouble(o1.getScore()));
+                } else {
+                    return 1;
+                }
+            }
+        });
+        System.out.println("大小" + hotelList.size());
+        return (ArrayList<HotelMsg>) hotelList;
     }
 
     @Override
-    public ArrayList<TraverNote> getHotTraverNoteList() {
-        List<TraverNote> TraverNoteList = this.getTraverNoteList();
-        System.out.println("TraverNoteList包含个数：" + TraverNoteList.size());
-        ArrayList<TraverNote> hotTraverNoteList = new ArrayList<>();
-        hotTraverNoteList.add(TraverNoteList.get(0));
-        //hotTraverNoteList.add(TraverNoteList.get(1));
-        //hotTraverNoteList.add(TraverNoteList.get(2));
-        return hotTraverNoteList;
+    public ArrayList<TraverNote> getHotTraverNoteList(int traverNoteNum) {
+        List<TraverNote> traverNoteList = traverNoteMapper.getTraverNoteList();
+        traverNoteList.sort(Comparator.reverseOrder());
+
+        ArrayList<TraverNote> resultList = new ArrayList<>();
+
+        if (traverNoteNum < traverNoteList.size()) {
+            for (int i = 0; i < traverNoteNum; ++i) {
+                resultList.add(traverNoteList.get(i));
+            }
+        } else {
+            for (int i = 0; i < traverNoteList.size(); ++i) {
+                resultList.add(traverNoteList.get(i));
+            }
+        }
+
+        return resultList;
     }
 
     /*******************酒店信息**********/
@@ -231,6 +252,12 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
+    public List<HotelMsg> getHotelListByDestinationAndStore(String destination, String supplierId) {
+        return hotelMsgMapper.getHotelListByDestinationAndStore(destination, supplierId);
+    }
+
+    /*******************产品信息**********/
+    @Override
     public List<ProductMsg> getProductList() {
         return productMapper.getProductList();
     }
@@ -241,18 +268,23 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public List<ProductMsg> getProductListByTraverdays(String traverDays) {
-        return productMapper.getProductListByTraverdays(traverDays);
+    public List<ProductMsg> getProductListByCityName(String cityname) {
+        return productMapper.getProductListByCityName(cityname);
     }
 
     @Override
-    public List<ProductMsg> getProductListByProductType(String productType) {
-        return productMapper.getProductListByProductType(productType);
+    public List<ProductMsg> getProductListByTraverdays(String traverDays, String cityname) {
+        return productMapper.getProductListByTraverdays(traverDays, cityname);
     }
 
     @Override
-    public List<ProductMsg> getProductListBySupplierId(String supplierId) {
-        return productMapper.getProductListBySupplierId(supplierId);
+    public List<ProductMsg> getProductListByProductType(String productType, String cityname) {
+        return productMapper.getProductListByProductType(productType, cityname);
+    }
+
+    @Override
+    public List<ProductMsg> getProductListBySupplierId(String supplierId, String cityname) {
+        return productMapper.getProductListBySupplierId(supplierId, cityname);
     }
 
     @Override
@@ -261,23 +293,24 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId) {
-        return productMapper.getProductListByThree(traverDays, productType, supplierId);
+    public List<ProductMsg> getProductListByThree(String traverDays, String productType, String supplierId, String cityname) {
+        return productMapper.getProductListByThree(traverDays, productType, supplierId, cityname);
+    }
+
+
+    @Override
+    public List<ProductMsg> getProductListByDaysAndStore(String traverDays, String supplierId, String cityname) {
+        return productMapper.getProductListByDaysAndStore(traverDays, supplierId, cityname);
     }
 
     @Override
-    public List<ProductMsg> getProductListByDaysAndStore(String traverDays, String supplierId) {
-        return productMapper.getProductListByDaysAndStore(traverDays, supplierId);
+    public List<ProductMsg> getProductListByDaysAndType(String traverDays, String productType, String cityname) {
+        return productMapper.getProductListByDaysAndType(traverDays, productType, cityname);
     }
 
     @Override
-    public List<ProductMsg> getProductListByDaysAndType(String traverDays, String productType) {
-        return productMapper.getProductListByDaysAndType(traverDays, productType);
-    }
-
-    @Override
-    public List<ProductMsg> getProductListByTypeAndStore(String productType, String supplierId) {
-        return productMapper.getProductListByTypeAndStore(productType, supplierId);
+    public List<ProductMsg> getProductListByTypeAndStore(String productType, String supplierId, String cityname) {
+        return productMapper.getProductListByTypeAndStore(productType, supplierId, cityname);
     }
 
     @Override
@@ -288,6 +321,11 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public Supplier getSupplierByName(String name) {
         return supplierMapper.getSupplierByName(name);
+    }
+
+    @Override
+    public Supplier getSupplierById(String id) {
+        return supplierMapper.getSupplierById(id);
     }
 
     @Override
@@ -399,5 +437,15 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public List<TraverNote> getTraverNoteListByCityName(String cityId) {
         return traverNoteMapper.getTraverNodeListbyCityName(cityId);
+    }
+
+    @Override
+    public void insertTraverNote(TraverNote traverNote) {
+        traverNoteMapper.insertTraverNote(traverNote);
+    }
+
+    @Override
+    public List<TraverNote> getAllTraverNoteList() {
+        return traverNoteMapper.getAllTraverNoteList();
     }
 }

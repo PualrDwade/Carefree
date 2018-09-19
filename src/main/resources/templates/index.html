@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <style>
     .priceTag {
-        font-size: 25px;
+        font-size: 18px;
         margin-top: 5px;
         color: #F3C300;
         font-weight: 800;
@@ -136,31 +136,35 @@
                 <div class="row">
                     <div class="col-md-3 ">
                         <div>
-                            <img th:src="${session.product1.img_url}"
+                            <img th:src="${product1.img_url}"
                                  class="productImg">
                         </div>
 
                     </div>
                     <div class="col-md-7 mt-sm-20 left-align-p">
-                        <a th:href="${session.product1.product_link}"
+                        <a th:href="${product1.product_link}"
                            target="_blank">
-                            <h4 th:text="${session.product1.name}" class="mb-30 title_color "></h4>
+                            <h4 th:text="${product1.name}" class="mb-30 title_color "></h4>
                         </a>
                     </div>
                     <div class="col-md-2">
                         <div class="priceTag">
-                            <p>￥<span th:text="${session.product1.price}"></span>
+                            <p>￥<span th:text="${product1.price}"></span>
                                 <small>/人起</small>
                             </p>
                         </div>
                         <div class="logo-size">
-                            <a th:href="${session.product1.supplierUrl}"><img
-                                    th:src="${session.product1.supplierImgUrl}"></a>
+                            <a th:href="${product1.supplierUrl}">
+                                <img th:if="${product1.supplier_id}=='00001'" src="/image/logo/美团.svg">
+                                <img th:if="${product1.supplier_id}=='00002'" src="/image/logo/马蜂窝.svg">
+                                <img th:if="${product1.supplier_id}=='00003'" src="/image/logo/携程.svg">
+                                <img th:if="${product1.supplier_id}=='00004'" src="/image/logo/去哪儿.svg">
+                            </a>
                         </div>
                         <div class="container">
-                            <a>评分：</a><span th:text="${session.product1.product_grade}" class="badge badge-primary"
+                            <a>评分：</a><span th:text="${product1.product_grade}" class="badge badge-primary"
                                             style="background-color: #f3c300;"></span><br><br>
-                            <a>销量：</a><span th:text="${session.product1.sell_num}" class="badge badge-primary"
+                            <a>销量：</a><span th:text="${product1.sell_num}" class="badge badge-primary"
                                             style="background-color: #f3aecc;"></span>
                         </div>
                     </div>
@@ -169,31 +173,35 @@
                 <div class="row">
                     <div class="col-md-3 ">
                         <div>
-                            <img th:src="${session.product2.img_url}"
+                            <img th:src="${product2.img_url}"
                                  class="productImg">
                         </div>
 
                     </div>
                     <div class="col-md-7 mt-sm-20 left-align-p">
-                        <a th:href="${session.product2.product_link}"
+                        <a th:href="${product2.product_link}"
                            target="_blank">
-                            <h4 th:text="${session.product2.name}" class="mb-30 title_color "></h4>
+                            <h4 th:text="${product2.name}" class="mb-30 title_color "></h4>
                         </a>
                     </div>
                     <div class="col-md-2">
                         <div class="priceTag">
-                            <p>￥ <span th:text="${session.product2.price}"></span>
+                            <p>￥ <span th:text="${product2.price}"></span>
                                 <small>/人起</small>
                             </p>
                         </div>
                         <div class="logo-size">
-                            <a th:href="${session.product2.supplierUrl}"><img
-                                    th:src="${session.product2.supplierImgUrl}"></a>
+                            <a th:href="${product2.supplierUrl}">
+                                <img th:if="${product1.supplier_id}=='00001'" src="/image/logo/美团.svg">
+                                <img th:if="${product2.supplier_id}=='00002'" src="/image/logo/马蜂窝.svg">
+                                <img th:if="${product2.supplier_id}=='00003'" src="/image/logo/携程.svg">
+                                <img th:if="${product2.supplier_id}=='00004'" src="/image/logo/去哪儿.svg">
+                            </a>
                         </div>
                         <div class="container">
-                            <a>评分：</a><span th:text="${session.product2.product_grade}" class="badge badge-primary"
+                            <a>评分：</a><span th:text="${product2.product_grade}" class="badge badge-primary"
                                             style="background-color: #f3c300;"></span><br><br>
-                            <a>销量：</a><span th:text="${session.product2.sell_num}" class="badge badge-primary"
+                            <a>销量：</a><span th:text="${product2.sell_num}" class="badge badge-primary"
                                             style="background-color: #f3aecc;"></span>
                         </div>
                     </div>
@@ -241,14 +249,15 @@
     <section class="accomodation_area section_gap">
         <div class="container">
             <div class="section_title text-center">
-                <a th:href="@{/Catalog/HotHotelList(destination=${session.location})}"><h2 class="title_color">优 质 酒
-                    店</h2></a>
+                <a th:href="@{/Catalog/HotHotelList}"><h2 class="title_color">精品酒店</h2></a>
                 <p class="text-center">我 们 竭 力 为 您 推 荐 最 舒 适 最 优 质 性 价 比 最 高 的 酒 店，让 您 在 旅 途 的 奔 波 当 中 能 够 安 心 舒 睡 ，消 除
                     一 天
                     的 疲 惫</p>
+                <br><br>
             </div>
+            <h4 class="section_title text-center" style="font-size: 20px!important;">最实惠</h4>
             <div class="row mb_30">
-                <div class="col-lg-3 col-sm-6" th:each="hotHotel : ${hotHotelList}">
+                <div class="col-lg-3 col-sm-6" th:each="hotHotel : ${hotHotelList_01}">
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
                             <img th:src="${hotHotel.img_url}"
@@ -256,21 +265,50 @@
                             <a th:href="${hotHotel.hotel_link}"
                                class="btn theme_btn button_hover">立即预定</a>
                         </div>
-                        <a th:href="${hotHotel.hotel_link}" target="view_window"><h4 class="sec_h4">浮乐德酒店</h4>
+                        <a th:href="${hotHotel.hotel_link}" target="view_window"><h4 class="sec_h4"
+                                                                                     th:text="${hotHotel.name}"></h4>
                         </a>
                         <h5>￥<span th:text="${hotHotel.hotel_price}"></span>
                             <small>/晚</small>
                         </h5>
                         <p th:text="${hotHotel.hotel_content}"></p>
-                        评分：<span th:text="${hotHotel.score}" class="badge badge-primary"
-                                 style="background-color: #f3c300;"></span>
+                        <div style="bottom: 5px;position: absolute;left: 40%">
+                            评分：<span th:text="${hotHotel.score}" class="badge badge-primary"
+                                     style="background-color: #f3c300;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <h4 class="section_title text-center" style="font-size: 20px!important;">最受欢迎</h4>
+            <div class="row mb_30">
+                <div class="col-lg-3 col-sm-6" th:each="hotHotel : ${hotHotelList_02}">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img th:src="${hotHotel.img_url}"
+                                 alt="">
+                            <a th:href="${hotHotel.hotel_link}"
+                               class="btn theme_btn button_hover">立即预定</a>
+                        </div>
+                        <a th:href="${hotHotel.hotel_link}" target="view_window"><h4 class="sec_h4"
+                                                                                     th:text="${hotHotel.name}">
+                        </h4>
+                        </a>
+                        <h5>￥<span th:text="${hotHotel.hotel_price}"></span>
+                            <small>/晚</small>
+                        </h5>
+                        <p th:text="${hotHotel.hotel_content}"></p>
+                        <div style="bottom: 5px;position: absolute;left: 40%">
+                            评分：<span th:text="${hotHotel.score}" class="badge badge-primary"
+                                     style="background-color: #f3c300;"></span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--================ 酒店  =================-->
-
     <!--================ 问答展示  =================-->
     <section class="testimonial_area section_gap">
         <div class="container">

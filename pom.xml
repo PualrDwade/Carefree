@@ -82,6 +82,18 @@
             <artifactId>stripes</artifactId>
             <version>1.5.4</version>
         </dependency>
+        <!--添加了新的json依赖包-->
+        <dependency>
+            <groupId>com.vaadin.external.google</groupId>
+            <artifactId>android-json</artifactId>
+            <version>0.0.20131108.vaadin1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin.external.google</groupId>
+            <artifactId>android-json</artifactId>
+            <version>0.0.20131108.vaadin1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <body>
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
@@ -151,14 +152,17 @@
                             <a class="aa-avatar" href="/wenda/u/85353052/answer.html"><img
                                     src="http://b2-q.mafengwo.net/s12/M00/5E/5C/wKgED1uY0fWAWbYCAAJ937FhNIQ53.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
                                     class="photo"></a>
-                            <a class="aa-name">Dreams °🍀</a>
+                            <a class="aa-name" th:text="${session.username}">Dreams °🍀</a>
                         </div>
-                        <div class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  ">
+                        <form class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  "
+                              th:action="@{/TraverAsk/answerAsk}"
+                              th:method="post">
                             <div class="editor-scroll">
-                                <div class="question-title">请问长沙谢子龙影像馆要收门票吗？</div>
+                                <div class="question-title" th:text="${userAsk.title}">请问长沙谢子龙影像馆要收门票吗？</div>
                                 <div class="answer-editor">
                                     <div class="toolbar-out">
-                                        <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar">
+                                        <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar"
+                                             style="height: auto; width: 703px;">
                                             <div class="item _js_bold"><a class="btn-bold" role="button"></a>
                                                 <div class="tooltip"><span>加粗</span></div>
                                             </div>
@@ -174,35 +178,21 @@
                                             <div class="item _js_ordered_list"><a class="btn-ol" role="button"></a>
                                                 <div class="tooltip"><span>有序列表</span></div>
                                             </div>
-                                            <div class="separator"></div>
-                                            <div class="item"><a class="btn-insertimg _js_upload_pic" role="button"></a>
-                                                <div class="tooltip"><span>插入图片</span></div>
-                                            </div>
-                                            <div class="item _js_video"><a class="btn-video _js_upload_video"
-                                                                           role="button"></a>
-                                                <div class="tooltip"><span>插入视频</span></div>
-                                            </div>
 
-                                            <div class="item"><a class="btn-insertpoi _js_upload_poi" role="button"></a>
-                                                <div class="tooltip"><span>添加地点</span></div>
-                                            </div>
-                                            <a class="btn-fullscreen _j_fullscreen" role="button"><i></i>全屏模式</a>
-                                            <a class="btn-exitfullscreen _j_exitfullscreen" role="button"><i></i>退出全屏模式</a>
+
                                         </div>
                                     </div>
-                                    <div class="editor-container" id="_j_answer_editor">
-                                    </div>
+                                    <!--修改TextArea样式-->
+                                    <textarea class="" id="" name="answerContent" style="width: 703px ;height: 200px">
+                                    </textarea>
+
+
                                 </div>
                                 <div class="aa-ft">
-                                    <div class="count">
-                                        <span class="word"><b id="_j_word_count">0</b>字</span>
-                                        <span class="pic"><b id="_j_pic_count">0</b>图</span>
-                                        <span class="pic"><b id="_j_video_count">0</b>视频</span>
-                                    </div>
-                                    <input class="btn-comment _j_submit_answer_btn" type="button" value="提交回答">
+                                    <input class=" " type="submit" value="提交回答">
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

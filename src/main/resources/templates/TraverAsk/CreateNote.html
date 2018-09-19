@@ -4,24 +4,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>新游记</title>
     <meta name="renderer" content="webkit"/>
-
-
     <link href="http://css.mafengwo.net/css/cv/css+mfw-ask+detail_v3:css+mfw-ask+img_pop:css+mfw-ask+detail_answer_foldup:css+mfw-ask+upload_pics^al0^1533612615.css"
           rel="stylesheet" type="text/css"/>
-
     <link href="http://css.mafengwo.net/css/cv/css+base:css+jquery.suggest:css+plugins:css+plugins+jquery.jgrowl:css+other+popup:css+mfw-header.2015^YlVS^1527308432.css"
           rel="stylesheet" type="text/css"/>
 
-
     <link href="http://css.mafengwo.net/css/cv/css+mfweditor+mfweditor:css+post+addpost:css+jquery-ui-1.9.1.custom.min^ZFQ^1493174418.css"
           rel="stylesheet" type="text/css"/>
-
-
     <script language="javascript"
             src="http://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js"
             type="text/javascript" crossorigin="anonymous"></script>
-
-
 </head>
 <body>
 <!--================Header Area =================-->
@@ -35,22 +27,15 @@
         </div>
         <div class="ap-wrap">
             <div class="ap-main">
-                <form class="forms" id="infoform" th:action="@{/TraverAsk/createNote}" th:method="get"
-                      enctype="multipart/form-data" target="postinfo" name="fileForm">
+                <form class="forms" id="infoform" th:action="@{/TraverAsk/createNote}" th:method="post"
+                      name="fileForm">
                     <dl class="title cf">
                         <dd>
-                            <!--<span class="char-limit hide _j_char_limit">可输入<strong>48</strong>字</span>-->
-                            <input id="title" name="title" type="text" maxlength="48" placeholder="请输入游记标题" value="">
-                            <!--<input id="type" name="type" type="hidden">-->
-                            <!--<input id="cid" name="cid" type="hidden">-->
-                            <!--<input id="rid" name="rid" type="hidden" value="">-->
-                            <!--<input id="sfrom" name="sfrom" type="hidden" value="">-->
-                            <!--<input type="hidden" name="target" value="iframe">-->
+                            <input id="title" name="title" type="text" maxlength="48" placeholder="请输入游记标题"
+                                   value="">
                         </dd>
                     </dl>
-
                     <div class="answer-wrap">
-
                         <div class="answer-add clearfix">
                             <a name="answer"></a>
                             <div class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  ">
@@ -58,7 +43,8 @@
                                     <div class="question-title">新游记</div>
                                     <div class="answer-editor">
                                         <div class="toolbar-out">
-                                            <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar">
+                                            <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar"
+                                                 style="height: auto; width: 703px;">
                                                 <div class="item _js_bold"><a class="btn-bold" role="button"></a>
                                                     <div class="tooltip"><span>加粗</span></div>
                                                 </div>
@@ -72,7 +58,8 @@
                                                     <div class="tooltip"><span>无序列表</span></div>
                                                 </div>
 
-                                                <div class="item _js_ordered_list"><a class="btn-ol" role="button"></a>
+                                                <div class="item _js_ordered_list"><a class="btn-ol"
+                                                                                      role="button"></a>
                                                     <div class="tooltip"><span>有序列表</span></div>
                                                 </div>
 
@@ -86,21 +73,13 @@
                                                                                role="button"></a>
                                                     <div class="tooltip"><span>插入视频</span></div>
                                                 </div>
-
-                                                <a class="btn-fullscreen _j_fullscreen" role="button"><i></i>全屏模式</a>
-                                                <a class="btn-exitfullscreen _j_exitfullscreen" role="button"><i></i>退出全屏模式</a>
                                             </div>
                                         </div>
-                                        <div class="editor-container" id="_j_answer_editor">
-                                        </div>
+                                        <textarea class="" id="" name="noteContent"
+                                                  style="width: 703px ;height: 300px">
+                                        </textarea>
                                     </div>
                                     <div class="aa-ft">
-                                        <div class="count">
-                                            <span class="word"><b id="_j_word_count">0</b>字</span>
-                                            <span class="pic"><b id="_j_pic_count">0</b>图</span>
-                                            <span class="pic"><b id="_j_video_count">0</b>视频</span>
-                                        </div>
-
                                         <input type="submit" value="发表游记">
                                     </div>
                                 </div>
@@ -110,10 +89,8 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
-
 </div>
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>
@@ -242,30 +219,11 @@
         cursor: pointer;
     }
 
-    ._j_uploading_mode ._j_process {
-        display: block;
-    }
-
     .editor-toolbar .item-active:hover .tooltip {
         visibility: hidden;
         opacity: 0;
     }
 </style>
-
-<div class="mfw-toolbar" id="_j_mfwtoolbar">
-    <div class="toolbar-item-top">
-        <a role="button" class="btn _j_gotop">
-            <i class="icon_top"></i>
-            <em>返回顶部</em>
-        </a>
-    </div>
-    <div class="toolbar-item-down">
-        <a role="button" class="btn _j_gobottom">
-            <i class="icon_down"></i>
-            <em>页面底部</em>
-        </a>
-    </div>
-</div>
 <!--加载静态资源-->
 <link href="http://css.mafengwo.net/mobile/css/omc/coupon-pop/coupon-pop.css?1526627473" rel="stylesheet"
       type="text/css"/>
@@ -273,10 +231,5 @@
         type="text/javascript" crossorigin="anonymous"></script>
 <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
 <link href="http://css.mafengwo.net/css/mfw-toolbar.css?1493174418" rel="stylesheet" type="text/css"/>
-<script language="javascript" type="text/javascript">
-    if (typeof M !== "undefined" && typeof M.loadResource === "function") {
-        M.loadResource("http://js.mafengwo.net/js/cv/js+pageletcommon+pageHeadUserInfoWWWDark:js+M+module+dialog+Layer:js+M+module+dialog+DialogBase:js+M+module+dialog+Dialog:js+M+module+dialog+alert:js+M+module+dialog+confirm:js+M+module+FrequencyVerifyControl:js+M+module+FrequencyAppVerify:js+jquery.scrollTo:js+qa+videoPlay:js+M+module+Storage:js+qa+wysiwyg:js+qa+wysiwyg-editor:js+qa+qa_module+selection:js+plupload:js+module+uploader+Pluploader:js+jquery.tmpl:js+plugins+jquery.rotate:js+qa+QaPicDialog:js+qa+QaPicUploader:js+qa+qa_module+PasteInEditor:js+qa+qa_module+FilterHtml:js+qiniu+qiniuFileUpload:js+M+module+TopTip:js+qa+VideoUploadPop:js+M+module+InputListener:js+M+module+SuggestionXHR:js+M+module+DropList:js+M+module+Suggestion:js+qa+initPlaceSuggestion:js+qa+QaRichTextEditor:js+mfwCountdown:js+qa+QaDetailV1:js+mSnsShare:js+qa+DoShare:js+qa+QaShare:js+M+module+Pagination:js+qa+QaCaret:js+qa+QaComments:js+qa+QaSeach:js+M+module+Toggle:js+qa+InviteUserAnswer:js+jquery.lazyload:js+jquery.upnum:js+M+module+ScrollObserver:js+qa+ControllerDetailAnswerList:js+qa+ARecommentQu:js+M+module+PageAdmin:js+M+module+Cookie:js+M+module+ResourceKeeper:js+jquery.jgrowl.min:js+AMessage:js+M+module+FrequencySystemVerify:js+ALogin:js+M+module+QRCode:js+AToolbar:js+ACnzzGaLog:js+ARecruit:js+ALazyLoad^YldWRw^1534732433.js");
-    }
-</script>
 </body>
 </html>

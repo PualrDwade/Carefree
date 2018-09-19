@@ -30,4 +30,13 @@ public interface TraverAskService {
 
     //通过username得到用户回答列表
     List<UserAnswer> getUserAnswerListByName(String username);
+
+    //通过时间进行排序获得所有的List
+    List<UserAsk> getUserAskListByTime();
+
+    //获得热门游记
+    List<UserAsk> getHotUserAskListByTime(int askListNum);
+
+    //获得用户所有回答
+    List<UserAnswer> getUserAnswerList();
 }

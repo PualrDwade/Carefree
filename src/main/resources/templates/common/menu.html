@@ -10,13 +10,13 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/Catalog/Mdd}">目的地</a>
                     </li>
                     <li class="nav-item"><a class="nav-link"
-                                            th:href="@{/Catalog/HotProductList(destination=${session.location})}">热门旅游</a>
+                                            th:href="@{/Catalog/HotProductList}">热门旅游</a>
                     </li>
                     <li class="nav-item"><a class="nav-link"
-                                            th:href="@{/Catalog/HotHotelList(destination=${session.location})}">酒店</a>
+                                            th:href="@{/Catalog/HotHotelList}">选酒店</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/TraverAsk/ViewTraverNote}">游记</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/TraverAsk/QuestionAnswer}">问答专区</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/TraverAsk/ViewTraverNote}">游记街</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/TraverAsk/QuestionAnswer}">问答广场</a></li>
 
                     <li th:if="!${session.username}" class="nav-item" style="margin-left: 200px">
                         <a class="nav-link"
@@ -33,6 +33,10 @@
                     <li th:if="${session.username}" class="nav-item">
                         <a class="nav-link"
                            th:href="@{/account/ViewUserCenter}">用户中心</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:text="'当前位置:'+${session.location}"></a>
                     </li>
                 </ul>
             </div>

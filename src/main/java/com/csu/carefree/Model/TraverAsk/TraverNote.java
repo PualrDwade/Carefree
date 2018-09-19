@@ -2,16 +2,16 @@ package com.csu.carefree.Model.TraverAsk;
 
 import java.io.Serializable;
 
-public class TraverNote implements Serializable {
+public class TraverNote implements Serializable, Comparable<TraverNote> {
     private String id;
     private String title;
     private String note_content;
-    private String star_num;
+    private int star_num;
     private String notify_status;
     private String add_time;
     private String img_url;
-    private String city_id;
     private String user_id;
+    private String city_id;
 
 
     @Override
@@ -61,12 +61,12 @@ public class TraverNote implements Serializable {
         this.note_content = note_content;
     }
 
-    public String getStar_num() {
+    public int getStar_num() {
         return star_num;
     }
 
     public void setStar_num(String star_num) {
-        this.star_num = star_num;
+        this.star_num = Integer.parseInt(star_num);
     }
 
     public String getNotify_status() {
@@ -104,20 +104,29 @@ public class TraverNote implements Serializable {
     public TraverNote() {
     }
 
-    public TraverNote(String id, String title, String user_id,
+    public TraverNote(String id, String title,
                       String note_content, String star_num,
                       String notify_status, String add_time,
-                      String img_url, String city_id) {
+                      String img_url, String user_id, String city_id) {
         this.id = id;
         this.title = title;
         this.user_id = user_id;
         this.note_content = note_content;
-        this.star_num = star_num;
+        this.star_num = Integer.parseInt(star_num);
         this.notify_status = notify_status;
         this.add_time = add_time;
         this.img_url = img_url;
         this.city_id = city_id;
+    }
 
+
+    @Override
+    public int compareTo(TraverNote o) {
+        if (this.star_num > o.getStar_num()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
 

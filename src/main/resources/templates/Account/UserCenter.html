@@ -3,6 +3,7 @@
 
 <head th:replace="common/userCenter::userHead"></head>
 <body>
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <div class="main">
     <!--导航栏-->
     <div th:replace="common/userCenter::userNav"></div>
@@ -65,9 +66,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="more_notes">
-                    <a class="btn_deleted" href="/u/note/delete.html"><i></i>已删除游记</a>
-                </div>
             </div>
             <!--我的提问-->
             <div class="common_block my_notes">
@@ -86,21 +84,23 @@
                 <div th:if="${askNum}!=0" class="common_title clearfix">
                     <div class="ask_list">
                         <ul class="_j_qa_answer_list">
-                            <li th:each="askitem : ${askAnswerContainer.getUserAskList()}">
+                            <li th:each="askitem : ${userAskPageInfo.getPageData()}">
                                 <dl>
                                     <dt class="common_dt">
                                         <div class="ask_ava">
                                             <a href="#" target="_blank">
                                                 <!--用户头像url-->
-                                                <img th:src="${userProfile.image}" height="48" width="48"
-                                                     th:alt="${userProfile.nick_name}">
+                                                <img th:src="${session.userProfile.image}" height="48" width="48"
+                                                     th:alt="${session.userProfile.nick_name}">
                                             </a>
                                         </div>
                                         <div class="ask_info">
-                                            <h2><a href="#" th:text="${askitem.title}" target="_blank"></a>
+                                            <h2><a th:href="@{/TraverAsk/viewAskAnswerDetail(askId=${askitem.id})}"
+                                                   th:text="${askitem.title}" target="_blank"></a>
                                             </h2>
                                             <span th:text="'此问题共'+${askAnswerContainer.getAnswerListByask(askitem).size()}+'个人参与了回答'"></span>
-                                            </p>
+                                            <span th:text="'发表时间:'+${askitem.add_time}"
+                                                  style="right: 0px;position:absolute"></span>
                                         </div>
                                     </dt>
                                     <!--下面是回答列表-->
@@ -114,9 +114,67 @@
                             </li>
                         </ul>
                     </div>
+                    <center>
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a th:href="@{${'/account/ViewUserCenter'}(pageNum = 1)}"> 首页 </a>
+                                </li>
+                                <li>
+                                    <a th:if="${not userAskPageInfo.isFirstPage()}"
+                                       th:href="@{${'/account/ViewUserCenter'}(pageNum = ${userAskPageInfo.getCurrentPage() - 1})}">上一页</a>
+                                </li>
+
+                                <li th:if="${userAskPageInfo.getMaxPage() <= 10}"
+                                    th:each="pageNo : ${#numbers.sequence(1, userAskPageInfo.getMaxPage())}">
+                                    <a th:if="${userAskPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                    <a th:if="${not (userAskPageInfo.getCurrentPage() eq pageNo)}"
+                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${pageNo})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </li>
+
+                                <li th:if="${userAskPageInfo.getCurrentPage()+10 >= userAskPageInfo.getMaxPage() && userAskPageInfo.getMaxPage() > 10}"
+                                    th:each="pageNo : ${#numbers.sequence(userAskPageInfo.getMaxPage() -10, userAskPageInfo.getMaxPage())}">
+                                    <a th:if="${userAskPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                    <a th:if="${not (userAskPageInfo.getCurrentPage() eq pageNo)}"
+                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${pageNo})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </li>
+
+                                <li th:if="${userAskPageInfo.getCurrentPage()+10 < userAskPageInfo.getMaxPage() && userAskPageInfo.getMaxPage() > 10}"
+                                    th:each="pageNo : ${#numbers.sequence(userAskPageInfo.getCurrentPage(), userAskPageInfo.getCurrentPage()+10)}">
+                                    <a th:if="${userAskPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                    <a th:if="${not (userAskPageInfo.getCurrentPage() eq pageNo)}"
+                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${pageNo})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a th:if="${not userAskPageInfo.isLastPage()}"
+                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${userAskPageInfo.getCurrentPage()+1})}">下一页</a>
+                                </li>
+
+                                <li>
+                                    <a th:href="@{${'/account/ViewUserCenter'}(pageNum = ${userAskPageInfo.getMaxPage()})}">
+                                        尾页 </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </center>
                 </div>
             </div>
+
         </div>
+
     </div>
 </div>
 <!--底部黑色栏-->

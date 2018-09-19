@@ -2,11 +2,11 @@ package com.csu.carefree.Model.TraverAsk;
 
 import java.io.Serializable;
 
-public class UserAsk implements Serializable {
+public class UserAsk implements Serializable, Comparable<UserAsk> {
     private String id;
     private String title;
     private String ask_content;
-    private String star_num;
+    private int star_num;
     private String add_time;
     private String city_id;
     private String user_id;
@@ -48,12 +48,12 @@ public class UserAsk implements Serializable {
         this.ask_content = ask_content;
     }
 
-    public String getStar_num() {
+    public int getStar_num() {
         return star_num;
     }
 
     public void setStar_num(String star_num) {
-        this.star_num = star_num;
+        this.star_num = Integer.parseInt(star_num);
     }
 
     public String getUser_id() {
@@ -93,9 +93,18 @@ public class UserAsk implements Serializable {
         this.id = id;
         this.title = title;
         this.ask_content = ask_content;
-        this.star_num = star_num;
+        this.star_num = Integer.parseInt(star_num);
         this.user_id = user_id;
         this.add_time = add_time;
         this.city_id = city_id;
+    }
+
+    @Override
+    public int compareTo(UserAsk o) {
+        if (this.star_num > o.getStar_num()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }

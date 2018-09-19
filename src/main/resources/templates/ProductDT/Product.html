@@ -4,12 +4,17 @@
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
 <!--================Header Area =================-->
+<style>
+    body input {
+        border: 0.5px;
+        solid: #585858;
+    }
+</style>
 <div id="content" style="margin-top: 10px">
     <br><br><br>
     <div class="container ">
-        <form method="post" action="/Catalog/HotProductListByConditions">
+        <form method="get" th:action="@{/Catalog/HotProductList}">
             <div class="row margin-div">
-
                 <div class="col-lg-9">
                     <hr>
                     <div class="row">
@@ -18,7 +23,7 @@
                              style="margin-right: 10px;">
                             <p>全部 </p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="0" id="days-all"
+                                <input name="days" type="radio" value="0" id="days-all" class="days-all"
                                        th:checked="${session.hotProductcheckedDaysAll}">
                                 <label for="days-all"></label>
                             </div>
@@ -27,7 +32,7 @@
                              style="margin-right: 10px;">
                             <p>1天 </p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="1" id="days-1">
+                                <input name="days" type="radio" value="1" id="days-1" class="days-1">
                                 <label for="days-1"></label>
                             </div>
                         </div>
@@ -35,7 +40,7 @@
                              style="margin-right: 10px;">
                             <p>2天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="2" id="days-2">
+                                <input name="days" type="radio" value="2" id="days-2" class="days-2">
                                 <label for="days-2"></label>
                             </div>
                         </div>
@@ -43,7 +48,7 @@
                              style="margin-right: 10px;">
                             <p>3天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="3" id="days-3">
+                                <input name="days" type="radio" value="3" id="days-3" class="days-3">
                                 <label for="days-3"></label>
                             </div>
                         </div>
@@ -51,7 +56,7 @@
                              style="margin-right: 10px;">
                             <p>4天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="4" id="days-4">
+                                <input name="days" type="radio" value="4" id="days-4" class="days-4">
                                 <label for="days-4"></label>
                             </div>
                         </div>
@@ -59,7 +64,7 @@
                              style="margin-right: 10px;">
                             <p>5天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="5" id="days-5">
+                                <input name="days" type="radio" value="5" id="days-5" class="days-5">
                                 <label for="days-5"></label>
                             </div>
                         </div>
@@ -67,7 +72,7 @@
                              style="margin-right: 10px;">
                             <p>6天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="6" id="days-6">
+                                <input name="days" type="radio" value="6" id="days-6" class="days-6">
                                 <label for="days-6"></label>
                             </div>
                         </div>
@@ -75,7 +80,7 @@
                              style="margin-right: 10px;">
                             <p>7天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="7" id="days-7">
+                                <input name="days" type="radio" value="7" id="days-7" class="days-7">
                                 <label for="days-7"></label>
                             </div>
                         </div>
@@ -83,7 +88,7 @@
                              style="margin-right: 10px;">
                             <p>8天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="8" id="days-8">
+                                <input name="days" type="radio" value="8" id="days-8" class="days-8">
                                 <label for="days-8"></label>
                             </div>
                         </div>
@@ -91,7 +96,7 @@
                              style="margin-right: 10px;">
                             <p>9天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="9" id="days-9">
+                                <input name="days" type="radio" value="9" id="days-9" class="days-9">
                                 <label for="days-9"></label>
                             </div>
                         </div>
@@ -99,10 +104,22 @@
                              style="margin-right: 10px;">
                             <p>10天</p>
                             <div class="primary-checkbox">
-                                <input name="days" type="radio" value="10" id="days-10">
+                                <input name="days" type="radio" value="10" id="days-10" class="days-10">
                                 <label for="days-10"></label>
                             </div>
                         </div>
+                        <script th:inline="javascript">
+                            var traverDays = [[${session.productForm.traverDays}]]
+                            var check = document.getElementsByClassName("days-" + traverDays)[0]
+                            console.log("days-" + traverDays)
+                            if (check != null) {
+                                check.checked = true
+                            }
+                            else {
+                                check = document.getElementsByClassName("days-all")[0]
+                                check.checked = true
+                            }
+                        </script>
                     </div>
                     <hr>
                     <div class="row">
@@ -111,7 +128,7 @@
                              style="margin-right: 10px;">
                             <p>全部</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="0" id="store-all"
+                                <input name="store" type="radio" value="0" id="store-all" class="store-all"
                                        th:checked="${session.hotProductcheckedStoreAll}">
                                 <label for="store-all"></label>
                             </div>
@@ -120,7 +137,7 @@
                              style="margin-right: 10px;">
                             <p>携程</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00003" id="store-1">
+                                <input name="store" type="radio" value="00003" id="store-1" class="store-00003">
                                 <label for="store-1"></label>
                             </div>
                         </div>
@@ -128,7 +145,7 @@
                              style="margin-right: 10px;">
                             <p>马蜂窝</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00002" id="store-2">
+                                <input name="store" type="radio" value="00002" id="store-2" class="store-00002">
                                 <label for="store-2"></label>
                             </div>
                         </div>
@@ -136,7 +153,7 @@
                              style="margin-right: 10px;">
                             <p>去哪儿</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00004" id="store-3">
+                                <input name="store" type="radio" value="00004" id="store-3" class="store-00004">
                                 <label for="store-3"></label>
                             </div>
                         </div>
@@ -144,7 +161,7 @@
                              style="margin-right: 10px;">
                             <p>飞猪</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00005" id="store-4">
+                                <input name="store" type="radio" value="00005" id="store-4" class="store-00005">
                                 <label for="store-4"></label>
                             </div>
                         </div>
@@ -152,10 +169,22 @@
                              style="margin-right: 10px;">
                             <p>途牛</p>
                             <div class="primary-checkbox">
-                                <input name="store" type="radio" value="00006" id="store-5">
+                                <input name="store" type="radio" value="00006" id="store-5" class="store-00006">
                                 <label for="store-5"></label>
                             </div>
                         </div>
+                        <script th:inline="javascript">
+                            var store = [[${session.productForm.supplierId}]]
+                            var check2 = document.getElementsByClassName("store-" + store)[0]
+                            console.log("store-" + store)
+                            if (check2 != null) {
+                                check2.checked = true
+                            }
+                            else {
+                                check2 = document.getElementsByClassName("store-all")[0]
+                                check2.checked = true
+                            }
+                        </script>
                     </div>
                     <hr>
                     <div class="row">
@@ -164,7 +193,7 @@
                              style="margin-right: 10px;">
                             <p>全部</p>
                             <div class="primary-checkbox">
-                                <input name="type" type="radio" value="0" id="type-all"
+                                <input name="type" type="radio" value="0" id="type-all" class="type-all"
                                        th:checked="${session.hotProductcheckedTypeAll}">
                                 <label for="type-all"></label>
                             </div>
@@ -173,7 +202,7 @@
                              style="margin-right: 10px;">
                             <p>半自助</p>
                             <div class="primary-checkbox">
-                                <input name="type" type="radio" value="半自助" id="type-1">
+                                <input name="type" type="radio" value="半自助" id="type-1" class="type-半自助">
                                 <label for="type-1"></label>
                             </div>
                         </div>
@@ -181,7 +210,7 @@
                              style="margin-right: 10px;">
                             <p>跟团游</p>
                             <div class="primary-checkbox">
-                                <input name="type" type="radio" value="跟团游" id="type-2">
+                                <input name="type" type="radio" value="跟团游" id="type-2" class="type-跟团游">
                                 <label for="type-2"></label>
                             </div>
                         </div>
@@ -189,80 +218,149 @@
                              style="margin-right: 10px;">
                             <p>私家团</p>
                             <div class="primary-checkbox">
-                                <input name="type" type="radio" value="私家团" id="type-3">
+                                <input name="type" type="radio" value="私家团" id="type-3" class="type-私家团">
                                 <label for="type-3"></label>
                             </div>
                         </div>
+                        <script th:inline="javascript">
+                            var type = [[${session.productForm.productType}]]
+                            var check3 = document.getElementsByClassName("type-" + type)[0]
+                            console.log("type-" + type)
+                            if (check3 != null) {
+                                check3.checked = true
+                            }
+                            else {
+                                check3 = document.getElementsByClassName("type-all")[0]
+                                check3.checked = true
+                            }
+                        </script>
                     </div>
                     <hr>
-                    <div class="col-lg-3">
-                        <div class="input-group">
-                            <input type="submit" value="按条件筛选" class="book_now_btn button_hover">
-                        </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group" style="margin-top: 50px">
+                        <input type="text" class="form-control" placeholder="输入您想搜索的内容">
+                        <span class="input-group-addon myYellow"><a href="#"><i
+                                class="glyphicon glyphicon-search myYellow"> <span
+                                class="myYellow">搜索</span></i></a></span>
                     </div>
 
+                    <div class="input-group" style="margin-top: 50px">
+                        <input type="submit" value="按条件筛选" class="book_now_btn button_hover">
+                    </div>
                 </div>
+            </div>
         </form>
-            <div class="col-lg-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="输入您想搜索的内容">
-                    <span class="input-group-addon myYellow"><a href="#"><i
-                            class="glyphicon glyphicon-search myYellow"> <span class="myYellow">搜索</span></i></a></span>
-                </div>
-            </div>
-
+        <div class="col-lg-3">
         </div>
     </div>
+</div>
 
-    <br><br>
-    <!--================ 产品  =================-->
-    <div class="whole-wrap">
-        <br>
-        <div class="section_title text-center">
-            <h2 class="title_color">为您推荐</h2>
-        </div>
-        <div class="container">
-            <div class="section-top-border" th:each="productMsg:${productMsgList}"
-                 th:if="${productMsg.current_price}!='价格未知'">
-                <div class="row">
-                    <div class="col-md-3 hotel_img">
-                        <div class=" hotel_img">
-                            <img th:src="${productMsg.img_url}"
-                                 class="img-fluid">
-                        </div>
-
+<br><br>
+<!--================ 产品  =================-->
+<div class="whole-wrap">
+    <br>
+    <div class="section_title text-center">
+        <h2 class="title_color">为您推荐</h2>
+    </div>
+    <div class="container">
+        <div class="section-top-border" th:each="productMsg:${productMsgPageInfo.getPageData()}"
+             th:if="${productMsg.product_price}!='价格未知'">
+            <div class="row">
+                <div class="col-md-3 hotel_img">
+                    <div class=" hotel_img">
+                        <img th:src="${productMsg.img_url}"
+                             class="img-fluid">
                     </div>
-                    <div class="col-md-7 mt-sm-20 left-align-p">
-                        <a th:href="${productMsg.product_link}"
-                           target="_blank">
-                            <h3 class="mb-30 title_color" th:text="${productMsg.name}">海南三亚4日3晚跟团游(5钻)·【自营优选】网红游亚特兰蒂斯神秘世界 0购物 海景套房+希尔顿品牌选择
-                                热门景区全覆盖</h3>
+                </div>
+                <div class="col-md-7 mt-sm-20 left-align-p">
+                    <a th:href="${productMsg.product_link}"
+                       target="_blank">
+                        <h3 class="mb-30 title_color" th:text="${productMsg.name}">海南三亚4日3晚跟团游(5钻)·【自营优选】网红游亚特兰蒂斯神秘世界
+                            0购物 海景套房+希尔顿品牌选择
+                            热门景区全覆盖</h3>
+                    </a>
+                </div>
+                <div class="col-md-2">
+                    <div class="priceTag">
+                        <p th:utext="'￥'+${productMsg.product_price}+'<small>/人起</small>'">￥1754
+                        </p>
+                    </div>
+                    <div class="logo-size">
+                        <img th:if="${productMsg.supplier_id}=='00001'" src="/image/logo/美团.svg">
+                        <img th:if="${productMsg.supplier_id}=='00002'" src="/image/logo/马蜂窝.svg">
+                        <img th:if="${productMsg.supplier_id}=='00003'" src="/image/logo/携程.svg">
+                        <img th:if="${productMsg.supplier_id}=='00004'" src="/image/logo/去哪儿.svg">
+                    </div>
+                    <div class="container">
+                        <a>评分：</a><span class="badge badge-primary"
+                                        style="background-color: #f3c300;"
+                                        th:text="${productMsg.product_grade}">4.8</span><br><br>
+                        <a>销量：</a><span class="badge badge-primary" style="background-color: #f3aecc;"
+                                        th:text="${productMsg.sell_num}">1200</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <center th:if="${productMsgPageInfo.getPageData().size() != 0}">
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a th:href="@{${'/Catalog/HotProductList'}(pageNum = 1)}"> 首页 </a>
+                    </li>
+                    <li>
+                        <a th:if="${not productMsgPageInfo.isFirstPage()}"
+                           th:href="@{${'/Catalog/HotProductList'}(pageNum = ${productMsgPageInfo.getCurrentPage() - 1})}">上一页</a>
+                    </li>
+
+                    <li th:if="${productMsgPageInfo.getMaxPage() <= 10}"
+                        th:each="pageNo : ${#numbers.sequence(1, productMsgPageInfo.getMaxPage())}">
+                        <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                            <span th:text="${pageNo}"></span>
                         </a>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="priceTag">
-                            <p th:utext="'￥'+${productMsg.current_price}+'<small>/人起</small>'">￥1754
+                        <a th:if="${not (productMsgPageInfo.getCurrentPage() eq pageNo)}"
+                           th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                    </li>
 
-                            </p>
-                        </div>
-                        <div class="logo-size">
-                            <img th:if="${productMsg.supplier_id}=='00001'" src="/image/logo/美团.svg">
-                            <img th:if="${productMsg.supplier_id}=='00002'" src="/image/logo/马蜂窝.svg">
-                            <img th:if="${productMsg.supplier_id}=='00003'" src="/image/logo/携程.svg">
-                            <img th:if="${productMsg.supplier_id}=='00004'" src="/image/logo/去哪儿.svg">
-                        </div>
-                        <div class="container">
-                            <a>评分：</a><span class="badge badge-primary"
-                                            style="background-color: #f3c300;" th:text="${productMsg.product_grade}">4.8</span><br><br>
-                            <a>销量：</a><span class="badge badge-primary" style="background-color: #f3aecc;" th:text="${productMsg.sell_num}">1200</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <li th:if="${productMsgPageInfo.getCurrentPage()+10 >= productMsgPageInfo.getMaxPage() && productMsgPageInfo.getMaxPage() > 10}"
+                        th:each="pageNo : ${#numbers.sequence(productMsgPageInfo.getMaxPage() -10, productMsgPageInfo.getMaxPage())}">
+                        <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                        <a th:if="${not (productMsgPageInfo.getCurrentPage() eq pageNo)}"
+                           th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                    </li>
 
-        </div>
+                    <li th:if="${productMsgPageInfo.getCurrentPage()+10 < productMsgPageInfo.getMaxPage() && productMsgPageInfo.getMaxPage() > 10}"
+                        th:each="pageNo : ${#numbers.sequence(productMsgPageInfo.getCurrentPage(), productMsgPageInfo.getCurrentPage()+10)}">
+                        <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                        <a th:if="${not (productMsgPageInfo.getCurrentPage() eq pageNo)}"
+                           th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:if="${not productMsgPageInfo.isLastPage()}"
+                           th:href="@{${'/Catalog/HotProductList'}(pageNum=${productMsgPageInfo.getCurrentPage()+1})}">下一页</a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{${'/Catalog/HotProductList'}(pageNum = ${productMsgPageInfo.getMaxPage()})}">
+                            尾页 </a>
+                    </li>
+                </ul>
+            </nav>
+        </center>
     </div>
-    <!--================ 产品  =================-->
+</div>
+<!--================ 产品  =================-->
 </div>
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>

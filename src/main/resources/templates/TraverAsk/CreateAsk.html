@@ -16,8 +16,7 @@
         </div>
         <div class="ap-wrap">
             <div class="ap-main">
-
-                <form class="forms" id="infoform" th:action="@{/TraverAsk/createAsk}" th:method="get"
+                <form class="forms" id="infoform" th:action="@{/TraverAsk/createAsk}" th:method="post"
                       enctype="multipart/form-data" target="postinfo" name="fileForm">
                     <dl class="title cf">
                         <dd>
@@ -25,13 +24,13 @@
                         </dd>
                     </dl>
                     <div class="answer-wrap">
-                        <div class="answer-add clearfix">
+                        <div class="answer-add clearfix" style="width: auto">
                             <a name="answer"></a>
                             <div class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  ">
-                                <div class="editor-scroll">
                                     <div class="answer-editor">
                                         <div class="toolbar-out">
-                                            <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar">
+                                            <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar"
+                                                 style="height: auto; width: 703px;">
                                                 <div class="item _js_bold"><a class="btn-bold" role="button"></a>
                                                     <div class="tooltip"><span>加粗</span></div>
                                                 </div>
@@ -51,27 +50,34 @@
                                                 <div class="separator"></div>
                                             </div>
                                         </div>
-                                        <div class="editor-container" id="_j_answer_editor" name="askContent">
-                                        </div>
-                                    </div>
+                                        <!--需修改内容-->
+                                        <textarea class="" id="" name="askContent" style="width: 703px ;height: 360px">
+                                        </textarea>
 
                                     <div class="aa-ft">
-                                        <div class="count">
-                                            <span class="word"><b id="_j_word_count">0</b>字</span>
-                                        </div>
-
-                                        <input type="submit" value="提交问题">
-
                                         <!--
-                                        <div class="btn-submit">
-                                            <button class="btn-comment _j_submit_answer_btn" onclick="submitBtnClick()">提交问题</button>
-                                            <script type="text/javascript">
-                                                function submitBtnClick() {
-                                                    //提交问题
-                                                    document.fileForm.submit();
-                                                }
-                                            </script>
-                                        </div>
+                                         <div class="count">
+                                             <span class="word"><b id="_j_word_count">0</b>字</span>
+                                         </div>
+                                        -->
+                                        <input type="submit" value="提交问题">
+                                        <!--<input type="button" onclick="submitAskForm()" value="提交问题">-->
+                                        <!--
+                                          <script lang="JavaScript">
+                                            function submitAskForm() {
+                                                var askForm = document.getElementById("infoform");
+                                                    if(askForm[0].value == null){
+                                                        alert("标题不能为空！");
+                                                        return false;
+                                                    }else {
+                                                        if (askForm[1].value == null){
+                                                            alert("问题内容不能为空！");
+                                                            return false;
+                                                        }
+                                                    }
+                                                    return true;
+                                            }
+                                        </script>
                                         -->
                                     </div>
                                 </div>

@@ -4,12 +4,13 @@
 
 <mapper namespace="com.csu.carefree.Persistence.UserAnswerMapper">
 
-    <cache />
+    <cache/>
 
     <!--
         实现查询所有问题答案，将结果以LIST形式输出
     -->
-    <select id="getUserAnswerByAsk" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
+    <select id="getUserAnswerByAsk" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
     SELECT
         ID,
         ANSWER_CONTENT,
@@ -17,6 +18,8 @@
         ASK_ID_ID AS ask_id,
         USER_ID_ID AS user_id
     FROM TraverAsk_useranswer
+    WHERE ask_id_id = #{userAskId}
+    ORDER BY add_time DESC
   </select>
 
     <!--
@@ -26,12 +29,13 @@
     INSERT INTO TraverAsk_useranswer
       (ID, ANSWER_CONTENT, ADD_TIME, ASK_ID_ID, USER_ID_ID)
     VALUES
-      (#{id}, #{answer_content}, #{add_time}, #{user_id})
+      (#{id}, #{answer_content}, #{add_time}, #{ask_id}, #{user_id})
   </insert>
 
 
     <!--通过用户名称获取用户问题列表-->
-    <select id="getUserAnswerListByName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
+    <select id="getUserAnswerListByName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
     SELECT
         ID,
         ANSWER_CONTENT,
@@ -40,6 +44,17 @@
         USER_ID_ID AS user_id
     FROM TraverAsk_useranswer
     WHERE user_id_id = #{username}
+    </select>
+
+    <!--获得所有问答-->
+    <select id="getUserAnswerList" resultType="com.csu.carefree.Model.TraverAsk.UserAnswer">
+    SELECT
+        ID,
+        ANSWER_CONTENT,
+        ADD_TIME,
+        ASK_ID_ID AS ask_id,
+        USER_ID_ID AS user_id
+    FROM TraverAsk_useranswer
     </select>
 
 </mapper>
