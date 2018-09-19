@@ -2,6 +2,7 @@ package com.csu.carefree.Service.impl;
 
 import com.csu.carefree.Model.ProductDT.*;
 import com.csu.carefree.Model.TraverAsk.TraverNote;
+import com.csu.carefree.Model.TraverAsk.UserAnswer;
 import com.csu.carefree.Model.TraverMsg.CityMsg;
 import com.csu.carefree.Model.TraverMsg.ProvinceMsg;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
@@ -430,4 +431,8 @@ public class CatalogServiceImpl implements CatalogService {
         traverNoteMapper.insertTraverNote(traverNote);
     }
 
+    @Override
+    public List<TraverNote> getAllTraverNoteList(){
+        return traverNoteMapper.getAllTraverNoteList();
+    }
 }

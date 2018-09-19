@@ -36,4 +36,7 @@ public interface TraverAskService {
 
     //获得热门游记
     List<UserAsk> getHotUserAskListByTime(int askListNum);
+
+    //获得用户所有回答
+    List<UserAnswer> getUserAnswerList();
 }

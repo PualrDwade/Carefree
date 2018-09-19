@@ -121,23 +121,19 @@ public class CatalogController {
     public String ViewMdd(HttpSession session) {
         /*****************************景点推荐*********************************/
         List<ScenicMsg> recommendScenicList = catalogService.getRecommendScenicList(session);
-        System.out.println("-----------------------景点的个数" + recommendScenicList.size());
         session.setAttribute("recommendScenicList", recommendScenicList);
 
 
         /*****************************酒店推荐*********************************/
         List<HotelMsg> recommendHotelList = catalogService.getRecommendHotelList(session);
-        System.out.println("-----------------------宾馆的个数" + recommendHotelList.size());
         session.setAttribute("recommendHotelList", recommendHotelList);
 
         /*****************************攻略推荐*********************************/
         List<StrategyMsg> recommendStrategyList = catalogService.getRecommendStrategyList(session);
-        System.out.println("-----------------------攻略的个数" + recommendStrategyList.size());
         session.setAttribute("recommendStrategyList", recommendStrategyList);
 
         /*****************************游记推荐*********************************/
         List<TraverNote> recommendTraverNoteList = catalogService.getRecommendTraverNoteList(session);
-        System.out.println("-----------------------游记的个数" + recommendTraverNoteList.size());
         session.setAttribute("recommendTraverNoteList", recommendTraverNoteList);
         return "ProductDT/Mdd";
     }
@@ -162,23 +158,19 @@ public class CatalogController {
 
         /*****************************景点推荐*********************************/
         List<ScenicMsg> recommendScenicList = catalogService.getRecommendScenicList(session);
-        System.out.println("-----------------------景点的个数" + recommendScenicList.size());
         session.setAttribute("recommendScenicList", recommendScenicList);
 
 
         /*****************************酒店推荐*********************************/
         List<HotelMsg> recommendHotelList = catalogService.getRecommendHotelList(session);
-        System.out.println("-----------------------宾馆的个数" + recommendHotelList.size());
         session.setAttribute("recommendHotelList", recommendHotelList);
 
         /*****************************攻略推荐*********************************/
         List<StrategyMsg> recommendStrategyList = catalogService.getRecommendStrategyList(session);
-        System.out.println("-----------------------攻略的个数" + recommendStrategyList.size());
         session.setAttribute("recommendStrategyList", recommendStrategyList);
 
         /*****************************游记推荐*********************************/
         List<TraverNote> recommendTraverNoteList = catalogService.getRecommendTraverNoteList(session);
-        System.out.println("-----------------------游记的个数" + recommendTraverNoteList.size());
         session.setAttribute("recommendTraverNoteList", recommendTraverNoteList);
         return "ProductDT/Mdd";
     }
