@@ -223,7 +223,7 @@
     </div>
     <div class="container">
         <div class="section-top-border" th:each="productMsg:${productMsgPageInfo.getPageData()}"
-             th:if="${product_price_map.get(productMsg)}!='价格未知'">
+             th:if="${productMsg.product_price}!='价格未知'">
             <div class="row">
                 <div class="col-md-3 hotel_img">
                     <div class=" hotel_img">
@@ -242,7 +242,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="priceTag">
-                        <p th:utext="'￥'+${product_price_map.get(productMsg)}+'<small>/人起</small>'">￥1754
+                        <p th:utext="'￥'+${productMsg.product_price}+'<small>/人起</small>'">￥1754
 
                         </p>
                     </div>

@@ -5,7 +5,6 @@
 <mapper namespace="com.csu.carefree.Persistence.ProductMapper">
 
     <cache/>
-
     <!--
         获取所有产品信息
     -->
@@ -198,13 +197,14 @@
         sell_num,
         comments_num,
         product_grade,
-        supplier_id
+        supplier_id,
         FROM ProductDT_productmsg
         WHERE product_type = #{product_type} AND supplier_id = #{suppliper_id}
     </select>
 
     <!--通过城市名称获得产品列表-->
-    <select id="getProductListByCityName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    <select id="getProductListByCityName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
         SELECT
           ProductDT_productmsg.id,
           ProductDT_productmsg.name,
@@ -216,7 +216,8 @@
           ProductDT_productmsg.sell_num,
           ProductDT_productmsg.comments_num,
           ProductDT_productmsg.product_grade,
-          ProductDT_productmsg.supplier_id
+          ProductDT_productmsg.supplier_id,
+          ProductDT_product_city.product_price
           FROM  carefree.ProductDT_product_city , carefree.ProductDT_productmsg
           WHERE ProductDT_product_city.city_id = #{cityname}
 			AND ProductDT_productmsg.id = ProductDT_product_city.product_id
