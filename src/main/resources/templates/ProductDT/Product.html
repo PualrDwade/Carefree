@@ -360,6 +360,12 @@
                 </ul>
             </nav>
         </center>
+
+        <center >
+            <div th:if="${productMsgPageInfo.getPageData().size() == 0}">
+                <img src="/image/sorry.png">
+            </div>
+        </center>
     </div>
 </div>
 <!--================ 产品  =================-->
