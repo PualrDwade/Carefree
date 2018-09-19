@@ -52,7 +52,7 @@ public interface CatalogService {
     List<HotelMsg> getHotelListByDestination(String destination);
 
     //目的地和供应商
-    List<HotelMsg> getHotelListByDestinationAndStore(String destination ,String supplierId);
+    List<HotelMsg> getHotelListByDestinationAndStore(String destination, String supplierId);
 
 
     /*****************通过筛选条件获取产品*****************/
@@ -63,8 +63,6 @@ public interface CatalogService {
 
     //筛选条件：traver_days, product_type, supplier_id, cityname
 
-    //城市名
-    List<ProductMsg> getProductListByCityName(String cityname);
 
     //行程天数
     List<ProductMsg> getProductListByTraverdays(String traverDays);
@@ -172,13 +170,11 @@ public interface CatalogService {
 
     //通过游记ID获取游记信息
     TraverNote getTraverNoteById(String traverNoteId);
-  
+
     //通过城市名获取游记
     List<TraverNote> getTraverNoteListByCityName(String cityName);
 
     //插入游记信息
     void insertTraverNote(TraverNote traverNote);
 
-    //通过cityname查找供应产品
-    List<ProductMsg> getProductListByCityName(String destination);
 }

@@ -203,17 +203,17 @@ public class CatalogServiceImpl implements CatalogService {
 
         ArrayList<TraverNote> resultList = new ArrayList<>();
 
-        if(traverNoteNum < traverNoteList.size()){
-            for (int i=0; i < traverNoteNum; ++i){
+        if (traverNoteNum < traverNoteList.size()) {
+            for (int i = 0; i < traverNoteNum; ++i) {
                 resultList.add(traverNoteList.get(i));
             }
-        }else{
-            for (int i=0; i< traverNoteList.size(); ++i){
+        } else {
+            for (int i = 0; i < traverNoteList.size(); ++i) {
                 resultList.add(traverNoteList.get(i));
             }
         }
 
-        return  resultList;
+        return resultList;
     }
 
     /*******************酒店信息**********/
@@ -283,14 +283,10 @@ public class CatalogServiceImpl implements CatalogService {
         return productMapper.getProductListByThree(traverDays, productType, supplierId);
     }
 
-    @Override
-    public List<ProductMsg> getProductListByCityName(String cityname){
-        return productMapper.getProductListByCityName(cityname);
-    }
 
     @Override
-    public List<ProductMsg> getProductListByDaysAndStore(String traverDays , String supplierId) {
-        return productMapper.getProductListByDaysAndStore(traverDays,supplierId);
+    public List<ProductMsg> getProductListByDaysAndStore(String traverDays, String supplierId) {
+        return productMapper.getProductListByDaysAndStore(traverDays, supplierId);
     }
 
     @Override
@@ -430,11 +426,8 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public void insertTraverNote(TraverNote traverNote){
+    public void insertTraverNote(TraverNote traverNote) {
         traverNoteMapper.insertTraverNote(traverNote);
-      
-    @Override
-    public List<ProductMsg> getProductListByCityName(String destination) {
-        return productMapper.getProductListByCityName(destination);
     }
+
 }

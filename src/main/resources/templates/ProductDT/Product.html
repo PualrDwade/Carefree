@@ -1,5 +1,5 @@
 <!doctype html >
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
@@ -201,6 +201,7 @@
                     </div>
 
                 </div>
+            </div>
         </form>
         <div class="col-lg-3">
             <div class="input-group">
@@ -211,22 +212,24 @@
         </div>
     </div>
 </div>
-    <br><br>
-    <!--================ 产品  =================-->
-    <div class="whole-wrap">
-        <br>
-        <div class="section_title text-center">
-            <h2 class="title_color">为您推荐</h2>
-        </div>
-        <div class="container">
-            <div class="section-top-border" th:each="productMsg:${productMsgList}"  th:if="${productMsg.current_price}!='价格未知'">
-                <div class="row">
-                    <div class="col-md-3 hotel_img">
-                        <div class=" hotel_img">
-                            <img th:src="${productMsg.img_url}"
-                                 class="img-fluid">
-                        </div>
+
+<br><br>
+<!--================ 产品  =================-->
+<div class="whole-wrap">
+    <br>
+    <div class="section_title text-center">
+        <h2 class="title_color">为您推荐</h2>
+    </div>
+    <div class="container">
+        <div class="section-top-border" th:each="productMsg:${productMsgList}"
+             th:if="${product_price_map.get(productMsg)}!='价格未知'">
+            <div class="row">
+                <div class="col-md-3 hotel_img">
+                    <div class=" hotel_img">
+                        <img th:src="${productMsg.img_url}"
+                             class="img-fluid">
                     </div>
+
                 </div>
                 <div class="col-md-7 mt-sm-20 left-align-p">
                     <a th:href="${productMsg.product_link}"
@@ -238,15 +241,15 @@
                 </div>
                 <div class="col-md-2">
                     <div class="priceTag">
-                        <p>￥1754
-                            <small>/人起</small>
+                        <p th:utext="'￥'+${product_price_map.get(productMsg)}+'<small>/人起</small>'">￥1754
+
                         </p>
                     </div>
                     <div class="logo-size">
-                        <img th:if="${productMsg.supplier_id}=='00001'" src="/static/image/logo/美团.svg">
-                        <img th:if="${productMsg.supplier_id}=='00002'" src="/static/image/logo/携程.svg">
+                        <img th:if="${productMsg.supplier_id}=='00001'" src="/image/logo/美团.svg">
+                        <img th:if="${productMsg.supplier_id}=='00002'" src="/image/logo/马蜂窝.svg">
                         <img th:if="${productMsg.supplier_id}=='00003'" src="/image/logo/携程.svg">
-                        <img th:if="${productMsg.supplier_id}=='00004'" src="/static/image/logo/携程.svg">
+                        <img th:if="${productMsg.supplier_id}=='00004'" src="/image/logo/去哪儿.svg">
                     </div>
                     <div class="container">
                         <a>评分：</a><span class="badge badge-primary"
@@ -258,50 +261,11 @@
                 </div>
             </div>
         </div>
-        <center>
-            <nav>
-                <ul class="pagination">
-                    <li>
-                        <a th:href="@{${'/Catalog/HotProductList'}(pageNum = 1)}"> 首页 </a>
-                    </li>
-                    <li>
-                        <a th:if="${not pageInfo.isFirstPage()}"
-                           th:href="@{${'/Catalog/HotProductList'}(pageNum = ${pageInfo.getCurrentPage() - 1})}">上一页</a>
-                    </li>
-                    <li th:if="${pageInfo.getCurrentPage()+10 >= pageInfo.getMaxPage()}" th:each="pageNo : ${#numbers.sequence(pageInfo.getMaxPage() -10, pageInfo.getCurrentPage())}">
-                        <a th:if="${pageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
-                            <span th:text="${pageNo}"></span>
-                        </a>
-                        <a th:if="${not (pageInfo.getCurrentPage() eq pageNo)}"
-                           th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
-                            <span th:text="${pageNo}"></span>
-                        </a>
-                    </li>
-                    <li th:if="${pageInfo.getCurrentPage()+10 < pageInfo.getMaxPage()}" th:each="pageNo : ${#numbers.sequence(pageInfo.getCurrentPage(), pageInfo.getCurrentPage()+10)}">
-                        <a th:if="${pageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
-                            <span th:text="${pageNo}"></span>
-                        </a>
-                        <a th:if="${not (pageInfo.getCurrentPage() eq pageNo)}"
-                           th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
-                            <span th:text="${pageNo}"></span>
-                        </a>
-                    </li>
 
-                    <li>
-                        <a th:if="${not pageInfo.isLastPage()}"
-                           th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageInfo.getCurrentPage()+1})}">下一页</a>
-                    </li>
-
-                    <li>
-                        <a th:href="@{${'/Catalog/HotProductList'}(pageNum = ${pageInfo.getMaxPage()})}">
-                            尾页 </a>
-                    </li>
-                </ul>
-            </nav>
-        </center>
     </div>
 </div>
 <!--================ 产品  =================-->
+</div>
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>
 <!--================ End footer Area  =================-->
