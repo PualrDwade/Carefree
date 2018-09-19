@@ -229,14 +229,13 @@ public class CatalogController {
         }
 
         System.out.println("找到符合条件的产品" + productMsgList.size() + "条");
-
-        System.out.println("开始计算价格");
-        Map<ProductMsg, String> map = new HashMap<>();
-        for (ProductMsg productMsg : productMsgList) {
-            map.put(productMsg, catalogService.getDepartCityPrice(productMsg.getId(), destination).getProduct_price());
-        }
-        System.out.println("计算完成");
-        model.addAttribute("product_price_map", map);
+//        System.out.println("开始计算价格");
+//        Map<ProductMsg, String> map = new HashMap<>();
+//        for (ProductMsg productMsg : productMsgList) {
+//            map.put(productMsg, catalogService.getDepartCityPrice(productMsg.getId(), destination).getProduct_price());
+//        }
+//        System.out.println("计算完成");
+//        model.addAttribute("product_price_map", map);
         model.addAttribute("productMsgList", productMsgList);
         return "ProductDT/Product";
     }

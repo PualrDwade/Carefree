@@ -14,7 +14,17 @@ public class ProductMsg implements Serializable {
     private String comments_num;
     private String product_grade;
     private String supplier_id;
-    private String current_price = "价格未知";
+    private String product_price = "价格未知";
+
+
+    public String getProduct_price() {
+        return product_price;
+    }
+
+    public void setProduct_price(String product_price) {
+        this.product_price = product_price;
+    }
+
 
     public String getId() {
         return id;
@@ -104,29 +114,41 @@ public class ProductMsg implements Serializable {
         this.product_grade = product_grade;
     }
 
-    public ProductMsg() {
-    }
-
-    public ProductMsg(String id, String name, String traver_days, String product_type, String supplier_id, String product_link, String score, String sell_num, String img_url, String comments_num, String product_grade) {
+    public ProductMsg(String id, String name, String traver_days,
+                      String product_type, String img_url,
+                      String product_link, String score,
+                      String sell_num, String comments_num,
+                      String product_grade, String supplier_id) {
         this.id = id;
         this.name = name;
         this.traver_days = traver_days;
         this.product_type = product_type;
-        this.supplier_id = supplier_id;
+        this.img_url = img_url;
         this.product_link = product_link;
         this.score = score;
         this.sell_num = sell_num;
-        this.img_url = img_url;
         this.comments_num = comments_num;
         this.product_grade = product_grade;
-        this.current_price = "价格未知";
+        this.supplier_id = supplier_id;
     }
 
-    public String getCurrent_price() {
-        return current_price;
-    }
-
-    public void setCurrent_price(String current_price) {
-        this.current_price = current_price;
+    public ProductMsg(String id, String name, String traver_days,
+                      String product_type, String img_url,
+                      String product_link, String score,
+                      String sell_num, String comments_num,
+                      String product_grade, String supplier_id,
+                      String product_price) {
+        this.id = id;
+        this.name = name;
+        this.traver_days = traver_days;
+        this.product_type = product_type;
+        this.img_url = img_url;
+        this.product_link = product_link;
+        this.score = score;
+        this.sell_num = sell_num;
+        this.comments_num = comments_num;
+        this.product_grade = product_grade;
+        this.supplier_id = supplier_id;
+        this.product_price = product_price;
     }
 }
