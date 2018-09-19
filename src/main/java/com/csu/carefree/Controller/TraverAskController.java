@@ -133,12 +133,14 @@ public class TraverAskController {
         }
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        String askId = "test_" + (traverAskService.getUserAskList().size() - 13);
+        String askId = "test_" + (traverAskService.getUserAskList().size() - 12);
         String username = (String) session.getAttribute("username");
         UserAsk userAsk = new UserAsk(askId, title, askContent, "0", df.format(new Date()), username, "CN_city10");
         traverAskService.insertUserAsk(userAsk);
+        int askSum = traverAskService.getUserAskList().size();
+        session.setAttribute("askSum", askSum);
 
-        return "/TraverAsk/QuestionAnswer";
+        return "redirect:/TraverAsk/ViewNewQuestion";
     }
 
     //问题回复
@@ -160,6 +162,8 @@ public class TraverAskController {
         UserAnswer userAnswer = new UserAnswer(answerId, answerContent, df.format(new Date()), askId, userId);
         traverAskService.insertUserAnswer(userAnswer);
         List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(userAsk.getId());
+        int answerSum = traverAskService.getUserAnswerList().size();
+        session.setAttribute("answerSum", answerSum);
 
         model.addAttribute("userAsk", userAsk);
         model.addAttribute("userAnswerList", userAnswerList);
