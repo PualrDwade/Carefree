@@ -148,7 +148,7 @@
     -->
     <select id="getProductListByThree" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
-      ProductDT_productmsg.oducid,
+      ProductDT_productmsg.id,
       name,
       traver_days,
       product_type,
@@ -162,7 +162,7 @@
       ProductDT_product_city.product_price
     FROM ProductDT_productmsg,ProductDT_product_city
     WHERE traver_days = #{traver_days} AND product_type = #{product_type}
-    AND supplier_id = #{suppliper_id} AND city_id#{cityname}
+    AND supplier_id = #{suppliper_id} AND city_id= #{cityname}
     AND ProductDT_productmsg.id = ProductDT_product_city.product_id
     </select>
 
