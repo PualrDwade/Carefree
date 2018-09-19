@@ -107,20 +107,16 @@
                                             </div>
                                         </div>
                                         <div class="_j_long_answer_item">
-                                            <div class="_j_answer_html" th:text="${userAnswer.answer_content}">
-                                                你好</br></br>1.门票是免费的</br>
-                                                2.9.16号，是它的周年纪念日，当然有两场影像展，有时间的话推荐那天去看看</br></br></br></div>
+                                            <div class="_j_answer_html" th:text="${userAnswer.answer_content}"></div>
                                         </div>
                                     </div>
-
                                     <div class="a-operate _js_operate clearfix">
                                         <div class="fl">
-
                                             <div class="collect">
                                                 <a class="_j_collect_answer"><i></i>收藏</a>
                                             </div>
                                             <div class="pub-time">
-                                                <span th:text="发布与+${userAnswer.add_time}">发布于 1天前</span>
+                                                <span th:text="发布于+${userAnswer.add_time}"></span>
                                             </div>
                                             <div class="tip-off">
                                                 <a data-japp="report"
@@ -135,16 +131,6 @@
                         </ul>
                         <!-- 回答详情页 更多回答 -->
                     </div>
-
-                    <!-- 加载更多 -->
-                    <div class="_j_pager">
-                        <div class="ft ft_load_btn _j_page_loader">
-                            <div class="answer-more"><a rel="nofollow">加载更多<i></i></a></div>
-                        </div>
-                        <div class="_j_page_loading ft hide ft_loading">
-                            <div class="answer-loading">正在加载<i></i></div>
-                        </div>
-                    </div>
                     <!-- 用户回复信息 -->
                     <div class="answer-add clearfix">
                         <a name="answer"></a>
@@ -152,16 +138,17 @@
                             <a class="aa-avatar" href="/wenda/u/85353052/answer.html"><img
                                     src="http://b2-q.mafengwo.net/s12/M00/5E/5C/wKgED1uY0fWAWbYCAAJ937FhNIQ53.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
                                     class="photo"></a>
-                            <a class="aa-name" th:text="${session.username}">Dreams °🍀</a>
+                            <a class="aa-name" th:text="${session.username}"></a>
                         </div>
                         <form class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  "
                               th:action="@{/TraverAsk/answerAsk}"
                               th:method="post">
                             <div class="editor-scroll">
-                                <div class="question-title" th:text="${userAsk.title}">请问长沙谢子龙影像馆要收门票吗？</div>
+                                <div class="question-title" th:text="${userAsk.title}"></div>
                                 <div class="answer-editor">
                                     <div class="toolbar-out">
-                                        <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar"  style="height: auto; width: 703px;">
+                                        <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar"
+                                             style="height: auto; width: 703px;">
                                             <div class="item _js_bold"><a class="btn-bold" role="button"></a>
                                                 <div class="tooltip"><span>加粗</span></div>
                                             </div>
@@ -177,15 +164,11 @@
                                             <div class="item _js_ordered_list"><a class="btn-ol" role="button"></a>
                                                 <div class="tooltip"><span>有序列表</span></div>
                                             </div>
-
-
                                         </div>
                                     </div>
                                     <!--修改TextArea样式-->
-                                    <textarea class="" id="" name="answerContent"  style="width: 703px ;height: 200px">
+                                    <textarea class="" id="" name="answerContent" style="width: 703px ;height: 200px">
                                     </textarea>
-
-
                                 </div>
                                 <div class="aa-ft">
                                     <input class=" " type="submit" value="提交回答">
@@ -199,7 +182,9 @@
             <div class="col-side" id="_js_right_side">
                 <!-- 我要提问 -->
                 <div class="btn-question">
-                    <a th:href="@{/TraverAsk/ViewCreateAsk}" class="btn-ask btn-ask2" target="_blank">我要提问</a>
+                    <a th:href="@{/TraverAsk/ViewCreateAsk}" style="margin-top: 57px!important;"
+                       class="btn-ask btn-ask2"
+                       target="_blank">我要提问</a>
                 </div>
             </div>
         </div>

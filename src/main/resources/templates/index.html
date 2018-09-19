@@ -139,7 +139,6 @@
                             <img th:src="${product1.img_url}"
                                  class="productImg">
                         </div>
-
                     </div>
                     <div class="col-md-7 mt-sm-20 left-align-p">
                         <a th:href="${product1.product_link}"
@@ -176,7 +175,6 @@
                             <img th:src="${product2.img_url}"
                                  class="productImg">
                         </div>
-
                     </div>
                     <div class="col-md-7 mt-sm-20 left-align-p">
                         <a th:href="${product2.product_link}"
@@ -221,27 +219,31 @@
                 <a th:href="@{TraverAsk/ViewTraverNote}"><h2 class="title_color">精 品 游 记</h2></a>
                 <p style="text-align: center">这 里 有 最 精 彩 的 旅 行 游 记，能 给 你 更 多 的 旅 行 知 识</p>
             </div>
-            <div class="row mb_30" th:each="hotTraverNote : ${session.hotTraverNoteList}">
-                <div class="col-lg-4 col-md-6">
+            <div class="row mb_30">
+                <!--item-->
+                <div class="col-lg-4 col-md-6" th:each="hotTraverNote : ${hotTraverNoteList}">
                     <div class="single-recent-blog-post">
                         <div class="thumb">
-                            <img class="img-fluid" th:src="${hotTraverNote.img_url}" alt="post">
+                            <img class="img-fluid" src="/image/blog/blog-1.jpg" alt="post">
                         </div>
                         <div class="details">
                             <div class="tags">
-                                <a href="#" class="button_hover tag_btn">Travel</a>
-                                <a href="#" class="button_hover tag_btn">Life Style</a>
+                                <a href="#" class="button_hover tag_btn">旅行</a>
+                                <a href="#" class="button_hover tag_btn">生活方式</a>
                             </div>
-                            <a href="#"><h4 class="sec_h4">Low Cost Advertising</h4></a>
-                            <p>Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
-                                farmer.</p>
-                            <h6 class="date title_color">31st January,2018</h6>
+                            <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId=${hotTraverNote.id})}"><h4
+                                    class="sec_h4" th:text="${hotTraverNote.title}"></h4></a>
+                            <p th:text="${hotTraverNote.note_content}" style="margin-top: 3px"></p>
+                            <h6 class="date title_color" style="bottom: 0px;position: absolute"
+                                th:text="'发表于:'+${hotTraverNote.add_time}"></h6>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!--================ 游记  =================-->
+
     <!--================ 游记  =================-->
 
 

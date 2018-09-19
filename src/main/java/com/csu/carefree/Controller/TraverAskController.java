@@ -123,8 +123,6 @@ public class TraverAskController {
     }
 
     //创建新用户问答
-    //@RequestMapping(value = "/TraverAsk/createAsk" , method = RequestMethod.POST)
-    //@GetMapping("/TraverAsk/createAsk")
     @RequestMapping(value = "/TraverAsk/createAsk", method = RequestMethod.POST)
     public String createAsk(@RequestParam("title") String title, @RequestParam("askContent") String askContent, HttpSession session, Model model) {
         //获得表单内容
@@ -143,9 +141,11 @@ public class TraverAskController {
     }
 
     //问题回复
-    //@GetMapping("/TraverAsk/answerAsk")
     @RequestMapping(value = "/TraverAsk/answerAsk", method = RequestMethod.POST)
     public String answerUserAsk(@RequestParam("answerContent") String answerContent, HttpSession session, Model model) {
+        if (session.getAttribute("username") == null) {
+            return "redirect:/account/ViewSignonForm";
+        }
         //获得当前问题ID
         //获取问题答案List
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -165,7 +165,6 @@ public class TraverAskController {
     }
 
     /*****************用户游记模块******************/
-
     //进入用户游记的控制器url
     @GetMapping("/TraverAsk/ViewTraverNote")
     public String ViewTraverNote(Model model, @RequestParam(defaultValue = "1") Integer pageNum) {

@@ -50,7 +50,6 @@ public class CatalogController {
     //请求主界面
     @GetMapping("/")
     public String viewIndex(HttpSession session, Model model) {
-
         //首先调用百度地图api获得当前城市信息,如果获取失败,则设为长沙
         String location = null;
         try {
@@ -80,28 +79,25 @@ public class CatalogController {
             session.setAttribute("traverMsg", traverMsg);
         }
 
-        /*****************************热门产品推荐*********************************/
-        List<FullProductInfo> hotProductList = catalogService.getHotProductList(session);
-        session.setAttribute("product1", hotProductList.get(0));
-        session.setAttribute("product2", hotProductList.get(1));
 
-        FullProductInfo product1 = session.getAttribute("product1")
-                == null ? new FullProductInfo() : (FullProductInfo) session.getAttribute("product1");
+        /*****************************热门产品推荐*********************************/
+        //随机推荐两个产品
+        List<FullProductInfo> hotProductList = catalogService.getHotProductList(session);
+        FullProductInfo product1 = hotProductList.get(0);
         String product1Price = (catalogService.getDepartCityPrice(product1.getId(), (String) session.getAttribute("location"))).getProduct_price();
         product1.setPrice(product1Price);//设置价格
-        FullProductInfo product2;
-        if (session.getAttribute("product2") == null)
-            product2 = new FullProductInfo();
-        else
-            product2 = (FullProductInfo) session.getAttribute("product2");
+        FullProductInfo product2 = hotProductList.get(1);
         String product2Price = (catalogService.getDepartCityPrice(product2.getId(), (String) session.getAttribute("location"))).getProduct_price();
         product2.setPrice(product2Price);
+        //2热门产品信息存入model
+        model.addAttribute("product1", product1);
+        model.addAttribute("product2", product2);
 
         /***************************热门游记推荐*********************************/
-//        List<TraverNote> hotTraverNoteList = catalogService.getHotTraverNoteList();
-//        System.out.println("热门游记个数："+ hotProductList.size());
-//        session.setAttribute("hotTraverNoteList", hotTraverNoteList);
-
+        //得到两篇热门游记
+        List<TraverNote> hotTraverNoteList = catalogService.getHotTraverNoteList(3);
+        System.out.println("热门游记个数：" + hotProductList.size());
+        model.addAttribute("hotTraverNoteList", hotTraverNoteList);
         /****************************热门酒店推荐********************************/
         //热门酒店推荐这个城市排名最高个酒店
         //1.价格最便宜的酒店
@@ -112,9 +108,7 @@ public class CatalogController {
         //1. 酒店信息
         model.addAttribute("hotHotelList_01", hotHotelList_01);
         model.addAttribute("hotHotelList_02", hotHotelList_02);
-        //2. 热门产品信息
-        model.addAttribute("product1", product1);
-        model.addAttribute("product2", product2);
+
         return "index";
     }
 

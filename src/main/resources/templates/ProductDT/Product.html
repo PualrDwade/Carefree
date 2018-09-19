@@ -6,8 +6,16 @@
 <!--================Header Area =================-->
 <style>
     body input {
-        border: 0.5px;
-        solid: #585858;
+        border: 3px;
+        solid: #273028;
+        border-color: #1b1e21;
+    }
+
+    .priceTag {
+        font-size: 18px;
+        margin-top: 5px;
+        color: #F3C300;
+        font-weight: 800;
     }
 </style>
 <div id="content" style="margin-top: 10px">
@@ -277,15 +285,13 @@
                 <div class="col-md-7 mt-sm-20 left-align-p">
                     <a th:href="${productMsg.product_link}"
                        target="_blank">
-                        <h3 class="mb-30 title_color" th:text="${productMsg.name}">海南三亚4日3晚跟团游(5钻)·【自营优选】网红游亚特兰蒂斯神秘世界
-                            0购物 海景套房+希尔顿品牌选择
-                            热门景区全覆盖</h3>
+                        <h3 class="mb-30 title_color" style="font-size: 18px!important;"
+                            th:text="${productMsg.name}"></h3>
                     </a>
                 </div>
                 <div class="col-md-2">
                     <div class="priceTag">
-                        <p th:utext="'￥'+${productMsg.product_price}+'<small>/人起</small>'">￥1754
-
+                        <p th:utext="'￥'+${productMsg.product_price}+'<small>/人起</small>'">
                         </p>
                     </div>
                     <div class="logo-size">
@@ -314,7 +320,6 @@
                         <a th:if="${not productMsgPageInfo.isFirstPage()}"
                            th:href="@{${'/Catalog/HotProductList'}(pageNum = ${productMsgPageInfo.getCurrentPage() - 1})}">上一页</a>
                     </li>
-
                     <li th:if="${productMsgPageInfo.getMaxPage() <= 10}"
                         th:each="pageNo : ${#numbers.sequence(1, productMsgPageInfo.getMaxPage())}">
                         <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
@@ -325,7 +330,6 @@
                             <span th:text="${pageNo}"></span>
                         </a>
                     </li>
-
                     <li th:if="${productMsgPageInfo.getCurrentPage()+10 >= productMsgPageInfo.getMaxPage() && productMsgPageInfo.getMaxPage() > 10}"
                         th:each="pageNo : ${#numbers.sequence(productMsgPageInfo.getMaxPage() -10, productMsgPageInfo.getMaxPage())}">
                         <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
@@ -336,7 +340,6 @@
                             <span th:text="${pageNo}"></span>
                         </a>
                     </li>
-
                     <li th:if="${productMsgPageInfo.getCurrentPage()+10 < productMsgPageInfo.getMaxPage() && productMsgPageInfo.getMaxPage() > 10}"
                         th:each="pageNo : ${#numbers.sequence(productMsgPageInfo.getCurrentPage(), productMsgPageInfo.getCurrentPage()+10)}">
                         <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
@@ -347,12 +350,10 @@
                             <span th:text="${pageNo}"></span>
                         </a>
                     </li>
-
                     <li>
                         <a th:if="${not productMsgPageInfo.isLastPage()}"
                            th:href="@{${'/Catalog/HotProductList'}(pageNum=${productMsgPageInfo.getCurrentPage()+1})}">下一页</a>
                     </li>
-
                     <li>
                         <a th:href="@{${'/Catalog/HotProductList'}(pageNum = ${productMsgPageInfo.getMaxPage()})}">
                             尾页 </a>
@@ -363,7 +364,6 @@
     </div>
 </div>
 <!--================ 产品  =================-->
-</div>
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>
 <!--================ End footer Area  =================-->
