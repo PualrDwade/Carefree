@@ -60,7 +60,7 @@
     INSERT INTO TraverAsk_userask
       (ID, TITLE, ASK_CONTENT, STAR_NUM, ADD_TIME,  USER_ID_ID, CITY_ID_ID)
     VALUES
-      (#{id}, #{title}, #{ask_content}, #{star_num}, #{add_time},}, #{user_id}, #{city_id})
+      (#{id}, #{title}, #{ask_content}, #{star_num}, #{add_time}, #{user_id}, #{city_id})
   </insert>
 
     <!--通过username得到用户问题列表-->
@@ -74,5 +74,19 @@
          CITY_ID_ID AS city_id
     FROM TraverAsk_userask
     WHERE user_id_id = #{username}
+    </select>
+
+    <!--通过时间进行排序-->
+    <select id="getUserAskListByTime" resultType="com.csu.carefree.Model.TraverAsk.UserAsk">
+    SELECT
+         ID,
+         TITLE,
+         ASK_CONTENT,
+         STAR_NUM,ADD_TIME,
+         USER_ID_ID AS user_id,
+         CITY_ID_ID AS city_id
+    FROM TraverAsk_userask
+    ORDER BY add_time DESC
+
     </select>
 </mapper>

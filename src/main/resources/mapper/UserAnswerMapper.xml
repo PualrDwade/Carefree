@@ -18,7 +18,7 @@
         ASK_ID_ID AS ask_id,
         USER_ID_ID AS user_id
     FROM TraverAsk_useranswer
-    where ask_id_id=#{userAskId}
+    WHERE ask_id_id = #{userAskId}
   </select>
 
     <!--
@@ -44,5 +44,6 @@
     FROM TraverAsk_useranswer
     WHERE user_id_id = #{username}
     </select>
+
 
 </mapper>

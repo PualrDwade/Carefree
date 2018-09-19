@@ -10,13 +10,21 @@ import com.csu.carefree.Service.AccountService;
 import com.csu.carefree.Service.CatalogService;
 import com.csu.carefree.Service.TraverAskService;
 import com.csu.carefree.Service.impl.CatalogServiceImpl;
+import com.csu.carefree.Util.HtmlEncode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
+import java.awt.print.Book;
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -40,10 +48,14 @@ public class TraverAskController {
         //进行分页操作
         //按点赞数进行排序
         //返回页面
-        List<UserAsk> askList = traverAskService.getUserAskList();//获得所有UserAsk
-        model.addAttribute("askList", askList);
+        List<UserAsk> askList = traverAskService.getUserAskList();//获得所有Ask
+        askList.sort(Comparator.reverseOrder());
+        model.addAttribute("askList" , askList);
+
         return "TraverAsk/QuestionAnswer";
     }
+
+
 
     //进入用户提出问题模块
     @GetMapping("/TraverAsk/ViewCreateAsk")
@@ -54,19 +66,26 @@ public class TraverAskController {
 
     //查看热门问题
     @GetMapping("/TraverAsk/ViewHotQuestion")
-    public String ViewHotQuestion() {
+    public String ViewHotQuestion(Model model) {
         //通过点赞先后完成问题列表查询
         //排序关键词star_num
         //直接刷新网页
+        List<UserAsk> askList = traverAskService.getUserAskList();//获得所有Ask
+        askList.sort(Comparator.reverseOrder());
+        model.addAttribute("askList" , askList);
+
         return "TraverAsk/QuestionAnswer";
     }
 
     //查看最新问题
     @GetMapping("/TraverAsk/ViewNewQuestion")
-    public String ViewNewQuestion() {
+    public String ViewNewQuestion(Model model) {
         //通过时间先后完成问题列表查询
         //排序关键词add_time
         //直接刷新网页
+        List<UserAsk> askList = traverAskService.getUserAskListByTime();//获得所有Ask
+        model.addAttribute("askList" , askList);
+
         return "TraverAsk/QuestionAnswer";
     }
 
@@ -75,7 +94,9 @@ public class TraverAskController {
     public String searchAskList(@RequestParam("keyword") String keyword,Model model) {
         //通过用户输入信息搜索问题列表
         //排序是顺序暂定为点赞数量star_num
+        System.out.println(keyword);
         List<UserAsk> askList = traverAskService.searchUserAskList(keyword);
+        askList.sort(Comparator.reverseOrder());
         model.addAttribute("askList", askList);
 
         return "TraverAsk/QuestionAnswer";
@@ -86,33 +107,45 @@ public class TraverAskController {
     public String viewAskAnswerDetail(@RequestParam("askId") String askId, Model model) {
         //获得当前问题ID
         //获取问题答案List
-        try {
             UserAsk userAsk = traverAskService.getUserAskById(askId);
-            List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(askId);
+            List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(userAsk.getId());
             model.addAttribute("userAsk", userAsk);
             model.addAttribute("userAnswerList", userAnswerList);
 
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
         return "TraverAsk/AskAnswerDetail";
     }
 
     //创建新用户问答
     //@RequestMapping(value = "/TraverAsk/createAsk" , method = RequestMethod.POST)
     @GetMapping("/TraverAsk/createAsk")
-    public String createAsk( HttpSession session, Model model){
+    public String createAsk(@RequestParam("title") String title, @RequestParam("askContent") String askContent, HttpSession session, Model model){
         //获得表单内容
         //以HTML形式保存用户问题
         //获得用户ID
+        //设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 
-        //String userName = (String) session.getAttribute("username");
-        //List<UserAsk> askList = traverAskService.getUserAskList();//获得所有UserAsk
-       // model.addAttribute("askList", askList);
+        UserAsk userAsk = new UserAsk("",title,askContent,"0",df.format(new Date()),"2391255979@qq.com","CN_city10");
+        traverAskService.insertUserAsk(userAsk);
 
         return "redirect:/TraverAsk/QuestionAnswer";
     }
 
+    //问题回复
+    @GetMapping("/TraverAsk/answerAsk")
+    public String answerUserAsk(@RequestParam("askId") String askId,@RequestParam("answerContent") String answerContent,Model model){
+        //获得当前问题ID
+        //获取问题答案List
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+//        UserAsk userAsk = traverAskService.getUserAskById(askId);
+//        UserAnswer userAnswer = new UserAnswer("",answerContent,df.format(new Date()),askId,"544493924@qq.com");
+//        traverAskService.insertUserAnswer(userAnswer);
+//        List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(userAsk.getId());
+//        model.addAttribute("userAsk", userAsk);
+//        model.addAttribute("userAnswerList", userAnswerList);
+
+        return "TraverAsk/AskAnswerDetail";
+    }
 
     /*****************用户游记模块******************/
 
@@ -123,7 +156,9 @@ public class TraverAskController {
         //返回页面进行渲染
         //获取游记列表
         List<TraverNote> traverNoteList = catalogService.getTraverNoteList();
+        List<TraverNote> hotTraverNoteList = catalogService.getHotTraverNoteList(6);
         model.addAttribute("traverNoteList", traverNoteList);
+        model.addAttribute("hotTraverNoteList", hotTraverNoteList);
 
         return "TraverAsk/TraverNoteList";
     }
@@ -135,11 +170,10 @@ public class TraverAskController {
         // 通过游记ID获取游记内容
         TraverNote traverNote = catalogService.getTraverNoteById(traverNoteId);
         UserProfile userProfile = accountService.getUserProfileByUserName(traverNote.getUser_id());
-
         model.addAttribute("traverNote" , traverNote);
         model.addAttribute("userProfile",userProfile);
 
-        return "TraverAsk/TraverNoteDetail";
+        return "TraverAsk/AskAnswerDetail";
     }
 
     //搜索游记功能
@@ -147,7 +181,9 @@ public class TraverAskController {
     public String searchNoteList(@RequestParam("keyword") String keyword,Model model){
         //根据关键词搜索游记
         List<TraverNote> traverNoteList = catalogService.searchTraverNoteList(keyword);
+        List<TraverNote> hotTraverNoteList = catalogService.getHotTraverNoteList(6);
         model.addAttribute("traverNoteList", traverNoteList);
+        model.addAttribute("hotTraverNoteList", hotTraverNoteList);
 
         return "TraverAsk/TraverNoteList";
     }
@@ -155,11 +191,21 @@ public class TraverAskController {
     //创建新用户游记
     //@RequestMapping(value = "/TraverAsk/createNote", method = RequestMethod.POST)
     @GetMapping("/TraverAsk/createNote")
-    public String createNote(Model model){
+    public String createNote(@RequestParam("title") String title, @RequestParam("noteContent") String noteContent, Model model){
         //获取用户写的游记TITLE
         //获得游记写的游记内容
         //List<TraverNote> traverNoteList = catalogService.getTraverNoteList();
         //model.addAttribute("traverNoteList", traverNoteList);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        TraverNote traverNote = new TraverNote("",title,noteContent,"0","1",df.format(new Date()),"http://software.csu.edu.cn/","544493924@qq.com","CN_city68");
+        catalogService.insertTraverNote(traverNote);
+
+        List<TraverNote> traverNoteList = catalogService.getTraverNoteList();
+        List<TraverNote> hotTraverNoteList = catalogService.getHotTraverNoteList(6);
+
+        model.addAttribute("traverNoteList", traverNoteList);
+        model.addAttribute("hotTraverNoteList", hotTraverNoteList);
+
 
         return "redirect:/TraverAsk/ViewTraverNote";
     }

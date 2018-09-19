@@ -23,4 +23,5 @@ public interface TraverNoteMapper {
 
     //通过城市名来查询相应的游记
     List<TraverNote> getTraverNodeListbyCityName(String cityId);
+
 }

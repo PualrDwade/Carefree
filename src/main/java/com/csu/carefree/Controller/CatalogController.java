@@ -31,8 +31,6 @@ public class CatalogController {
      * 实现与酒店有关的业务逻辑
      * 酒店信息展示，热门酒店推荐
      */
-
-
     private static final int PRODUCTPAGESIZE = 8;
     private static final int HOTELPAGESIZE = 8;
     @Autowired
@@ -45,8 +43,6 @@ public class CatalogController {
         model.addAttribute("HotelList");
         return "Hotel";
     }
-
-
     //请求主界面
     @GetMapping("/")
     public String viewIndex(HttpSession session, Model model) {
@@ -292,7 +288,6 @@ public class CatalogController {
         }
 
         List<HotelMsg> hotelMsgList = new ArrayList<HotelMsg>();
-
         if (supplierId.equals("0") && price.equals("0")) {
             hotelMsgList = catalogService.getHotelListByDestination(destination + "市");
         }

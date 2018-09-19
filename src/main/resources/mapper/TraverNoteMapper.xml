@@ -21,7 +21,7 @@
           USER_ID_ID AS user_id,
           CITY_ID_ID AS city_id
     FROM TraverAsk_travernote
-    WHERE NOTIFY_STATUS = 'YES'
+    WHERE NOTIFY_STATUS = '2'
   </select>
 
     <!--
@@ -40,7 +40,7 @@
           CITY_ID_ID AS city_id
     FROM TraverAsk_travernote
     WHERE lower(title) like #{value}
-    AND NOTIFY_STATUS = 'YES'
+    AND NOTIFY_STATUS = '2'
   </select>
 
     <!--
@@ -103,4 +103,12 @@
     FROM TraverAsk_travernote
     WHERE user_id_id = #{cityId}
     </select>
+
+    <!--插入游记-->
+    <insert id="insertTraverNote" parameterType="com.csu.carefree.Model.TraverAsk.TraverNote">
+      INSERT INTO  TraverAsk_travernote
+      (ID, TITLE, NOTE_CONTENT, STAR_NUM, NOTIFY_STATUS, ADD_TIME, IMG_URL, USER_ID_ID, CITY_ID_ID )
+      values
+      (#{id},#{title},#{note_content},#{star_num},#{notify_status},#{add_time},#{img_url},#{user_id},#{city_id})
+    </insert>
 </mapper>
