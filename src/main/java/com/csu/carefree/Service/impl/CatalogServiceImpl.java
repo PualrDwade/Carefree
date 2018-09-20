@@ -160,15 +160,19 @@ public class CatalogServiceImpl implements CatalogService {
 
     /*******************获取热门信息**********/
     @Override
-    public ArrayList<FullProductInfo> getHotProductList(HttpSession session) {
-        List<ProductMsg> productList = this.getProductList();
+    public ArrayList<FullProductInfo> getHotProductList(String location) {
+        //随机得到两个热门产品进行推荐
+        List<ProductMsg> productList = productMapper.getProductListByCityName(location);
         ArrayList<FullProductInfo> hotProductList = new ArrayList<>();
-        //热门产品推荐指标
-        for (int i = 0; i < productList.size(); i++) {
-            break;
+        Random random = new Random();
+        int n1 = random.nextInt(productList.size());
+        int n2 = 0;
+        while (true) {
+            n2 = random.nextInt(productList.size());
+            if (n2 != n1) break;
         }
-        hotProductList.add(new FullProductInfo(productList.get(0)));
-        hotProductList.add(new FullProductInfo(productList.get(1)));
+        hotProductList.add(new FullProductInfo(productList.get(n1)));
+        hotProductList.add(new FullProductInfo(productList.get(n2)));
         return hotProductList;
     }
 
@@ -432,7 +436,7 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public List<TraverNote> getAllTraverNoteList(){
+    public List<TraverNote> getAllTraverNoteList() {
         return traverNoteMapper.getAllTraverNoteList();
     }
 }

@@ -6,9 +6,8 @@
 <!--================Header Area =================-->
 <style>
     body input {
-        border: 3px;
-        solid: #273028;
-        border-color: #1b1e21;
+        border-width: 3px !important;
+        solid: #273028 !important;
     }
 
     .priceTag {
@@ -16,6 +15,11 @@
         margin-top: 5px;
         color: #F3C300;
         font-weight: 800;
+    }
+
+    .primary-checkbox input {
+        border-width: 2px !important;
+        solid: #273028 !important;
     }
 </style>
 <div id="content" style="margin-top: 10px">
@@ -362,7 +366,7 @@
             </nav>
         </center>
 
-        <center >
+        <center>
             <div th:if="${productMsgPageInfo.getPageData().size() == 0}">
                 <img src="/image/sorry.png">
             </div>

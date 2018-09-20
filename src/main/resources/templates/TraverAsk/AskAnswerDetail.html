@@ -23,7 +23,7 @@
                         <div class="search-panel" data-cs-t="wenda">
                             <div class="clearfix _j_suggest_hd " style="margin-top: 15px">
                                 <div class="sp-input" style="height: auto!important;">
-                                    <input type="text" id="_j_wenda_seach_input" value="" placeholder="提问前请先搜索">
+                                    <input type="text" id="_j_wenda_seach_input" value="" placeholder="搜索回复">
                                 </div>
                                 <input type="button" id="_j_wenda_seach_button" class="sp-button" data-mddid="0">
                             </div>
@@ -46,8 +46,6 @@
                         </div>
                         <div class="q-info1 clearfix">
                             <div class="pub-bar fr">
-                            <span class="photo"> <img src="https://images.mafengwo.net/images/pp48.gif" width="16"
-                                                      height="16"></span>
                                 <span class="name" th:text="${userAsk.user_id}">匿名用户</span>
                                 <span class="time"><i class="ico_phone"></i><span th:text="${userAsk.add_time}">2018-09-12 10:10:59</span></span>
                             </div>
@@ -62,18 +60,10 @@
                             </div>
                         </div>
                         <div class="fr">
-                            <!--
-                                <span class="atten-num">195浏览</span>
-                            -->
                             <a class="btn-answer _j_btn_goanswer" rel="nofollow">回答</a>
                         </div>
                     </div>
                     <!-- 修改问题内容 -->
-                    <!-- 邀请回答 -->
-                    <div data-pagelet id="pagelet-block-a6db9a51b076cf8ecd0a33c9beedfb9d" class=""
-                         data-api=":qa:pagelet:InviteUserAnswer"
-                         data-params="{&quot;mddid&quot;:10466,&quot;qid&quot;:13051644,&quot;anum&quot;:2,&quot;flag&quot;:0}"
-                         data-async="1" data-controller="/js/qa/InviteUserAnswer"></div>
                 </div>
                 <!-- 回答区域 -->
                 <div class="answer-wrap">
@@ -182,7 +172,7 @@
             <div class="col-side" id="_js_right_side">
                 <!-- 我要提问 -->
                 <div class="btn-question">
-                    <a th:href="@{/TraverAsk/ViewCreateAsk}" style="margin-top: 57px!important;"
+                    <a th:href="@{/TraverAsk/ViewCreateAsk}" style="margin-top: -7px!important;"
                        class="btn-ask btn-ask2"
                        target="_blank">我要提问</a>
                 </div>

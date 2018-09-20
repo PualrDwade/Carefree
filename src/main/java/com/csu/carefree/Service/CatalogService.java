@@ -31,8 +31,8 @@ public interface CatalogService {
 
     void sortTraverNoteList(List<TraverNote> recommendTraverNoteList);
 
-    /*******************获取热门信息**********/
-    ArrayList<FullProductInfo> getHotProductList(HttpSession session);
+    /*******************获取所在地热门信息**********/
+    ArrayList<FullProductInfo> getHotProductList(String location);
 
     //通过城市名获取热门酒店信息,按照给定的指标进行筛选
     ArrayList<HotelMsg> getHotHotelListByCityName(String cityName, int orderType);

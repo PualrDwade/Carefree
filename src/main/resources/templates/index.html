@@ -128,7 +128,7 @@
         <!--<br>-->
         <div class="section_title text-center">
             <a th:href="@{/Catalog/HotProductList}">
-                <h2 class="title_color">热门旅游</h2>
+                <h2 class="title_color">旅游推荐</h2>
             </a>
         </div>
         <div class="container">
@@ -242,11 +242,7 @@
             </div>
         </div>
     </section>
-    <!--================ 游记  =================-->
-
-    <!--================ 游记  =================-->
-
-
+    <br><br><br>
     <!--================ 酒店  =================-->
     <section class="accomodation_area section_gap">
         <div class="container">
@@ -311,6 +307,7 @@
             </div>
         </div>
     </section>
+    <br><br><br>
     <!--================ 问答展示  =================-->
     <section class="testimonial_area section_gap">
         <div class="container">
@@ -318,71 +315,49 @@
                 <a th:href="@{/TraverAsk/QuestionAnswer}"><h2 class="title_color">问 答 专 区</h2></a>
                 <p style="text-align: center">为 你 答 疑 解 惑， 更 加 了 解 这 个 城 市</p>
             </div>
-            <div class="testimonial_slider owl-carousel">
-                <div class="media testimonial_item">
-                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                    <div class="media-body">
-                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
-                            you
-                            think about it, you travel across her face, and She is the </p>
-                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                        <div class="star">
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star-half-o"></i></a>
+            <!--问题显示区-->
+            <div class="bd newcate-bd">
+                <!--问题列表-->
+                <ul class="_j_pager_box">
+                    <!--这是一个循环问题块-->
+                    <li class="item clearfix " data-qid="12980256" th:each="userAsk : ${askList}">
+                        <!--问题标题-->
+                        <div class="title">
+                            <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}"
+                               target="_blank" th:text="${userAsk.title}"></a>
                         </div>
-                    </div>
-                </div>
-                <div class="media testimonial_item">
-                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                    <div class="media-body">
-                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
-                            you
-                            think about it, you travel across her face, and She is the </p>
-                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                        <div class="star">
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star-half-o"></i></a>
+                        <!--问题内容-->
+                        <div class="container">
+                            <!--用户头像-->
+                            <div class="avatar"><a target="_blank" class="_j_filter_click"><img
+                                    class="_j_filter_click"
+                                    src="http://n2-q.mafengwo.net/s10/M00/48/68/wKgBZ1kAeXeAUnIGAABhXP2UUcY94.jpeg?imageMogr2%2Fthumbnail%2F%2190x90r%2Fgravity%2FCenter%2Fcrop%2F%2190x90%2Fquality%2F90"></a>
+                            </div>
+                            <!--用户昵称-->
+                            <div class="user-info">
+                                <a class="name _j_filter_click" target="_blank"
+                                   th:text="${userAsk.user_id}"></a>
+                            </div>
+                            <!-- 问题描述 -->
+                            <div class="desc clearfix">
+                                <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}"
+                                   target="_blank" style="color: #666;">
+                                    <p th:text="${userAsk.ask_content}"></p>
+                                </a>
+                            </div>
+                            <!--相关操作-->
+                            <div class="operate">
+                                <!--回答-->
+                                <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}"
+                                   target="_blank" style="text-decoration: none;">
+                                    <span class="reply" th:text="'回答 ('+${userAsk.answer_num}+')'"></span>
+                                </a>
+                                <!--发布时间-->
+                                <span class="date" th:text="发布于+${userAsk.add_time}"></span>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="media testimonial_item">
-                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                    <div class="media-body">
-                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
-                            you
-                            think about it, you travel across her face, and She is the </p>
-                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                        <div class="star">
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star-half-o"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="media testimonial_item">
-                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                    <div class="media-body">
-                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
-                            you
-                            think about it, you travel across her face, and She is the </p>
-                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                        <div class="star">
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star-half-o"></i></a>
-                        </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>

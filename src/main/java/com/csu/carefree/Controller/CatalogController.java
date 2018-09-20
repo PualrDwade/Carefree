@@ -1,6 +1,9 @@
 package com.csu.carefree.Controller;
 
 
+import com.csu.carefree.Model.TraverAsk.UserAnswer;
+import com.csu.carefree.Model.TraverAsk.UserAsk;
+import com.csu.carefree.Service.TraverAskService;
 import com.csu.carefree.Util.PageInfo;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
@@ -20,10 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class CatalogController {
@@ -38,6 +38,9 @@ public class CatalogController {
     private static final int HOTELPAGESIZE = 8;
     @Autowired
     private CatalogService catalogService;
+
+    @Autowired
+    private TraverAskService traverAskService;
 
     private CatalogUtils catalogUtils = new CatalogUtils();
 
@@ -82,7 +85,7 @@ public class CatalogController {
 
         /*****************************热门产品推荐*********************************/
         //随机推荐两个产品
-        List<FullProductInfo> hotProductList = catalogService.getHotProductList(session);
+        List<FullProductInfo> hotProductList = catalogService.getHotProductList(location);
         FullProductInfo product1 = hotProductList.get(0);
         String product1Price = (catalogService.getDepartCityPrice(product1.getId(), (String) session.getAttribute("location"))).getProduct_price();
         product1.setPrice(product1Price);//设置价格
@@ -109,6 +112,20 @@ public class CatalogController {
         model.addAttribute("hotHotelList_01", hotHotelList_01);
         model.addAttribute("hotHotelList_02", hotHotelList_02);
 
+
+        /***************************热门问答推荐**********************************/
+        List<UserAsk> askList = traverAskService.getUserAskList();//获得所有Ask
+        //循环,通过每一个提问获取提问的回答
+        for (UserAsk userAsk : askList) {
+            //通过提问获取所有的回答
+            List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(userAsk.getId());
+            userAsk.setAnswer_num(userAnswerList.size());
+        }
+        //排序关键词:评论数
+        askList.sort(Comparator.reverseOrder());
+        model.addAttribute("askList", askList);
+
+        //最后显示主页
         return "index";
     }
 
