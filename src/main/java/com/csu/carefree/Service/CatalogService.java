@@ -196,6 +196,4 @@ public interface CatalogService {
     //通过地点获得游记
     ArrayList<TraverNote> getHotTraverNoteListByCity(int traverNoteNum, String cityName);
 
-    //通过关键词获得产品信息
-    List<ProductMsg> searchProductListByKeyword(String keyword);
 }

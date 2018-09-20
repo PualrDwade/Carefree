@@ -110,9 +110,9 @@ public class CatalogController {
         /****************************热门酒店推荐********************************/
         //热门酒店推荐这个城市排名最高个酒店
         //1.价格最便宜的酒店
-        List<HotelMsg> hotHotelList_01 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location"), 1);
+        List<HotelMsg> hotHotelList_01 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location") + '市', 1);
         //2.评分最高的酒店
-        List<HotelMsg> hotHotelList_02 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location"), 2);
+        List<HotelMsg> hotHotelList_02 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location") + '市', 2);
         //存储数据到前端页面
         //1. 酒店信息
         model.addAttribute("hotHotelList_01", hotHotelList_01);
@@ -127,6 +127,10 @@ public class CatalogController {
     public String ViewMdd(@RequestParam(value = "view_city", defaultValue = "", required = false) String view_city,
                           HttpSession session, Model model) {
         TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
+        if (traverMsg == null) {
+            traverMsg = new TraverMsg();
+            session.setAttribute("traverMsg", traverMsg);
+        }
         if (view_city != null && !view_city.equals("")) {
             traverMsg.setEnd_city(view_city);
         }

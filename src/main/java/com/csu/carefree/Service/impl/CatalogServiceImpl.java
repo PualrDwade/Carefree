@@ -476,11 +476,5 @@ public class CatalogServiceImpl implements CatalogService {
         return resultList;
     }
 
-    @Override
-    public List<ProductMsg> searchProductListByKeyword(String keyword) {
-        return productMapper.searchProductListByKeyword("$" + keyword + "%");
-    }
-
-
 
 }
