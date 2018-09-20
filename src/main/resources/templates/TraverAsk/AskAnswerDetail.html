@@ -23,7 +23,7 @@
                         <div class="search-panel" data-cs-t="wenda">
                             <div class="clearfix _j_suggest_hd " style="margin-top: 15px">
                                 <div class="sp-input" style="height: auto!important;">
-                                    <input type="text" id="_j_wenda_seach_input" value="" placeholder="提问前请先搜索">
+                                    <input type="text" id="_j_wenda_seach_input" value="" placeholder="搜索回复">
                                 </div>
                                 <input type="button" id="_j_wenda_seach_button" class="sp-button" data-mddid="0">
                             </div>
@@ -38,16 +38,12 @@
                     <div class="q-content">
                         <div class="q-title">
                             <h1 th:text="${userAsk.title}">
-                                长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？
                             </h1>
                         </div>
                         <div class="q-desc" th:text="${userAsk.ask_content}">
-                            明天开车去长沙世界之窗，请问世界之窗有免费停车的地方吗？能大包小包提进去吗？因为要带吃的和泳衣。然后想问下水上乐园玩完能有地方洗澡吗？玩每个项目前，包包有地方寄存吗？寄存要钱吗？问题有点多，麻烦各位了🌸🌸
                         </div>
                         <div class="q-info1 clearfix">
                             <div class="pub-bar fr">
-                            <span class="photo"> <img src="https://images.mafengwo.net/images/pp48.gif" width="16"
-                                                      height="16"></span>
                                 <span class="name" th:text="${userAsk.user_id}">匿名用户</span>
                                 <span class="time"><i class="ico_phone"></i><span th:text="${userAsk.add_time}">2018-09-12 10:10:59</span></span>
                             </div>
@@ -62,18 +58,10 @@
                             </div>
                         </div>
                         <div class="fr">
-                            <!--
-                                <span class="atten-num">195浏览</span>
-                            -->
                             <a class="btn-answer _j_btn_goanswer" rel="nofollow">回答</a>
                         </div>
                     </div>
                     <!-- 修改问题内容 -->
-                    <!-- 邀请回答 -->
-                    <div data-pagelet id="pagelet-block-a6db9a51b076cf8ecd0a33c9beedfb9d" class=""
-                         data-api=":qa:pagelet:InviteUserAnswer"
-                         data-params="{&quot;mddid&quot;:10466,&quot;qid&quot;:13051644,&quot;anum&quot;:2,&quot;flag&quot;:0}"
-                         data-async="1" data-controller="/js/qa/InviteUserAnswer"></div>
                 </div>
                 <!-- 回答区域 -->
                 <div class="answer-wrap">
@@ -107,20 +95,16 @@
                                             </div>
                                         </div>
                                         <div class="_j_long_answer_item">
-                                            <div class="_j_answer_html" th:text="${userAnswer.answer_content}">
-                                                你好</br></br>1.门票是免费的</br>
-                                                2.9.16号，是它的周年纪念日，当然有两场影像展，有时间的话推荐那天去看看</br></br></br></div>
+                                            <div class="_j_answer_html" th:text="${userAnswer.answer_content}"></div>
                                         </div>
                                     </div>
-
                                     <div class="a-operate _js_operate clearfix">
                                         <div class="fl">
-
                                             <div class="collect">
                                                 <a class="_j_collect_answer"><i></i>收藏</a>
                                             </div>
                                             <div class="pub-time">
-                                                <span th:text="发布与+${userAnswer.add_time}">发布于 1天前</span>
+                                                <span th:text="发布于+${userAnswer.add_time}"></span>
                                             </div>
                                             <div class="tip-off">
                                                 <a data-japp="report"
@@ -135,16 +119,6 @@
                         </ul>
                         <!-- 回答详情页 更多回答 -->
                     </div>
-
-                    <!-- 加载更多 -->
-                    <div class="_j_pager">
-                        <div class="ft ft_load_btn _j_page_loader">
-                            <div class="answer-more"><a rel="nofollow">加载更多<i></i></a></div>
-                        </div>
-                        <div class="_j_page_loading ft hide ft_loading">
-                            <div class="answer-loading">正在加载<i></i></div>
-                        </div>
-                    </div>
                     <!-- 用户回复信息 -->
                     <div class="answer-add clearfix">
                         <a name="answer"></a>
@@ -152,13 +126,13 @@
                             <a class="aa-avatar" href="/wenda/u/85353052/answer.html"><img
                                     src="http://b2-q.mafengwo.net/s12/M00/5E/5C/wKgED1uY0fWAWbYCAAJ937FhNIQ53.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
                                     class="photo"></a>
-                            <a class="aa-name" th:text="${session.username}">Dreams °🍀</a>
+                            <a class="aa-name" th:text="${session.username}"></a>
                         </div>
                         <form class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  "
                               th:action="@{/TraverAsk/answerAsk}"
                               th:method="post">
                             <div class="editor-scroll">
-                                <div class="question-title" th:text="${userAsk.title}">请问长沙谢子龙影像馆要收门票吗？</div>
+                                <div class="question-title" th:text="${userAsk.title}"></div>
                                 <div class="answer-editor">
                                     <div class="toolbar-out">
                                         <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar"
@@ -178,15 +152,11 @@
                                             <div class="item _js_ordered_list"><a class="btn-ol" role="button"></a>
                                                 <div class="tooltip"><span>有序列表</span></div>
                                             </div>
-
-
                                         </div>
                                     </div>
                                     <!--修改TextArea样式-->
                                     <textarea class="" id="" name="answerContent" style="width: 703px ;height: 200px">
                                     </textarea>
-
-
                                 </div>
                                 <div class="aa-ft">
                                     <input class=" " type="submit" value="提交回答">
@@ -200,7 +170,9 @@
             <div class="col-side" id="_js_right_side">
                 <!-- 我要提问 -->
                 <div class="btn-question">
-                    <a th:href="@{/TraverAsk/ViewCreateAsk}" class="btn-ask btn-ask2" target="_blank">我要提问</a>
+                    <a th:href="@{/TraverAsk/ViewCreateAsk}" style="margin-top: -7px!important;"
+                       class="btn-ask btn-ask2"
+                       target="_blank">我要提问</a>
                 </div>
             </div>
         </div>

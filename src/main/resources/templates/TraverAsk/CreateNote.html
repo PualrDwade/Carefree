@@ -15,6 +15,20 @@
             src="http://js.mafengwo.net/js/cv/js+jquery-1.8.1.min:js+global+json2:js+M+Module:js+M+M:js+M+Log:js+m.statistics:js+advert+inspector^alw^1536006240.js"
             type="text/javascript" crossorigin="anonymous"></script>
 </head>
+<style>
+    .submit-btn {
+        text-decoration: none;
+        display: inline-block;
+        padding: 0 30px;
+        height: 36px;
+        background-color: #ff9d00;
+        border-radius: 4px;
+        font-size: 16px;
+        line-height: 36px;
+        text-align: center;
+        color: #fff;
+    }
+</style>
 <body>
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
@@ -27,8 +41,7 @@
         </div>
         <div class="ap-wrap">
             <div class="ap-main">
-                <form class="forms" id="infoform" th:action="@{/TraverAsk/createNote}" th:method="post"
-                      name="fileForm">
+                <form class="forms" th:action="@{/TraverAsk/createNote}" th:method="post">
                     <dl class="title cf">
                         <dd>
                             <input id="title" name="title" type="text" maxlength="48" placeholder="请输入游记标题"
@@ -80,7 +93,7 @@
                                         </textarea>
                                     </div>
                                     <div class="aa-ft">
-                                        <input type="submit" value="发表游记">
+                                        <input type="submit" value="发表游记" class="submit-btn">
                                     </div>
                                 </div>
                             </div>

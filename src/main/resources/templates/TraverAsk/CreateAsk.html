@@ -8,6 +8,20 @@
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
 <!--================Header Area =================-->
+<style>
+    .submit-btn {
+        text-decoration: none;
+        display: inline-block;
+        padding: 0 30px;
+        height: 36px;
+        background-color: #ff9d00;
+        border-radius: 4px;
+        font-size: 16px;
+        line-height: 36px;
+        text-align: center;
+        color: #fff;
+    }
+</style>
 <div id="content">
     <div class="wrapper">
         <div class="ap-head">
@@ -16,8 +30,8 @@
         </div>
         <div class="ap-wrap">
             <div class="ap-main">
-                <form class="forms" id="infoform" th:action="@{/TraverAsk/createAsk}" th:method="post"
-                      enctype="multipart/form-data" target="postinfo" name="fileForm">
+
+                <form class="forms" th:action="@{/TraverAsk/createAsk}" th:method="post">
                     <dl class="title cf">
                         <dd>
                             <input id="title" name="title" type="text" maxlength="48" placeholder="请输入问题标题" value="">
@@ -27,67 +41,41 @@
                         <div class="answer-add clearfix" style="width: auto">
                             <a name="answer"></a>
                             <div class="editor-outer _j_editorOuter _js_editorWrap _js_forFixTitle  ">
-                                    <div class="answer-editor">
-                                        <div class="toolbar-out">
-                                            <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar"
-                                                 style="height: auto; width: 703px;">
-                                                <div class="item _js_bold"><a class="btn-bold" role="button"></a>
-                                                    <div class="tooltip"><span>加粗</span></div>
-                                                </div>
-
-                                                <div class="item _js_title"><a class="btn-title" role="button"></a>
-                                                    <div class="tooltip"><span>标题</span></div>
-                                                </div>
-
-                                                <div class="item _js_unordered_list"><a class="btn-ul"
-                                                                                        role="button"></a>
-                                                    <div class="tooltip"><span>无序列表</span></div>
-                                                </div>
-
-                                                <div class="item _js_ordered_list"><a class="btn-ol" role="button"></a>
-                                                    <div class="tooltip"><span>有序列表</span></div>
-                                                </div>
-                                                <div class="separator"></div>
+                                <div class="answer-editor">
+                                    <div class="toolbar-out">
+                                        <div class="editor-toolbar _js_answerTitle" id="_j_editor_toolbar"
+                                             style="height: auto; width: 703px;">
+                                            <div class="item _js_bold"><a class="btn-bold" role="button"></a>
+                                                <div class="tooltip"><span>加粗</span></div>
                                             </div>
-                                        </div>
-                                        <!--需修改内容-->
-                                        <textarea class="" id="" name="askContent" style="width: 703px ;height: 360px">
-                                        </textarea>
 
+                                            <div class="item _js_title"><a class="btn-title" role="button"></a>
+                                                <div class="tooltip"><span>标题</span></div>
+                                            </div>
+
+                                            <div class="item _js_unordered_list"><a class="btn-ul"
+                                                                                    role="button"></a>
+                                                <div class="tooltip"><span>无序列表</span></div>
+                                            </div>
+
+                                            <div class="item _js_ordered_list"><a class="btn-ol" role="button"></a>
+                                                <div class="tooltip"><span>有序列表</span></div>
+                                            </div>
+                                            <div class="separator"></div>
+                                        </div>
+                                    </div>
+                                    <!--需修改内容-->
+                                    <textarea class="" id="" name="askContent" style="width: 703px ;height: 360px">
+                                        </textarea>
                                     <div class="aa-ft">
-                                        <!--
-                                         <div class="count">
-                                             <span class="word"><b id="_j_word_count">0</b>字</span>
-                                         </div>
-                                        -->
-                                        <input type="submit" value="提交问题">
-                                        <!--<input type="button" onclick="submitAskForm()" value="提交问题">-->
-                                        <!--
-                                          <script lang="JavaScript">
-                                            function submitAskForm() {
-                                                var askForm = document.getElementById("infoform");
-                                                    if(askForm[0].value == null){
-                                                        alert("标题不能为空！");
-                                                        return false;
-                                                    }else {
-                                                        if (askForm[1].value == null){
-                                                            alert("问题内容不能为空！");
-                                                            return false;
-                                                        }
-                                                    }
-                                                    return true;
-                                            }
-                                        </script>
-                                        -->
+                                        <input type="submit" value="提交问题" class="submit-btn">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form>
-
             </div>
-
         </div>
     </div>
 </div>
@@ -103,27 +91,6 @@
         type="text/javascript" crossorigin="anonymous"></script>
 <link href="http://css.mafengwo.net/css/mfw-footer.css?1533714581" rel="stylesheet" type="text/css"/>
 <style type="text/css">
-    .video_upload {
-        position: absolute;
-        left: 100px;
-        top: 58px;
-        width: 500px;
-        background-color: #fff;
-        border: 1px solid #d3d3d3;
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
-        z-index: 100;
-    }
-
-    .video-hd {
-        height: 76px;
-        border-bottom: 2px solid #e5e5e5;
-        text-align: center;
-        text-align: center;
-        font-size: 18px;
-        color: #333;
-        line-height: 76px;
-    }
-
     .video-hd .item {
         float: left;
         width: 50%;
@@ -147,57 +114,6 @@
 
     .video-hd .item .icon-vlocal {
         background-position: -345px -470px;
-    }
-
-    .video-hd .item.on .icon-vlocal {
-        background-position: -271px -470px;
-    }
-
-    .video-hd .item.on {
-        color: #ff9d00;
-    }
-
-    .video-hd .item.on:after {
-        content: '';
-        position: absolute;
-        width: 150px;
-        height: 5px;
-        background-color: #ff9d00;
-        border-radius: 5px;
-        bottom: -3px;
-        left: 50%;
-        margin-left: -75px;
-    }
-
-    .video-bd {
-        padding: 35px 35px 60px;
-        height: 95px;
-        position: relative;
-    }
-
-    .video-bd .art-tips {
-        font-size: 14px;
-    }
-
-    .vbd-local {
-        text-align: center;
-    }
-
-    .vbd-local .art-tips {
-        margin-top: 15px;
-    }
-
-    .vbd-online, .vbd-online .art-tips {
-        text-align: left;
-    }
-
-    .vbd-online .a-inptxt {
-        font-size: 14px;
-    }
-
-    .video_bar {
-        margin-top: 25px;
-        padding-left: 55px;
     }
 
     .video_bar p {
@@ -224,50 +140,11 @@
         cursor: pointer;
     }
 
-    .uping_per {
-        margin-top: 12px;
-        font-size: 12px;
-        color: #999;
-    }
-
     .uping_per span {
         color: #ff8a00;
     }
 
-    .flt1 {
-        float: left;
-    }
 
-    ._j_process, ._j_uploading_mode ._j_upload {
-        display: none;
-    }
-
-    ._j_uploading_mode ._j_process {
-        display: block;
-    }
-
-    .art-btn-upload:hover {
-        background-color: #add965;
-        text-decoration: none;
-        color: #fff;
-    }
-
-    ._j_upload_video_trigger {
-        display: inline-block;
-        opacity: 0;
-        filter: Alpha(Opacity=0);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        z-index: 1;
-        top: 0;
-        left: 0
-    }
-
-    .editor-toolbar .item-active:hover .tooltip {
-        visibility: hidden;
-        opacity: 0;
-    }
 </style>
 
 <link href="http://css.mafengwo.net/css/cv/css+mfw-ask+detail_v3:css+mfw-ask+img_pop:css+mfw-ask+detail_answer_foldup:css+mfw-ask+upload_pics^al0^1533612615.css"

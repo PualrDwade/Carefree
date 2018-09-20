@@ -25,7 +25,7 @@
                         <a th:href="@{/TraverAsk/QuestionAnswer}">问答首页</a>
                         <em></em>
                         <div class="drop-mine _j_crumb_my">
-                            <a class="drop-hd" th:href="@{/account/ViewMyTraverAnswers}" target="_blank"><i></i>我的问答</a>
+                            <a class="drop-hd" th:href="@{/account/ViewMyTraverAnswers}" target="_blank">我的问答</a>
                         </div>
                     </div>
                     <div class="search-box ">
@@ -54,12 +54,14 @@
                 <div class="newcate-wrap _j_qa_list">
                     <div class="hd">
                         <ul class="cate-tab">
-                            <li class="on _j_change_type" data-type="1" data-sort="10">
+                            <li th:class="${session.tab==1}? 'on _j_change_type' : '_j_change_type'" data-type="1"
+                                data-sort="10">
                                 <a th:href="@{/TraverAsk/ViewHotQuestion}">
                                     热门问题
                                 </a>
                             </li>
-                            <li class="_j_change_type" data-type="0" data-sort="1">
+                            <li th:class="${session.tab==2}? 'on _j_change_type' : '_j_change_type'" data-type="0"
+                                data-sort="1">
                                 <a th:href="@{/TraverAsk/ViewNewQuestion}">
                                     最新问题
                                 </a>
@@ -76,7 +78,7 @@
                                 <!--问题标题-->
                                 <div class="title">
                                     <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}"
-                                       target="_blank" th:text="${userAsk.title}">长沙世界之窗新概念水上乐园玩完有地方洗澡和啪啪啪吗？</a>
+                                       target="_blank" th:text="${userAsk.title}"></a>
                                 </div>
                                 <!--问题内容-->
                                 <div class="container">
@@ -88,14 +90,13 @@
                                     <!--用户昵称-->
                                     <div class="user-info">
                                         <a class="name _j_filter_click" target="_blank"
-                                           th:text="${userAsk.user_id}">张恺庭</a>
+                                           th:text="${userAsk.user_id}"></a>
                                     </div>
                                     <!-- 问题描述 -->
                                     <div class="desc clearfix">
                                         <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}"
                                            target="_blank" style="color: #666;">
-                                            <p th:text="${userAsk.ask_content}">
-                                                明天开车去长沙世界之窗，请问世界之窗有免费停车的地方吗？能大包小包提进去吗？因为要带吃的和泳衣。然后想问下水上乐园玩完能有地方洗澡吗？玩每个项目前，包包有地方寄存吗？寄存要钱吗？问题有点多，麻烦各位了🌸🌸</p>
+                                            <p th:text="${userAsk.ask_content}"></p>
                                         </a>
                                     </div>
                                     <!--相关操作-->
@@ -103,33 +104,23 @@
                                         <!--回答-->
                                         <a th:href="@{/TraverAsk/viewAskAnswerDetail(askId = ${userAsk.id})}"
                                            target="_blank" style="text-decoration: none;">
-                                            <span class="reply">回答 (2)</span>
+                                            <span class="reply" th:text="'回答 ('+${userAsk.answer_num}+')'"></span>
                                         </a>
                                         <!--发布时间-->
-                                        <span class="date" th:text="发布于+${userAsk.add_time}">发布于17分钟前</span>
+                                        <span class="date" th:text="发布于+${userAsk.add_time}"></span>
                                     </div>
                                 </div>
                             </li>
                         </ul>
-                    </div>
-                    <div class="_j_pager">
-                        <div class="ft ft_load_btn">
-                            <div class="answer-more _j_add_more_button">
-                                <a>加载更多<i></i></a>
-                            </div>
-                        </div>
-                        <div class="ft ft_loading _j_add_loading_button hide">
-                            <div class="answer-loading">正在加载<i></i></div>
-                        </div>
                     </div>
                 </div>
             </div>
 
             <!-------提问模块以及显示当前参加问题的人数------->
             <div class="col-side">
-
                 <div class="i-ask">
-                    <a th:href="@{/TraverAsk/ViewCreateAsk}" class="btn-ask btn-ask2" target="_blank"><i></i>我要提问</a>
+                    <a th:href="@{/TraverAsk/ViewCreateAsk}" class="btn-ask btn-ask2"
+                       style="margin-top: 57px!important;" target="_blank"><i></i>我要提问</a>
                 </div>
 
                 <div class="i_num">

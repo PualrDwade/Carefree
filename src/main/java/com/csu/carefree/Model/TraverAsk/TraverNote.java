@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class TraverNote implements Serializable, Comparable<TraverNote> {
     private String id;
-    private String title;
+        private String title;
     private String note_content;
     private int star_num;
     private String notify_status;

@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.csu.carefree.Util.RandomNumberUtils;//验证码生成类
 import com.csu.carefree.Util.EmailSendUtils;//邮箱发送类
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,8 +52,11 @@ public class AccountController {
 
     //进行登陆的请求
     @PostMapping("/account/Signon")
-    public String Sigon(@RequestParam("username") String username, Model model, @RequestParam("password") String password, HttpSession session) {
+    public String Sigon(HttpServletRequest request, Model model, HttpSession session) {
         //进行业务处理(登录)
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        System.out.println(username);
         Sigon sigon = accountService.getSigonByUserName(username);
         if (sigon != null) {
             //判断密码是否正确
@@ -75,7 +80,6 @@ public class AccountController {
                     userProfile.setNick_name("畅游网新用户");//默认昵称
                     accountService.setUserProfile(userProfile);
                 }
-                model.addAttribute("userProfile", userProfile);
                 session.setAttribute("userProfile", userProfile);
                 /**用户信息加载完成*/
                 //重定向到首页页面
@@ -188,7 +192,7 @@ public class AccountController {
 
     //邮箱的控制器请求
     @GetMapping("/account/EmailVerify")
-    public String EmailVerify(@RequestParam("code") String code, @RequestParam("type") String type, HttpSession session) {
+    public String EmailVerify(Model model, @RequestParam("code") String code, @RequestParam("type") String type, HttpSession session) {
         try {
             //存在username
             System.out.println("try.....");
@@ -198,11 +202,29 @@ public class AccountController {
                 //如果是注册
                 if (type.equalsIgnoreCase("register")) {
                     //完成注册激活
-                    System.out.println("succ");
                     accountService.setSigon(username, (String) session.getAttribute("register_password"));
-                    //同时进行登陆
+                    //登陆成功
                     session.setAttribute("username", username);
-                    //直接登陆,重定向到主页
+                    //加载用户信息(回答数,提问数)
+                    /**用户信息加载模块*/
+                    List<UserAsk> userAskList = accountService.getUserAskListbyName(username);
+                    int askNum = userAskList.size();//提问数
+                    int answerNum = traverAskService.getUserAnswerListByName(username).size();//回答数
+                    //渲染到视图,用户的问题容器
+                    session.setAttribute("askNum", askNum);
+                    session.setAttribute("answerNum", answerNum);
+                    //首先判断是否有详细信息字段//
+                    UserProfile userProfile = accountService.getUserProfileByUserName(username);
+                    if (userProfile == null) {
+                        userProfile = new UserProfile();
+                        userProfile.setEmail(username);//设置邮箱字段为用户名
+                        userProfile.setImage("http://img4.imgtn.bdimg.com/it/u=1106367332,2196124484&fm=26&gp=0.jpg");//设置为默认头像
+                        userProfile.setNick_name("畅游网新用户");//默认昵称
+                        accountService.setUserProfile(userProfile);
+                    }
+                    session.setAttribute("userProfile", userProfile);
+                    /**用户信息加载完成*/
+                    //重定向到首页页面
                     return "redirect:/";
                 }
                 //如果是找回密码
@@ -224,7 +246,7 @@ public class AccountController {
 
     //进行重置密码的请求
     @PostMapping("/account/ResetPassword")
-    public String ResetPassword(@RequestParam String password, Model model, HttpSession session) {
+    public String ResetPassword(@RequestParam String password, RedirectAttributes model, HttpSession session) {
         //修改密码
         try {
             String username = (String) session.getAttribute("forget_username");
@@ -269,12 +291,9 @@ public class AccountController {
             //通过用户名获取所有游记
             List<TraverNote> traverNoteList = accountService.getTraverNodeListbyName(username);
             /***用户详细信息获取***/
-
             PageInfo<UserAsk> userAskPageInfo = new PageInfo<>();
             userAskPageInfo.setPageData(askAnswerContainer.getUserAskList(), ANSWERPAGESIZE, pageNum);
-
             model.addAttribute("userAskPageInfo", userAskPageInfo);
-
             //完成数据渲染,返回到前端页面
             return "Account/UserCenter";
         } catch (Exception e) {

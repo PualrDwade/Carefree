@@ -125,83 +125,43 @@
 
     <!--================ 产品  =================-->
     <div class="whole-wrap">
-        <!--<br>-->
         <div class="section_title text-center">
-            <a th:href="@{/Catalog/HotProductList}">
-                <h2 class="title_color">热门旅游</h2>
-            </a>
+            <a th:href="@{/Catalog/HotProductList}"><h2 class="title_color">热 门 旅 游</h2></a>
+            <p style="text-align: center" th:text="'在'+${session.location}+'不知道去哪玩?畅游网给您推荐最受欢迎的大众产品~'"></p>
         </div>
         <div class="container">
             <div class="section-top-border">
-                <div class="row">
+                <div class="row" th:each="product:${hotProductList}">
                     <div class="col-md-3 ">
                         <div>
-                            <img th:src="${product1.img_url}"
+                            <img th:src="${product.img_url}"
                                  class="productImg">
                         </div>
-
                     </div>
                     <div class="col-md-7 mt-sm-20 left-align-p">
-                        <a th:href="${product1.product_link}"
+                        <a th:href="${product.product_link}"
                            target="_blank">
-                            <h4 th:text="${product1.name}" class="mb-30 title_color "></h4>
+                            <h4 th:text="${product.name}" class="mb-30 title_color "></h4>
                         </a>
                     </div>
                     <div class="col-md-2">
                         <div class="priceTag">
-                            <p>￥<span th:text="${product1.price}"></span>
+                            <p>￥<span th:text="${product.price}"></span>
                                 <small>/人起</small>
                             </p>
                         </div>
                         <div class="logo-size">
-                            <a th:href="${product1.supplierUrl}">
-                                <img th:if="${product1.supplier_id}=='00001'" src="/image/logo/美团.svg">
-                                <img th:if="${product1.supplier_id}=='00002'" src="/image/logo/马蜂窝.svg">
-                                <img th:if="${product1.supplier_id}=='00003'" src="/image/logo/携程.svg">
-                                <img th:if="${product1.supplier_id}=='00004'" src="/image/logo/去哪儿.svg">
+                            <a th:href="${product.supplierUrl}">
+                                <img th:if="${product.supplier_id}=='00001'" src="/image/logo/美团.svg">
+                                <img th:if="${product.supplier_id}=='00002'" src="/image/logo/马蜂窝.svg">
+                                <img th:if="${product.supplier_id}=='00003'" src="/image/logo/携程.svg">
+                                <img th:if="${product.supplier_id}=='00004'" src="/image/logo/去哪儿.svg">
                             </a>
                         </div>
                         <div class="container">
-                            <a>评分：</a><span th:text="${product1.product_grade}" class="badge badge-primary"
+                            <a>评分：</a><span th:text="${product.product_grade}" class="badge badge-primary"
                                             style="background-color: #f3c300;"></span><br><br>
-                            <a>销量：</a><span th:text="${product1.sell_num}" class="badge badge-primary"
-                                            style="background-color: #f3aecc;"></span>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-3 ">
-                        <div>
-                            <img th:src="${product2.img_url}"
-                                 class="productImg">
-                        </div>
-
-                    </div>
-                    <div class="col-md-7 mt-sm-20 left-align-p">
-                        <a th:href="${product2.product_link}"
-                           target="_blank">
-                            <h4 th:text="${product2.name}" class="mb-30 title_color "></h4>
-                        </a>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="priceTag">
-                            <p>￥ <span th:text="${product2.price}"></span>
-                                <small>/人起</small>
-                            </p>
-                        </div>
-                        <div class="logo-size">
-                            <a th:href="${product2.supplierUrl}">
-                                <img th:if="${product1.supplier_id}=='00001'" src="/image/logo/美团.svg">
-                                <img th:if="${product2.supplier_id}=='00002'" src="/image/logo/马蜂窝.svg">
-                                <img th:if="${product2.supplier_id}=='00003'" src="/image/logo/携程.svg">
-                                <img th:if="${product2.supplier_id}=='00004'" src="/image/logo/去哪儿.svg">
-                            </a>
-                        </div>
-                        <div class="container">
-                            <a>评分：</a><span th:text="${product2.product_grade}" class="badge badge-primary"
-                                            style="background-color: #f3c300;"></span><br><br>
-                            <a>销量：</a><span th:text="${product2.sell_num}" class="badge badge-primary"
+                            <a>销量：</a><span th:text="${product.sell_num}" class="badge badge-primary"
                                             style="background-color: #f3aecc;"></span>
                         </div>
                     </div>
@@ -221,30 +181,30 @@
                 <a th:href="@{TraverAsk/ViewTraverNote}"><h2 class="title_color">精 品 游 记</h2></a>
                 <p style="text-align: center">这 里 有 最 精 彩 的 旅 行 游 记，能 给 你 更 多 的 旅 行 知 识</p>
             </div>
-            <div class="row mb_30" th:each="hotTraverNote : ${session.hotTraverNoteList}">
-                <div class="col-lg-4 col-md-6">
+            <div class="row mb_30">
+                <!--item-->
+                <div class="col-lg-4 col-md-6" th:each="hotTraverNote : ${hotTraverNoteList}">
                     <div class="single-recent-blog-post">
                         <div class="thumb">
-                            <img class="img-fluid" th:src="${hotTraverNote.img_url}" alt="post">
+                            <img class="img-fluid" src="/image/blog/blog-1.jpg" alt="post">
                         </div>
                         <div class="details">
                             <div class="tags">
-                                <a href="#" class="button_hover tag_btn">Travel</a>
-                                <a href="#" class="button_hover tag_btn">Life Style</a>
+                                <a href="#" class="button_hover tag_btn">旅行</a>
+                                <a href="#" class="button_hover tag_btn">生活方式</a>
                             </div>
-                            <a href="#"><h4 class="sec_h4">Low Cost Advertising</h4></a>
-                            <p>Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
-                                farmer.</p>
-                            <h6 class="date title_color">31st January,2018</h6>
+                            <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId=${hotTraverNote.id})}"><h4
+                                    class="sec_h4" th:text="${hotTraverNote.title}"></h4></a>
+                            <p th:text="${hotTraverNote.note_content}" style="margin-top: 3px"></p>
+                            <h6 class="date title_color" style="bottom: 0px;position: absolute"
+                                th:text="'发表于:'+${hotTraverNote.add_time}"></h6>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--================ 游记  =================-->
-
-
+    <br><br><br>
     <!--================ 酒店  =================-->
     <section class="accomodation_area section_gap">
         <div class="container">
@@ -309,82 +269,7 @@
             </div>
         </div>
     </section>
-    <!--================ 问答展示  =================-->
-    <section class="testimonial_area section_gap">
-        <div class="container">
-            <div class="section_title text-center">
-                <a th:href="@{/TraverAsk/QuestionAnswer}"><h2 class="title_color">问 答 专 区</h2></a>
-                <p style="text-align: center">为 你 答 疑 解 惑， 更 加 了 解 这 个 城 市</p>
-            </div>
-            <div class="testimonial_slider owl-carousel">
-                <div class="media testimonial_item">
-                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                    <div class="media-body">
-                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
-                            you
-                            think about it, you travel across her face, and She is the </p>
-                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                        <div class="star">
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star-half-o"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="media testimonial_item">
-                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                    <div class="media-body">
-                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
-                            you
-                            think about it, you travel across her face, and She is the </p>
-                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                        <div class="star">
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star-half-o"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="media testimonial_item">
-                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                    <div class="media-body">
-                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
-                            you
-                            think about it, you travel across her face, and She is the </p>
-                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                        <div class="star">
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star-half-o"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="media testimonial_item">
-                    <img class="rounded-circle" src="/image/testtimonial-1.jpg" alt="">
-                    <div class="media-body">
-                        <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If
-                            you
-                            think about it, you travel across her face, and She is the </p>
-                        <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
-                        <div class="star">
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star-half-o"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--================ 问答展示  =================-->
+    <br><br><br>
 </div>
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>

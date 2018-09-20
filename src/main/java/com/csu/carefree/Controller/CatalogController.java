@@ -4,6 +4,9 @@ import com.csu.carefree.Model.ProductDT.*;
 import com.csu.carefree.Model.TraverMsg.CityMsg;
 import com.csu.carefree.Model.TraverAsk.TraverNote;
 
+import com.csu.carefree.Model.TraverAsk.UserAnswer;
+import com.csu.carefree.Model.TraverAsk.UserAsk;
+import com.csu.carefree.Service.TraverAskService;
 import com.csu.carefree.Util.PageInfo;
 import com.csu.carefree.Model.TraverMsg.ScenicMsg;
 import com.csu.carefree.Model.TraverMsg.TraverMsg;
@@ -30,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 
 @Controller
 public class CatalogController {
@@ -45,6 +49,9 @@ public class CatalogController {
     @Autowired
     private CatalogService catalogService;
 
+    @Autowired
+    private TraverAskService traverAskService;
+
     private CatalogUtils catalogUtils = new CatalogUtils();
 
     @GetMapping("ProductDT/viewHotel")
@@ -56,7 +63,6 @@ public class CatalogController {
     //请求主界面
     @GetMapping("/")
     public String viewIndex(HttpSession session, Model model) {
-
         //首先调用百度地图api获得当前城市信息,如果获取失败,则设为长沙
         String location = null;
         try {
@@ -86,29 +92,21 @@ public class CatalogController {
             session.setAttribute("traverMsg", traverMsg);
         }
 
+
         /*****************************热门产品推荐*********************************/
-
-        List<FullProductInfo> hotProductList = catalogService.getHotProductList(session);
-        session.setAttribute("product1", hotProductList.get(0));
-        session.setAttribute("product2", hotProductList.get(1));
-
-        FullProductInfo product1 = session.getAttribute("product1")
-                == null ? new FullProductInfo() : (FullProductInfo) session.getAttribute("product1");
-        String product1Price = (catalogService.getDepartCityPrice(product1.getId(), (String) session.getAttribute("location"))).getProduct_price();
-        product1.setPrice(product1Price);//设置价格
-        FullProductInfo product2;
-        if (session.getAttribute("product2") == null)
-            product2 = new FullProductInfo();
-        else
-            product2 = (FullProductInfo) session.getAttribute("product2");
-        String product2Price = (catalogService.getDepartCityPrice(product2.getId(), (String) session.getAttribute("location"))).getProduct_price();
-        product2.setPrice(product2Price);
+        //随机推荐两个产品
+        List<FullProductInfo> hotProductList = catalogService.getHotProductList(location, 2);//默认两篇
+        for (FullProductInfo productInfo : hotProductList) {
+            String productPrice = (catalogService.getDepartCityPrice(productInfo.getId(), (String) session.getAttribute("location"))).getProduct_price();
+            productInfo.setPrice(productPrice);
+        }
+        model.addAttribute("hotProductList", hotProductList);
 
         /***************************热门游记推荐*********************************/
-//        List<TraverNote> hotTraverNoteList = catalogService.getHotTraverNoteList();
-//        System.out.println("热门游记个数："+ hotProductList.size());
-//        session.setAttribute("hotTraverNoteList", hotTraverNoteList);
-
+        //得到两篇热门游记
+        List<TraverNote> hotTraverNoteList = catalogService.getHotTraverNoteList(3);//默认三篇
+        System.out.println("热门游记个数：" + hotProductList.size());
+        model.addAttribute("hotTraverNoteList", hotTraverNoteList);
         /****************************热门酒店推荐********************************/
         //热门酒店推荐这个城市排名最高个酒店
         //1.价格最便宜的酒店
@@ -119,9 +117,7 @@ public class CatalogController {
         //1. 酒店信息
         model.addAttribute("hotHotelList_01", hotHotelList_01);
         model.addAttribute("hotHotelList_02", hotHotelList_02);
-        //2. 热门产品信息
-        model.addAttribute("product1", product1);
-        model.addAttribute("product2", product2);
+        //最后显示主页
         return "index";
     }
 
@@ -292,26 +288,24 @@ public class CatalogController {
         String price = "0";
         String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
         String[] checkedPriceValues = httpServletRequest.getParameterValues("price");
-        String destination = session.getAttribute("location").toString();
-
+        String destination = (String) session.getAttribute("location");
         if (checkedStoreValues != null && checkedPriceValues != null) {
             supplierId = checkedStoreValues[0];
             price = checkedPriceValues[0];
         }
-
         List<HotelMsg> hotelMsgList = new ArrayList<HotelMsg>();
         if (supplierId.equals("0") && price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestination(destination + "市");
+            hotelMsgList = catalogService.getHotelListByDestination(destination);
         }
         if (!supplierId.equals("0") && price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination + "市", supplierId);
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination, supplierId);
         }
         if (supplierId.equals("0") && !price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestination(destination + "市");
+            hotelMsgList = catalogService.getHotelListByDestination(destination);
             catalogUtils.setHotelListByPrices(hotelMsgList, price);
         }
         if (!supplierId.equals("0") && !price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination + "市", supplierId);
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination, supplierId);
             catalogUtils.setHotelListByPrices(hotelMsgList, price);
         }
         /****分页模块***/

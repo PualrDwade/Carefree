@@ -5,6 +5,20 @@
 <header th:replace="common/menu::header"></header>
 <!--================Header Area =================-->
 
+<style>
+    #xieyouji {
+        text-decoration: none;
+        display: inline-block;
+        width: 100%;
+        height: 36px;
+        background-color: #ff9d00;
+        border-radius: 10px;
+        font-size: 16px;
+        line-height: 36px;
+        text-align: center;
+        color: #fff;
+    }
+</style>
 <div id="content">
     <!--================Banner Area =================-->
     <section class="banner_area blog_banner d_flex align-items-center">
@@ -122,7 +136,7 @@
                         <aside class="single_sidebar_widget search_widget">
                             <div class="widget_title">
                                 <a th:href="@{/account/GotoCreateNote}" target="_blank" title="写游记"
-                                   class="btn_write"><i></i>写游记</a>
+                                   class="btn_write" id="xieyouji"><i></i>写游记</a>
                             </div>
                         </aside>
 
@@ -142,11 +156,6 @@
                         </aside>
                     </div>
                     <br><br><br><br><br>
-                    <aside class="single_sidebar_widget ads_widget">
-                        <a href="#">
-                            <img class="img-fluid" src="../../static/image/blog/add.jpg" alt=""></a>
-                        <div class="br"></div>
-                    </aside>
                 </div>
             </div>
         </div>

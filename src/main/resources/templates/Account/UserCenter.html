@@ -114,57 +114,56 @@
                             </li>
                         </ul>
                     </div>
-                    <center>
+                    <center th:if="${userAskPageInfo.getPageData().size() != 0}">
                         <nav>
                             <ul class="pagination">
                                 <li>
-                                    <a th:href="@{${'/account/ViewUserCenter'}(pageNum = 1)}"> 首页 </a>
+                                    <a th:href="@{${'/Catalog/HotProductList'}(pageNum = 1)}"> 首页 </a>
                                 </li>
                                 <li>
                                     <a th:if="${not userAskPageInfo.isFirstPage()}"
-                                       th:href="@{${'/account/ViewUserCenter'}(pageNum = ${userAskPageInfo.getCurrentPage() - 1})}">上一页</a>
+                                       th:href="@{${'/Catalog/HotProductList'}(pageNum = ${userAskPageInfo.getCurrentPage() - 1})}">上一页</a>
                                 </li>
 
                                 <li th:if="${userAskPageInfo.getMaxPage() <= 10}"
                                     th:each="pageNo : ${#numbers.sequence(1, userAskPageInfo.getMaxPage())}">
-                                    <a th:if="${userAskPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                    <a th:if="${userAskPageInfo.getCurrentPage() eq pageNo}"
+                                       href="javascript:void(0);">
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                     <a th:if="${not (userAskPageInfo.getCurrentPage() eq pageNo)}"
-                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${pageNo})}">
+                                       th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                 </li>
-
                                 <li th:if="${userAskPageInfo.getCurrentPage()+10 >= userAskPageInfo.getMaxPage() && userAskPageInfo.getMaxPage() > 10}"
                                     th:each="pageNo : ${#numbers.sequence(userAskPageInfo.getMaxPage() -10, userAskPageInfo.getMaxPage())}">
-                                    <a th:if="${userAskPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                    <a th:if="${userAskPageInfo.getCurrentPage() eq pageNo}"
+                                       href="javascript:void(0);">
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                     <a th:if="${not (userAskPageInfo.getCurrentPage() eq pageNo)}"
-                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${pageNo})}">
+                                       th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                 </li>
-
                                 <li th:if="${userAskPageInfo.getCurrentPage()+10 < userAskPageInfo.getMaxPage() && userAskPageInfo.getMaxPage() > 10}"
                                     th:each="pageNo : ${#numbers.sequence(userAskPageInfo.getCurrentPage(), userAskPageInfo.getCurrentPage()+10)}">
-                                    <a th:if="${userAskPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                    <a th:if="${userAskPageInfo.getCurrentPage() eq pageNo}"
+                                       href="javascript:void(0);">
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                     <a th:if="${not (userAskPageInfo.getCurrentPage() eq pageNo)}"
-                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${pageNo})}">
+                                       th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                 </li>
-
                                 <li>
                                     <a th:if="${not userAskPageInfo.isLastPage()}"
-                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${userAskPageInfo.getCurrentPage()+1})}">下一页</a>
+                                       th:href="@{${'/Catalog/HotProductList'}(pageNum=${userAskPageInfo.getCurrentPage()+1})}">下一页</a>
                                 </li>
-
                                 <li>
-                                    <a th:href="@{${'/account/ViewUserCenter'}(pageNum = ${userAskPageInfo.getMaxPage()})}">
+                                    <a th:href="@{${'/Catalog/HotProductList'}(pageNum = ${userAskPageInfo.getMaxPage()})}">
                                         尾页 </a>
                                 </li>
                             </ul>
@@ -172,9 +171,7 @@
                     </center>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>
 <!--底部黑色栏-->

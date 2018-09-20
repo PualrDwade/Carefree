@@ -2,12 +2,13 @@ package com.csu.carefree.Persistence;
 
 import com.csu.carefree.Model.TraverAsk.TraverNote;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface TraverNoteMapper {
 
     //获取所有游记信息
-    List<TraverNote> getTraverNoteList();
+    ArrayList<TraverNote> getTraverNoteList();
 
     //通过关键词搜索游记信息
     List<TraverNote> searchTraverNoteList(String keyord);
