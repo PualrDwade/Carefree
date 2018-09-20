@@ -89,14 +89,14 @@ public class AccountController {
             } else {
                 System.out.println("密码错误");
                 //返回给页面进行渲染
-                model.addAttribute("loginResponse", 1);
-                return "redirect:/account/ViewSignonForm";
+                model.addAttribute("loginResponse", true);
+                return "Account/AccountLogin";
             }
         } else {
             System.out.println("用户名不存在");
             //返回给页面进行渲染
-            model.addAttribute("loginResponse", 2);
-            return "redirect:/account/ViewSignonForm";
+            model.addAttribute("loginResponse", false);
+            return "Account/AccountLogin";
         }
     }
 
@@ -138,8 +138,8 @@ public class AccountController {
         }
         //用户已经存在了,传递一个值到下一个页面
         else {
-            model.addAttribute("registerResponse", 1);//用户名已存在
-            return "redirect:/account/ViewRegister";
+            model.addAttribute("registerResponse", true);//用户名已存在
+            return "Account/AccountRegister";
         }
     }
 
