@@ -268,11 +268,12 @@ public class CatalogController {
         }
         if (supplierId.equals("0") && !price.equals("0")) {
             hotelMsgList = catalogService.getHotelListByDestination(destination + "市");
-            catalogUtils.setHotelListByPrices(hotelMsgList, price);
+            hotelMsgList = catalogUtils.getHotelListByPrices(hotelMsgList, price);
         }
         if (!supplierId.equals("0") && !price.equals("0")) {
             hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination + "市", supplierId);
-            catalogUtils.setHotelListByPrices(hotelMsgList, price);
+            hotelMsgList = catalogUtils.getHotelListByPrices(hotelMsgList, price);
+
         }
         /****分页模块***/
         PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
