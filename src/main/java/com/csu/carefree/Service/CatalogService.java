@@ -96,6 +96,9 @@ public interface CatalogService {
     List<ProductMsg> getProductListByTypeAndStore(String productType,
                                                   String supplierId, String cityname);
 
+    //通过关键词获得产品信息
+    List<ProductMsg> searchProductListByKeyword(String keyword);
+
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找
     //推荐（排序）条件：score, sell_num, comments_num, product_grade

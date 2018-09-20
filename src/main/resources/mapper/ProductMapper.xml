@@ -245,8 +245,7 @@
     </select>
 
     <!--通过关键词获得产品信息-->
-    <select id="searchProductListByKeyword" parameterType="java.lang.String"
-            resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    <select id="searchProductListByKeyword" parameterType="java.lang.String" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
     SELECT
       id,
       name,

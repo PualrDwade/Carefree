@@ -48,6 +48,8 @@ public interface ProductMapper {
     List<ProductMsg> getProductListByTypeAndStore(@Param("product_type") String productType,
                                                   @Param("suppliper_id") String supplierId, @Param("cityname") String cityname);
 
+    //通过关键词获得产品信息
+    List<ProductMsg> searchProductListByKeyword(String keyword);
 
     //通过关键词获得产品信息
     List<ProductMsg> searchProductListByKeyword(String keyword);

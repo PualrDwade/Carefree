@@ -24,9 +24,17 @@
                             <input name="password" type="password" placeholder="您的密码"
                                    autocomplete="off"
                                    data-verification-name="密码" class="verification[required,minSize[4],maxSize[50]]"/>
-                            <div class="err-tip"></div>
+                            <div class="err-tip">
+                                <div  th:if="${loginResponse}">
+                                    <p style="color: #be1514!important;font-size: 15px; align-content: center">密码错误!</p>
+                                </div>
+                                <div  th:if="!${loginResponse}">
+                                    <p style="color: #be1514!important;font-size: 15px; align-content: center">用户名不存在!</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-link"><a th:href="@{/account/ViewForgetForm}">忘记密码</a></div>
+
                         <div class="submit-btn">
                             <button class="btn-submit" onclick="submitBtnClick()">登陆</button>
                             <script type="text/javascript">
@@ -38,6 +46,7 @@
                         </div>
                         <div class="err-tip"></div>
                     </form>
+
                 </div>
                 <div class="bottom-link">
                     还没有帐号?<a th:href="@{/account/ViewRegister}">马上注册</a>
