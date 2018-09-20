@@ -52,6 +52,10 @@
                                     <p>
                                         <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId = ${traverNote.id})}"
                                            class="view_btn button_hover">查看详情 »</a>
+                                    <p style="position: absolute;right: 0px!important;"
+                                       th:text="'发表时间: '+${traverNote.add_time}">
+
+                                    </p>
                                     </p>
                                     <hr style="color: #73ffd6">
                                 </div>
@@ -145,7 +149,6 @@
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">热门游记</h3>
                             <div class="media post_item" th:each="hotTraverNote : ${hotTraverNoteList}">
-                                <img th:src="${hotTraverNote.img_url}" alt="post">
                                 <div class="media-body">
                                     <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId = ${hotTraverNote.id})}"
                                        th:text="${hotTraverNote.title}"><h3>第一游记</h3></a>

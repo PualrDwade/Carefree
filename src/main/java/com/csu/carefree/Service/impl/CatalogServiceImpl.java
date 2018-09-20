@@ -60,9 +60,9 @@ public class CatalogServiceImpl implements CatalogService {
         List<ScenicMsg> scenicList;
         TraverMsg traver = (TraverMsg) session.getAttribute("traverMsg");
         if (traver != null && !traver.getEnd_city().equals("")) {
-            scenicList = this.getScenicMsgListByCityName(traver.getEnd_city() + "市");
+            scenicList = this.getScenicMsgListByCityName(traver.getEnd_city());
         } else {
-            scenicList = this.getScenicMsgListByCityName((String) session.getAttribute("location") + "市");
+            scenicList = this.getScenicMsgListByCityName((String) session.getAttribute("location"));
         }
         //对景点进行排序
         sortScenicList(scenicList);
@@ -190,7 +190,7 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public ArrayList<HotelMsg> getHotHotelListByCityName(String cityName, int orderType) {
         System.out.println(cityName);
-        List<HotelMsg> hotelList = hotelMsgMapper.getHotelListByDestination(cityName);
+        List<HotelMsg> hotelList = hotelMsgMapper.getHotelListByDestination("%" + cityName + "%");
         System.out.println("大小" + hotelList.size());
         Collections.sort(hotelList, new Comparator<HotelMsg>() {
             @Override
@@ -310,8 +310,8 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public List<ProductMsg> searchProductListByKeyword(String keyword){
-        return productMapper.searchProductListByKeyword("$"+keyword+"%");
+    public List<ProductMsg> searchProductListByKeyword(String keyword) {
+        return productMapper.searchProductListByKeyword("$" + keyword + "%");
     }
 
     @Override
@@ -415,12 +415,12 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<TicketMsg> getTicketListByScenicName(String scenicName) {
-        return ticketMsgMapper.getTicketListByScenicName(scenicName);
+        return ticketMsgMapper.getTicketListByScenicName("%" + scenicName + "%");
     }
 
     @Override
     public List<TicketMsg> getTicketListByCityName(String cityId) {
-        return ticketMsgMapper.getTicketListByCityName(cityId);
+        return ticketMsgMapper.getTicketListByCityName("%" + cityId + "%");
     }
 
     /*******************游记信息**********/
@@ -458,11 +458,9 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public ArrayList<TraverNote> getHotTraverNoteListByCity(int traverNoteNum, String cityName) {
-        List<TraverNote> traverNoteList = traverNoteMapper.getHotTraverNodeListbyCityName(cityName);
+        List<TraverNote> traverNoteList = traverNoteMapper.getHotTraverNodeListbyCityName("%" + cityName + "%");
         traverNoteList.sort(Comparator.reverseOrder());
-
         ArrayList<TraverNote> resultList = new ArrayList<>();
-
         if (traverNoteNum < traverNoteList.size()) {
             for (int i = 0; i < traverNoteNum; ++i) {
                 resultList.add(traverNoteList.get(i));

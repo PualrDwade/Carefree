@@ -13,99 +13,98 @@
 <!--================ 导航栏区域 =================-->
 <div id="content">
     <br><br><br><br>
-
     <!--定制模块开始-->
     <div class="hotel_booking_area position">
         <div class="container">
             <div class="hotel_booking_table">
                 <div class="col-md-9">
                     <div class="boking_table">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class='input-group'>
-                                                <div id="main">
-                                                    <div id="the_content" th:text="${viewCity}"
-                                                         style="color:#fff; padding-left: 30px; border-color: white">内容一
-                                                    </div>
-                                                    <div id="tan">▶</div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="book_tabel_item">
+                                    <div class="form-group">
+                                        <div class='input-group'>
+                                            <div id="main">
+                                                <div id="the_content" th:text="${viewCity}"
+                                                     style="color:#fff; padding-left: 30px; border-color: white">内容一
                                                 </div>
-                                                <div id="optionList">
-                                                    <ul id="option"
-                                                        style="color: #000;max-height:150px;background-color:#fff;overflow:auto;z-index:3;list-style:none; padding-left: 30px;position: absolute">
-                                                        <li onclick="change(this)" th:each="cityName : ${cityNameList}"
-                                                            th:text="${cityName}"></li>
-                                                    </ul>
-                                                </div>
+                                                <div id="tan">▶</div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <style>
-                                        #optionList {
-                                            display: none;
-                                        }
-
-                                        #option li:hover {
-                                            background-color: #aaa;
-                                        }
-
-                                        #the_content, #tan {
-                                            display: inline-block;
-                                        }
-
-                                        #tan {
-                                            float: right;
-                                            color: aliceblue;
-                                        }
-                                    </style>
-                                    <script type="text/javascript">
-                                        $('#main').click(function () {
-                                            if ($('#optionList').css('display') === "none") {
-                                                $("#tan").text("▼");
-                                                $("#optionList").slideDown();
-                                            } else {
-                                                $("#tan").text("▶");
-                                                $("#optionList").slideUp();
-                                            }
-                                        });
-
-                                        function change(e) {
-                                            var a = $(e).text();
-                                            $("#the_content").text(a);
-                                            if ($("#optionList").css("display") !== "none") {
-                                                $("#optionList").slideUp();
-                                            }
-                                            //jqury不能取出渲染的th:text
-                                            var view_city = document.getElementById('the_content').innerText;
-                                            window.location.href = "/Catalog/Mdd?view_city=" + view_city;
-                                        }
-
-                                        function gotoProduct() {
-                                            var keyword = $('#destination').val();
-                                            window.location.href = '/Catalog/HotProductList?keyword=' + keyword;
-                                        }
-                                    </script>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker1'>
-                                                <input th:value="${session.traverMsg.end_city}" id="destination"
-                                                       name="destination"
-                                                       type='text' class="form-control"
-                                                       placeholder=""/>
+                                            <div id="optionList">
+                                                <ul id="option"
+                                                    style="color: #000;max-height:150px;background-color:#fff;overflow:auto;z-index:3;list-style:none; padding-left: 30px;position: absolute">
+                                                    <li onclick="change(this)" th:each="cityName : ${cityNameList}"
+                                                        th:text="${cityName}"></li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="book_tabel_item">
-                                        <button th:text="搜索产品" class="book_now_btn button_hover"
-                                                id="button" onclick="gotoProduct()"></button>
+                                <style>
+                                    #optionList {
+                                        display: none;
+                                    }
+
+                                    #option li:hover {
+                                        background-color: #aaa;
+                                    }
+
+                                    #the_content, #tan {
+                                        display: inline-block;
+                                    }
+
+                                    #tan {
+                                        float: right;
+                                        color: aliceblue;
+                                    }
+                                </style>
+                                <script type="text/javascript">
+                                    $('#main').click(function () {
+                                        if ($('#optionList').css('display') === "none") {
+                                            $("#tan").text("▼");
+                                            $("#optionList").slideDown();
+                                        } else {
+                                            $("#tan").text("▶");
+                                            $("#optionList").slideUp();
+                                        }
+                                    });
+
+                                    function change(e) {
+                                        var a = $(e).text();
+                                        $("#the_content").text(a);
+                                        if ($("#optionList").css("display") !== "none") {
+                                            $("#optionList").slideUp();
+                                        }
+                                        //jqury不能取出渲染的th:text
+                                        var view_city = document.getElementById('the_content').innerText;
+                                        window.location.href = "/Catalog/Mdd?view_city=" + view_city;
+                                    }
+
+                                    function gotoProduct() {
+                                        var keyword = $('#destination').val();
+                                        window.location.href = '/Catalog/Mdd?keyword=' + keyword;
+                                    }
+                                </script>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="book_tabel_item">
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker1'>
+                                            <input th:value="${session.traverMsg.end_city}" id="destination"
+                                                   name="destination"
+                                                   type='text' class="form-control"
+                                                   placeholder=""/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <div class="book_tabel_item">
+                                    <button th:text="搜索产品" class="book_now_btn button_hover"
+                                            id="button" onclick="gotoProduct()"></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,14 +116,15 @@
         <div class="section-top-border">
             <div class="row">
                 <!--景点侧边栏开始-->
-                <div class="col-lg-2 col-md-2 mt-sm-30 element-wrap"
+                <div class="col-lg-3 col-md-3 mt-sm-30 element-wrap"
                      style="background-color: rgba(235,252,255,0.98) ; height: 700px ;overflow:auto">
                     <h3 style="margin-left: 10px;font-size: 25px" class="mb-30 title_color">想去哪些景点？</h3>
                     <div class="single-element-widget" th:each="recommendScenic : ${session.recommendScenicList}"
                          name="broadside">
                         <div class="switch-wrap d-flex justify-content-between">
-                            <a th:href="${recommendScenic.link_url}"><h4 th:text="${recommendScenic.name}" name="scenic"
-                                                                         style="margin-left: 20px"></h4></a>
+                            <a style="font-size: 18px!important;" th:href="${recommendScenic.link_url}" target="_blank">
+                                <h4 th:text="${recommendScenic.name}" name="scenic"
+                                    style="margin-left: 20px"></h4></a>
                         </div>
                         <hr>
                     </div>
@@ -132,13 +132,13 @@
                 <!--景点侧边栏结束-->
 
                 <!--地图-->
-                <div class="col-lg-8 col-md-8" id="map" style="height: 700px">
+                <div class="col-lg-9 col-md-9   " id="map" style="height: 700px">
                     <!--显示当前地图所在城市-->
                     <!--根据景点的地址将景点凸显出来（标定点）-->
                     <!--根据景点的布局最好全部显示出景点-->
                     <!--当点击侧边栏的时候.....-->
                 </div>
-                <div id="panel" class="col-lg-2 col-md-2" style="height: 700px"></div>
+                <!--<div id="panel" class="col-lg-2 col-md-2" style="height: 700px"></div>-->
 
                 <script src="https://webapi.amap.com/maps?v=1.4.10&key=754607261b9b76661652d0588746686d"></script>
                 <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
@@ -147,33 +147,92 @@
         </div>
     </div>
 
-    <!--游记区域开始-->
-    <section class="latest_blog_area section_gap">
+    <!--================ 门票  =================-->
+    <section class="accomodation_area section_gap">
         <div class="container">
-            <!--用户游记-->
             <div class="section_title text-center">
-                <a><h2 class="title_color">推 荐 游 记</h2></a>
-                <p>这 里 有 最 全 面 的 旅 行 攻 略，为 您 的 旅 行 出 谋 划 策</p>
+                <a><h2 class="title_color">热门景点门票</h2></a>
+                <p class="text-center" th:text="'欢迎来到'+${viewCity}+',畅游网为您提供最热门景点门票信息'"></p>
+                <br><br>
             </div>
-            <div class="col-lg-6" style="padding-left: 50px"
-                 th:each="traverNote : ${recommendTraverNoteList}">
-                <div class="row">
-                    <div class="col-md-8 ">
-                        <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId=${traverNote.id})}"><h4
-                                th:text="${traverNote.title}"
-                                class="sec_h4">标题</h4></a>
-                        <p th:text="${traverNote.note_content}">
-                            这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
-                            <img style="width: 90px;height: 35px;float: right" src="../../static/image/logo/携程.svg">
-                        </p>
+            <div class="row mb_30">
+                <div class="col-lg-3 col-sm-6" th:each="ticketMsg : ${productMsgPageInfo.getPageData()}">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img th:src="${ticketMsg.img_url}"
+                                 alt="">
+                            <a th:href="${ticketMsg.ticket_link}"
+                               class="btn theme_btn button_hover">立即购买</a>
+                        </div>
+                        <a th:href="${ticketMsg.ticket_link}" target="view_window"><h4 class="sec_h4"
+                                                                                       th:text="${ticketMsg.scenic_name}">
+                            名字</h4>
+                        </a>
+                        <h5>￥<span th:text="${ticketMsg.ticket_price}"></span>
+                            <small>/次</small>
+                        </h5>
+                        <p th:text="${ticketMsg.ticket_content}">描述</p>
                     </div>
                 </div>
+
             </div>
-            <!--攻略-->
+            <center th:if="${productMsgPageInfo.getPageData().size() != 0}">
+                <nav>
+                    <ul class="pagination">
+                        <li>
+                            <a th:href="@{${'/Catalog/Mdd'}(pageNum = 1)}"> 首页 </a>
+                        </li>
+                        <li>
+                            <a th:if="${not productMsgPageInfo.isFirstPage()}"
+                               th:href="@{${'/Catalog/Mdd'}(pageNum = ${productMsgPageInfo.getCurrentPage() - 1})}">上一页</a>
+                        </li>
+                        <li th:if="${productMsgPageInfo.getMaxPage() <= 10}"
+                            th:each="pageNo : ${#numbers.sequence(1, productMsgPageInfo.getMaxPage())}">
+                            <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                            <a th:if="${not (productMsgPageInfo.getCurrentPage() eq pageNo)}"
+                               th:href="@{${'/Catalog/Mdd'}(pageNum=${pageNo})}">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                        </li>
+                        <li th:if="${productMsgPageInfo.getCurrentPage()+10 >= productMsgPageInfo.getMaxPage() && productMsgPageInfo.getMaxPage() > 10}"
+                            th:each="pageNo : ${#numbers.sequence(productMsgPageInfo.getMaxPage() -10, productMsgPageInfo.getMaxPage())}">
+                            <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                            <a th:if="${not (productMsgPageInfo.getCurrentPage() eq pageNo)}"
+                               th:href="@{${'/Catalog/Mdd'}(pageNum=${pageNo})}">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                        </li>
+                        <li th:if="${productMsgPageInfo.getCurrentPage()+10 < productMsgPageInfo.getMaxPage() && productMsgPageInfo.getMaxPage() > 10}"
+                            th:each="pageNo : ${#numbers.sequence(productMsgPageInfo.getCurrentPage(), productMsgPageInfo.getCurrentPage()+10)}">
+                            <a th:if="${productMsgPageInfo.getCurrentPage() eq pageNo}" href="javascript:void(0);">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                            <a th:if="${not (productMsgPageInfo.getCurrentPage() eq pageNo)}"
+                               th:href="@{${'/Catalog/Mdd'}(pageNum=${pageNo})}">
+                                <span th:text="${pageNo}"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:if="${not productMsgPageInfo.isLastPage()}"
+                               th:href="@{${'/Catalog/Mdd'}(pageNum=${productMsgPageInfo.getCurrentPage()+1})}">下一页</a>
+                        </li>
+                        <li>
+                            <a th:href="@{${'/Catalog/Mdd'}(pageNum = ${productMsgPageInfo.getMaxPage()})}">
+                                尾页 </a>
+                        </li>
+                    </ul>
+                </nav>
+            </center>
+
+            <br>
+            <br>
+            <br>
         </div>
     </section>
-    <!--游记区域结束-->
-
     <script>
         var map = new AMap.Map('map', {
             resizeEnable: true,
@@ -187,8 +246,8 @@
                 pageSize: 5,
                 pageIndex: 1,
                 city: "010", //城市
-                map: map,
-                panel: "panel"
+                map: map
+                // panel: "panel"
             });
             placeSearch.search(scenicName);
         };
@@ -205,12 +264,13 @@
                 pageSize: 5,
                 pageIndex: 1,
                 city: "010", //城市
-                map: map,
-                panel: "panel"
+                map: map
+                // panel: "panel"
             });
             var scenicList = document.getElementsByName("scenic");
             var addressList = [];//获得景点字符串
             addressList[0] = scenicList[0].innerHTML;
+            console.log(addressList[0]);
             placeSearch.search(addressList[0]);
         });
     </script>

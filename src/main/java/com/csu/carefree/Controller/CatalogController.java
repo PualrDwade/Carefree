@@ -110,9 +110,9 @@ public class CatalogController {
         /****************************热门酒店推荐********************************/
         //热门酒店推荐这个城市排名最高个酒店
         //1.价格最便宜的酒店
-        List<HotelMsg> hotHotelList_01 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location") + '市', 1);
+        List<HotelMsg> hotHotelList_01 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location"), 1).subList(0, 8);
         //2.评分最高的酒店
-        List<HotelMsg> hotHotelList_02 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location") + '市', 2);
+        List<HotelMsg> hotHotelList_02 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location"), 2).subList(0, 8);
         //存储数据到前端页面
         //1. 酒店信息
         model.addAttribute("hotHotelList_01", hotHotelList_01);
@@ -121,66 +121,18 @@ public class CatalogController {
         return "index";
     }
 
-
-    //不填写表单直接跳转到目的地界面
-    @GetMapping("/Catalog/Mdd")
-    public String ViewMdd(@RequestParam(value = "view_city", defaultValue = "", required = false) String view_city,
-                          HttpSession session, Model model) {
-        TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
-        if (traverMsg == null) {
-            traverMsg = new TraverMsg();
-            session.setAttribute("traverMsg", traverMsg);
-        }
-        if (view_city != null && !view_city.equals("")) {
-            traverMsg.setEnd_city(view_city);
-        }
-        /*
-         * 城市名列表存入model；
-         * 传入页面显示城市viewCity；
-         */
-        List<String> cityNameList = catalogService.getCityNameList();
-        model.addAttribute("cityNameList", cityNameList);
-
-        if (traverMsg.getEnd_city().equals(""))
-            model.addAttribute("viewCity", session.getAttribute("location"));
-        else
-            model.addAttribute("viewCity", traverMsg.getEnd_city());
-
-        /*****************************景点推荐*********************************/
-        List<ScenicMsg> recommendScenicList = catalogService.getRecommendScenicList(session);
-        session.setAttribute("recommendScenicList", recommendScenicList);
-
-
-        /*****************************酒店推荐*********************************/
-        List<HotelMsg> recommendHotelList = catalogService.getRecommendHotelList(session);
-        session.setAttribute("recommendHotelList", recommendHotelList);
-
-
-        /*****************************游记推荐*********************************/
-        String cityName;
-        traverMsg = (TraverMsg) session.getAttribute("traverMsg");
-        if (traverMsg.getEnd_city() == null) {
-            cityName = session.getAttribute("location") + "市";
-        } else {
-            cityName = traverMsg.getEnd_city() + "市";
-        }
-        List<TraverNote> recommendTraverNoteList = catalogService.getHotTraverNoteListByCity(4, cityName);
-        model.addAttribute("recommendTraverNoteList", recommendTraverNoteList);
-
-
-        return "ProductDT/Mdd";
-    }
-
     //填写表单请求跳转目的地界面
-    @PostMapping("/Catalog/Mdd")
-    public String ViewMdd(@RequestParam("startCity") String startCity, @RequestParam("destination") String destination,
-                          @RequestParam("adultNum") String adultNum, @RequestParam("childrenNum") String childrenNum,
-                          @RequestParam("travelDays") String travelDays, HttpSession session, Model model) {
+    @GetMapping("/Catalog/Mdd")
+    public String ViewMdd(@RequestParam(value = "startCity", required = false) String startCity, @RequestParam(value = "destination", required = false) String destination,
+                          @RequestParam(value = "adultNum", required = false) String adultNum, @RequestParam(value = "childrenNum", required = false) String childrenNum,
+                          @RequestParam(value = "travelDays", required = false) String travelDays, @RequestParam(value = "view_city", required = false) String view_city,
+                          @RequestParam(defaultValue = "1") Integer pageNum, HttpSession session, Model model) {
         //行程数据
         TraverMsg traverMsg;
-        if (session.getAttribute("traverMsg") == null)
+        if (session.getAttribute("traverMsg") == null) {
             traverMsg = new TraverMsg();
-        else
+            session.setAttribute("traverMsg", traverMsg);
+        } else
             traverMsg = (TraverMsg) session.getAttribute("traverMsg");
 
         //保证字段不为空
@@ -190,32 +142,48 @@ public class CatalogController {
         traverMsg.setStart_city(startCity == null ? "" : startCity);
         traverMsg.setEnd_city(destination == null ? "" : destination);
 
+        //判断是否有view_city字段
+        if (view_city != null && view_city != "") {
+            traverMsg.setEnd_city(view_city);
+        }
+        System.out.println(1);
         /*****************************景点推荐*********************************/
         List<ScenicMsg> recommendScenicList = catalogService.getRecommendScenicList(session);
         session.setAttribute("recommendScenicList", recommendScenicList);
 
-
+        System.out.println(2);
         /*****************************酒店推荐*********************************/
         List<HotelMsg> recommendHotelList = catalogService.getRecommendHotelList(session);
         session.setAttribute("recommendHotelList", recommendHotelList);
 
-        /*****************************游记推荐*********************************/
+
         String cityName;
         traverMsg = (TraverMsg) session.getAttribute("traverMsg");
         if (traverMsg.getEnd_city() == null) {
-            cityName = session.getAttribute("location") + "市";
+            cityName = (String) session.getAttribute("location");
         } else {
-            cityName = traverMsg.getEnd_city() + "市";
+            cityName = traverMsg.getEnd_city();
         }
-        List<TraverNote> recommendTraverNoteList = catalogService.getHotTraverNoteListByCity(4, cityName);
-        model.addAttribute("recommendTraverNoteList", recommendTraverNoteList);
 
+        System.out.println(3);
+
+        //门票信息
+        List<TicketMsg> ticketMsgList = catalogService.getTicketListByCityName(cityName);
+        model.addAttribute("ticketMsgList", ticketMsgList);
+
+        System.out.println(4);
+
+        PageInfo<TicketMsg> productMsgPageInfo = new PageInfo<>();
+        productMsgPageInfo.setPageData(ticketMsgList, PRODUCTPAGESIZE, pageNum);
+        model.addAttribute("productMsgPageInfo", productMsgPageInfo);
         /*
          * 城市名列表存入model；
          * 传入页面显示城市viewCity；
          */
         List<String> cityNameList = catalogService.getCityNameList();
         model.addAttribute("cityNameList", cityNameList);
+
+        System.out.println(5);
 
         if (traverMsg.getEnd_city().equals(""))
             model.addAttribute("viewCity", session.getAttribute("location"));

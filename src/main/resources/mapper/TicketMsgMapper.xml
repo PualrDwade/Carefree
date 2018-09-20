@@ -52,7 +52,7 @@
       CITY_NAME,
       SUPPLIER_ID_ID AS supplier_id
     FROM ProductDT_ticketsmsg
-    WHERE CITY_NAME = #{cityName}
+    WHERE LOWER (CITY_NAME) LIKE #{cityName}
     </select>
 
 </mapper>

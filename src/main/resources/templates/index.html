@@ -26,7 +26,6 @@
         overflow: hidden;
     }
 </style>
-
 <body>
 <!--================Header Area =================-->
 <header th:replace="common/menu::header"></header>
@@ -48,7 +47,6 @@
             </div>
         </div>
         <!--海报-->
-
         <!--定制模块-->
         <div class="hotel_booking_area position">
             <div class="container">
@@ -58,13 +56,13 @@
                     </div>
                     <div class="col-md-9">
                         <div class="boking_table">
-                            <form th:action="@{/Catalog/Mdd}" method="post">
+                            <form th:action="@{/Catalog/Mdd}" method="get">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="book_tabel_item">
                                             <div class="form-group">
                                                 <div class='input-group date' id='datetimepicker11'>
-                                                    <input th:value="${session.traverMsg.getStart_city()}"
+                                                    <input th:value="${session.location}"
                                                            name="startCity"
                                                            type='text' class="form-control"
                                                            placeholder="出发城市"/>
@@ -121,17 +119,16 @@
         <!--定制模块-->
     </section>
     <!--================Banner Area =================-->
-
-
     <!--================ 产品  =================-->
     <div class="whole-wrap">
         <div class="section_title text-center">
             <a th:href="@{/Catalog/HotProductList}"><h2 class="title_color">热 门 旅 游</h2></a>
+            <br><br>
             <p style="text-align: center" th:text="'在'+${session.location}+'不知道去哪玩?畅游网给您推荐最受欢迎的大众产品~'"></p>
         </div>
         <div class="container">
-            <div class="section-top-border">
-                <div class="row" th:each="product:${hotProductList}">
+            <div class="section-top-border" style="padding:50px 0!important;">
+                <div class="row" th:each="product:${hotProductList}" style="margin: 5px">
                     <div class="col-md-3 ">
                         <div>
                             <img th:src="${product.img_url}"

@@ -4,7 +4,7 @@
 
 <mapper namespace="com.csu.carefree.Persistence.TraverNoteMapper">
 
-    <cache />
+    <cache/>
 
     <!--
         实现查询所有游记，将结果以LIST形式输出
@@ -27,7 +27,8 @@
     <!--
         实现关键字查询游记
     -->
-    <select id="searchTraverNoteList" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
+    <select id="searchTraverNoteList" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
     SELECT
           ID,
           TITLE,
@@ -46,7 +47,8 @@
     <!--
         实现游记具体内容查询
     -->
-    <select id="getTraverNoteById" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
+    <select id="getTraverNoteById" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
     SELECT
           ID,
           TITLE,
@@ -72,7 +74,8 @@
   </insert>
 
     <!--通过Username获取用户游记信息-->
-    <select id="getTraverNodeListbyName" parameterType="java.lang.String" resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
+    <select id="getTraverNodeListbyName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
     SELECT
           ID,
           TITLE,
@@ -142,6 +145,6 @@
           TraverAsk_travernote.CITY_ID_ID AS city_id
     FROM TraverAsk_travernote ,TraverMsg_citymsg
     WHERE TraverAsk_travernote.CITY_ID_ID = TraverMsg_citymsg.id
-    AND TraverMsg_citymsg.name = #{cityName}
+    AND lower(TraverMsg_citymsg.name) like #{cityName}
     </select>
 </mapper>
