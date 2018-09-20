@@ -8,6 +8,7 @@
           rel="stylesheet" type="text/css"/>
 </head>
 <body>
+
 <div class="wrapper">
     <div class="container">
         <div class="signup-forms">
@@ -43,6 +44,7 @@
                                 }
                             </script>
                         </div>
+                        <div  th:if="${registerResponse}"> <p style="color: #be1514!important;font-size: 15px; align-content: center">邮箱已经被注册!</p>  </div>
                     </form>
                 </div>
                 <div class="bottom-link">
@@ -51,6 +53,8 @@
             </div>
         </div>
     </div>
+
+
 </div>
 </body>
 </html>
