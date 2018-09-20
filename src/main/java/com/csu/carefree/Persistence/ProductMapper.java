@@ -48,6 +48,8 @@ public interface ProductMapper {
     List<ProductMsg> getProductListByTypeAndStore(@Param("product_type") String productType,
                                                   @Param("suppliper_id") String supplierId, @Param("cityname") String cityname);
 
+    //通过关键词获得产品信息
+    List<ProductMsg> searchProductListByKeyword(String keyword);
 
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找

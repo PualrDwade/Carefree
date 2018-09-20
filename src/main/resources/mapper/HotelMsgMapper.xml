@@ -57,7 +57,7 @@
           SUPPLIER_ID_ID AS supplier_id,
           CITY_NAME
     FROM ProductDT_hotelmsg
-    WHERE lower(name) = #{keyword}
+    WHERE lower(name) LIKE #{keyword}
     </select>
 
 
@@ -98,7 +98,7 @@
         SUPPLIER_ID_ID AS supplier_id,
         CITY_NAME
         FROM ProductDT_hotelmsg
-        WHERE city_name = #{destination} AND SUPPLIER_ID_ID = #{suppliper_id}
+        WHERE city_name '%${destination}%' AND SUPPLIER_ID_ID = #{suppliper_id}
     </select>
 
 </mapper>

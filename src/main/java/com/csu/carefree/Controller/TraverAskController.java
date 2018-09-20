@@ -130,14 +130,20 @@ public class TraverAskController {
         //获得用户ID
         //设置日期格式
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        String askId = "test_" + (traverAskService.getUserAskList().size() - 12);
+        String askId = "test_01" + (traverAskService.getUserAskList().size());
         String username = (String) session.getAttribute("username");
         UserAsk userAsk = new UserAsk(askId, title, askContent, "0", df.format(new Date()), username, "CN_city10");
         traverAskService.insertUserAsk(userAsk);
         int askSum = traverAskService.getUserAskList().size();
         session.setAttribute("askSum", askSum);
 
-        return "redirect:/TraverAsk/ViewNewQuestion";
+        session.setAttribute("tab", 2);
+        //通过时间先后完成问题列表查询
+        //排序关键词add_time
+        //直接刷新网页
+        List<UserAsk> askList = traverAskService.getUserAskListByTime();//获得所有Ask
+        model.addAttribute("askList", askList);
+        return "TraverAsk/QuestionAnswer";
     }
 
     //问题回复
@@ -152,7 +158,7 @@ public class TraverAskController {
         String askId = (String) session.getAttribute("askId");
         String userId = (String) session.getAttribute("username");
         UserAsk userAsk = traverAskService.getUserAskById(askId);
-        String answerId = "test_" + (traverAskService.getUserAnswerList().size() - 23);
+        String answerId = "test_01" + (traverAskService.getUserAnswerList().size());
         UserAnswer userAnswer = new UserAnswer(answerId, answerContent, df.format(new Date()), askId, userId);
         traverAskService.insertUserAnswer(userAnswer);
         List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(userAsk.getId());
@@ -219,7 +225,7 @@ public class TraverAskController {
             return "redirect:/account/ViewSignonForm";
         }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        String traverNoteId = "CN_traverNote_test_" + (catalogService.getAllTraverNoteList().size() - 97);
+        String traverNoteId = "CN_traverNote_test01_" + (catalogService.getAllTraverNoteList().size());
         String username = (String) session.getAttribute("username");
         TraverNote traverNote = new TraverNote(traverNoteId, title, noteContent, "0", "1", df.format(new Date()), "http://software.csu.edu.cn/", username, "CN_city68");
         catalogService.insertTraverNote(traverNote);

@@ -32,7 +32,7 @@ public interface CatalogService {
     void sortTraverNoteList(List<TraverNote> recommendTraverNoteList);
 
     /*******************获取所在地热门信息**********/
-    ArrayList<FullProductInfo> getHotProductList(String location);
+    ArrayList<FullProductInfo> getHotProductList(String location,int number);
 
     //通过城市名获取热门酒店信息,按照给定的指标进行筛选
     ArrayList<HotelMsg> getHotHotelListByCityName(String cityName, int orderType);
@@ -95,6 +95,9 @@ public interface CatalogService {
     //产品类型和供应商
     List<ProductMsg> getProductListByTypeAndStore(String productType,
                                                   String supplierId, String cityname);
+
+    //通过关键词获得产品信息
+    List<ProductMsg> searchProductListByKeyword(String keyword);
 
     //*****************通过推荐条件来排序、推荐*****************/
     //注意：推荐条件是在筛选条件的基础上进行的，所以不能直接对数据库进行查找

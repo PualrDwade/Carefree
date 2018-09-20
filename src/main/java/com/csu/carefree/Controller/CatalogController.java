@@ -85,20 +85,16 @@ public class CatalogController {
 
         /*****************************热门产品推荐*********************************/
         //随机推荐两个产品
-        List<FullProductInfo> hotProductList = catalogService.getHotProductList(location);
-        FullProductInfo product1 = hotProductList.get(0);
-        String product1Price = (catalogService.getDepartCityPrice(product1.getId(), (String) session.getAttribute("location"))).getProduct_price();
-        product1.setPrice(product1Price);//设置价格
-        FullProductInfo product2 = hotProductList.get(1);
-        String product2Price = (catalogService.getDepartCityPrice(product2.getId(), (String) session.getAttribute("location"))).getProduct_price();
-        product2.setPrice(product2Price);
-        //2热门产品信息存入model
-        model.addAttribute("product1", product1);
-        model.addAttribute("product2", product2);
+        List<FullProductInfo> hotProductList = catalogService.getHotProductList(location, 2);//默认两篇
+        for (FullProductInfo productInfo : hotProductList) {
+            String productPrice = (catalogService.getDepartCityPrice(productInfo.getId(), (String) session.getAttribute("location"))).getProduct_price();
+            productInfo.setPrice(productPrice);
+        }
+        model.addAttribute("hotProductList", hotProductList);
 
         /***************************热门游记推荐*********************************/
         //得到两篇热门游记
-        List<TraverNote> hotTraverNoteList = catalogService.getHotTraverNoteList(3);
+        List<TraverNote> hotTraverNoteList = catalogService.getHotTraverNoteList(3);//默认三篇
         System.out.println("热门游记个数：" + hotProductList.size());
         model.addAttribute("hotTraverNoteList", hotTraverNoteList);
         /****************************热门酒店推荐********************************/
@@ -111,20 +107,6 @@ public class CatalogController {
         //1. 酒店信息
         model.addAttribute("hotHotelList_01", hotHotelList_01);
         model.addAttribute("hotHotelList_02", hotHotelList_02);
-
-
-        /***************************热门问答推荐**********************************/
-        List<UserAsk> askList = traverAskService.getUserAskList();//获得所有Ask
-        //循环,通过每一个提问获取提问的回答
-        for (UserAsk userAsk : askList) {
-            //通过提问获取所有的回答
-            List<UserAnswer> userAnswerList = traverAskService.getUserAnswerByAsk(userAsk.getId());
-            userAsk.setAnswer_num(userAnswerList.size());
-        }
-        //排序关键词:评论数
-        askList.sort(Comparator.reverseOrder());
-        model.addAttribute("askList", askList);
-
         //最后显示主页
         return "index";
     }
@@ -247,34 +229,55 @@ public class CatalogController {
 
     // 进入热门酒店的控制器url
     @GetMapping("/Catalog/HotHotelList")
-    public String HotHotelListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
+    public String HotHotelListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model,
+                                           @RequestParam(defaultValue = "1") Integer pageNum) {
         String supplierId = "0";
         String price = "0";
         String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
         String[] checkedPriceValues = httpServletRequest.getParameterValues("price");
-        String destination = session.getAttribute("location").toString();
-
+        String destination = (String) session.getAttribute("location");
         if (checkedStoreValues != null && checkedPriceValues != null) {
             supplierId = checkedStoreValues[0];
             price = checkedPriceValues[0];
         }
-
         List<HotelMsg> hotelMsgList = new ArrayList<HotelMsg>();
         if (supplierId.equals("0") && price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestination(destination + "市");
+            hotelMsgList = catalogService.getHotelListByDestination(destination);
         }
         if (!supplierId.equals("0") && price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination + "市", supplierId);
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination, supplierId);
         }
         if (supplierId.equals("0") && !price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestination(destination + "市");
-            hotelMsgList = catalogUtils.getHotelListByPrices(hotelMsgList, price);
+            hotelMsgList = catalogService.getHotelListByDestination(destination);
+            catalogUtils.setHotelListByPrices(hotelMsgList, price);
         }
         if (!supplierId.equals("0") && !price.equals("0")) {
-            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination + "市", supplierId);
-            hotelMsgList = catalogUtils.getHotelListByPrices(hotelMsgList, price);
-
+            hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination, supplierId);
+            catalogUtils.setHotelListByPrices(hotelMsgList, price);
         }
+        /****分页模块***/
+        PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
+        hotelMsgPageInfo.setPageData(hotelMsgList, HOTELPAGESIZE, pageNum);
+        model.addAttribute("hotelMsgPageInfo", hotelMsgPageInfo);
+        return "ProductDT/Hotel";
+    }
+
+    //通过搜索关键字获得产品信息
+    @GetMapping("/ProductDT/searchProductList")
+    public String searchProductListByKeyword(@RequestParam("keyword") String keyword,
+                                             Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
+        List<ProductMsg> productMsgList = catalogService.searchProductListByKeyword(keyword);
+        PageInfo<ProductMsg> productMsgPageInfo = new PageInfo<>();
+        productMsgPageInfo.setPageData(productMsgList, PRODUCTPAGESIZE, pageNum);
+        model.addAttribute("productMsgPageInfo", productMsgPageInfo);
+        return "ProductDT/Product";
+    }
+
+    //通过关键子搜索获得酒店信息
+    @GetMapping("/ProductDT/searchHotelList")
+    public String searchHotelMsgList(@RequestParam("keyword") String keyword,
+                                     Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
+        List<HotelMsg> hotelMsgList = catalogService.searchHotelMsgList(keyword);
         /****分页模块***/
         PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
         hotelMsgPageInfo.setPageData(hotelMsgList, HOTELPAGESIZE, pageNum);
