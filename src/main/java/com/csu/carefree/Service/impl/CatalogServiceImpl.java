@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Array;
 import java.util.*;
 
 @Service
@@ -157,22 +158,19 @@ public class CatalogServiceImpl implements CatalogService {
 
     }
 
-
     /*******************获取热门信息**********/
     @Override
-    public ArrayList<FullProductInfo> getHotProductList(String location) {
-        //随机得到两个热门产品进行推荐
+    public ArrayList<FullProductInfo> getHotProductList(String location, int number) {
+        //随机得到number个热门产品进行推荐
         List<ProductMsg> productList = productMapper.getProductListByCityName(location);
-        ArrayList<FullProductInfo> hotProductList = new ArrayList<>();
-        Random random = new Random();
-        int n1 = random.nextInt(productList.size());
-        int n2 = 0;
-        while (true) {
-            n2 = random.nextInt(productList.size());
-            if (n2 != n1) break;
+        if (productList.size() <= number) {
+            number = productList.size();
         }
-        hotProductList.add(new FullProductInfo(productList.get(n1)));
-        hotProductList.add(new FullProductInfo(productList.get(n2)));
+        Collections.shuffle(productList);
+        ArrayList<FullProductInfo> hotProductList = new ArrayList<>();
+        for (int i = 0; i < number; ++i) {
+            hotProductList.add(new FullProductInfo((productList.get(i))));
+        }
         return hotProductList;
     }
 
@@ -202,23 +200,17 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public ArrayList<TraverNote> getHotTraverNoteList(int traverNoteNum) {
-        List<TraverNote> traverNoteList = traverNoteMapper.getTraverNoteList();
-        traverNoteList.sort(Comparator.reverseOrder());
-
-        ArrayList<TraverNote> resultList = new ArrayList<>();
-
-        if (traverNoteNum < traverNoteList.size()) {
-            for (int i = 0; i < traverNoteNum; ++i) {
-                resultList.add(traverNoteList.get(i));
-            }
-        } else {
-            for (int i = 0; i < traverNoteList.size(); ++i) {
-                resultList.add(traverNoteList.get(i));
-            }
+    public ArrayList<TraverNote> getHotTraverNoteList(int number) {
+        ArrayList<TraverNote> traverNoteList = traverNoteMapper.getTraverNoteList();
+        Collections.shuffle(traverNoteList);
+        if (traverNoteList.size() <= number) {
+            return traverNoteList;
         }
-
-        return resultList;
+        ArrayList<TraverNote> list = new ArrayList<>();
+        for (int i = 0; i < number; ++i) {
+            list.add(traverNoteList.get(i));
+        }
+        return list;
     }
 
     /*******************酒店信息**********/

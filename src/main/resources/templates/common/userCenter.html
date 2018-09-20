@@ -33,22 +33,6 @@
                 <li><a class="tags_link" th:href="@{/account/ViewMyTraverNotes}" title="我的游记">我的游记</a></li>
                 <li><a class="tags_link" th:href="@{/account/ViewMyTraverAnswers}" title="我的问答">我的问答</a></li>
                 <li><a class="tags_link" href="#" title="我的收藏">我的收藏</a></li>
-                <li class="more ">
-                        <span class="tags_link" role="button" title="更多" style="cursor:default">更多<i
-                                class="MDownMore"></i></span>
-                    <div class="tags_more_list">
-                        <ul>
-                            <li data-cs-t="go_to_activity"><a href="#" title="我的点赞"><i
-                                    class="ico_collect"></i><span>我的点赞</span></a></li>
-                            <li data-cs-t="go_to_activity"><a href="#" title="我的门票"><i
-                                    class="ico_order"></i><span>我的门票</span></a>
-                            </li>
-                            <li data-cs-t="go_to_activity"><a href="#" title="我的产品"><i
-                                    class="ico_ticket"></i><span>我的产品</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
             </ul>
         </div>
     </div>
@@ -65,17 +49,18 @@
             </a>
         </div>
         <!--昵称和性别标签-->
-        <div class="MAvaName" th:text="${session.userProfile.nick_name}">陈志轩
-            <i th:if="${session.userProfile.gender}=='male'" class="MGenderMale"></i>
-            <i th:if="${session.userProfile.gender}=='female'" class="MGenderFemale"></i>
-            <i th:if="${session.userProfile.gender}==null" class="MGender"></i>
+        <div class="MAvaName" th:text="${session.userProfile.nick_name}">
+            <i th:if="${session.userProfile.gender=='male'}" class="MGenderMale">男</i>
+            <i th:if="${session.userProfile.gender=='female'}" class="MGenderFemale">女</i>
+            <i th:if="${session.userProfile.gender==null}" class="MGender">未知</i>
         </div>
         <!--生日和居住地，设置图标-->
         <div class="MAvaInfo clearfix MAvaMyInfo">
             <span class="MAvaLevel flt1" title="11.15"
-                  th:text="'生日: '+${session.userProfile.birthday}">生日：请完善信息</a></span>
-            <span class="MAvaPlace flt1" th:text="${session.userProfile.address}">现居地: 请完善信息</span>
-            <span class="MAvaSet"><a title="设置" th:href="@{/account/AccountSetting}"></a></span>
+                  th:text="'生日: '+${session.userProfile.birthday}" th:if="${session.userProfile.birthday!=null}"></span>
+            <span class="MAvaPlace flt1" th:text="${session.userProfile.address}"></span>
+            <span class="MAvaSet" style="margin-top: 5px"><a title="设置"
+                                                             th:href="@{/account/AccountSetting}"></a>设置</span>
         </div>
         <!--数据展示-->
         <div class="MAvaMore clearfix">
@@ -100,48 +85,47 @@
             <div class="MUsersAtom">
                 <ul class="clearfix _j_followlist">
                     <li>
-                        <a href="/u/10024.html" target="_blank">
+                        <a target="_blank">
                             <img src="http://p4-q.mafengwo.net/s11/M00/44/FF/wKgBEFqx9GeAMw4mAADuZSQe9AY372.png?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
                                  height="48" width="48" alt="小蜂" title="小蜂">
                         </a>
-                        <p><a href="/u/10024.html" target="_blank" title="张恺庭">张恺庭</a></p>
+                        <p><a target="_blank" title="张恺庭">张恺庭</a></p>
                     </li>
                     <li>
-                        <a href="/u/114259.html" target="_blank">
+                        <a target="_blank">
                             <img src="http://n1-q.mafengwo.net/s9/M00/0D/F5/wKgBs1hPb8WAEruUAAGXKCGfy4U06.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
                                  height="48" width="48" alt="蜂窝机器人" title="蜂窝机器人">
                         </a>
-                        <p><a href="/u/114259.html" target="_blank" title="陈志轩">陈志轩</a></p>
+                        <p><a target="_blank" title="陈志轩">陈志轩</a></p>
                     </li>
                     <li>
-                        <a href="/u/388631.html" target="_blank">
+                        <a target="_blank">
                             <img src="http://p1-q.mafengwo.net/s11/M00/E6/B5/wKgBEFsWUTmAexhvAANf5Uux-cw10.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
                                  height="48" width="48" alt="马蜂窝大管家" title="马蜂窝大管家">
                         </a>
-                        <p><a href="/u/388631.html" target="_blank" title="廖智勇">廖智勇</a></p>
+                        <p><a target="_blank" title="廖智勇">廖智勇</a></p>
                     </li>
                     <li>
-                        <a href="/u/461006.html" target="_blank">
+                        <a target="_blank">
                             <img src="http://b3-q.mafengwo.net/s11/M00/63/A5/wKgBEFqyBhiABvUmAAEyFTouc2U797.png?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
                                  height="48" width="48" alt="小蚂" title="小蚂">
                         </a>
                         <p><a href="/u/461006.html" target="_blank" title="黄凯">黄凯</a></p>
                     </li>
                     <li>
-                        <a href="/u/90102427.html" target="_blank">
+                        <a target="_blank">
                             <img src="http://b4-q.mafengwo.net/s10/M00/E8/CD/wKgBZ1iZk2SAGbKsAAME0TWzCHE45.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
                                  height="48" width="48" alt="马小蜂" title="马小蜂">
                         </a>
                         <p><a href="/u/90102427.html" target="_blank" title="王鹭星">王鹭星</a></p>
                     </li>
-
                 </ul>
             </div>
         </div>
     </div>
 </div>
 <div th:fragment="footer" id="footer">
-    <div class="row footer-bottom d-flex justify-content-between align-items-center">
+    <div class="row footer-bottom d-flex justify-content-between align-items-center ">
         <p class="col-lg-8 col-sm-12 footer-text m-0" style="text-align: center">
             Copyright &copy;
             <script>document.write(new Date().getFullYear());</script>
