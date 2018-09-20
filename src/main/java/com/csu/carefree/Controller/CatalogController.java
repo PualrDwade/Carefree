@@ -229,7 +229,8 @@ public class CatalogController {
 
     // 进入热门酒店的控制器url
     @GetMapping("/Catalog/HotHotelList")
-    public String HotHotelListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
+    public String HotHotelListByConditions(HttpServletRequest httpServletRequest, HttpSession session, Model model,
+                                           @RequestParam(defaultValue = "1") Integer pageNum) {
         String supplierId = "0";
         String price = "0";
         String[] checkedStoreValues = httpServletRequest.getParameterValues("store");
@@ -254,6 +255,29 @@ public class CatalogController {
             hotelMsgList = catalogService.getHotelListByDestinationAndStore(destination, supplierId);
             catalogUtils.setHotelListByPrices(hotelMsgList, price);
         }
+        /****分页模块***/
+        PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
+        hotelMsgPageInfo.setPageData(hotelMsgList, HOTELPAGESIZE, pageNum);
+        model.addAttribute("hotelMsgPageInfo", hotelMsgPageInfo);
+        return "ProductDT/Hotel";
+    }
+
+    //通过搜索关键字获得产品信息
+    @GetMapping("/ProductDT/searchProductList")
+    public String searchProductListByKeyword(@RequestParam("keyword") String keyword,
+                                             Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
+        List<ProductMsg> productMsgList = catalogService.searchProductListByKeyword(keyword);
+        PageInfo<ProductMsg> productMsgPageInfo = new PageInfo<>();
+        productMsgPageInfo.setPageData(productMsgList, PRODUCTPAGESIZE, pageNum);
+        model.addAttribute("productMsgPageInfo", productMsgPageInfo);
+        return "ProductDT/Product";
+    }
+
+    //通过关键子搜索获得酒店信息
+    @GetMapping("/ProductDT/searchHotelList")
+    public String searchHotelMsgList(@RequestParam("keyword") String keyword,
+                                     Model model, @RequestParam(defaultValue = "1") Integer pageNum) {
+        List<HotelMsg> hotelMsgList = catalogService.searchHotelMsgList(keyword);
         /****分页模块***/
         PageInfo<HotelMsg> hotelMsgPageInfo = new PageInfo<>();
         hotelMsgPageInfo.setPageData(hotelMsgList, HOTELPAGESIZE, pageNum);
