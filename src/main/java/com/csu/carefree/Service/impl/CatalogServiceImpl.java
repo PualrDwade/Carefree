@@ -248,7 +248,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<HotelMsg> getHotelListByDestination(String destination) {
-        return hotelMsgMapper.getHotelListByDestination(destination);
+        return hotelMsgMapper.getHotelListByDestination("%" + destination + "%");
     }
 
     @Override
@@ -331,6 +331,11 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public ProvinceMsg getProvinceMsgById(String provinceId) {
         return provinceMsgMapper.getProvinceMsgById(provinceId);
+    }
+
+    @Override
+    public List<String> getCityNameList() {
+        return cityMsgMapper.getCityNameMsgList();
     }
 
     @Override
@@ -448,4 +453,33 @@ public class CatalogServiceImpl implements CatalogService {
     public List<TraverNote> getAllTraverNoteList() {
         return traverNoteMapper.getAllTraverNoteList();
     }
+
+
+    @Override
+    public ArrayList<TraverNote> getHotTraverNoteListByCity(int traverNoteNum, String cityName) {
+        List<TraverNote> traverNoteList = traverNoteMapper.getHotTraverNodeListbyCityName(cityName);
+        traverNoteList.sort(Comparator.reverseOrder());
+
+        ArrayList<TraverNote> resultList = new ArrayList<>();
+
+        if (traverNoteNum < traverNoteList.size()) {
+            for (int i = 0; i < traverNoteNum; ++i) {
+                resultList.add(traverNoteList.get(i));
+            }
+        } else {
+            for (int i = 0; i < traverNoteList.size(); ++i) {
+                resultList.add(traverNoteList.get(i));
+            }
+        }
+
+        return resultList;
+    }
+
+    @Override
+    public List<ProductMsg> searchProductListByKeyword(String keyword) {
+        return productMapper.searchProductListByKeyword("$" + keyword + "%");
+    }
+
+
+
 }

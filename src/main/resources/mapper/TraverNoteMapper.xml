@@ -126,4 +126,22 @@
           CITY_ID_ID AS city_id
     FROM TraverAsk_travernote
     </select>
+
+    <!--通过cityName获取用户游记信息-->
+    <select id="getHotTraverNodeListbyCityName" parameterType="java.lang.String"
+            resultType="com.csu.carefree.Model.TraverAsk.TraverNote">
+    SELECT
+          TraverAsk_travernote.ID,
+          TraverAsk_travernote.TITLE,
+          TraverAsk_travernote.NOTE_CONTENT,
+          TraverAsk_travernote.STAR_NUM,
+          TraverAsk_travernote.NOTIFY_STATUS,
+          TraverAsk_travernote.ADD_TIME,
+          TraverAsk_travernote.IMG_URL,
+          TraverAsk_travernote.USER_ID_ID AS user_id,
+          TraverAsk_travernote.CITY_ID_ID AS city_id
+    FROM TraverAsk_travernote ,TraverMsg_citymsg
+    WHERE TraverAsk_travernote.CITY_ID_ID = TraverMsg_citymsg.id
+    AND TraverMsg_citymsg.name = #{cityName}
+    </select>
 </mapper>

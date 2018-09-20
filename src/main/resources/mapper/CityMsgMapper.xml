@@ -5,6 +5,14 @@
 <mapper namespace="com.csu.carefree.Persistence.CityMsgMapper">
 
     <cache/>
+    <!--
+        查询所有城市信息
+    -->
+    <select id="getCityNameMsgList" resultType="java.lang.String">
+    SELECT
+          NAME
+    FROM TraverMsg_citymsg
+  </select>
 
     <!--
         通过省份ID查询省份信息

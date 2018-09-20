@@ -26,4 +26,6 @@ public interface TraverNoteMapper {
 
     //获得所有traverNote
     List<TraverNote> getAllTraverNoteList();
+
+    List<TraverNote> getHotTraverNodeListbyCityName(String cityName);
 }
