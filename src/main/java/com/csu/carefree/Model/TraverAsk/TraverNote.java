@@ -2,7 +2,7 @@ package com.csu.carefree.Model.TraverAsk;
 
 import java.io.Serializable;
 
-public class TraverNote implements Serializable ,Comparable<TraverNote>{
+public class TraverNote implements Serializable, Comparable<TraverNote> {
     private String id;
         private String title;
     private String note_content;
@@ -12,7 +12,6 @@ public class TraverNote implements Serializable ,Comparable<TraverNote>{
     private String img_url;
     private String user_id;
     private String city_id;
-
 
 
     @Override
@@ -108,7 +107,7 @@ public class TraverNote implements Serializable ,Comparable<TraverNote>{
     public TraverNote(String id, String title,
                       String note_content, String star_num,
                       String notify_status, String add_time,
-                      String img_url, String user_id,String city_id) {
+                      String img_url, String user_id, String city_id) {
         this.id = id;
         this.title = title;
         this.user_id = user_id;
@@ -118,16 +117,17 @@ public class TraverNote implements Serializable ,Comparable<TraverNote>{
         this.add_time = add_time;
         this.img_url = img_url;
         this.city_id = city_id;
-
     }
 
 
     @Override
     public int compareTo(TraverNote o) {
-        if(this.star_num > o.getStar_num()){
+        if (this.star_num > o.getStar_num()) {
             return 1;
-        }else {
+        } else {
             return -1;
         }
     }
+
+
 }

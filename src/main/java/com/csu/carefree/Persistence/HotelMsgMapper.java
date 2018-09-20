@@ -20,5 +20,5 @@ public interface HotelMsgMapper {
     List<HotelMsg> getHotelListByDestination(@Param("destination") String destination);
 
     //目的地和供应商
-    List<HotelMsg> getHotelListByDestinationAndStore(@Param("destination") String destination , @Param("suppliper_id") String supplierId);
+    List<HotelMsg> getHotelListByDestinationAndStore(@Param("destination") String destination, @Param("suppliper_id") String supplierId);
 }

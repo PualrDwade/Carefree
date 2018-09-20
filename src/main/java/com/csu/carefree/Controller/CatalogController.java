@@ -1,5 +1,8 @@
 package com.csu.carefree.Controller;
 
+import com.csu.carefree.Model.ProductDT.*;
+import com.csu.carefree.Model.TraverMsg.CityMsg;
+import com.csu.carefree.Model.TraverAsk.TraverNote;
 
 import com.csu.carefree.Model.TraverAsk.UserAnswer;
 import com.csu.carefree.Model.TraverAsk.UserAsk;
@@ -23,6 +26,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.*;
 
 @Controller
@@ -100,9 +110,9 @@ public class CatalogController {
         /****************************热门酒店推荐********************************/
         //热门酒店推荐这个城市排名最高个酒店
         //1.价格最便宜的酒店
-        List<HotelMsg> hotHotelList_01 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location"), 1).subList(0, 4);
+        List<HotelMsg> hotHotelList_01 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location"), 1);
         //2.评分最高的酒店
-        List<HotelMsg> hotHotelList_02 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location"), 2).subList(0, 4);
+        List<HotelMsg> hotHotelList_02 = catalogService.getHotHotelListByCityName((String) session.getAttribute("location"), 2);
         //存储数据到前端页面
         //1. 酒店信息
         model.addAttribute("hotHotelList_01", hotHotelList_01);
@@ -114,7 +124,24 @@ public class CatalogController {
 
     //不填写表单直接跳转到目的地界面
     @GetMapping("/Catalog/Mdd")
-    public String ViewMdd(HttpSession session) {
+    public String ViewMdd(@RequestParam(value = "view_city", defaultValue = "", required = false) String view_city,
+                          HttpSession session, Model model) {
+        TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
+        if (view_city != null && !view_city.equals("")) {
+            traverMsg.setEnd_city(view_city);
+        }
+        /*
+         * 城市名列表存入model；
+         * 传入页面显示城市viewCity；
+         */
+        List<String> cityNameList = catalogService.getCityNameList();
+        model.addAttribute("cityNameList", cityNameList);
+
+        if (traverMsg.getEnd_city().equals(""))
+            model.addAttribute("viewCity", session.getAttribute("location"));
+        else
+            model.addAttribute("viewCity", traverMsg.getEnd_city());
+
         /*****************************景点推荐*********************************/
         List<ScenicMsg> recommendScenicList = catalogService.getRecommendScenicList(session);
         session.setAttribute("recommendScenicList", recommendScenicList);
@@ -124,13 +151,19 @@ public class CatalogController {
         List<HotelMsg> recommendHotelList = catalogService.getRecommendHotelList(session);
         session.setAttribute("recommendHotelList", recommendHotelList);
 
-        /*****************************攻略推荐*********************************/
-        List<StrategyMsg> recommendStrategyList = catalogService.getRecommendStrategyList(session);
-        session.setAttribute("recommendStrategyList", recommendStrategyList);
 
         /*****************************游记推荐*********************************/
-        List<TraverNote> recommendTraverNoteList = catalogService.getRecommendTraverNoteList(session);
-        session.setAttribute("recommendTraverNoteList", recommendTraverNoteList);
+        String cityName;
+        traverMsg = (TraverMsg) session.getAttribute("traverMsg");
+        if (traverMsg.getEnd_city() == null) {
+            cityName = session.getAttribute("location") + "市";
+        } else {
+            cityName = traverMsg.getEnd_city() + "市";
+        }
+        List<TraverNote> recommendTraverNoteList = catalogService.getHotTraverNoteListByCity(4, cityName);
+        model.addAttribute("recommendTraverNoteList", recommendTraverNoteList);
+
+
         return "ProductDT/Mdd";
     }
 
@@ -145,6 +178,7 @@ public class CatalogController {
             traverMsg = new TraverMsg();
         else
             traverMsg = (TraverMsg) session.getAttribute("traverMsg");
+
         //保证字段不为空
         traverMsg.setTraverdays(travelDays == null ? "" : travelDays);
         traverMsg.setAdult_num(adultNum == null ? "" : adultNum);
@@ -161,19 +195,39 @@ public class CatalogController {
         List<HotelMsg> recommendHotelList = catalogService.getRecommendHotelList(session);
         session.setAttribute("recommendHotelList", recommendHotelList);
 
-        /*****************************攻略推荐*********************************/
-        List<StrategyMsg> recommendStrategyList = catalogService.getRecommendStrategyList(session);
-        session.setAttribute("recommendStrategyList", recommendStrategyList);
-
         /*****************************游记推荐*********************************/
-        List<TraverNote> recommendTraverNoteList = catalogService.getRecommendTraverNoteList(session);
-        session.setAttribute("recommendTraverNoteList", recommendTraverNoteList);
+        String cityName;
+        traverMsg = (TraverMsg) session.getAttribute("traverMsg");
+        if (traverMsg.getEnd_city() == null) {
+            cityName = session.getAttribute("location") + "市";
+        } else {
+            cityName = traverMsg.getEnd_city() + "市";
+        }
+        List<TraverNote> recommendTraverNoteList = catalogService.getHotTraverNoteListByCity(4, cityName);
+        model.addAttribute("recommendTraverNoteList", recommendTraverNoteList);
+
+        /*
+         * 城市名列表存入model；
+         * 传入页面显示城市viewCity；
+         */
+        List<String> cityNameList = catalogService.getCityNameList();
+        model.addAttribute("cityNameList", cityNameList);
+
+        if (traverMsg.getEnd_city().equals(""))
+            model.addAttribute("viewCity", session.getAttribute("location"));
+        else
+            model.addAttribute("viewCity", traverMsg.getEnd_city());
+
         return "ProductDT/Mdd";
     }
 
 
     @GetMapping("/Catalog/HotProductList")
-    public String HotProductList(@RequestParam(defaultValue = "1") Integer pageNum, HttpServletRequest httpServletRequest, HttpSession session, Model model) {
+    public String HotProductList(@RequestParam(value = "keyword", defaultValue = "", required = false) String keyword,
+                                 @RequestParam(defaultValue = "1") Integer pageNum,
+                                 HttpServletRequest httpServletRequest, HttpSession session, Model model) {
+        System.out.println("keyword：" + keyword);
+
         //首先从session中得到
         System.out.println(pageNum);
         ProductForm productForm = (ProductForm) session.getAttribute("productForm");

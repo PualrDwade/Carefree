@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface CityMsgMapper {
 
+    List<String> getCityNameMsgList();
+
     //通过省份ID获取省份信息
     ProvinceMsg getProvinceMsgById(String provinceId);
 

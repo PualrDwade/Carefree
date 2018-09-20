@@ -11,7 +11,6 @@ import com.csu.carefree.Model.TraverAsk.UserAsk;
 import com.csu.carefree.Service.AccountService;
 import com.csu.carefree.Service.TraverAskService;
 import com.csu.carefree.Util.PageInfo;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -43,7 +42,6 @@ public class AccountController {
     private AccountService accountService;
     @Autowired
     private TraverAskService traverAskService;
-
     private static final int ANSWERPAGESIZE = 3;
 
     //跳转到登陆页面的请求

@@ -80,7 +80,7 @@
             SUPPLIER_ID_ID AS supplier_id,
             CITY_NAME
       FROM ProductDT_hotelmsg
-      WHERE city_name like '%${destination}%'
+      WHERE lower (city_name) LIKE #{destination}
     </select>
 
     <select id="getHotelListByDestinationAndStore" parameterType="java.lang.String"

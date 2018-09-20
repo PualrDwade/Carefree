@@ -12,5 +12,5 @@ public interface SigonMapper {
     void setSigon(@Param("username") String username, @Param("password") String password);
 
     //通过找回密码
-    void updateSigon(@Param("username") String username,@Param("password") String password);
+    void updateSigon(@Param("username") String username, @Param("password") String password);
 }

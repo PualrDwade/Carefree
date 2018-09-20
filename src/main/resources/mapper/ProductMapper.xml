@@ -261,5 +261,4 @@
     FROM ProductDT_productmsg
     WHERE lower (name ) LIKE #{keyword}
     </select>
-
 </mapper>

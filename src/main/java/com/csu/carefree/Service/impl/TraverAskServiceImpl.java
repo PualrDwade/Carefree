@@ -56,39 +56,40 @@ public class TraverAskServiceImpl implements TraverAskService {
         userAnswerMapper.insertUserAnswer(userAnswer);
     }
 
+
     @Override
     public List<UserAnswer> getUserAnswerListByName(String username) {
         return userAnswerMapper.getUserAnswerListByName(username);
     }
 
     @Override
-    public List<UserAsk> getUserAskListByTime(){
+    public List<UserAsk> getUserAskListByTime() {
         return userAskMapper.getUserAskListByTime();
     }
 
     @Override
-    public List<UserAsk> getHotUserAskListByTime(int askListNum){
+    public List<UserAsk> getHotUserAskListByTime(int askListNum) {
         List<UserAsk> askList = userAskMapper.getUserAskList();
         askList.sort(Comparator.reverseOrder());
 
         ArrayList<UserAsk> resultList = new ArrayList<>();
 
-        if(askListNum < askList.size()){
-            for (int i=0; i < askListNum; ++i){
+        if (askListNum < askList.size()) {
+            for (int i = 0; i < askListNum; ++i) {
                 resultList.add(askList.get(i));
             }
-        }else{
+        } else {
 
-            for (int i=0; i< askList.size(); ++i){
+            for (int i = 0; i < askList.size(); ++i) {
                 resultList.add(askList.get(i));
             }
         }
 
-        return  resultList;
+        return resultList;
     }
 
     @Override
-    public List<UserAnswer> getUserAnswerList(){
+    public List<UserAnswer> getUserAnswerList() {
         return userAnswerMapper.getUserAnswerList();
     }
 }

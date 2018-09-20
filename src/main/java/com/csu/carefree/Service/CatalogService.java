@@ -117,6 +117,9 @@ public interface CatalogService {
     //通过省份ID获取省份信息
     ProvinceMsg getProvinceMsgById(String provinceId);
 
+    //获取城市信息
+    List<String> getCityNameList();
+
     //通过城市ID获取城市信息
     CityMsg getCityMsgById(String cityId);
 
@@ -188,4 +191,11 @@ public interface CatalogService {
 
     //获得所有traverNote
     List<TraverNote> getAllTraverNoteList();
+
+    /***********************************************/
+    //通过地点获得游记
+    ArrayList<TraverNote> getHotTraverNoteListByCity(int traverNoteNum, String cityName);
+
+    //通过关键词获得产品信息
+    List<ProductMsg> searchProductListByKeyword(String keyword);
 }

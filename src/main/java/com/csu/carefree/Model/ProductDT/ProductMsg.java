@@ -25,7 +25,6 @@ public class ProductMsg implements Serializable {
         this.product_price = product_price;
     }
 
-
     public String getId() {
         return id;
     }

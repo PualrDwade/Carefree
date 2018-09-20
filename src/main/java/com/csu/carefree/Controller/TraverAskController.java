@@ -169,7 +169,6 @@ public class TraverAskController {
 
         return "TraverAsk/AskAnswerDetail";
     }
-
     /*****************用户游记模块******************/
     //进入用户游记的控制器url
     @GetMapping("/TraverAsk/ViewTraverNote")

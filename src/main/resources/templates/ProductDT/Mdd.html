@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css">
+    <script src="/js/semantic.min.js"></script>
+</head>
 <body>
+
 <!--================ 导航栏区域 =================-->
 <header th:replace="common/menu::header"></header>
 <!--================ 导航栏区域 =================-->
@@ -11,65 +18,94 @@
     <div class="hotel_booking_area position">
         <div class="container">
             <div class="hotel_booking_table">
-                <div class="col-md-3">
-                    <h2 style="letter-spacing: 5px">定制您的旅行<br></h2>
-                </div>
                 <div class="col-md-9">
                     <div class="boking_table">
-                        <form th:action="@{/Catalog/Mdd}" method="post">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="book_tabel_item">
                                         <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker11'>
-                                                <input th:value="${session.traverMsg.start_city}" name="startCity"
-                                                       type='text' class="form-control"
-                                                       placeholder="出发城市"/>
-                                                    </span>
+                                            <div class='input-group'>
+                                                <div id="main">
+                                                    <div id="the_content" th:text="${viewCity}"
+                                                         style="color:#fff; padding-left: 30px; border-color: white">内容一
+                                                    </div>
+                                                    <div id="tan">▶</div>
+                                                </div>
+                                                <div id="optionList">
+                                                    <ul id="option"
+                                                        style="color: #000;max-height:150px;background-color:#fff;overflow:auto;z-index:3;list-style:none; padding-left: 30px;position: absolute">
+                                                        <li onclick="change(this)" th:each="cityName : ${cityNameList}"
+                                                            th:text="${cityName}"></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <style>
+                                        #optionList {
+                                            display: none;
+                                        }
+
+                                        #option li:hover {
+                                            background-color: #aaa;
+                                        }
+
+                                        #the_content, #tan {
+                                            display: inline-block;
+                                        }
+
+                                        #tan {
+                                            float: right;
+                                            color: aliceblue;
+                                        }
+                                    </style>
+                                    <script type="text/javascript">
+                                        $('#main').click(function () {
+                                            if ($('#optionList').css('display') === "none") {
+                                                $("#tan").text("▼");
+                                                $("#optionList").slideDown();
+                                            } else {
+                                                $("#tan").text("▶");
+                                                $("#optionList").slideUp();
+                                            }
+                                        });
+
+                                        function change(e) {
+                                            var a = $(e).text();
+                                            $("#the_content").text(a);
+                                            if ($("#optionList").css("display") !== "none") {
+                                                $("#optionList").slideUp();
+                                            }
+                                            //jqury不能取出渲染的th:text
+                                            var view_city = document.getElementById('the_content').innerText;
+                                            window.location.href = "/Catalog/Mdd?view_city=" + view_city;
+                                        }
+
+                                        function gotoProduct() {
+                                            var keyword = $('#destination').val();
+                                            window.location.href = '/Catalog/HotProductList?keyword=' + keyword;
+                                        }
+                                    </script>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="book_tabel_item">
                                         <div class="form-group">
                                             <div class='input-group date' id='datetimepicker1'>
-                                                <input th:value="${session.traverMsg.end_city}" name="destination"
+                                                <input th:value="${session.traverMsg.end_city}" id="destination"
+                                                       name="destination"
                                                        type='text' class="form-control"
-                                                       placeholder="目的地城市"/>
-                                                    </span>
+                                                       placeholder=""/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <input th:value="${session.traverMsg.adult_num}" name="adultNum"
-                                                       type='text' class="form-control"
-                                                       placeholder="成人数"/>
-                                            </div>
-                                            <div class="input-group">
-                                                <input th:value="${session.traverMsg.child_num}"
-                                                       name="childrenNum"
-                                                       type='text' class="form-control"
-                                                       placeholder="儿童数"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="book_tabel_item">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <input th:text="${session.traverMsg.traverdays}"
-                                                       name="travelDays"
-                                                       type='text' class="form-control"
-                                                       placeholder="行程天数"/>
-                                            </div>
-                                        </div>
-                                        <input type="submit" value="选好了" class="book_now_btn button_hover">
+                                        <button th:text="搜索产品" class="book_now_btn button_hover"
+                                                id="button" onclick="gotoProduct()"></button>
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -81,51 +117,32 @@
         <div class="section-top-border">
             <div class="row">
                 <!--景点侧边栏开始-->
-                <div class="col-lg-2 col-md-4 mt-sm-30 element-wrap"
+                <div class="col-lg-2 col-md-2 mt-sm-30 element-wrap"
                      style="background-color: rgba(235,252,255,0.98) ; height: 700px ;overflow:auto">
                     <h3 style="margin-left: 10px;font-size: 25px" class="mb-30 title_color">想去哪些景点？</h3>
-                    <div class="single-element-widget" th:each="recommendScenic : ${session.recommendScenicList}">
+                    <div class="single-element-widget" th:each="recommendScenic : ${session.recommendScenicList}"
+                         name="broadside">
                         <div class="switch-wrap d-flex justify-content-between">
-                            <a th:href="${recommendScenic.link_url}"><h4 th:text="${recommendScenic.name}"
+                            <a th:href="${recommendScenic.link_url}"><h4 th:text="${recommendScenic.name}" name="scenic"
                                                                          style="margin-left: 20px"></h4></a>
                         </div>
                         <hr>
-                    </div>
-
-                    <div class="pager">
-                        <a class="page_num" href="">1</a>
-                        <a class="page_num" href="">2</a>
-                        <a class="page_num" href="">3</a>
                     </div>
                 </div>
                 <!--景点侧边栏结束-->
 
                 <!--地图-->
-                <div class="col-lg-8 col-md-8" id="allmap"></div>
-                <!--地图-->
-
-                <!--酒店侧边栏开始-->
-                <div class="col-lg-2 col-md-4 mt-sm-30 element-wrap"
-                     style="background-color: rgba(235,252,255,0.98) ; height: 700px ;overflow:auto">
-                    <h3 style="margin-left: 10px;font-size: 25px" class="mb-30 title_color">想要怎样的酒店？</h3>
-                    <div class="single-element-widget" th:each="recommendHotel : ${session.recommendHotelList}">
-                        <div class="switch-wrap d-flex justify-content-between">
-                            <a th:href="${recommendHotel.hotel_link}"><h4 th:text="${recommendHotel.name}"
-                                                                          style="margin-left: 20px"></h4></a>
-                            <div class="primary-checkbox">
-                                <input type="checkbox" id="site-1">
-                                <label for="site-1"></label>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="pager">
-                        <a class="page_num" href="">1</a>
-                        <a class="page_num" href="">2</a>
-                        <a class="page_num" href="">3</a>
-                    </div>
+                <div class="col-lg-8 col-md-8" id="map" style="height: 700px">
+                    <!--显示当前地图所在城市-->
+                    <!--根据景点的地址将景点凸显出来（标定点）-->
+                    <!--根据景点的布局最好全部显示出景点-->
+                    <!--当点击侧边栏的时候.....-->
                 </div>
-                <!--酒店侧边栏结束-->
+                <div id="panel" class="col-lg-2 col-md-2" style="height: 700px"></div>
+
+                <script src="https://webapi.amap.com/maps?v=1.4.10&key=754607261b9b76661652d0588746686d"></script>
+                <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+                <!--地图-->
             </div>
         </div>
     </div>
@@ -133,49 +150,19 @@
     <!--游记区域开始-->
     <section class="latest_blog_area section_gap">
         <div class="container">
-            <!--游记-->
-            <div class="col-lg-6 " style="border-right: 5px solid #f3c300; padding-right: 50px ">
-                <div class="section_title text-center">
-                    <a th:href="@{TraverAsk/ViewTraverNote}"><h2 class="title_color">推 荐 游 记</h2></a>
-                    <p>这 里 有 最 精 彩 的 旅 行 游 记，给 你 更 多 的 旅 行 知 识</p>
-                </div>
-                <div class="row mb_30" th:each="recommendTraverNote : ${session.recommendTraverNoteList}">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-recent-blog-post">
-                            <div class="thumb">
-                                <img class="img-fluid" th:src="${recommendTraverNote.img_url}" alt="post">
-                            </div>
-                            <div class="details">
-                                <div class="tags">
-                                    <a href="#" class="button_hover tag_btn">Travel</a>
-                                    <a href="#" class="button_hover tag_btn">Life Style</a>
-                                </div>
-                                <a href="#"><h4 class="sec_h4">Low Cost Advertising</h4></a>
-                                <p>Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
-                                    farmer.</p>
-                                <h6 class="date title_color">31st January,2018</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--游记-->
-
-            <!--攻略-->
+            <!--用户游记-->
             <div class="section_title text-center">
-                <a><h2 class="title_color">推 荐 攻 略</h2></a>
+                <a><h2 class="title_color">推 荐 游 记</h2></a>
                 <p>这 里 有 最 全 面 的 旅 行 攻 略，为 您 的 旅 行 出 谋 划 策</p>
             </div>
             <div class="col-lg-6" style="padding-left: 50px"
-                 th:each="recommendStrategy : ${session.recommendStrategyList}">
+                 th:each="traverNote : ${recommendTraverNoteList}">
                 <div class="row">
-                    <div class="col-md-4">
-                        <img th:src="${recommendStrategy.img_url}" alt="" class="img-fluid">
-                    </div>
                     <div class="col-md-8 ">
-                        <a th:href="${recommendStrategy.link_url}"><h4 th:text="${recommendStrategy.title}"
-                                                                       class="sec_h4">标题</h4></a>
-                        <p th:text="${recommendStrategy.simple_content}">
+                        <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId=${traverNote.id})}"><h4
+                                th:text="${traverNote.title}"
+                                class="sec_h4">标题</h4></a>
+                        <p th:text="${traverNote.note_content}">
                             这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
                             <img style="width: 90px;height: 35px;float: right" src="../../static/image/logo/携程.svg">
                         </p>
@@ -187,21 +174,46 @@
     </section>
     <!--游记区域结束-->
 
-    <script type="text/javascript">
-        // 百度地图API功能
-        var map = new BMap.Map("allmap");    // 创建Map实例
-        map.centerAndZoom("长沙");      // 初始化地图,用城市名设置地图中心点
-        //添加地图类型控件
-        map.addControl(new BMap.MapTypeControl({
-            mapTypes: [
-                BMAP_NORMAL_MAP,
-                BMAP_HYBRID_MAP
-            ]
-        }));
-        CityMsg.setCurrentCity("长沙");          // 设置地图显示的城市 此项是必须设置的
-        CityMsg.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-    </script>
+    <script>
+        var map = new AMap.Map('map', {
+            resizeEnable: true,
+            zoom: 11
+        });
 
+        var cityPositioning = function () {
+            //this指向<div class="single-element-widget" name="scenicPosition">
+            var scenicName = this.firstElementChild.firstElementChild.firstElementChild.innerHTML;
+            var placeSearch = new AMap.PlaceSearch({ //构造地点查询类
+                pageSize: 5,
+                pageIndex: 1,
+                city: "010", //城市
+                map: map,
+                panel: "panel"
+            });
+            placeSearch.search(scenicName);
+        };
+
+        //给侧边栏绑定事件
+        var scenicPositionList = document.getElementsByName("broadside");
+        for (var q = 0; q < scenicPositionList.length; q++) {
+            AMap.event.addDomListener(scenicPositionList[q], 'click', cityPositioning);
+        }
+
+        //页面加载后显示出第一个景点
+        AMap.service(["AMap.PlaceSearch"], function () {
+            var placeSearch = new AMap.PlaceSearch({ //构造地点查询类
+                pageSize: 5,
+                pageIndex: 1,
+                city: "010", //城市
+                map: map,
+                panel: "panel"
+            });
+            var scenicList = document.getElementsByName("scenic");
+            var addressList = [];//获得景点字符串
+            addressList[0] = scenicList[0].innerHTML;
+            placeSearch.search(addressList[0]);
+        });
+    </script>
 </div>
 <!--================ start footer Area  =================-->
 <footer th:replace="common/menu::footer"></footer>

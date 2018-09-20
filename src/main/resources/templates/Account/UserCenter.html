@@ -124,6 +124,7 @@
                                     <a th:if="${not userAskPageInfo.isFirstPage()}"
                                        th:href="@{${'/Catalog/HotProductList'}(pageNum = ${userAskPageInfo.getCurrentPage() - 1})}">上一页</a>
                                 </li>
+
                                 <li th:if="${userAskPageInfo.getMaxPage() <= 10}"
                                     th:each="pageNo : ${#numbers.sequence(1, userAskPageInfo.getMaxPage())}">
                                     <a th:if="${userAskPageInfo.getCurrentPage() eq pageNo}"
