@@ -79,11 +79,11 @@
                         <nav>
                             <ul class="pagination">
                                 <li>
-                                    <a th:href="@{${'/Catalog/HotProductList'}(pageNum = 1)}"> 首页 </a>
+                                    <a th:href="@{${'/account/ViewUserCenter'}(pageNum = 1)}"> 首页 </a>
                                 </li>
                                 <li>
                                     <a th:if="${not userAskPageInfo.isFirstPage()}"
-                                       th:href="@{${'/Catalog/HotProductList'}(pageNum = ${userAskPageInfo.getCurrentPage() - 1})}">上一页</a>
+                                       th:href="@{${'/account/ViewUserCenter'}(pageNum = ${userAskPageInfo.getCurrentPage() - 1})}">上一页</a>
                                 </li>
 
                                 <li th:if="${userAskPageInfo.getMaxPage() <= 10}"
@@ -93,7 +93,7 @@
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                     <a th:if="${not (userAskPageInfo.getCurrentPage() eq pageNo)}"
-                                       th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
+                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${pageNo})}">
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                 </li>
@@ -104,7 +104,7 @@
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                     <a th:if="${not (userAskPageInfo.getCurrentPage() eq pageNo)}"
-                                       th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
+                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${pageNo})}">
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                 </li>
@@ -115,16 +115,16 @@
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                     <a th:if="${not (userAskPageInfo.getCurrentPage() eq pageNo)}"
-                                       th:href="@{${'/Catalog/HotProductList'}(pageNum=${pageNo})}">
+                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${pageNo})}">
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a th:if="${not userAskPageInfo.isLastPage()}"
-                                       th:href="@{${'/Catalog/HotProductList'}(pageNum=${userAskPageInfo.getCurrentPage()+1})}">下一页</a>
+                                       th:href="@{${'/account/ViewUserCenter'}(pageNum=${userAskPageInfo.getCurrentPage()+1})}">下一页</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{${'/Catalog/HotProductList'}(pageNum = ${userAskPageInfo.getMaxPage()})}">
+                                    <a th:href="@{${'/account/ViewUserCenter'}(pageNum = ${userAskPageInfo.getMaxPage()})}">
                                         尾页 </a>
                                 </li>
                             </ul>
