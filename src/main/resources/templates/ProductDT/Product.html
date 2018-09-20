@@ -238,16 +238,18 @@
                     <hr>
                 </div>
                 <div class="col-lg-3">
-                    <div class="input-group" style="margin-top: 50px">
-                        <input type="text" class="form-control" placeholder="输入您想搜索的内容">
-                        <span class="input-group-addon myYellow"><a href="#"><i
-                                class="glyphicon glyphicon-search myYellow"> <span
-                                class="myYellow">搜索</span></i></a></span>
-                    </div>
+                    <form th:action="@{/ProductDT/searchProductList}">
+                        <div class="input-group" style="margin-top: 50px">
+                            <input  name="keyword" type="text" class="form-control" placeholder="输入您想搜索的内容">
+                            <span class="input-group-addon myYellow"><a href="#"><i
+                                    class="glyphicon glyphicon-search myYellow"> <span
+                                    class="myYellow">搜索</span></i></a></span>
+                        </div>
+                    </form>
+                        <div class="input-group" style="margin-top: 50px">
+                            <input type="submit" value="按条件筛选" class="book_now_btn button_hover">
+                        </div>
 
-                    <div class="input-group" style="margin-top: 50px">
-                        <input type="submit" value="按条件筛选" class="book_now_btn button_hover">
-                    </div>
                 </div>
             </div>
         </form>

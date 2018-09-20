@@ -217,6 +217,26 @@ public class CatalogServiceImpl implements CatalogService {
         return resultList;
     }
 
+    @Override
+    public ArrayList<TraverNote> getHotTraverNoteListByCity(int traverNoteNum, String cityName){
+        List<TraverNote> traverNoteList = traverNoteMapper.getHotTraverNodeListbyCityName(cityName);
+        traverNoteList.sort(Comparator.reverseOrder());
+
+        ArrayList<TraverNote> resultList = new ArrayList<>();
+
+        if (traverNoteNum < traverNoteList.size()) {
+            for (int i = 0; i < traverNoteNum; ++i) {
+                resultList.add(traverNoteList.get(i));
+            }
+        } else {
+            for (int i = 0; i < traverNoteList.size(); ++i) {
+                resultList.add(traverNoteList.get(i));
+            }
+        }
+
+        return resultList;
+    }
+
     /*******************酒店信息**********/
     @Override
     public List<HotelMsg> getHotelMsgList() {
@@ -235,7 +255,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public List<HotelMsg> getHotelListByDestination(String destination) {
-        return hotelMsgMapper.getHotelListByDestination(destination);
+        return hotelMsgMapper.getHotelListByDestination("%"+destination+"%");
     }
 
     @Override
@@ -298,6 +318,11 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public List<ProductMsg> getProductListByTypeAndStore(String productType, String supplierId, String cityname) {
         return productMapper.getProductListByTypeAndStore(productType, supplierId, cityname);
+    }
+
+    @Override
+    public List<ProductMsg> searchProductListByKeyword(String keyword){
+        return productMapper.searchProductListByKeyword("$"+keyword+"%");
     }
 
     @Override

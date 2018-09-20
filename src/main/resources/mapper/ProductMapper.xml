@@ -243,4 +243,22 @@
           WHERE ProductDT_product_city.city_id = #{cityname}
 			AND ProductDT_productmsg.id = ProductDT_product_city.product_id
     </select>
+
+    <!--通过关键词获得产品信息-->
+    <select id="searchProductListByKeyword" parameterType="java.lang.String" resultType="com.csu.carefree.Model.ProductDT.ProductMsg">
+    SELECT
+      id,
+      name,
+      traver_days,
+      product_type,
+      img_url,
+      product_link,
+      score,
+      sell_num,
+      comments_num,
+      product_grade,
+      supplier_id,
+    FROM ProductDT_productmsg
+    WHERE lower (name ) LIKE #{keyword}
+    </select>
 </mapper>
