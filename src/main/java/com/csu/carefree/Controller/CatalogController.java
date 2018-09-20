@@ -132,7 +132,7 @@ public class CatalogController {
 
     //不填写表单直接跳转到目的地界面
     @GetMapping("/Catalog/Mdd")
-    public String ViewMdd(HttpSession session) {
+    public String ViewMdd(HttpSession session,Model model) {
         /*****************************景点推荐*********************************/
         List<ScenicMsg> recommendScenicList = catalogService.getRecommendScenicList(session);
         session.setAttribute("recommendScenicList", recommendScenicList);
@@ -142,13 +142,21 @@ public class CatalogController {
         List<HotelMsg> recommendHotelList = catalogService.getRecommendHotelList(session);
         session.setAttribute("recommendHotelList", recommendHotelList);
 
-        /*****************************攻略推荐*********************************/
-        List<StrategyMsg> recommendStrategyList = catalogService.getRecommendStrategyList(session);
+        /*****************************门票推荐*********************************/
+        ArrayList<StrategyMsg> recommendStrategyList = catalogService.getRecommendStrategyList(session);
         session.setAttribute("recommendStrategyList", recommendStrategyList);
 
         /*****************************游记推荐*********************************/
-        List<TraverNote> recommendTraverNoteList = catalogService.getRecommendTraverNoteList(session);
-        session.setAttribute("recommendTraverNoteList", recommendTraverNoteList);
+        String cityName;
+        TraverMsg traverMsg = (TraverMsg) session.getAttribute("traverMsg");
+        if(traverMsg.getEnd_city() == null){
+            cityName = session.getAttribute("location")+"市";
+        }else {
+            cityName = traverMsg.getEnd_city()+"市";
+        }
+        List<TraverNote> recommendTraverNoteList = catalogService.getHotTraverNoteListByCity(4,cityName);
+        model.addAttribute("recommendTraverNoteList", recommendTraverNoteList);
+
         return "ProductDT/Mdd";
     }
 
@@ -184,8 +192,16 @@ public class CatalogController {
         session.setAttribute("recommendStrategyList", recommendStrategyList);
 
         /*****************************游记推荐*********************************/
-        List<TraverNote> recommendTraverNoteList = catalogService.getRecommendTraverNoteList(session);
-        session.setAttribute("recommendTraverNoteList", recommendTraverNoteList);
+        String cityName;
+        if(traverMsg.getEnd_city().equals("")){
+            cityName = session.getAttribute("location")+"市";
+        }else {
+            cityName = traverMsg.getEnd_city()+"市";
+        }
+        List<TraverNote> recommendTraverNoteList = catalogService.getHotTraverNoteListByCity(4,cityName);
+        model.addAttribute("recommendTraverNoteList", recommendTraverNoteList);
+
+
         return "ProductDT/Mdd";
     }
 
@@ -243,6 +259,21 @@ public class CatalogController {
         productMsgPageInfo.setPageData(productMsgList, PRODUCTPAGESIZE, pageNum);
         model.addAttribute("productMsgPageInfo", productMsgPageInfo);
         return "ProductDT/Product";
+    }
+
+    //搜索产品信息
+    @GetMapping("/Product/searchProductList")
+    public String searchProductListByKeyword(@RequestParam("keyword") String keyword,Model model){
+
+
+        return "ProductDT/Product";
+    }
+
+    @GetMapping("/ProductDT/searchProductList")
+    public String searchHotelListByKeyword(@RequestParam("keyword") String keyword,Model model){
+
+
+        return "ProductDT/Hotel";
     }
 
     // 进入热门酒店的控制器url

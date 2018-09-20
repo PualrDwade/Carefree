@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-9">
                     <div class="boking_table">
-                        <form th:action="@{/Catalog/Mdd}" method="post">
+                        <form th:action="@{/Catalog/Mdd}" th:method="post">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="book_tabel_item">
@@ -133,49 +133,49 @@
     <!--游记区域开始-->
     <section class="latest_blog_area section_gap">
         <div class="container">
-            <!--游记-->
-            <div class="col-lg-6 " style="border-right: 5px solid #f3c300; padding-right: 50px ">
-                <div class="section_title text-center">
-                    <a th:href="@{TraverAsk/ViewTraverNote}"><h2 class="title_color">推 荐 游 记</h2></a>
-                    <p>这 里 有 最 精 彩 的 旅 行 游 记，给 你 更 多 的 旅 行 知 识</p>
-                </div>
-                <div class="row mb_30" th:each="recommendTraverNote : ${session.recommendTraverNoteList}">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-recent-blog-post">
-                            <div class="thumb">
-                                <img class="img-fluid" th:src="${recommendTraverNote.img_url}" alt="post">
-                            </div>
-                            <div class="details">
-                                <div class="tags">
-                                    <a href="#" class="button_hover tag_btn">Travel</a>
-                                    <a href="#" class="button_hover tag_btn">Life Style</a>
-                                </div>
-                                <a href="#"><h4 class="sec_h4">Low Cost Advertising</h4></a>
-                                <p>Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A
-                                    farmer.</p>
-                                <h6 class="date title_color">31st January,2018</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--游记-->
+            <!--&lt;!&ndash;游记&ndash;&gt;-->
+            <!--<div class="col-lg-6 " style="border-right: 5px solid #f3c300; padding-right: 50px ">-->
+                <!--<div class="section_title text-center">-->
+                    <!--<a th:href="@{TraverAsk/ViewTraverNote}"><h2 class="title_color">推 荐 游 记</h2></a>-->
+                    <!--<p>这 里 有 最 精 彩 的 旅 行 游 记，给 你 更 多 的 旅 行 知 识</p>-->
+                <!--</div>-->
+                <!--<div class="row mb_30" th:each="recommendTraverNote : ${session.recommendTraverNoteList}">-->
+                    <!--<div class="col-lg-4 col-md-6">-->
+                        <!--<div class="single-recent-blog-post">-->
+                            <!--&lt;!&ndash;<div class="thumb">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<img class="img-fluid" th:src="${recommendTraverNote.img_url}" alt="post">&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--<div class="details">-->
+                                <!--&lt;!&ndash;<div class="tags">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="#" class="button_hover tag_btn">Travel</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a href="#" class="button_hover tag_btn">Life Style</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--<a href="#"><h4 class="sec_h4" th:text="${recommendTraverNote.title}">Low Cost Advertising</h4></a>-->
+                                <!--<p th:text="${recommendTraverNote.note_content}">Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A-->
+                                    <!--farmer.</p>-->
+                                <!--<h6 class="date title_color" th:text="${recommendTraverNote.add_time}">31st January,2018</h6>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;游记&ndash;&gt;-->
 
-            <!--攻略-->
+            <!--用户游记-->
             <div class="section_title text-center">
-                <a><h2 class="title_color">推 荐 攻 略</h2></a>
+                <a><h2 class="title_color">推 荐 游 记</h2></a>
                 <p>这 里 有 最 全 面 的 旅 行 攻 略，为 您 的 旅 行 出 谋 划 策</p>
             </div>
             <div class="col-lg-6" style="padding-left: 50px"
-                 th:each="recommendStrategy : ${session.recommendStrategyList}">
+                 th:each="traverNote : ${recommendTraverNoteList}">
                 <div class="row">
-                    <div class="col-md-4">
-                        <img th:src="${recommendStrategy.img_url}" alt="" class="img-fluid">
-                    </div>
+                    <!--<div class="col-md-4">-->
+                        <!--<img th:src="${traverNote.img_url}" alt="" class="img-fluid">-->
+                    <!--</div>-->
                     <div class="col-md-8 ">
-                        <a th:href="${recommendStrategy.link_url}"><h4 th:text="${recommendStrategy.title}"
+                        <a th:href="@{/TraverAsk/ViewTraverNoteDetail(traverNoteId=${traverNote.id})}"><h4 th:text="${traverNote.title}"
                                                                        class="sec_h4">标题</h4></a>
-                        <p th:text="${recommendStrategy.simple_content}">
+                        <p th:text="${traverNote.note_content}">
                             这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息这里是详细的旅游信息
                             <img style="width: 90px;height: 35px;float: right" src="../../static/image/logo/携程.svg">
                         </p>
